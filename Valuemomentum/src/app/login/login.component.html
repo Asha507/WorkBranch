@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row">
+        <div class="form_bg">
+            <form name="LoginForm" #loginForm="ngForm">
+              <div class="row">
+              <div class="image">
+              <img [src]="'https://www.valuemomentum.com/wp-content/uploads/2016/12/ValueMomentum-logo.png'" >
+            </div>
+            <hr>
+            </div> 
+              <h2 class="text-center">Login </h2>
+                <br/>
+                <div class="form-group">
+                    <input type="email" name="Email" class="form-control" id="userid" #Email="ngModel" placeholder="User id" [(ngModel)]="login.emailAddr" required>
+                    <div [hidden]="Email.valid||Email.pristine" class="aler alert-danger">UserId is required</div>                    
+                </div>
+
+                    <div class="form-group">
+                    <input type="password" name="Password" #Pswrd="ngModel" class="form-control" id="pwd" placeholder="Password" [(ngModel)]="login.pwd" required>
+                    <div [hidden]="Pswrd.valid||Pswrd.pristine" class="aler alert-danger">Password is required</div>                                        
+                    </div>
+                    <br/>
+                   <div class="align-center">
+                <button type="submit" class="btn btn-primary" id="login" (click)="Login()" [disabled]="!loginForm.valid">Login</button>
+                    </div>
+                    <div class="align-left">
+                        <a href="#">Forgot Password</a>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
