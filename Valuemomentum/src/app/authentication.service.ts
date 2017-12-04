@@ -1,13 +1,20 @@
 import { Injectable } from '@angular/core';
+import {Http} from '@angular/http'
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AuthenticationService {
 
-  constructor() { }
+  constructor(private http:Http) { }
 
-  Authenticate():string
+  Authenticate():Observable<any>
   {
-    return "Asha";
+   return  this.http.post('/api/authenticate',
+   {"email":'asha',"password":"asha"}).map((res)=>{
+     return res.json();
+    });
   }
 
 }
