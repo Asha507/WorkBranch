@@ -9,10 +9,10 @@ export class AuthenticationService {
 
   constructor(private http:Http) { }
 
-  Authenticate():Observable<any>
+  Authenticate(userid:string,pwd:string):Observable<any>
   {
-   return  this.http.post('/api/authenticate',
-   {"email":'asha',"password":"asha"}).map((res)=>{
+    return  this.http.post('/api/authenticate',
+   {"UserID":userid,"password":pwd}).map((res)=>{
      return res.json();
     });
   }
