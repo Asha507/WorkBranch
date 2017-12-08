@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMTAPP", "AMTAPP\AMTAPP.csproj", "{CD3E9D81-1877-4455-B719-5381010AEACD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingWPFCode", "TestingWPFCode\TestingWPFCode.csproj", "{D2F1E5D5-AFB2-48B3-A05A-51EB567CC22D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CD3E9D81-1877-4455-B719-5381010AEACD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD3E9D81-1877-4455-B719-5381010AEACD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD3E9D81-1877-4455-B719-5381010AEACD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD3E9D81-1877-4455-B719-5381010AEACD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2F1E5D5-AFB2-48B3-A05A-51EB567CC22D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2F1E5D5-AFB2-48B3-A05A-51EB567CC22D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2F1E5D5-AFB2-48B3-A05A-51EB567CC22D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2F1E5D5-AFB2-48B3-A05A-51EB567CC22D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3E14849C-F16E-4DEA-AAC0-B119A53B163D}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,15 @@
+D:\Projects\Accelarator\AccelaratorAMT\AMTAPP\TestingWPFCode\bin\Debug\TestingWPFCode.exe.config
+D:\Projects\Accelarator\AccelaratorAMT\AMTAPP\TestingWPFCode\bin\Debug\TestingWPFCode.exe
+D:\Projects\Accelarator\AccelaratorAMT\AMTAPP\TestingWPFCode\bin\Debug\TestingWPFCode.pdb
+D:\Projects\Accelarator\AccelaratorAMT\AMTAPP\TestingWPFCode\obj\Debug\MainWindow.g.cs
+D:\Projects\Accelarator\AccelaratorAMT\AMTAPP\TestingWPFCode\obj\Debug\App.g.cs
+D:\Projects\Accelarator\AccelaratorAMT\AMTAPP\TestingWPFCode\obj\Debug\TestingWPFCode_MarkupCompile.cache
+D:\Projects\Accelarator\AccelaratorAMT\AMTAPP\TestingWPFCode\obj\Debug\TestingWPFCode_MarkupCompile.lref
+D:\Projects\Accelarator\AccelaratorAMT\AMTAPP\TestingWPFCode\obj\Debug\MainWindow.baml
+D:\Projects\Accelarator\AccelaratorAMT\AMTAPP\TestingWPFCode\obj\Debug\TestingWPFCode.g.resources
+D:\Projects\Accelarator\AccelaratorAMT\AMTAPP\TestingWPFCode\obj\Debug\TestingWPFCode.Properties.Resources.resources
+D:\Projects\Accelarator\AccelaratorAMT\AMTAPP\TestingWPFCode\obj\Debug\TestingWPFCode.csproj.GenerateResource.Cache
+D:\Projects\Accelarator\AccelaratorAMT\AMTAPP\TestingWPFCode\obj\Debug\TestingWPFCode.csproj.CoreCompileInputs.cache
+D:\Projects\Accelarator\AccelaratorAMT\AMTAPP\TestingWPFCode\obj\Debug\TestingWPFCode.exe
+D:\Projects\Accelarator\AccelaratorAMT\AMTAPP\TestingWPFCode\obj\Debug\TestingWPFCode.pdb
+D:\Projects\Accelarator\AccelaratorAMT\AMTAPP\TestingWPFCode\obj\Debug\TestingWPFCode.csprojResolveAssemblyReference.cache

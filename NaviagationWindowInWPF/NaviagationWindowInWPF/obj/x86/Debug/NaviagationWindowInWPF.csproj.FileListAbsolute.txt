@@ -1,0 +1,38 @@
+C:\Documents and Settings\Kirankumar\My Documents\Visual Studio 2010\Projects\NaviagationWindowInWPF\NaviagationWindowInWPF\bin\Debug\NaviagationWindowInWPF.exe
+C:\Documents and Settings\Kirankumar\My Documents\Visual Studio 2010\Projects\NaviagationWindowInWPF\NaviagationWindowInWPF\bin\Debug\NaviagationWindowInWPF.pdb
+C:\Documents and Settings\Kirankumar\My Documents\Visual Studio 2010\Projects\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Kirankumar\My Documents\Visual Studio 2010\Projects\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\MainWindow.baml
+C:\Documents and Settings\Kirankumar\My Documents\Visual Studio 2010\Projects\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\MainWindow.g.cs
+C:\Documents and Settings\Kirankumar\My Documents\Visual Studio 2010\Projects\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\App.g.cs
+C:\Documents and Settings\Kirankumar\My Documents\Visual Studio 2010\Projects\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\NaviagationWindowInWPF_MarkupCompile.cache
+C:\Documents and Settings\Kirankumar\My Documents\Visual Studio 2010\Projects\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\NaviagationWindowInWPF.g.resources
+C:\Documents and Settings\Kirankumar\My Documents\Visual Studio 2010\Projects\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\WpfApplication1.Properties.Resources.resources
+C:\Documents and Settings\Kirankumar\My Documents\Visual Studio 2010\Projects\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Documents and Settings\Kirankumar\My Documents\Visual Studio 2010\Projects\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Documents and Settings\Kirankumar\My Documents\Visual Studio 2010\Projects\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\NaviagationWindowInWPF.exe
+C:\Documents and Settings\Kirankumar\My Documents\Visual Studio 2010\Projects\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\NaviagationWindowInWPF.pdb
+C:\Documents and Settings\Kirankumar\My Documents\Visual Studio 2010\Projects\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\Home.baml
+C:\Documents and Settings\Kirankumar\My Documents\Visual Studio 2010\Projects\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\Home.g.cs
+C:\Documents and Settings\Kirankumar\My Documents\Visual Studio 2010\Projects\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\Master.baml
+C:\Documents and Settings\Kirankumar\My Documents\Visual Studio 2010\Projects\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\Transaction.baml
+C:\Documents and Settings\Kirankumar\My Documents\Visual Studio 2010\Projects\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\Master.g.cs
+C:\Documents and Settings\Kirankumar\My Documents\Visual Studio 2010\Projects\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\Transaction.g.cs
+C:\Users\ashap\Downloads\NaviagationWindowInWPF\NaviagationWindowInWPF\bin\Debug\NaviagationWindowInWPF.exe
+C:\Users\ashap\Downloads\NaviagationWindowInWPF\NaviagationWindowInWPF\bin\Debug\NaviagationWindowInWPF.pdb
+C:\Users\ashap\Downloads\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\NaviagationWindowInWPF.csprojResolveAssemblyReference.cache
+C:\Users\ashap\Downloads\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\Home.baml
+C:\Users\ashap\Downloads\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\MainWindow.baml
+C:\Users\ashap\Downloads\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\Master.baml
+C:\Users\ashap\Downloads\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\Transaction.baml
+C:\Users\ashap\Downloads\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\Home.g.cs
+C:\Users\ashap\Downloads\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\MainWindow.g.cs
+C:\Users\ashap\Downloads\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\Master.g.cs
+C:\Users\ashap\Downloads\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\Transaction.g.cs
+C:\Users\ashap\Downloads\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\App.g.cs
+C:\Users\ashap\Downloads\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\NaviagationWindowInWPF_MarkupCompile.cache
+C:\Users\ashap\Downloads\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\NaviagationWindowInWPF.g.resources
+C:\Users\ashap\Downloads\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\WpfApplication1.Properties.Resources.resources
+C:\Users\ashap\Downloads\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\NaviagationWindowInWPF.csproj.GenerateResource.Cache
+C:\Users\ashap\Downloads\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\NaviagationWindowInWPF.csproj.CoreCompileInputs.cache
+C:\Users\ashap\Downloads\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\NaviagationWindowInWPF.exe
+C:\Users\ashap\Downloads\NaviagationWindowInWPF\NaviagationWindowInWPF\obj\x86\Debug\NaviagationWindowInWPF.pdb
