@@ -51,6 +51,10 @@
     text-align: center;
 }
 #sidebar {
+    position: fixed;
+    margin-left: 3px;
+    padding-top: 8%;
+    margin-top:20px;
     min-width: 250px;
     max-width: 250px;
     min-height: 100vh;
@@ -179,14 +183,6 @@ a[aria-expanded="true"]::before {
     }
 }
 
-
-    /* Reappearing the sidebar on toggle button click */
-    #sidebar {
-        margin-left: 45px;
-        padding-top:30%;  
-    }
-
-
     /* Toggling the sidebar header content, 
        hide the big heading [h3] and showing the small heading [strong] and vice versa
     */
@@ -226,4 +222,9 @@ a[aria-expanded="true"]::before {
         bottom: 5px;
         right: 50%;
         transform: translateX(50%);
+    }
+    #Panel2
+    {
+        margin-top:7%;
+        margin-left: 1%; 
     }

@@ -1,13 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {AuthenticationService} from './authentication.service'
+import {AuthenticationService} from './authentication.service';
+import {NewsService} from './news-service.service';
 import {HttpModule} from '@angular/http';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { NewsComponent } from './news/news.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 
 @NgModule({
@@ -15,7 +17,8 @@ import { NewsComponent } from './news/news.component';
     AppComponent,
     LoginComponent,
     HomeComponent,
-    NewsComponent
+    NewsComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,7 @@ import { NewsComponent } from './news/news.component';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [AuthenticationService],
+  providers: [AuthenticationService,NewsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

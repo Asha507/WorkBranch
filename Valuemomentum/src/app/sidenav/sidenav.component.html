@@ -1,0 +1,55 @@
+
+<div class="row">
+    <div class="clo-lg-2">
+       <!-- Sidebar -->
+     <nav id="sidebar">
+         <div class="sidebar-header">
+             <h3>Dashboard</h3>
+         </div>
+         <ul class="list-unstyled components">
+             <li class="active"><a [routerLink]="Login">News</a></li>
+             <li ><a href="#">Hierarchy</a></li>
+             <li><a href="#">Products</a></li>
+ 
+             <li>
+                 <!-- Link with dropdown items -->
+                 <a href="#financeSubmenu" data-toggle="collapse" aria-expanded="false">Finance</a>
+                 <ul class="collapse list-unstyled" id="financeSubmenu">
+                     <li><a href="#">Page</a></li>
+                     <li><a href="#">Page</a></li>
+                     <li><a href="#">Page</a></li>
+                 </ul>
+ </li>
+ <li>
+     <!-- Link with dropdown items -->
+     <a href="#hrSubmenu" data-toggle="collapse" aria-expanded="false">HR Management</a>
+     <ul class="collapse list-unstyled" id="hrSubmenu">
+         <li><a href="#">Page</a></li>
+         <li><a href="#">Page</a></li>
+         <li><a href="#">Page</a></li>
+     </ul>
+ </li>
+             <li><a href="#">HelpDesk</a></li>
+             <li><a href="#">Contact</a></li>
+         </ul>
+     </nav>
+   </div>
+ <div class="col-lg-10">
+   <div id="content">
+         <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+             <i class="glyphicon glyphicon-align-left"></i>
+             Toggle Sidebar
+         </button>
+     </div>
+   </div>
+     </div>
+   </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+   
