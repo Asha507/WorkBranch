@@ -228,3 +228,8 @@ a[aria-expanded="true"]::before {
         margin-top:7%;
         margin-left: 1%; 
     }
+    #mainpanel
+    {
+         margin-top:-85%;
+        margin-left: 20%; 
+    }

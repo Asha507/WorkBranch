@@ -1,0 +1,16 @@
+<div class="container">
+
+<h3>Latest news </h3>
+<div  id ="news-list">
+<div *ngFor="let row of news" class="row" id="news-id">
+    <div class="s12 teal lighten-2">
+      <p class="flow-text">{{ row['description'] }}</p> 
+      <p class="flow-text">Posted On : {{ row['date']|date:'medium' }}</p> 
+      <a>Read More....</a>   
+      <hr> 
+    </div>
+  
+  </div>
+  <button class="btn btn-secondary " name="btnSee" (click)="SeeAll()"  >See All</button>
+</div>
+</div>
