@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import {LoginService} from './login.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterModule, Routes } from '@angular/router';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 const routes:Routes=[
   { path: '', redirectTo: '/Dashboard', pathMatch: 'full' },
   {path:'Login',component:LoginComponent},
@@ -23,7 +24,8 @@ const routes:Routes=[
     BrowserModule,
     RouterModule.forRoot(routes),
     FormsModule,
-    HttpModule
+    HttpModule,
+    BrowserAnimationsModule
   ],
   providers: [LoginService],
   bootstrap: [AppComponent]
