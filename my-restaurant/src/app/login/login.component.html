@@ -1,0 +1,30 @@
+<div class="main">
+  <div class="login">
+    <div class="login-top">
+    <img [src]="'../assets/p.png'" >
+    </div>
+    <h1>Sign in to start your session</h1>
+    <div class="login-bottom">
+    <form name="LoginForm" #loginForm="ngForm">
+      <input type="text" name="userID" id="userID" placeholder="Username" #UserID="ngModel" required [(ngModel)]="login.userID" required>		         			
+      <input type="password" name="pwd" id="pwd" class="password" placeholder="Password" #pwd="ngModel" required [(ngModel)]="login.pwd" required>						         
+      <input type="submit" value="login" (click)="Login()" [disabled]="!loginForm.valid">
+    </form>
+    <a href="#"><p>Forgot your password? Click Here</p></a>
+    </div>
+  </div>
+   <div *ngIf="UserID.invalid && (UserID.dirty || UserID.touched)"  class="alert alert-danger">
+
+      <div *ngIf="UserID.errors.required"  class="alert alert-danger">
+      Name is required.
+      </div>
+
+      <div *ngIf="pwd.errors.required"  class="alert alert-danger">
+          Password is required.
+          </div>
+    
+  </div>
+</div>
+<div class="footer">
+<p>@MyRestaurant</p>
+</div>

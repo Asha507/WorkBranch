@@ -10,6 +10,9 @@ import { AppRoutingModule } from './/app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { NewsComponent } from './news/news.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { LearningComponent } from './learning/learning.component';
+import { HeaderComponent } from './header/header.component';
+import { MainContentComponent } from './main-content/main-content.component';
 
 
 @NgModule({
@@ -18,7 +21,10 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     LoginComponent,
     HomeComponent,
     NewsComponent,
-    SidebarComponent
+    SidebarComponent,
+    LearningComponent,
+    HeaderComponent,
+    MainContentComponent
   ],
   imports: [
     BrowserModule,

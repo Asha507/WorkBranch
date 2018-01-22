@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+	font-family: 'PT Sans Narrow', sans-serif;
+	background-image: "'../assets/banner1.jpg'";
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+	 
+}
