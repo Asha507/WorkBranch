@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FMICModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="MappingData">
+    <Key>
+      <PropertyRef Name="PhoenixField" />
+    </Key>
+    <Property Name="PhoenixField" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DFXField" Type="varchar" MaxLength="500" />
+    <Property Name="DefaultValue" Type="varchar" MaxLength="20" />
+    <Property Name="FromRequest" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityContainer Name="FMICModelStoreContainer">
+    <EntitySet Name="MappingData" EntityType="Self.MappingData" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

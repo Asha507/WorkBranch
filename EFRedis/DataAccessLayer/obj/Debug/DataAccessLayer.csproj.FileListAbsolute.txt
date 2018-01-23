@@ -1,0 +1,11 @@
+D:\Projects\Accelarator\EFRedis\DataAccessLayer\bin\Debug\DataAccessLayer.dll.config
+D:\Projects\Accelarator\EFRedis\DataAccessLayer\bin\Debug\DataAccessLayer.dll
+D:\Projects\Accelarator\EFRedis\DataAccessLayer\bin\Debug\DataAccessLayer.pdb
+D:\Projects\Accelarator\EFRedis\DataAccessLayer\bin\Debug\EFCache.dll
+D:\Projects\Accelarator\EFRedis\DataAccessLayer\bin\Debug\EntityFramework.dll
+D:\Projects\Accelarator\EFRedis\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.dll
+D:\Projects\Accelarator\EFRedis\DataAccessLayer\bin\Debug\EntityFramework.xml
+D:\Projects\Accelarator\EFRedis\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.xml
+D:\Projects\Accelarator\EFRedis\DataAccessLayer\obj\Debug\DataAccessLayer.csprojResolveAssemblyReference.cache
+D:\Projects\Accelarator\EFRedis\DataAccessLayer\obj\Debug\DataAccessLayer.dll
+D:\Projects\Accelarator\EFRedis\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
