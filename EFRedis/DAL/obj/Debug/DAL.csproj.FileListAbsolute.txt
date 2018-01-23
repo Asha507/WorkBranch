@@ -1,0 +1,15 @@
+C:\Users\Asha\WorkBranch\EFRedis\DAL\bin\Debug\DAL.dll.config
+C:\Users\Asha\WorkBranch\EFRedis\DAL\bin\Debug\DAL.dll
+C:\Users\Asha\WorkBranch\EFRedis\DAL\bin\Debug\DAL.pdb
+C:\Users\Asha\WorkBranch\EFRedis\DAL\bin\Debug\EFCache.dll
+C:\Users\Asha\WorkBranch\EFRedis\DAL\bin\Debug\EFCache.RedisCache.dll
+C:\Users\Asha\WorkBranch\EFRedis\DAL\bin\Debug\EntityFramework.dll
+C:\Users\Asha\WorkBranch\EFRedis\DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Asha\WorkBranch\EFRedis\DAL\bin\Debug\StackExchange.Redis.dll
+C:\Users\Asha\WorkBranch\EFRedis\DAL\bin\Debug\EntityFramework.xml
+C:\Users\Asha\WorkBranch\EFRedis\DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Asha\WorkBranch\EFRedis\DAL\bin\Debug\StackExchange.Redis.pdb
+C:\Users\Asha\WorkBranch\EFRedis\DAL\bin\Debug\StackExchange.Redis.xml
+C:\Users\Asha\WorkBranch\EFRedis\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+C:\Users\Asha\WorkBranch\EFRedis\DAL\obj\Debug\DAL.dll
+C:\Users\Asha\WorkBranch\EFRedis\DAL\obj\Debug\DAL.pdb

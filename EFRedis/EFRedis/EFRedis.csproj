@@ -390,9 +390,9 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
-      <Project>{88ff8ec1-c9c1-4eef-adbc-d131de7c55be}</Project>
-      <Name>DataAccessLayer</Name>
+    <ProjectReference Include="..\DBAccess\DBAccess.csproj">
+      <Project>{804962CD-B57E-4A1F-AB4F-EC0FFD47FFCB}</Project>
+      <Name>DBAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

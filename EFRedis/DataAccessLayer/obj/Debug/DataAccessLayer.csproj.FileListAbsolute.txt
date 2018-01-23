@@ -9,3 +9,14 @@ D:\Projects\Accelarator\EFRedis\DataAccessLayer\bin\Debug\EntityFramework.SqlSer
 D:\Projects\Accelarator\EFRedis\DataAccessLayer\obj\Debug\DataAccessLayer.csprojResolveAssemblyReference.cache
 D:\Projects\Accelarator\EFRedis\DataAccessLayer\obj\Debug\DataAccessLayer.dll
 D:\Projects\Accelarator\EFRedis\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
+C:\Users\Asha\WorkBranch\EFRedis\DataAccessLayer\obj\Debug\DataAccessLayer.csprojResolveAssemblyReference.cache
+C:\Users\Asha\WorkBranch\EFRedis\DataAccessLayer\obj\Debug\DataAccessLayer.dll
+C:\Users\Asha\WorkBranch\EFRedis\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
+C:\Users\Asha\WorkBranch\EFRedis\DataAccessLayer\bin\Debug\DataAccessLayer.dll.config
+C:\Users\Asha\WorkBranch\EFRedis\DataAccessLayer\bin\Debug\DataAccessLayer.dll
+C:\Users\Asha\WorkBranch\EFRedis\DataAccessLayer\bin\Debug\DataAccessLayer.pdb
+C:\Users\Asha\WorkBranch\EFRedis\DataAccessLayer\bin\Debug\EFCache.dll
+C:\Users\Asha\WorkBranch\EFRedis\DataAccessLayer\bin\Debug\EntityFramework.dll
+C:\Users\Asha\WorkBranch\EFRedis\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Asha\WorkBranch\EFRedis\DataAccessLayer\bin\Debug\EntityFramework.xml
+C:\Users\Asha\WorkBranch\EFRedis\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.xml

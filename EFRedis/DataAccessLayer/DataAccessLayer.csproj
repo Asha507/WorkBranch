@@ -56,51 +56,51 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseOperations.cs" />
-    <Compile Include="MappingData.cs">
-      <DependentUpon>ModelEF.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ModelEF.Context.cs">
+    <Compile Include="ModelEntity.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelEF.Context.tt</DependentUpon>
+      <DependentUpon>ModelEntity.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModelEF.cs">
+    <Compile Include="ModelEntity.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelEF.tt</DependentUpon>
+      <DependentUpon>ModelEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModelEF.Designer.cs">
+    <Compile Include="ModelEntity.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelEF.edmx</DependentUpon>
+      <DependentUpon>ModelEntity.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Student.cs">
+      <DependentUpon>ModelEntity.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="ModelEF.edmx">
+    <EntityDeploy Include="ModelEntity.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelEF.Designer.cs</LastGenOutput>
+      <LastGenOutput>ModelEntity.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ModelEF.edmx.diagram">
-      <DependentUpon>ModelEF.edmx</DependentUpon>
+    <None Include="ModelEntity.edmx.diagram">
+      <DependentUpon>ModelEntity.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ModelEF.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelEF.edmx</DependentUpon>
-      <LastGenOutput>ModelEF.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="ModelEF.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelEF.edmx</DependentUpon>
-      <LastGenOutput>ModelEF.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="ModelEntity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelEntity.edmx</DependentUpon>
+      <LastGenOutput>ModelEntity.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ModelEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelEntity.edmx</DependentUpon>
+      <LastGenOutput>ModelEntity.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

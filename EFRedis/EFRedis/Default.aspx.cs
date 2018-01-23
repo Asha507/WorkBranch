@@ -1,4 +1,4 @@
-﻿using DataAccessLayer;
+﻿using DBAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ namespace EFRedis
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            DatabaseOperations dal = new DatabaseOperations();
+            DBOperations dal = new DBOperations();
             GridView1.DataSource = dal.SelectAll();
             GridView1.DataBind();
         }
