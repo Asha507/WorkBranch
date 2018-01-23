@@ -16,7 +16,6 @@ body a{
 	-moz-transition:0.5s all;
 	-o-transition:0.5s all;
 	-ms-transition:0.5s all;
-	background:#011D4A!mportant;
 }
 a:focus, a:active, a:hover ,a.dropdown-toggle{
     outline: none;
@@ -320,7 +319,7 @@ li#menu-academico{
 }
 .logo-w3-agile h1 {
     margin: 0;
-    font-size: 35px;
+    font-size: 25px;
 }
 .logo-w3-agile h1 a {
     color: #fff;
@@ -345,7 +344,7 @@ li#menu-academico{
     float: left;
     width: 24.25%;
     text-align: center;
-	 padding: 1em;
+	 padding: 1.25em;
 	 margin-right: 1%;
 }
 .nav > li > a:hover, .nav > li > a:focus {
@@ -383,7 +382,7 @@ span.logo-clr{
     display: inline-block;
 }
 .w3-search-box input[type="submit"] {
-    background: url(../images/search.png)no-repeat;
+    /* background: url(../images/search.png)no-repeat; */
     width: 20px;
     height: 20px;
     display: inline-block;
@@ -936,7 +935,7 @@ ul.dropdown-menu.drp-mnu li {
     margin: 14px 0;
 }
 .four-grids h4 {
-    font-size: 30px;
+    font-size: 15px;
     color: #fff;
     margin: 0;
 }
@@ -5837,7 +5836,7 @@ table th, table td {
 		 }
 		 .page-container.sidebar-collapsed-back.srch button {
 			cursor: pointer;
-			background: url('../images/search.png') no-repeat 19px 16px rgba(3, 182, 197, 0.68);
+			/* background: url('../images/search.png') no-repeat 19px 16px rgba(3, 182, 197, 0.68); */
 			width: 70px;
 			height: 63px;
 			display: block;
@@ -5852,7 +5851,7 @@ table th, table td {
 	  }
 	 .page-container.sidebar-collapsed .left-content .srch button {
 		cursor: pointer;
-		background: url('../images/search.png') no-repeat 25px 15px rgba(3, 182, 197, 0.68);
+		/* background: url('../images/search.png') no-repeat 25px 15px rgba(3, 182, 197, 0.68); */
 		width: 80px;
 		height: 63px;
 		display: block;
@@ -5926,7 +5925,7 @@ table th, table td {
 	}
 	.page-container.sidebar-collapsed .left-content .srch button {
 		cursor: pointer;
-		background: url('../images/search.png') no-repeat 25px 15px rgba(3, 182, 197, 0.68);
+		/* background: url('../images/search.png') no-repeat 25px 15px rgba(3, 182, 197, 0.68); */
 		width: 80px;
 		height: 63px;
 		display: block;
@@ -5964,7 +5963,7 @@ table th, table td {
 	}
 	.page-container.sidebar-collapsed .left-content .srch button {
 		cursor: pointer;
-		background: url('../images/search.png') no-repeat 23px 12px rgba(3, 182, 197, 0.68);
+		/* background: url('../images/search.png') no-repeat 23px 12px rgba(3, 182, 197, 0.68); */
 		width: 70px;
 		height: 60px;
 		display: block;
