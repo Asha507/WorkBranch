@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NHibernate.Caches.Redis</name>
+    </assembly>
+    <members>
+        <member name="M:NHibernate.Caches.Redis.IAcquireLockRetryStrategy.GetShouldRetry">
+            <summary>
+            Gets a delegate that is used to determine if acquiring a lock should be retried.
+            Implementors should respect the AcquireLockTimeout argument of the delegate.
+            This must be thread-safe.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:NHibernate.Caches.Redis.ILockValueFactory">
+            <summary>
+            Generate a value used for a lock. This is helpful if you want to identify
+            where the lock was created from (such as including the machine name, process
+            id and a random Guid). This type must be thread-safe.
+            </summary>
+        </member>
+        <member name="M:NHibernate.Caches.Redis.ILockValueFactory.GetLockValue">
+            <summary>
+            Gets a unique value for a lock.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:NHibernate.Caches.Redis.RedisCacheConfiguration.Expiration">
+            <summary>
+            Gets or sets the duration that the item remains in the cache.
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.Redis.RedisCacheConfiguration.SlidingExpiration">
+            <summary>
+            Gets or sets the span of time allowed before an item's expiration
+            that will cause it to be re-expired when getting it from the cache.
+            
+            For example, setting the Expiration to 10 minutes and the
+            SlidingExpiration to 3 minutes means that the item must be accessed
+            within the last 3 minutes to cause the expiration to be reset.
+            
+            If it is desired to always re-expire the item when getting it from
+            the cache, set this to the same value as the Expiration.
+            
+            To emulate a sliding expiration policy siliar to ASP.NET's forms
+            authentication, set this to half of the Expiration.
+            
+            By defafult, no sliding expiration will occur (getting the item
+            from the cache will not cause it to re-expire).
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.Redis.RedisCacheConfiguration.LockTimeout">
+            <summary>
+            Gets or sets the maximum duration that the item can be locked.
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.Redis.RedisCacheConfiguration.AcquireLockTimeout">
+            <summary>
+            Gets or sets the maximum duration to wait when acquiring a lock
+            for the item. By default, this is the same as the lock timeout.
+            </summary>
+        </member>
+        <member name="M:NHibernate.Caches.Redis.RedisCacheConfiguration.#ctor(System.String)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="regionName"></param>
+        </member>
+        <member name="M:NHibernate.Caches.Redis.RedisCacheConfiguration.#ctor(System.String,NHibernate.Caches.Redis.RedisCacheConfiguration)">
+            <summary>
+            Copy constructor.
+            </summary>
+            <param name="regionName"></param>
+            <param name="other"></param>
+        </member>
+        <member name="M:NHibernate.Caches.Redis.RedisCacheProvider.SetConnectionMultiplexer(StackExchange.Redis.ConnectionMultiplexer)">
+            <summary>
+            Set the <see cref="T:StackExchange.Redis.ConnectionMultiplexer"/> to be used to
+            connect to Redis.
+            </summary>
+            <param name="connectionMultiplexer"></param>
+        </member>
+        <member name="M:NHibernate.Caches.Redis.RedisCacheProvider.SetOptions(NHibernate.Caches.Redis.RedisCacheProviderOptions)">
+            <summary>
+            Set the options to be used to configure each cache.
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="P:NHibernate.Caches.Redis.RedisCacheProviderOptions.Serializer">
+            <summary>
+            Get or set the serializer used for serializing/deserializing
+            values from Redis.
+            </summary>
+        </member>
+        <member name="E:NHibernate.Caches.Redis.RedisCacheProviderOptions.Exception">
+            <summary>
+            An event raised when exceptions occur during cache operations.
+            If an event handler is not added, by default exceptions are
+            thrown.
+            This must be thread-safe.
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.Redis.RedisCacheProviderOptions.AcquireLockRetryStrategy">
+            <summary>
+            Get or set the strategy used when determining whether or not to retry
+            acquiring a lock.
+            </summary>
+        </member>
+        <member name="E:NHibernate.Caches.Redis.RedisCacheProviderOptions.LockFailed">
+            <summary>
+            An event raised when locking fails (for any reason other than an
+            exception). If an event handler is not added, by default a 
+            <see cref="T:System.TimeoutException"/> is thrown. This must be thread-safe.
+            </summary>
+        </member>
+        <member name="E:NHibernate.Caches.Redis.RedisCacheProviderOptions.UnlockFailed">
+            <summary>
+            An event raised when unlocking fails (for any reason other
+            than an exception). This must be thread-safe.
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.Redis.RedisCacheProviderOptions.LockValueFactory">
+            <summary>
+            Get or set a factory used for creating the value of the locks.
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.Redis.RedisCacheProviderOptions.Database">
+            <summary>
+            Control which Redis database is used for the cache.
+            </summary>
+        </member>
+        <member name="P:NHibernate.Caches.Redis.RedisCacheProviderOptions.CacheConfigurations">
+            <summary>
+            Get or set the configuration for each region's cache.
+            </summary>
+        </member>
+    </members>
+</doc>

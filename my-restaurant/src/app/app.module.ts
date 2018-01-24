@@ -12,12 +12,14 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { BillingComponent } from './billing/billing.component';
 const routes:Routes=[
   { path: '', redirectTo: '/Login', pathMatch: 'full' },
   {path:'Login',component:LoginComponent},
   {path:'Home',component:HomeComponent,children:[
     { path: '', redirectTo: 'Dashboard', pathMatch: 'full' },
-    {path:'Dashboard',component:DashboardComponent}
+    {path:'Dashboard',component:DashboardComponent},
+    {path:'Billing',component:BillingComponent}
   ]}];
 
 @NgModule({
@@ -29,7 +31,8 @@ const routes:Routes=[
     HomeComponent,
     HeaderComponent,
     SidebarComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    BillingComponent
   ],
   imports: [
     BrowserModule,

@@ -15,9 +15,9 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
   }
-  ToggleMenu()
+  Load()
   {
-    
+    alert('Hello i am working');
   }
 
 }

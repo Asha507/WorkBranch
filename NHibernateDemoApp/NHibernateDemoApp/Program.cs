@@ -1,9 +1,11 @@
 ﻿using HibernatingRhinos.Profiler.Appender.NHibernate;
 using NHibernate.Cache;
+using NHibernate.Caches.Redis;
 using NHibernate.Cfg;
 using NHibernate.Dialect;
 using NHibernate.Driver;
 using NHibernate.Stat;
+using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,8 +33,8 @@ namespace NHibernateDemoApp
                 c.UseQueryCache = true;
             });
 
-            cfg.SessionFactory().Caching.Through<HashtableCacheProvider>()
-               .WithDefaultExpiration(1440);
+            var connectionMultiplexer = ConnectionMultiplexer.Connect("localhost:6379");
+            RedisCacheProvider.SetConnectionMultiplexer(connectionMultiplexer);
 
             var sefact = cfg.BuildSessionFactory();
 

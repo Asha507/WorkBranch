@@ -167,7 +167,7 @@ img{max-width:100%;}
     width: 87%;
 	font-size: .95em;
 }
-.login-bottom input[type="submit"] {
+.login-bottom button[type="submit"] {
     font-size: 1.4em;
 }
 .main {
