@@ -1,0 +1,30 @@
+.table-grid:nth-child(1) {
+    padding-left:15px;
+}
+.table-grid:nth-child(4) {
+    padding-right: 15px;
+}
+
+.table-grids {
+    margin: 1% 0;
+}
+.table-grid {
+    padding-bottom: 1%;
+    padding-right: 1% !important;
+    padding-left: 1% !important;
+    
+}
+.table-grid i.glyphicon {
+    color: #fff;
+    font-size: 32px;
+}
+.table-grid h3 {
+    font-size: 20px;
+    color: #fff;
+    margin: 14px 0;
+}
+.table-grids h4 {
+    font-size: 15px;
+    color: #fff;
+    margin: 0;
+}

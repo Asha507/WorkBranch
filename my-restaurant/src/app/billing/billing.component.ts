@@ -7,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BillingComponent implements OnInit {
 
-  constructor() { }
-
+  Numbers:any;
+    constructor() {
+      this.Numbers = Array(20).fill(0).map((x,i)=>i);
+    }
+ 
   ngOnInit() {
   }
 
