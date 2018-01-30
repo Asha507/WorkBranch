@@ -13,6 +13,7 @@ import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { BillingComponent } from './billing/billing.component';
+import {TableService} from './table.service';
 const routes:Routes=[
   { path: '', redirectTo: '/Login', pathMatch: 'full' },
   {path:'Login',component:LoginComponent},
@@ -41,7 +42,7 @@ const routes:Routes=[
     HttpModule,
     BrowserAnimationsModule
   ],
-  providers: [LoginService],
+  providers: [LoginService,TableService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

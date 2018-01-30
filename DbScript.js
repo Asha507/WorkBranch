@@ -58,3 +58,31 @@ db.News.insert({"date":ISODate("2016-09-07T00:00:00.000Z"),"description":"ValueM
 db.News.insert({"date":ISODate("2016-06-05T00:00:00.000Z"),"description":"ValueMomentum Unveils Major Enhancements to its BizDynamics Digital Solution",
     "Full-News":"From the IASA Annual Education and Business Conference ValueMomentum, Inc., a software and services provider to the insurance and the broader financial services industry, announced today the immediate availability of the enhanced version of its BizDynamics Digital Solution, a cloud-based offering designed to help property/casualty insurance carriers deploy and manage digital engagements and experiences. Version 1.2 is the second major enhancement released since the introduction of BizDynamics at last year’s IASA event.Highlights of new capabilities offered with version V1.2 include:Self-service capabilities for agents, enabling them to service customers with post-new business capabilities including endorsements, renewals, cancellations and reinstatements.Collaboration between agents and underwriters via Deal Wall capability, such that agents can view all activities related to a quote in a live feed.Provision of user profile operations APIs that enable agents to update their personal profiles, preferences, and passwords via quick links.Highlights of new client wins in 2017 include:A regional insurance carrier has licensed BizDynamics to establish a platform for its digital engagement initiatives, with the first rollout focused on segment specific digital experiences during the quote and buy journeys.A leading program administrator has licensed BizDynamics as its omni-channel digital platform for its multiple programs, and has launched its first consumer facing program using BizDynamics. The program was setup in five months.“This latest version of BizDynamics offers a number of new capabilities that bring even greater value to our BizDynamics user community. We are committed to continue our strong investment in the offering to align with the rapid pace digital technology is evolving,” said James Carlucci, Vice President, Insurance at ValueMomentum. “Since introducing BizDynamics at last year’s IASA we’ve enjoyed strong market adoption. We look forward to bringing our new capabilities to our early BizDynamics clients and to attracting other carriers looking to enable their digital environments.”With BizDynamics insurers are able to provide customers, agents and employees with uniform digital experiences across all touchpoints. BizDynamics can accelerate an insurer’s digital transformation with out-of-the-box applications for customers, agents and employees. It provides insurers powerful tools to rapidly develop new applications and digital experiences while leveraging their investments made in core systems through APIs."})
 
+db.TableStatus.deleteMany({})
+
+
+db.createCollection('TableStatus')
+
+db.TableStatus.insert({"Number":"1","Status":"Table Empty"})
+db.TableStatus.insert({"Number":"2","Status":"Table Occupied"})
+db.TableStatus.insert({"Number":"3","Status":"Order Completed"})
+db.TableStatus.insert({"Number":"4","Status":"Order Placed"})
+db.TableStatus.insert({"Number":"5","Status":"Table Empty"})
+db.TableStatus.insert({"Number":"6","Status":"Order Placed"})
+db.TableStatus.insert({"Number":"7","Status":"Table Occupied"})
+db.TableStatus.insert({"Number":"8","Status":"Table Empty"})
+db.TableStatus.insert({"Number":"9","Status":"Order Placed"})
+db.TableStatus.insert({"Number":"10","Status":"Table Empty"})
+db.TableStatus.insert({"Number":"11","Status":"Table Empty"})
+db.TableStatus.insert({"Number":"12","Status":"Order Completed"})
+db.TableStatus.insert({"Number":"13","Status":"Table Empty"})
+db.TableStatus.insert({"Number":"14","Status":"Table Occupied"})
+db.TableStatus.insert({"Number":"15","Status":"Order Placed"})
+db.TableStatus.insert({"Number":"16","Status":"Table Empty"})
+db.TableStatus.insert({"Number":"17","Status":"Order Completed"})
+db.TableStatus.insert({"Number":"18","Status":"Table Occupied"})
+db.TableStatus.insert({"Number":"19","Status":"Table Empty"})
+db.TableStatus.insert({"Number":"20","Status":"Order Completed"})
+
+
+db.TableStatus.find()

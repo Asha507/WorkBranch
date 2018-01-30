@@ -4,15 +4,16 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
+
 @Injectable()
-export class LoginService {
+export class TableService {
 
   constructor(private http:Http) { }
-  Authenticate(userid:string,pwd:string):Observable<any>
-  {
-    return  this.http.post('/api/authenticate',
-   {"UserID":userid,"password":pwd}).map((res)=>{
-     return res.json();
-    });
-  }
+
+GetTableStatus():Observable<any>
+{
+  return  this.http.get('/api/GetTableStatus').map((res)=>{
+    return res.json();
+   });
+}
 }

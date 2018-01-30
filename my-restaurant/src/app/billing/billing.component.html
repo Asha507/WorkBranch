@@ -1,17 +1,14 @@
 <!--four-grids here-->
 <div class="table-grids">
-  <div class="col-md-3 table-grid"  *ngFor="let number of Numbers">
-    <div class="four-agileits" >
-      <div class="icon">
-        <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
-      </div>
-      <div class="four-text">
-          <a [routerLink]="['../Billing']">
-        <h3>Table 1</h3>
-        <h4>  Update Status  
-          <img [src]="'../assets/right_arrow.png'">
-        </h4>    
-        </a>      
+  <div class="col-md-3 table-grid"  *ngFor="let table of Tables">
+    <div class="four-tile" [ngClass]="SetClasses(table.Status)" >
+      
+      <div class="tile-text">          
+        <h3>Table {{ table.Number }}</h3>
+        <h5 style="color:white">{{table.Status}} </h5> 
+        <div class="four-link">
+        <h4>Update Status</h4>   
+      </div>      
       </div>      
     </div>
   </div>

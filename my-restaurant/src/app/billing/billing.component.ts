@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import {TableService} from  '../table.service'
+import {Table} from '../Table';
 @Component({
   selector: 'app-billing',
   templateUrl: './billing.component.html',
@@ -8,11 +9,39 @@ import { Component, OnInit } from '@angular/core';
 export class BillingComponent implements OnInit {
 
   Numbers:any;
-    constructor() {
-      this.Numbers = Array(20).fill(0).map((x,i)=>i);
+  Tables:Table[];
+    constructor(private tableService:TableService) {
+    
     }
  
   ngOnInit() {
+    debugger;
+    this.tableService.GetTableStatus().subscribe(response => {
+   this.Numbers=Array(response.result.length).map((x,i)=>i);
+   this.Tables=response.result;
+   });
   }
 
+  SetClasses(status:String)
+  {
+    let classes: any
+      if(status=="Order Completed")
+      {
+        classes='four-two'
+      }
+      else if(status=="Table Occupied")
+      {
+        classes='four-one'
+      }
+      else if(status=="Table Empty")
+      {
+        classes='four-three'
+      }
+      else if(status=="Order Placed")
+      {
+        classes='four-four'
+      }
+    return classes;
+    
+}
 }
