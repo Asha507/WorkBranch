@@ -14,13 +14,17 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { BillingComponent } from './billing/billing.component';
 import {TableService} from './table.service';
+import { OrdersComponent } from './orders/orders.component';
+import { MenuComponent } from './menu/menu.component';
 const routes:Routes=[
   { path: '', redirectTo: '/Login', pathMatch: 'full' },
   {path:'Login',component:LoginComponent},
   {path:'Home',component:HomeComponent,children:[
     { path: '', redirectTo: 'Dashboard', pathMatch: 'full' },
     {path:'Dashboard',component:DashboardComponent},
-    {path:'Billing',component:BillingComponent}
+    {path:'Billing',component:BillingComponent},
+    {path:'Menu',component:MenuComponent},
+    {path:'Order',component:OrdersComponent}
   ]}];
 
 @NgModule({
@@ -33,7 +37,9 @@ const routes:Routes=[
     HeaderComponent,
     SidebarComponent,
     BreadcrumbComponent,
-    BillingComponent
+    BillingComponent,
+    OrdersComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,

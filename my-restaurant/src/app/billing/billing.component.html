@@ -1,15 +1,21 @@
 <!--four-grids here-->
 <div class="table-grids">
-  <div class="col-md-3 table-grid"  *ngFor="let table of Tables">
-    <div class="four-tile" [ngClass]="SetClasses(table.Status)" >
-      
+  <div class="col-md-4 table-grid"  *ngFor="let table of Tables">
+    <div class="four-tile" [ngClass]="SetClasses(table.Status)" >      
       <div class="tile-text">          
         <h3>Table {{ table.Number }}</h3>
-        <h5 style="color:white">{{table.Status}} </h5> 
-        <div class="four-link">
-        <h4>Update Status</h4>   
-      </div>      
-      </div>      
+        <h5 style="color:white">{{table.Status}} </h5>               
+      </div>  
+      <!-- <div>
+          <img [src]="'../assets/OrderCompleted.png'">
+      </div> -->
+      <div class="four-link"  [ngClass]="SetSubClasses(table.Status)">
+        <a href="javascript:void(0)">
+          <h4>Update Status
+              <img [src]="'../assets/right_arrow.png'" (click)="UpdateStatus(table.Status)">  
+          </h4>
+        </a>   
+      </div>    
     </div>
   </div>
   <div class="clearfix"></div>
