@@ -1,6 +1,7 @@
 .menu-grids
 {
-    padding-bottom: 5%;
+    margin: 1% 0;
+    padding-bottom: 1%;
     background: white;
     margin-top: 3%;
     margin-bottom: 3%;
@@ -31,4 +32,22 @@
 {
 background: white;
 padding-bottom: 100%;
+}
+h6
+{
+    color:white !important;
+}
+h5
+{
+    color:white !important;
+}
+.menu-grid
+{
+    padding-bottom: 2%;
+    padding-right: 1% !important;
+    padding-left: 1% !important;
+}
+.imgBack
+{
+    background-image: url('../../assets/mik-4ever-indian-restaurant.jpg') !important;
 }

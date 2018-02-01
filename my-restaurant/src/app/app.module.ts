@@ -5,6 +5,7 @@ import {HttpModule} from '@angular/http'
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import {LoginService} from './login.service';
+import{MenuServiceService} from './menu-service.service'
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterModule, Routes } from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -48,7 +49,7 @@ const routes:Routes=[
     HttpModule,
     BrowserAnimationsModule
   ],
-  providers: [LoginService,TableService],
+  providers: [LoginService,TableService,MenuServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,45 +4,15 @@
             <div class="row menu-grids">
                 <!--s here-->
                 <div class="s menu ">
-                    <div class="col-md-4 ">
-                        <div class="four-agileits">
+                    <div class="col-md-4 menu-grid" *ngFor="let category of categories">
+                        <div class="four-agileits imgBack">
 
                             <div class="four-text">
                                 <a href="javascript:void(0)">
-                                    <h3>Non-Veg</h3>
+                                    <h3>{{category}}</h3>
                                     <h4>
-                                        Select menu
-                                        <img [src]="'../assets/right_arrow.png'" (click)="SelectSubCategory(Non-Veg)">
-                                    </h4>
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-md-4 ">
-                        <div class="four-w3ls">
-
-                            <div class="four-text">
-                                <a href="#">
-                                    <h3>Veg</h3>
-                                    <h4>
-                                        Select menu
-                                        <img [src]="'../assets/right_arrow.png'">
-                                    </h4>
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-md-4 ">
-                        <div class="four-agileinfo">
-
-                            <div class="four-text">
-                                <a href="#">
-                                    <h3>Indian Bread</h3>
-                                    <h4>
-                                        Select menu
-                                        <img [src]="'../assets/right_arrow.png'">
+                                        Select
+                                        <img [src]="'../assets/right_arrow.png'" (click)="SelectSubCategory(category)">
                                     </h4>
                                 </a>
                             </div>
@@ -55,111 +25,34 @@
             </div>
             <div class="row menu-grids" *ngIf="showSubCategory">
                 <div class="s menu">
-                    <div class="col-md-3 ">
+                    <div class="col-md-3 menu-grid" *ngFor="let subCategory of subCategories">
                         <div class="four-agileits">
 
                             <div class="four-text">
                                 <a href="javascript:void(0)">
-                                    <h3>Soup</h3>
-                                    <h4>
-                                        Select menu
-                                        <img [src]="'../assets/right_arrow.png'" (click)="SelectSubCategory(Non-Veg)">
-                                    </h4>
+                                    <h4>{{subCategory}}</h4>
+                                    <h6>
+                                        Select Items
+                                        <img [src]="'.././assets/right_arrow.png'" (click)="SelectItems(subCategory)">
+                                    </h6>
                                 </a>
                             </div>
-
-                        </div>
-                    </div>
-                    <div class="col-md-3 ">
-                        <div class="four-w3ls">
-
-                            <div class="four-text">
-                                <a href="#">
-                                    <h3>Starter</h3>
-                                    <h4>
-                                        Select menu
-                                        <img [src]="'../assets/right_arrow.png'">
-                                    </h4>
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-md-3 ">
-                        <div class="four-agileinfo">
-
-                            <div class="four-text">
-                                <a href="#">
-                                    <h3>Main Course</h3>
-                                    <h4>
-                                        Select menu
-                                        <img [src]="'../assets/right_arrow.png'">
-                                    </h4>
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-md-3 ">
-                        <div class="four-agileinfo">
-
-                            <div class="four-text">
-                                <a href="#">
-                                    <h3>Curries</h3>
-                                    <h4>
-                                        Select menu
-                                        <img [src]="'../assets/right_arrow.png'">
-                                    </h4>
-                                </a>
-                            </div>
-
-                        </div>
+              </div>
                     </div>
                     <div class="clearfix"></div>
                 </div>
             </div>
-            <div class="row menu-grids">
-                <div class="s menu ">
-                    <div class="col-md-4 ">
+            <div class="row menu-grids" *ngIf="showItems">
+                <div class="s menu " >
+                    <div class="col-md-3 menu-grid " *ngFor="let item of items">
                         <div class="four-agileits">
 
                             <div class="four-text">
                                 <a href="javascript:void(0)">
-                                    <h3>Non-Veg</h3>
-                                    <h4>
-                                        Select menu
-                                        <img [src]="'../assets/right_arrow.png'" (click)="SelectSubCategory(Non-Veg)">
-                                    </h4>
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-md-4 ">
-                        <div class="four-w3ls">
-
-                            <div class="four-text">
-                                <a href="#">
-                                    <h3>Veg</h3>
-                                    <h4>
-                                        Select menu
-                                        <img [src]="'../assets/right_arrow.png'">
-                                    </h4>
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-md-4 ">
-                        <div class="four-agileinfo">
-
-                            <div class="four-text">
-                                <a href="#">
-                                    <h3>Indian Bread</h3>
-                                    <h4>
-                                        Select menu
-                                        <img [src]="'../assets/right_arrow.png'">
-                                    </h4>
+                                    <h5>{{item.Name}}</h5>
+                                    <h6>
+                                        {{item.ItemCode}}
+                                    </h6>
                                 </a>
                             </div>
 
@@ -172,7 +65,7 @@
         <div class="col-md-4" id="sel-grid" >
           <div class="sel-items">
             2nd column
-            </div>
+          </div>
         </div>
     </div>
 </div>

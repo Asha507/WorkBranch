@@ -22,7 +22,10 @@ export class BillingComponent implements OnInit {
    this.Tables=response.result;
    });
   }
+GetCategories()
+{
 
+}
   SetClasses(status:String)
   {
     let classes: any
