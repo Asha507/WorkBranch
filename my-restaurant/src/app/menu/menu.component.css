@@ -1,3 +1,7 @@
+img{
+
+    background-color: red;
+}
 .menu-grids
 {
     margin: 1% 0;
@@ -14,13 +18,21 @@
 {
     margin: 5% 0% 0% 2% !important;
 }
+.four-text
+{
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+    padding-left: 10%;
+    text-align: left;
+   
+}
 .four-text h3
 {
-    color:white
+    color: rgb(134, 4, 4) !important;
 }
 .four-text h4
 {
-    color:white
+    color: darkred !important;
 }
 #sel-grid
 {
@@ -35,11 +47,11 @@ padding-bottom: 100%;
 }
 h6
 {
-    color:white !important;
+    color: darkred !important;
 }
 h5
 {
-    color:white !important;
+    color: darkred !important;
 }
 .menu-grid
 {
@@ -47,7 +59,21 @@ h5
     padding-right: 1% !important;
     padding-left: 1% !important;
 }
-.imgBack
+.VegimgBack
 {
-    background-image: url('../../assets/mik-4ever-indian-restaurant.jpg') !important;
+    background-image: url('../../assets/veg2.jpg') !important;
+    padding: 17% 0% 20% 0%;
+    
+}
+.NonVegimgBack
+{
+    background-image: url('../../assets/Non-Veg.jpg') !important;
+    padding: 17% 0% 20% 0%;
+    
+}
+.IBimgBack
+{
+    background-image: url('../../assets/IB.jpg') !important;
+    padding: 17% 0% 20% 0%;
+    
 }

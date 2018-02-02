@@ -5,8 +5,7 @@
                 <!--s here-->
                 <div class="s menu ">
                     <div class="col-md-4 menu-grid" *ngFor="let category of categories">
-                        <div class="four-agileits imgBack">
-
+                        <div class="four-agileits" [ngClass]="GetBackgroundImage(category)">
                             <div class="four-text">
                                 <a href="javascript:void(0)">
                                     <h3>{{category}}</h3>
@@ -44,7 +43,7 @@
             </div>
             <div class="row menu-grids" *ngIf="showItems">
                 <div class="s menu " >
-                    <div class="col-md-3 menu-grid " *ngFor="let item of items">
+                    <div class="col-md-3 menu-grid " *ngFor="let item of items" id="Items">
                         <div class="four-agileits">
 
                             <div class="four-text">

@@ -20,10 +20,30 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     this.GetCategories();
   }
+
+  GetBackgroundImage(category:String)
+  {
+    let classes:any;
+    if(category=="Veg")
+    {
+      classes= "VegimgBack";
+    }
+    else if(category=="Non-Veg")
+    {
+      classes= "NonVegimgBack";
+    }
+    else if(category=="Indian-Bread")
+    {
+      classes= "IBimgBack";
+    }
+    return classes;
+  }
+
   SelectSubCategory(category:String)
-   {   
+   {  
+    debugger; 
+    this.showItems=false;
      this.selectedCategory=category;
-    debugger;
    this.menuService.GetSubCategories(category).subscribe(response=>{  
      this.subCategories=response.result;
    });
@@ -36,7 +56,6 @@ export class MenuComponent implements OnInit {
   this.menuService.GetItems(this.selectedCategory,this.selectedSubCategory).subscribe(response=>{  
     debugger;
     this.items=response.result;
-    var  x= this.items[0].ItemCode;
   });
   this.showItems=true;
  }
