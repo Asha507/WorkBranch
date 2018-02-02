@@ -59,21 +59,30 @@ h5
     padding-right: 1% !important;
     padding-left: 1% !important;
 }
+.imgBack
+{
+    padding: 17% 0% 20% 0%;
+}
 .VegimgBack
 {
     background-image: url('../../assets/veg2.jpg') !important;
-    padding: 17% 0% 20% 0%;
+    
     
 }
 .NonVegimgBack
 {
     background-image: url('../../assets/Non-Veg.jpg') !important;
-    padding: 17% 0% 20% 0%;
     
 }
 .IBimgBack
 {
-    background-image: url('../../assets/IB.jpg') !important;
-    padding: 17% 0% 20% 0%;
-    
+    background-image: url('../../assets/IB.jpg') !important;    
+}
+.VBiryaniimgBack
+{
+    background-image: url('../../assets/vegbiryani.jpg') !important;
+}
+.NVBiryaniimgBack
+{
+    background-image: url('../../assets/biryani.jpg') !important;
 }

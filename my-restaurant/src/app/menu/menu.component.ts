@@ -36,6 +36,23 @@ export class MenuComponent implements OnInit {
     {
       classes= "IBimgBack";
     }
+    else if(category=="Indian-Bread")
+    {
+      classes= "IBimgBack";
+    }
+    else if(category=="Biryani")
+    {
+      debugger;
+      if(this.selectedCategory=="Veg")
+      {
+        classes= "VBiryaniimgBack";
+      }
+      else if(this.selectedCategory=="Non-Veg")
+      {
+        classes= "NVBiryaniimgBack";
+      }
+      
+    }
     return classes;
   }
 
