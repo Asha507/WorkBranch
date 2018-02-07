@@ -10,7 +10,7 @@ import {HttpModule} from '@angular/http';
 import { HeaderComponent } from './header/header.component';
 import { InvestmentsComponent } from './investments/investments.component';
 const routes:Routes=[
-  { path: '', redirectTo: '/Login', pathMatch: 'full' },
+  { path: '', redirectTo: '/Home', pathMatch: 'full' },
   {path:'Login',component:LoginComponent},
   {path:'Home',component:HomeComponent},
  ];

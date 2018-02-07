@@ -4,3 +4,20 @@ body
     margin:0% !important;
     font-size: 105%;
 }
+.text-align-center
+{
+    text-align: center;
+}
+.labelText label
+{
+    font-size: 14px;
+    font-weight: 500;
+}
+.clear-fix
+{
+    margin: 1%;
+}
+.right-align
+{
+    float:right;
+}

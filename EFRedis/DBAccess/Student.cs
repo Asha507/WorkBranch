@@ -30,7 +30,7 @@ namespace DBAccess
 
         {
 
-            var transactionHandler = new CacheTransactionHandler(new InMemoryCache());
+            var transactionHandler = new CacheTransactionHandler(new );
 
             AddInterceptor(transactionHandler);
 
