@@ -1,0 +1,24 @@
+.header-main
+{
+    padding-top:0.5%;
+    padding-left: 2%;
+    padding-right: 0%;
+    padding-bottom: 0.5%;
+	background:#0072c6;
+	 box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    -o-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
+.header-title
+{
+color: white;
+font-size: 1.2em;
+}
+.header-user
+{
+    color: white;
+    font-size: 1em;
+    float: right !important;
+}
