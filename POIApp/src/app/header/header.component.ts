@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
       this.vamID=params.id;
       this.vamName=params.Name;
     localStorage.setItem("Username",this.vamName);
+    debugger;
     localStorage.setItem("VamID",this.vamID);
     });
   }

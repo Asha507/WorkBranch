@@ -1,4 +1,5 @@
-<div class="container investment-container">
+<ngForm>
+ <div class="container investment-container">
   <div class="row">
       <div class="title-style" >
       <h2>Investment Proof Submission Form for FY 2017-2018</h2>
@@ -32,11 +33,11 @@
               <div class="col-md-2"></div>
             </div>
             <div class="row right-align">
-                <a href=""><h6>Click here to download the rules before filling the form</h6> </a>
+                <a (click)='downloadRulesFile()'><h6>Click here to download the rules before filling the form</h6> </a>
             </div>
           </div>
-        </div>
-        <div class="panel panel-default">
+      </div>
+       <div class="panel panel-default">
             <div class="panel-heading">
               <h3 class="panel-title">Proof Submission</h3>
             </div>
@@ -60,45 +61,74 @@
                       <th scope="row">1</th>
                       <td >Life Insurance paid for self/spouse/children(Excluding the deduction through salary)</td>
                       <td>
-                        <input type="text" value="0" class="form-control">
+                        <input type="text" value="0" class="form-control" [(ngModel)]='LICAmount' name="LICAmount">
                       </td>
                       <td>
-                        <input type="text" placeholder="Copy of Premium Receipt" class="form-control">                        
+                        <input type="text" placeholder="Copy of Premium Receipt" class="form-control" name="LIC" [(ngModel)]='LIC'>                        
                       </td>
                       <td class="text-align-center">                          
-                          <input name="Upload" type="file">
+                          <div class="fileUpload btn btn-primary">  
+                              <span>Upload File</span>  
+                              <input type="file" id="btnUpload" value="Upload" (change)="fileChange($event,'LIC')" class="upload" />  
+                          </div>  
                         </td>
                     </tr>
                     <tr>
                       <th scope="row">2</th>
                       <td >Public Provident Fund Subscriptions for self/spouse/children</td>
                       <td>
-                          <input type="text" value="0" class="form-control">
+                          <input type="text" value="0" class="form-control" [(ngModel)]='PPFAmount' name="PPFAmount">
                         </td>
                         <td>
-                          <input type="text" placeholder="Deposit Receipt for PPF Account/Passbook" class="form-control">                        
+                          <input type="text" placeholder="Deposit Receipt for PPF Account/Passbook" name="PPF" class="form-control"  [(ngModel)]='PPF'>                        
                         </td>
                         <td class="text-align-center">                          
-                            <button name="Upload" type="button" class="btn btn-primary">Upload file</button>
-                          </td>
+                            <div class="fileUpload btn btn-primary">  
+                                <span>Upload File</span>  
+                                <input type="file" id="btnUpload" value="Upload" (change)="fileChange($event,'PPF')" class="upload" />  
+                            </div>    
+                        </td>
                     </tr>
                     <tr>
                       <th scope="row">3</th>
                       <td>NSC (Only in the name of self)</td>
                       <td>
-                          <input type="text" value="0" class="form-control">
+                          <input type="text" value="0" class="form-control" [(ngModel)]='NSCAmount' name="NSCAmount">
                         </td>
                         <td>
-                          <input type="text" placeholder="Copy of NSC Certificate" class="form-control">                        
+                          <input type="text" class="form-control" name="NSC" placeholder="Copy of NSC Certificate" [(ngModel)]='NSC'>                        
                         </td>
                         <td class="text-align-center">                          
-                            <button name="Upload" type="button" class="btn btn-primary">Upload file</button>
-                          </td>
+                            <div class="fileUpload btn btn-primary">  
+                                <span>Upload File</span>  
+                                <input type="file" id="btnUpload" value="Upload" (change)="fileChange($event,'NSC')" class="upload" />  
+                            </div>  
+                        </td>
                     </tr>
                   </tbody>
                 </table>
                 </div>
             </div>
+       </div>
+       <div class="panel panel-default">
+         <div class="panel-heading"> 
+          <h3 class="panel-title">Declaration</h3>
+         </div>
+         <div class="panel-body labelText">
+         <h6> I hereby declare the information given above is true and correct. I undertake to inform immediately of any change in the above facts. Any Income tax liability arising out of wrong declaration will be my responsibility. </h6> 
+          <h6>Date : {{date|date:'short'}}</h6>
+          <div class="row">
+            <span class="col-md-3"></span>
+           <input type="Reset" class="btn btn-primary text-center col-md-2" > 
+           <span class="col-md-1"></span>
+           <input type="Submit" class="btn btn-primary text-center col-md-2" > 
+           <span class="col-md-4"></span>
           </div>
+           
+         </div>
+       </div>
    </div>
-</div>
+
+
+  </div>
+</ngForm>

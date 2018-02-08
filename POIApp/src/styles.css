@@ -21,3 +21,7 @@ body
 {
     float:right;
 }
+.center-align
+{
+   align-content: center;
+}
