@@ -9,6 +9,7 @@ import {LoginService} from './login.service';
 import {HttpModule} from '@angular/http';
 import { HeaderComponent } from './header/header.component';
 import { InvestmentsComponent } from './investments/investments.component';
+import {InvestmentService} from './services/investment.service';
 const routes:Routes=[
   { path: '', redirectTo: '/Home', pathMatch: 'full' },
   {path:'Login',component:LoginComponent},
@@ -29,7 +30,7 @@ const routes:Routes=[
     RouterModule.forRoot(routes),
     HttpModule
   ],
-  providers: [LoginService],
+  providers: [LoginService,InvestmentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
