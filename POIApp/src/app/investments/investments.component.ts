@@ -2,44 +2,48 @@ import { Component, OnInit } from '@angular/core';
 import { Http, RequestOptions, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { InvestmentService } from '../services/investment.service';
+import { IFieldTemplate } from '../IFieldTemplate';
 @Component({
   selector: 'app-investments',
   templateUrl: './investments.component.html',
   styleUrls: ['./investments.component.css']
 })
 export class InvestmentsComponent implements OnInit {
-
-  // public LIC:String;
-  // public PPF:String;
-  // public NSC:String;
-  //public amount: String = '0';
-  public document: string;
-  name: string;
-  // public PPFAmount:String='0';
-  // public NSCAmount:String='0';
   date: number = Date.now();
-  Fields_80C: any[];
+  Fields_80C: IFieldTemplate[];
+  Fields_Others:IFieldTemplate[];
+  guideLines:Array<string>;
   constructor(private investmentService: InvestmentService) { }
 
   ngOnInit() {
     this.GetJsonData();
+    this.GetGuideLines();
   }
 
   GetJsonData() {
-    this.investmentService.GetJsonData('80CTemplate.json').subscribe(response => {
-      this.Fields_80C = response;
+    this.investmentService.GetJsonData().subscribe(response => {
+      debugger;
+      this.Fields_80C = response["80C"];
+      this.Fields_Others=response["Others"];
     }
     );
   }
-  AmountChange(event, row) {
-    debugger;
-    var value = event.target.value;
+
+  GetGuideLines()
+  {
+    this.investmentService.GetGuidelines().subscribe(response => {
+    this.guideLines=response;
+    }
+    );
   }
-  fileChange(event, row) {
+ 
+
+  fileChange(event, row:IFieldTemplate) {
     debugger;
     let fileList: FileList = event.target.files;
     let file: File = fileList[0];
     row.FileName = file.name;
+    row.FileInfo=file;
     // switch(name.toLowerCase())
     // {
     //   case 'lic':
@@ -60,7 +64,7 @@ export class InvestmentsComponent implements OnInit {
     // }
     // this.investmentDetails.FileInfo=file;
     // this.invDetails.push(this.investmentDetails);
-    if (fileList.length > 0) {
+    // if (fileList.length > 0) {
       // if(name.toLowerCase()=="lic")
       // {
       //   this.LIC= fileList[0].name;  
@@ -88,7 +92,7 @@ export class InvestmentsComponent implements OnInit {
       // data => alert('success'),  
       // error => alert(error)  
       // )  
-    }
+    // }
     //End of FileChange
 
   }

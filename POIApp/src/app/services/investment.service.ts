@@ -8,11 +8,15 @@ export class InvestmentService {
 data:any;
   constructor(private http: Http) { }
 
-  GetJsonData(filename: String): Observable<any> {
-    return this.http.get('/assets/'+filename).map((res) => {
-      this.data=res.json();
-      debugger;
-      return this.data;
+  GetJsonData(): Observable<any> {
+    return this.http.get('/api/Configuration/GetFields').map((res) => {
+      return res.json();       
+    });
+  }
+
+  GetGuidelines(): Observable<any> {
+     return this.http.get('/api/Configuration/GetGuideLines').map((res) => {
+      return res.json();       
     });
   }
 

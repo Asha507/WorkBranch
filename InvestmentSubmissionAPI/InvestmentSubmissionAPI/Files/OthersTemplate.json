@@ -1,0 +1,26 @@
+﻿[
+  {
+    "SNO": "1",
+    "Section": "Section 80CCC Pension Scheme ",
+    "Name": "Investments made in Jeevan Suraksha of LIC or any other insurer.",
+    "Placeholder": "Copy of premium paid receipt",
+    "FileName": "",
+    "Amount": "0"
+  },
+  {
+    "SNO": "2",
+    "Section": "Section 80D Mediclaim Insurance Premium",
+    "Name": "Premium should be paid by cheque only to avail deduction",
+    "Placeholder": "Copy of premium paid receipt",
+    "FileName": "",
+    "Amount": "0"
+  },
+  {
+    "SNO": "3",
+    "Section": "Section 80 E",
+    "Name": "Repayment of education loan Interest for self and dependant",
+    "Placeholder": "Certificate from Lender",
+    "FileName": "",
+    "Amount": "0"
+  }
+]

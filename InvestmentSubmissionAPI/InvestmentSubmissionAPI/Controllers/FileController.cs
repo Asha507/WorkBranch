@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -16,31 +17,40 @@ namespace InvestmentSubmissionAPI.Controllers
         {
 
         }
+
+        
+
         [HttpPost]
         public HttpResponseMessage UploadFile()
         {
-            HttpResponseMessage response = new HttpResponseMessage();
             var httpRequest = HttpContext.Current.Request;
-            if (httpRequest.Files.Count > 0)
+            try
             {
-                foreach (string file in httpRequest.Files)
+                if (httpRequest.Files.Count > 0)
                 {
-                    var postedFile = httpRequest.Files[file];
-                    var filePath =ConfigurationManager.AppSettings["FilesShareLocation"];
-                    string folderName = "VAM_"+httpRequest.Params["VamID"];
-                    string fileName = httpRequest.Params["FileType"] + "_"+postedFile.FileName;
-                    if(!Directory.Exists(Path.Combine(filePath,folderName)))
+                    foreach (string file in httpRequest.Files)
                     {
-                        Directory.CreateDirectory(Path.Combine(filePath, folderName));
+                        var postedFile = httpRequest.Files[file];
+                        var filePath = ConfigurationManager.AppSettings["FilesShareLocation"];
+                        string folderName = "VAM_" + httpRequest.Params["VamID"];
+                        string fileName = httpRequest.Params["FileType"] + "_" + postedFile.FileName;
+                        if (!Directory.Exists(Path.Combine(filePath, folderName)))
+                        {
+                            Directory.CreateDirectory(Path.Combine(filePath, folderName));
+                        }
+                        if (File.Exists(Path.Combine(filePath, folderName, fileName)))
+                        {
+                            File.Delete(Path.Combine(filePath, folderName, fileName));
+                        }
+                        postedFile.SaveAs(Path.Combine(filePath, folderName, fileName));
                     }
-                    if(File.Exists(Path.Combine(filePath, folderName, fileName)))
-                    {
-                        File.Delete(Path.Combine(filePath, folderName, fileName));
-                    }
-                    postedFile.SaveAs(Path.Combine(filePath,folderName,fileName));
                 }
-              }
-            return response;
+                return Request.CreateResponse(HttpStatusCode.OK, "Uploaded Sucessfully");
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
         }
     }
 }
