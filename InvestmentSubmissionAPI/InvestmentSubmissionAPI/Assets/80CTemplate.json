@@ -1,0 +1,23 @@
+[
+    {
+        "SNO":"1",
+        "Name" :"Life Insurance paid for self/spouse/children(Excluding the deduction through salary)",
+        "Placeholder":"Copy of Premium Receipt",
+        "FileName":"",
+        "Amount":"0"
+    },
+    {
+        "SNO":"2",
+        "Name" :"Public Provident Fund Subscriptions for self/spouse/children",
+        "Placeholder":"Deposit Receipt for PPF Account/Passbook",
+        "FileName":"",
+        "Amount":"0"
+    },
+    {
+        "SNO":"3",
+        "Name" :"NSC (Only in the name of self)",
+        "Placeholder":"Copy of NSC Certificate",
+        "FileName":"",
+        "Amount":"0"
+    }
+]

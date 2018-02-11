@@ -25,3 +25,7 @@ body
 {
    align-content: center;
 }
+.red-border-class
+{
+    border-color: red;
+}

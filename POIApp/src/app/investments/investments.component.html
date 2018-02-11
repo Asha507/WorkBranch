@@ -1,84 +1,131 @@
-<form id="submissionForm" #sf>
+<form id="submissionForm" #sf="ngForm" (ngSubmit)="SubmitClick()">
   <div class="container investment-container">
     <div class="row">
       <div class="title-style">
-        <h2>Investment Proof Submission Form for FY 2017-2018</h2>
+        <h2>Investment Proof Submission for FY 2017-2018</h2>
       </div>
     </div>
-    <div class="row ">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Employee Details</h3>
+    <div class="row ">      
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Employee Details</h3>
+      </div>
+      <div class="panel-body labelText">
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-4">
+            <label>Employee ID : {{id}}</label>
+          </div>
+          <div class="col-md-4">
+            <label>Employee Name : {{userName}}</label>
+          </div>
+          <div class="col-md-2"></div>
         </div>
-        <div class="panel-body labelText">
-          <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-4">
-              <label>Employee ID : 2301</label>
-            </div>
-            <div class="col-md-4">
-              <label>Employee Name : Asha Jyothi Polamarasetty</label>
-            </div>
-            <div class="col-md-2"></div>
+        <div class="clear-fix"></div>
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-4">
+            <label>Start Date : 1st April 2017</label>
           </div>
-          <div class="clear-fix"></div>
-          <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-4">
-              <label>Start Date : 1st April 2017</label>
-            </div>
-            <div class="col-md-4">
-              <label>End Date : 31st March 2018</label>
-            </div>
-            <div class="col-md-2"></div>
+          <div class="col-md-4">
+            <label>End Date : 31st March 2018</label>
           </div>
-          <div class="row right-align">
-            <a (click)='downloadRulesFile()'>
-              <h6>Click here to download the rules before filling the form</h6>
-            </a>
-          </div>
+          <div class="col-md-2"></div>
         </div>
       </div>
-      <div class="panel panel-default">
+    </div>
+    <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">Proof Submission</h3>
+          <h3 class="panel-title">Guidelines</h3>
         </div>
-        <div class="panel-body">
-          <div>
-            <h5>Investment Proposal under section 80C</h5>
-          </div>
-          <div class="table-responsive">
-            <table class="table table-bordered table-hover table-text">
-              <thead>
-                <tr class="active">
-                  <th class="col-md-1" scope="col">S.NO</th>
-                  <th scope="col" class="col-md-3">Investment Type</th>
-                  <th scope="col" class="col-md-3">Amount</th>
-                  <th scope="col" class="col-md-3">Upload</th>
-                  <th scope="col" class="col-md-2"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let row of Fields_80C;let index=index ">
-                  <th scope="row">{{row.SNO}}</th>
-                  <td >{{row.Name}}</td>
-                  <td>
-                    <input type="text" class="form-control" name="{{'amount'+index}}" [(ngModel)]="row.Amount">
-                  </td>
-                  <td>
-                    <input type="text" [placeholder]="row.Placeholder" class="form-control" name="{{'filename'+index}}" [(ngModel)]='row.FileName'>                        
-                  </td>
-                  <td class="text-align-center">                          
-                      <div class="fileUpload btn btn-primary">  
-                          <span>Upload File</span>  
-                          <input type="file" id="btnUpload" value="Upload" (change)="fileChange($event,row)" class="upload" />  
-                      </div>  
+         <div class="panel-body" style="font-size:14px">
+            <table border=0>
+                <tr>
+                    <td>
+                    <ul *ngFor="let rule of guideLines">
+                    <li><p>{{rule}}</p></li>                   
+                    </ul>
                     </td>
                 </tr>
-              </tbody>
             </table>
-          </div>
-          <!-- <div class="table-responsive">
+           <div class="right-align">
+              <a (click)='downloadRulesFile()'>
+                <h6>Click here to download the rules before filling the form</h6>
+              </a>
+            </div>
+        </div>
+      </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Proof Submission</h3>
+      </div>
+      <div class="panel-body">
+        <div>
+          <h5>Investment Proposal under section 80C</h5>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover table-text">
+            <thead>
+              <tr class="active">
+                <th class="col-md-1" scope="col">S.NO</th>
+                <th scope="col" class="col-md-3">Investment Type</th>
+                <th scope="col" class="col-md-3">Amount</th>
+                <th scope="col" class="col-md-3">Upload</th>
+                <th scope="col" class="col-md-2"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of Fields_80C;let index=index ">
+                <th scope="row">{{row.SNO}}</th>
+                <td>{{row.Name}}</td>
+                <td>
+                  <input type="number" placeholder="0.0" #name="ngModel" [ngClass]="{'red-border-class': name.errors}" [min]="row.min" [max]="row.max"  class="form-control" name="{{'amount'+index}}" [(ngModel)]="row.Amount" (change)="AmountChanged($event,row,index)">
+                </td>
+                <td>
+                  <input type="text" [placeholder]="row.Placeholder" readonly class="form-control" name="{{'80Cfilename'+index}}" [(ngModel)]="row.FileName">
+                </td>
+                <td class="text-align-center">
+                  <div class="fileUpload btn btn-primary" [ngClass]="{'upload-button-disable': !showUploadbtn[index]}">
+                    <span>Upload File</span>
+                    <input type="file" id="btnUpload" [disabled]="!showUploadbtn[index]"  value="Upload" (change)="fileChange($event,row)" class="upload" />
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table table-bordered table-hover table-text">
+            <thead>
+              <tr class="active">
+                <th class="col-md-1" scope="col">S.NO</th>
+                <th scope="col" class="col-md-2">Section</th>
+                <th scope="col" class="col-md-2">Investment Type</th>
+                <th scope="col" class="col-md-2">Amount</th>
+                <th scope="col" class="col-md-3">Upload</th>
+                <th scope="col" class="col-md-2"></th>
+              </tr>
+            </thead> 
+            <tbody>
+              <tr *ngFor="let row of Fields_Others;let index=index ">
+                <th scope="row">{{row.SNO}}</th>
+                <td>{{row.Section}}</td>
+                <td>{{row.Name}}</td>
+                <td>
+                  <input type="number" placeholder="0.0"  #othername="ngModel" [ngClass]="{'red-border-class': othername.errors}" [min]="row.min" [max]="row.max"  class="form-control" name="{{'otheramount'+index}}" [(ngModel)]="row.Amount" (change)="OthersAmountChanged($event,row,index)">
+                </td>
+                <td>
+                  <input type="text" [placeholder]="row.Placeholder" readonly class="form-control" name="{{'othersfilename'+index}}" [(ngModel)]="row.FileName">
+                </td>
+                <td class="text-align-center">
+                  <div class="fileUpload btn btn-primary " [ngClass]="{'upload-button-disable': !othersshowUploadbtn[index]}">
+                    <span>Upload File</span>
+                    <input type="file" id="btnUpload" value="Upload" [disabled]="!othersshowUploadbtn[index]"  (change)="fileChange($event,row)" class="upload" />
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- <div class="table-responsive">
               <table class="table table-bordered table-hover table-text">
                   <thead>
                     <tr class="active">
@@ -142,26 +189,26 @@
                 </table>
                 </div>
             </div> -->
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Declaration</h3>
+      </div>
+      <div class="panel-body labelText">
+        <h6> I hereby declare the information given above is true and correct. I undertake to inform immediately of any change
+          in the above facts. Any Income tax liability arising out of wrong declaration will be my responsibility. </h6>
+        <h6>Date : {{date|date:'short'}}</h6>
+        <div class="row">
+          <span class="col-md-3"></span>
+          <input type="reset" class="btn btn-primary text-center col-md-2">
+          <span class="col-md-1"></span>
+          <input type="Submit" class="btn btn-primary text-center col-md-2" [disabled]="!sf.valid">
+          <span class="col-md-4"></span>
         </div>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Declaration</h3>
-          </div>
-          <div class="panel-body labelText">
-            <h6> I hereby declare the information given above is true and correct. I undertake to inform immediately of any change
-              in the above facts. Any Income tax liability arising out of wrong declaration will be my responsibility. </h6>
-            <h6>Date : {{date|date:'short'}}</h6>
-            <div class="row">
-              <span class="col-md-3"></span>
-              <input type="Reset" class="btn btn-primary text-center col-md-2">
-              <span class="col-md-1"></span>
-              <input type="Submit" class="btn btn-primary text-center col-md-2">
-              <span class="col-md-4"></span>
-            </div>
 
-          </div>
-        </div>
       </div>
     </div>
   </div>
-  </form>
+  </div>
+</form>

@@ -2,44 +2,75 @@ import { Component, OnInit } from '@angular/core';
 import { Http, RequestOptions, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { InvestmentService } from '../services/investment.service';
+import { IFieldTemplate } from '../IFieldTemplate';
 @Component({
   selector: 'app-investments',
   templateUrl: './investments.component.html',
   styleUrls: ['./investments.component.css']
 })
 export class InvestmentsComponent implements OnInit {
-
-  // public LIC:String;
-  // public PPF:String;
-  // public NSC:String;
-  //public amount: String = '0';
-  public document: string;
-  name: string;
-  // public PPFAmount:String='0';
-  // public NSCAmount:String='0';
+  id:string=localStorage.getItem("VamID");
+  userName:string=localStorage.getItem("Username");
+  debugger;
   date: number = Date.now();
-  Fields_80C: any[];
+  Fields_80C: IFieldTemplate[];
+  Fields_Others: IFieldTemplate[];
+  guideLines: Array<string>;
+  showUploadbtn: any = [];
+  othersshowUploadbtn: any = [];
+  fieldsData: any = [];
+  filesToUpload:Array<File>=[];  
   constructor(private investmentService: InvestmentService) { }
 
   ngOnInit() {
     this.GetJsonData();
+    this.GetGuideLines();
   }
 
   GetJsonData() {
-    this.investmentService.GetJsonData('80CTemplate.json').subscribe(response => {
-      this.Fields_80C = response;
+    this.investmentService.GetJsonData().subscribe(response => {
+      debugger;
+      this.Fields_80C = response["80C"];
+      this.Fields_Others = response["Others"];
     }
     );
   }
-  AmountChange(event, row) {
-    debugger;
-    var value = event.target.value;
+
+  GetGuideLines() {
+    this.investmentService.GetGuidelines().subscribe(response => {
+      this.guideLines = response;
+    }
+    );
   }
-  fileChange(event, row) {
+  AmountChanged(event, row, index) {
+    debugger;
+    if (event.target.value == 0 || event.target.value == "") {
+      this.showUploadbtn[index] = false;
+      row.FileName = "";
+      row.Amount = 0;
+    }
+    else {
+      this.showUploadbtn[index] = true;
+    }
+  }
+  OthersAmountChanged(event, row, index) {
+    debugger;
+    if (event.target.value == 0 || event.target.value == "") {
+      this.othersshowUploadbtn[index] = false;
+      row.FileName = "";
+      row.Amount = 0;
+    }
+    else {
+      this.othersshowUploadbtn[index] = true;
+    }
+  }
+  fileChange(event, row: IFieldTemplate) {
     debugger;
     let fileList: FileList = event.target.files;
     let file: File = fileList[0];
     row.FileName = file.name;
+    row.FileInfo = file;
+    this.filesToUpload.push(file);
     // switch(name.toLowerCase())
     // {
     //   case 'lic':
@@ -60,37 +91,53 @@ export class InvestmentsComponent implements OnInit {
     // }
     // this.investmentDetails.FileInfo=file;
     // this.invDetails.push(this.investmentDetails);
-    if (fileList.length > 0) {
-      // if(name.toLowerCase()=="lic")
-      // {
-      //   this.LIC= fileList[0].name;  
-      // }
-      // else if(name.toLowerCase()=="ppf")
-      // {
-      //   this.PPF= fileList[0].name;  
-      // } 
-      // else if(name.toLowerCase()=="nsc")
-      // {
-      //   this.NSC= fileList[0].name;  
-      // } 
-      // let formData: FormData = new FormData();  
-      // formData.append('uploadFile', file, file.name);
-      // formData.append('VamID', localStorage.getItem("VamID")); 
-      // formData.append('FileType', name); 
-      // let headers = new Headers()  
+    // if (fileList.length > 0) {
+    // if(name.toLowerCase()=="lic")
+    // {
+    //   this.LIC= fileList[0].name;  
+    // }
+    // else if(name.toLowerCase()=="ppf")
+    // {
+    //   this.PPF= fileList[0].name;  
+    // } 
+    // else if(name.toLowerCase()=="nsc")
+    // {
+    //   this.NSC= fileList[0].name;  
+    // } 
+    // let formData: FormData = new FormData();  
+    // formData.append('uploadFile', file, file.name);
+    // formData.append('VamID', localStorage.getItem("VamID")); 
+    // formData.append('FileType', name); 
+    // let headers = new Headers()  
 
-      // let options = new RequestOptions({ headers: headers });  
-      // let apiUrl1 = "http://localhost:61808/api/File/UploadFile"; 
-      // this.http.post(apiUrl1, formData, options)  
-      // .map(res => res.json())  
-      // .catch(error => Observable.throw(error))  
-      // .subscribe(  
-      // data => alert('success'),  
-      // error => alert(error)  
-      // )  
-    }
+    // let options = new RequestOptions({ headers: headers });  
+    // let apiUrl1 = "http://localhost:61808/api/File/UploadFile"; 
+    // this.http.post(apiUrl1, formData, options)  
+    // .map(res => res.json())  
+    // .catch(error => Observable.throw(error))  
+    // .subscribe(  
+    // data => alert('success'),  
+    // error => alert(error)  
+    // )  
+    // }
     //End of FileChange
 
+  }
+  SubmitClick() {
+    this.fieldsData.push(this.Fields_80C);
+    this.fieldsData.push(this.Fields_Others);
+    let formData: FormData = new FormData();
+    formData.append('Data', JSON.stringify(this.fieldsData));
+    formData.append('VamID', localStorage.getItem("VamID"));
+    formData.append('EmployeeName', localStorage.getItem("Username"));
+    formData.append('SubmissionDate',this.date.toString());
+    for (var j = 0; j < this.filesToUpload.length; j++) {
+      formData.append("file[]", this.filesToUpload[j], this.filesToUpload[j].name);
+  }
+    this.investmentService.UploadData(formData).subscribe(response => {
+
+    }
+    );
   }
 
 }

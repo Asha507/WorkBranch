@@ -1,11 +1,16 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Excel;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Http;
 
 namespace InvestmentSubmissionAPI.Controllers
@@ -16,31 +21,143 @@ namespace InvestmentSubmissionAPI.Controllers
         {
 
         }
+
+
+
         [HttpPost]
         public HttpResponseMessage UploadFile()
         {
-            HttpResponseMessage response = new HttpResponseMessage();
+            List<TemplateFields> templateFieldsList = new List<TemplateFields>();
             var httpRequest = HttpContext.Current.Request;
-            if (httpRequest.Files.Count > 0)
+            string id = httpRequest.Params["VamID"];
+            string userName = httpRequest.Params["EmployeeName"];
+            string submissionDate = httpRequest.Params["SubmissionDate"];
+            try
             {
-                foreach (string file in httpRequest.Files)
+                //Download files 
+                if (httpRequest.Files.Count > 0)
                 {
-                    var postedFile = httpRequest.Files[file];
-                    var filePath =ConfigurationManager.AppSettings["FilesShareLocation"];
-                    string folderName = "VAM_"+httpRequest.Params["VamID"];
-                    string fileName = httpRequest.Params["FileType"] + "_"+postedFile.FileName;
-                    if(!Directory.Exists(Path.Combine(filePath,folderName)))
+                    for (int i = 0; i < httpRequest.Files.Count; i++)
                     {
-                        Directory.CreateDirectory(Path.Combine(filePath, folderName));
+                        var postedFile = httpRequest.Files[i];
+                        if (postedFile != null && postedFile.ContentLength != 0)
+                        {
+                            var filePath = ConfigurationManager.AppSettings["FilesShareLocation"];
+                            string folderName = "VAM_" + id;
+                            string fileName = postedFile.FileName;
+                            if (!Directory.Exists(Path.Combine(filePath, folderName)))
+                            {
+                                Directory.CreateDirectory(Path.Combine(filePath, folderName));
+                            }
+                            if (File.Exists(Path.Combine(filePath, folderName, fileName)))
+                            {
+                                File.Delete(Path.Combine(filePath, folderName, fileName));
+                            }
+                            postedFile.SaveAs(Path.Combine(filePath, folderName, fileName));
+                        }
                     }
-                    if(File.Exists(Path.Combine(filePath, folderName, fileName)))
-                    {
-                        File.Delete(Path.Combine(filePath, folderName, fileName));
-                    }
-                    postedFile.SaveAs(Path.Combine(filePath,folderName,fileName));
                 }
-              }
-            return response;
+
+                foreach (var item in JArray.Parse(httpRequest.Params["Data"]))
+                {
+                    foreach (var field in item)
+                    {
+                        templateFieldsList.Add(field.ToObject<TemplateFields>());
+                    }
+                }
+                CreateExcelDoc(id,userName,templateFieldsList);
+                return Request.CreateResponse(HttpStatusCode.OK, "Uploaded Sucessfully");
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
         }
+
+       
+        private static void CreateExcelDoc(string id,string name,List<TemplateFields> fieldsList)
+        {
+            Application xlApp;
+            object misValue;
+            Workbook xlWorkBook;
+            xlApp = new Application();
+            if (xlApp == null)
+            {
+                throw new Exception("Excel is not properly istalled");
+            }
+            misValue = System.Reflection.Missing.Value;
+           
+            string file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Files", ConfigurationManager.AppSettings["ExcelData"]);
+            List<Dictionary<string,string>> excelFields =JsonConvert.DeserializeObject<List<Dictionary<string, string>>>(File.ReadAllText(file));
+            System.Data.DataTable dt = new System.Data.DataTable();
+            foreach (var item in excelFields[0])
+            {
+                dt.Columns.Add(item.Key);
+            }
+
+            DataRow datarow = dt.NewRow();
+            datarow["VamID"] = id;
+            datarow["Name"] = name;
+            datarow["Date"] = DateTime.Now;
+            foreach (var item in fieldsList)
+            {                
+                if (item.Amount!=""&&Convert.ToInt64(item.Amount)>0)
+                {
+                    datarow["Amount_" + item.itemCode] = item.Amount;
+                    datarow["Filename_" + item.itemCode] = item.FileName;
+                }
+            }
+
+            int row, col;
+           
+            Worksheet xlWorkSheet = null;
+            Range objRange = null;
+            if (!File.Exists(ConfigurationManager.AppSettings["ExcelLocation"]))
+            {
+                row = 1; col = 1;
+                int j = col;
+                
+                xlWorkBook = xlApp.Workbooks.Add(1);
+                xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
+                xlWorkSheet.Name = "Proofs Submitted";
+
+                foreach (DataColumn column in dt.Columns)
+                {
+
+                    objRange = (Range)xlWorkSheet.Cells[row, j];
+                    objRange.Value2 = column.ColumnName;
+                    j++;
+                }
+                row++;
+            }
+            else
+            {
+                xlWorkBook = xlApp.Workbooks.Open(ConfigurationManager.AppSettings["ExcelLocation"]);
+                xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
+                row = xlWorkSheet.UsedRange.Rows.Count;
+            }
+            col = 1;            
+            int count = dt.Columns.Count;
+            int k = col;
+            for (int i = 0; i < count; i++)
+            {
+                objRange = (Range)xlWorkSheet.Cells[row, k];
+                objRange.Value2 = datarow[i].ToString();
+                k++;
+            }
+            if (!File.Exists(ConfigurationManager.AppSettings["ExcelLocation"]))
+            {
+                xlWorkBook.SaveAs(ConfigurationManager.AppSettings["FilesShareLocation"], XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+
+            }
+            else
+            {
+                xlWorkBook.Save();
+            }
+            xlWorkBook.Close(true, misValue, misValue);
+            xlApp.Quit();
+
+        }
+
     }
 }

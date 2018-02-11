@@ -75,6 +75,7 @@ D:\Projects\Accelarator\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\Syst
 D:\Projects\Accelarator\InvestmentSubmissionAPI\InvestmentSubmissionAPI\obj\Debug\InvestmentSubmissionAPI.csprojResolveAssemblyReference.cache
 D:\Projects\Accelarator\InvestmentSubmissionAPI\InvestmentSubmissionAPI\obj\Debug\InvestmentSubmissionAPI.dll
 D:\Projects\Accelarator\InvestmentSubmissionAPI\InvestmentSubmissionAPI\obj\Debug\InvestmentSubmissionAPI.pdb
+D:\Projects\Accelarator\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\Files\80CTemplate.json
 C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\roslyn\csc.exe
 C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -87,6 +88,7 @@ C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\ros
 C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\roslyn\vbc.exe
 C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\roslyn\VBCSCompiler.exe
 C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\Files\80CTemplate.json
 C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\InvestmentSubmissionAPI.dll.config
 C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\InvestmentSubmissionAPI.dll
 C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\InvestmentSubmissionAPI.pdb
@@ -152,3 +154,4 @@ C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\Sys
 C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\obj\Debug\InvestmentSubmissionAPI.csprojResolveAssemblyReference.cache
 C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\obj\Debug\InvestmentSubmissionAPI.dll
 C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\obj\Debug\InvestmentSubmissionAPI.pdb
+C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\obj\Debug\InvestmentSubmissionAPI.csproj.ResolveComReference.cache
