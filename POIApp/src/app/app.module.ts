@@ -11,10 +11,13 @@ import { HeaderComponent } from './header/header.component';
 import { InvestmentsComponent } from './investments/investments.component';
 import {InvestmentService} from './services/investment.service';
 import { CustomFormsModule } from 'ng2-validation';
+import { Ng2FileRequiredModule } from 'ng2-file-required';
+import { MenuComponent } from './menu/menu.component';
+import { AdminComponent } from './admin/admin.component';
 const routes:Routes=[
-  { path: '', redirectTo: '/Home', pathMatch: 'full' },
-  {path:'Login',component:LoginComponent},
-  {path:'Home',component:HomeComponent},
+  { path: '', redirectTo: '/Investment', pathMatch: 'full' },
+  {path:'Admin',component:AdminComponent},
+  {path:'Investment',component:InvestmentsComponent},
  ];
 
 @NgModule({
@@ -23,14 +26,17 @@ const routes:Routes=[
     LoginComponent,
     HomeComponent,
     HeaderComponent,
-    InvestmentsComponent
+    InvestmentsComponent,
+    MenuComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     CustomFormsModule,
     RouterModule.forRoot(routes),
-    HttpModule
+    HttpModule,
+    Ng2FileRequiredModule
   ],
   providers: [LoginService,InvestmentService],
   bootstrap: [AppComponent]

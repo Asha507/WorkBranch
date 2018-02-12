@@ -13,6 +13,12 @@ body
     font-size: 14px;
     font-weight: 500;
 }
+
+.font-custom
+{
+    font-size: 14px;
+    font-weight: 500;
+}
 .clear-fix
 {
     margin: 1%;

@@ -14,11 +14,10 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams
     .subscribe(params => {
-      this.vamID=params.id;
-      this.vamName=params.Name;
-    localStorage.setItem("Username",this.vamName);
-    debugger;
-    localStorage.setItem("VamID",this.vamID);
+      localStorage.setItem("Username",params.Name);
+      localStorage.setItem("VamID",params.id);
+      this.vamID=localStorage.getItem("VamID");
+      this.vamName=params.Name;    
     });
   }
 

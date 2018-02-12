@@ -151,7 +151,7 @@ C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\Mic
 C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\System.Web.Http.Owin.xml
-C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\obj\Debug\InvestmentSubmissionAPI.csprojResolveAssemblyReference.cache
+C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\obj\Debug\InvestmentSubmissionAPI.csproj.ResolveComReference.cache
 C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\obj\Debug\InvestmentSubmissionAPI.dll
 C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\obj\Debug\InvestmentSubmissionAPI.pdb
-C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\obj\Debug\InvestmentSubmissionAPI.csproj.ResolveComReference.cache
+C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\obj\Debug\InvestmentSubmissionAPI.csprojResolveAssemblyReference.cache

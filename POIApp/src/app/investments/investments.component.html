@@ -82,12 +82,12 @@
                   <input type="number" placeholder="0.0" #name="ngModel" [ngClass]="{'red-border-class': name.errors}" [min]="row.min" [max]="row.max"  class="form-control" name="{{'amount'+index}}" [(ngModel)]="row.Amount" (change)="AmountChanged($event,row,index)">
                 </td>
                 <td>
-                  <input type="text" [placeholder]="row.Placeholder" readonly class="form-control" name="{{'80Cfilename'+index}}" [(ngModel)]="row.FileName">
+                  <input  type="text" [placeholder]="row.Placeholder" [required]="row.Amount>0?true:false" readonly class="form-control" name="{{'80Cfilename'+index}}" [(ngModel)]="row.FileName">
                 </td>
                 <td class="text-align-center">
                   <div class="fileUpload btn btn-primary" [ngClass]="{'upload-button-disable': !showUploadbtn[index]}">
                     <span>Upload File</span>
-                    <input type="file" id="btnUpload" [disabled]="!showUploadbtn[index]"  value="Upload" (change)="fileChange($event,row)" class="upload" />
+                    <input type="file" id="btnUpload" [disabled]="!showUploadbtn[index]"   value="Upload" (change)="fileChange($event,row)" class="upload" />
                   </div>
                 </td>
               </tr>
