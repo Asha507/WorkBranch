@@ -5,15 +5,15 @@ import {LoginComponent} from './login/login.component';
 import {HomeComponent} from './home/home.component';
 import { AppComponent } from './app.component';
 import {FormsModule} from '@angular/forms';
-import {LoginService} from './login.service';
 import {HttpModule} from '@angular/http';
 import { HeaderComponent } from './header/header.component';
 import { InvestmentsComponent } from './investments/investments.component';
 import {InvestmentService} from './services/investment.service';
 import { CustomFormsModule } from 'ng2-validation';
-import { Ng2FileRequiredModule } from 'ng2-file-required';
 import { MenuComponent } from './menu/menu.component';
 import { AdminComponent } from './admin/admin.component';
+import {DataTableModule} from "angular2-datatable";
+import {AdminService} from './services/admin.service'
 const routes:Routes=[
   { path: '', redirectTo: '/Investment', pathMatch: 'full' },
   {path:'Admin',component:AdminComponent},
@@ -36,9 +36,9 @@ const routes:Routes=[
     CustomFormsModule,
     RouterModule.forRoot(routes),
     HttpModule,
-    Ng2FileRequiredModule
+    DataTableModule
   ],
-  providers: [LoginService,InvestmentService],
+  providers: [InvestmentService,AdminService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

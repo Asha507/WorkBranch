@@ -111,7 +111,8 @@ namespace InvestmentSubmissionAPI.Controllers
                 dt.Rows.Add(dr);
             }
             DisposeExcel(ref xlApp, misValue, ref xlWorkBook, ref xlWorkSheet);
-            return Request.CreateResponse(HttpStatusCode.OK, dt);
+            string json = DataTableToJSON(dt);
+            return Request.CreateResponse(HttpStatusCode.OK, json);
 
         }
 
@@ -206,7 +207,7 @@ namespace InvestmentSubmissionAPI.Controllers
         {
             if (!File.Exists(ConfigurationManager.AppSettings["ExcelLocation"]))
             {
-                xlWorkBook.SaveAs(ConfigurationManager.AppSettings["FilesShareLocation"], XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+                xlWorkBook.SaveAs(ConfigurationManager.AppSettings["ExcelLocation"], XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
 
             }
             else
@@ -215,7 +216,7 @@ namespace InvestmentSubmissionAPI.Controllers
             }
         }
 
-        private static void GenerateDataTable(string id, string name, List<TemplateFields> fieldsList, out System.Data.DataTable dt, out DataRow datarow)
+        private void GenerateDataTable(string id, string name, List<TemplateFields> fieldsList, out System.Data.DataTable dt, out DataRow datarow)
         {
             dt = new System.Data.DataTable();
             string file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Files", ConfigurationManager.AppSettings["ExcelData"]);
@@ -237,7 +238,19 @@ namespace InvestmentSubmissionAPI.Controllers
                     datarow["Amount_" + item.itemCode] = item.Amount;
                     datarow["Filename_" + item.itemCode] = item.FileName;
                 }
-            }
+                else
+                {
+                    datarow["Amount_" + item.itemCode] = "null";
+                    datarow["Filename_" + item.itemCode] = "null";
+                }
+            }           
+        }
+
+        public string DataTableToJSON(System.Data.DataTable table)
+        {
+            string JSONString = string.Empty;
+            JSONString = JsonConvert.SerializeObject(table);
+            return JSONString;
         }
 
         private void InsertToExcel(System.Data.DataTable dt, DataRow datarow, int row, Worksheet xlWorkSheet, ref Range objRange)
@@ -252,5 +265,7 @@ namespace InvestmentSubmissionAPI.Controllers
                 k++;
             }
         }
+
+        
     }
 }

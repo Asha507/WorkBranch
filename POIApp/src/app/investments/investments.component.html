@@ -80,6 +80,10 @@
                 <td>{{row.Name}}</td>
                 <td>
                   <input type="number" placeholder="0.0" #name="ngModel" [ngClass]="{'red-border-class': name.errors}" [min]="row.min" [max]="row.max"  class="form-control" name="{{'amount'+index}}" [(ngModel)]="row.Amount" (change)="AmountChanged($event,row,index)">
+                  <div *ngIf="name.invalid && (name.dirty || name.touched)"
+                  class="alert alert-danger">  
+                  Amount should not be greater than {{row.max}}     
+                  </div>      
                 </td>
                 <td>
                   <input  type="text" [placeholder]="row.Placeholder" [required]="row.Amount>0?true:false" readonly class="form-control" name="{{'80Cfilename'+index}}" [(ngModel)]="row.FileName">
@@ -111,6 +115,10 @@
                 <td>{{row.Name}}</td>
                 <td>
                   <input type="number" placeholder="0.0"  #othername="ngModel" [ngClass]="{'red-border-class': othername.errors}" [min]="row.min" [max]="row.max"  class="form-control" name="{{'otheramount'+index}}" [(ngModel)]="row.Amount" (change)="OthersAmountChanged($event,row,index)">
+                  <div *ngIf="othername.invalid && (othername.dirty || othername.touched)"
+                  class="alert alert-danger">  
+                  Amount should not be greater than {{row.max}}     
+                  </div>   
                 </td>
                 <td>
                   <input type="text" [placeholder]="row.Placeholder" readonly class="form-control" name="{{'othersfilename'+index}}" [(ngModel)]="row.FileName">

@@ -45,9 +45,12 @@ export class InvestmentsComponent implements OnInit {
   AmountChanged(event, row, index) {
     debugger;
     if (event.target.value == 0 || event.target.value == "") {
-      this.showUploadbtn[index] = false;
+      this.showUploadbtn[index] = false;      
+      row.Amount = "";
+      row.FileInfo="";
+      let file:number=this.filesToUpload.findIndex(item=>item.name==row.FileName);
       row.FileName = "";
-      row.Amount = 0;
+      this.filesToUpload.splice(file,1);
     }
     else {
       this.showUploadbtn[index] = true;
@@ -58,7 +61,7 @@ export class InvestmentsComponent implements OnInit {
     if (event.target.value == 0 || event.target.value == "") {
       this.othersshowUploadbtn[index] = false;
       row.FileName = "";
-      row.Amount = 0;
+      row.Amount = "";
     }
     else {
       this.othersshowUploadbtn[index] = true;
