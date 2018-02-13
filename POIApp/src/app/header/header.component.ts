@@ -7,18 +7,25 @@ import 'rxjs/add/operator/filter';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
- vamID:string;
- vamName:string;
-  constructor(private route: ActivatedRoute) { }
+  vamID: string;
+  vamName: string;
+  constructor(private route: ActivatedRoute) {
+    this.route.queryParams
+      .subscribe(params => {
+        if (undefined != params.Name) {
+          localStorage.setItem("Username", params.Name);
+        }
+        if (undefined != params.id) {
+          localStorage.setItem("VamID", params.id);
+        }
+
+        this.vamID = localStorage.getItem("VamID");
+        this.vamName = localStorage.getItem("Username");
+      });
+  }
 
   ngOnInit() {
-    this.route.queryParams
-    .subscribe(params => {
-      localStorage.setItem("Username",params.Name);
-      localStorage.setItem("VamID",params.id);
-      this.vamID=localStorage.getItem("VamID");
-      this.vamName=params.Name;    
-    });
+
   }
 
 }

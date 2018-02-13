@@ -35,3 +35,13 @@ body
 {
     border-color: red;
 }
+.table-text-wrap
+{
+    word-wrap:break-word;
+    word-break: break-all;
+     
+}
+.table-header-padding
+{
+    padding-right: 50%;
+}
