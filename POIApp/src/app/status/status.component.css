@@ -1,0 +1,10 @@
+.borderless td, .borderless th {
+    border: none;
+    font-size: 14px;
+    
+}
+table
+{
+    width: 40% !important;
+    margin: 0px auto;
+}

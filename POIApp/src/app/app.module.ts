@@ -13,11 +13,14 @@ import { CustomFormsModule } from 'ng2-validation';
 import { MenuComponent } from './menu/menu.component';
 import { AdminComponent } from './admin/admin.component';
 import {DataTableModule} from "angular2-datatable";
-import { Ng2FileTypeModule } from 'ng2-file-type';
-import {AdminService} from './services/admin.service'
+import {AdminService} from './services/admin.service';
+import { DataFilterPipe } from './data-filter.pipe';
+import { StatusComponent } from './status/status.component'
+import { StatusService } from './services/status.service';
 const routes:Routes=[
   { path: '', redirectTo: '/Investment', pathMatch: 'full' },
   {path:'Admin',component:AdminComponent},
+  {path:'Status',component:StatusComponent},
   {path:'Investment',component:InvestmentsComponent},
  ];
 
@@ -29,7 +32,9 @@ const routes:Routes=[
     HeaderComponent,
     InvestmentsComponent,
     MenuComponent,
-    AdminComponent
+    AdminComponent,
+    DataFilterPipe,
+    StatusComponent
   ],
   imports: [
     BrowserModule,
@@ -37,10 +42,9 @@ const routes:Routes=[
     CustomFormsModule,
     RouterModule.forRoot(routes),
     HttpModule,
-    DataTableModule,
-    Ng2FileTypeModule
+    DataTableModule
   ],
-  providers: [InvestmentService,AdminService],
+  providers: [InvestmentService,AdminService,StatusService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

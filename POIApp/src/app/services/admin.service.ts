@@ -16,4 +16,21 @@ export class AdminService {
       });
   }
 
+  ApproveRecord(item):Observable<any>
+  {
+    debugger;
+    return this.http.post('/api/File/UpdateStatus',{"VamID":item.VamID,"Status":"Approve"}).map(res=>
+      {
+        return res.json();
+      });
+  }
+
+  RejectRecord(item):Observable<any>
+  {
+    return this.http.post('/api/File/UpdateStatus',{"VamID":item.VamID,"Status":"Reject"}).map(res=>
+      {
+        return res.json();
+      });
+  }
+
 }

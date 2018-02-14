@@ -75,9 +75,40 @@ namespace InvestmentSubmissionAPI.Controllers
             }
         }
 
+        [HttpPost]
+        public HttpResponseMessage UpdateStatus([FromBody] dynamic data)
+        {
+            var httpRequest = HttpContext.Current.Request;
+            string id =JObject.Parse(data["VamID"]);
+            Application xlApp;
+            object misValue;
+            Workbook xlWorkBook;
+            Worksheet xlWorkSheet;
+            xlApp = new Application();
+            System.Data.DataTable dt = new System.Data.DataTable();
+            if (xlApp == null)
+            {
+                throw new Exception("Excel is not properly istalled");
+            }
+            misValue = System.Reflection.Missing.Value;
+            xlWorkBook = xlApp.Workbooks.Open(ConfigurationManager.AppSettings["ExcelLocation"]);
+            xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
+            int rowCount = xlWorkSheet.UsedRange.Rows.Count;
+            int columnCount = xlWorkSheet.UsedRange.Columns.Count;
+            int rowNumber = 1;
+            for (int r = 2; r <= rowCount; r++)
+            {
+                if(xlWorkSheet.Cells[r, 1].Text==data["VamID"].toString())
+                {
+                    xlWorkSheet.Cells[r, columnCount].Text = data["Status"].toString();
+                    break;
+                }
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, "");
+        }
 
         [HttpGet]
-        public HttpResponseMessage GetExcelData()
+        public HttpResponseMessage GetExcelData(int id=0)
         {
             Application xlApp;
             object misValue;
@@ -108,7 +139,18 @@ namespace InvestmentSubmissionAPI.Controllers
                 {
                     dr[c - 1] = xlWorkSheet.Cells[r, c].Text;
                 }
-                dt.Rows.Add(dr);
+                if (0 != id)
+                {
+                    if (Convert.ToInt32(dr["VamID"]) == id)
+                    {
+                        dt.Rows.Add(dr);
+                        break;
+                    }
+                }
+                else
+                {
+                    dt.Rows.Add(dr);
+                }
             }
             DisposeExcel(ref xlApp, misValue, ref xlWorkBook, ref xlWorkSheet);
             string json = DataTableToJSON(dt);
@@ -161,6 +203,7 @@ namespace InvestmentSubmissionAPI.Controllers
                     {
                         InsertToExcel(dt, datarow, i, xlWorkSheet, ref objRange);
                         recordExists = true;
+                        break;
                     }
                 }
                 if (!recordExists)
@@ -231,6 +274,7 @@ namespace InvestmentSubmissionAPI.Controllers
             datarow["VamID"] = id;
             datarow["Name"] = name;
             datarow["Date"] = DateTime.Now;
+            datarow["Status"] = "Pending";
             foreach (var item in fieldsList)
             {
                 if (item.Amount != "" && Convert.ToInt64(item.Amount) > 0)

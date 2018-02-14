@@ -1,0 +1,19 @@
+﻿[
+  {
+    "VamID": "String",
+    "Name": "String",
+    "Date": "Date",
+    "Amount_001": "Number",
+    "Filename_001": "String",
+    "Amount_002": "Number",
+    "Filename_002": "String",
+    "Amount_003": "String",
+    "Filename_003": "String",
+    "Amount_010": "String",
+    "Filename_010": "String",
+    "Amount_011": "String",
+    "Filename_011": "String",
+    "Amount_012": "String",
+    "Filename_012": "String"
+  }
+]

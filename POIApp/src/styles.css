@@ -43,5 +43,6 @@ body
 }
 .table-header-padding
 {
+    width: 30%;
     padding-right: 50%;
 }

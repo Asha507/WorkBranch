@@ -14,6 +14,7 @@
     "Amount_011": "String",
     "Filename_011": "String",
     "Amount_012": "String",
-    "Filename_012": "String"
+    "Filename_012": "String",
+    "Status":"String"
   }
 ]
