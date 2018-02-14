@@ -79,7 +79,8 @@ namespace InvestmentSubmissionAPI.Controllers
         public HttpResponseMessage UpdateStatus([FromBody] dynamic data)
         {
             var httpRequest = HttpContext.Current.Request;
-            string id =JObject.Parse(data["VamID"]);
+            string id =data["VamID"].Value;
+            string status = data["Status"].Value;
             Application xlApp;
             object misValue;
             Workbook xlWorkBook;
@@ -95,12 +96,13 @@ namespace InvestmentSubmissionAPI.Controllers
             xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
             int rowCount = xlWorkSheet.UsedRange.Rows.Count;
             int columnCount = xlWorkSheet.UsedRange.Columns.Count;
-            int rowNumber = 1;
+            Range objRange;
             for (int r = 2; r <= rowCount; r++)
             {
-                if(xlWorkSheet.Cells[r, 1].Text==data["VamID"].toString())
+                if (xlWorkSheet.Cells[r, 1].Text == id)
                 {
-                    xlWorkSheet.Cells[r, columnCount].Text = data["Status"].toString();
+                    objRange = (Range)xlWorkSheet.Cells[r, columnCount];
+                    objRange.Value2 = status;
                     break;
                 }
             }
