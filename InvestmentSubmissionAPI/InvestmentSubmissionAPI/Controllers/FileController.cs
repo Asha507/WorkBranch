@@ -66,7 +66,7 @@ namespace InvestmentSubmissionAPI.Controllers
                         templateFieldsList.Add(field.ToObject<TemplateFields>());
                     }
                 }
-                CreateExcelDoc(id, userName, templateFieldsList);
+                CreateExcelDoc(id, userName,submissionDate, templateFieldsList);
                 return Request.CreateResponse(HttpStatusCode.OK, "Uploaded Sucessfully");
             }
             catch (Exception ex)
@@ -170,7 +170,7 @@ namespace InvestmentSubmissionAPI.Controllers
 
         }
 
-        private void CreateExcelDoc(string id, string name, List<TemplateFields> fieldsList)
+        private void CreateExcelDoc(string id, string name,string submissionDate, List<TemplateFields> fieldsList)
         {
             Application xlApp;
             object misValue;
@@ -184,7 +184,7 @@ namespace InvestmentSubmissionAPI.Controllers
 
             System.Data.DataTable dt;
             DataRow datarow;
-            GenerateDataTable(id, name, fieldsList, out dt, out datarow);
+            GenerateDataTable(id, name,submissionDate, fieldsList, out dt, out datarow);
 
             int row, col;
 
@@ -271,7 +271,7 @@ namespace InvestmentSubmissionAPI.Controllers
             }
         }
 
-        private void GenerateDataTable(string id, string name, List<TemplateFields> fieldsList, out System.Data.DataTable dt, out DataRow datarow)
+        private void GenerateDataTable(string id, string name,string submissionDate, List<TemplateFields> fieldsList, out System.Data.DataTable dt, out DataRow datarow)
         {
             dt = new System.Data.DataTable();
             string file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Files", ConfigurationManager.AppSettings["ExcelData"]);
@@ -285,7 +285,7 @@ namespace InvestmentSubmissionAPI.Controllers
             datarow = dt.NewRow();
             datarow["VamID"] = id;
             datarow["Name"] = name;
-            datarow["Date"] = DateTime.Now;
+            datarow["Date"] = submissionDate;
             datarow["Status"] = "Pending";
             foreach (var item in fieldsList)
             {
