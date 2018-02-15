@@ -19,6 +19,9 @@ export class InvestmentsComponent implements OnInit {
   othersshowUploadbtn: any = [];
   fieldsData: any = [];
   filesToUpload: Array<File> = [];
+  hasError:boolean=false;
+  hasSizeError:boolean=false;
+  errorMessage:string="File should be in pdf format"
   constructor(private investmentService: InvestmentService) { }
 
   ngOnInit() {
@@ -68,7 +71,17 @@ export class InvestmentsComponent implements OnInit {
     let file: File = fileList[0];
     row.FileName = file.name;
     row.FileInfo = file;
+    if(+row.Amount>0 && !(row.FileName.endsWith(".pdf")))
+    {
+      this.hasError=true;
+    }
+    else if(file.size>1024)
+    {
+      this.hasSizeError=true;
+    }
+  else{
     this.filesToUpload.push(file);
+  }
   }
 
   isFormEmpty(): boolean {

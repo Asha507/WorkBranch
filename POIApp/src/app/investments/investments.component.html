@@ -88,7 +88,13 @@
                   </div>      
                 </td>
                 <td>
-                  <input  type="text" [placeholder]="row.Placeholder" [required]="row.Amount>0?true:false" readonly class="form-control" name="{{'80Cfilename'+index}}" [(ngModel)]="row.FileName">
+                  <input  type="text" [placeholder]="row.Placeholder" [required]="row.Amount>0?true:false" #fileType="ngModel"
+                   readonly class="form-control" name="{{'80Cfilename'+index}}"  [ngClass]="{'red-border-class': fileType.invalid && hasError}"
+                    [(ngModel)]="row.FileName" pattern="([a-zA-Z0-9\s_\\.\-:])+(.pdf)$" accept="application\pdf">
+                    <div *ngIf="(fileType.invalid && hasError)"
+                    class="alert alert-danger">  
+                    File Type should be PDF only     
+                    </div>
                 </td>
                 <td class="text-align-center">
                   <div class="fileUpload btn btn-primary" [ngClass]="{'upload-button-disable': !showUploadbtn[index]}">
