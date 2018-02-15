@@ -18,8 +18,7 @@ export class AdminService {
 
   ApproveRecord(item):Observable<any>
   {
-    debugger;
-    return this.http.post('/api/File/UpdateStatus',{"VamID":item.VamID,"Status":"Approve"}).map(res=>
+    return this.http.post('/api/File/UpdateStatus',{"VamID":item.VamID,"Status":"Approved"}).map(res=>
       {
         return res.json();
       });
@@ -27,7 +26,7 @@ export class AdminService {
 
   RejectRecord(item):Observable<any>
   {
-    return this.http.post('/api/File/UpdateStatus',{"VamID":item.VamID,"Status":"Reject"}).map(res=>
+    return this.http.post('/api/File/UpdateStatus',{"VamID":item.VamID,"Status":"Rejected"}).map(res=>
       {
         return res.json();
       });

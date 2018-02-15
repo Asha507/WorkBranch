@@ -14,11 +14,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
-  Login(){
-    debugger;
+  Login(){    
   this.loginService.Authenticate(this.login.userID,this.login.pwd).subscribe(response=>
     {
-      debugger;
       if(response.status==true)
       {
         localStorage.setItem('currentUser', this.login.userID);

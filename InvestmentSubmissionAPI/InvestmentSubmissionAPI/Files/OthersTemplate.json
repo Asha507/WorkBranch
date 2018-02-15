@@ -8,7 +8,7 @@
     "Amount": "",
     "min": "0",
     "max": "9999999999999",
-    "itemCode": "010"
+    "itemCode": "80CCC"
   },
   {
     "SNO": "2",
@@ -19,7 +19,7 @@
     "Amount": "",
     "min": "0",
     "max": "9999999999999",
-    "itemCode": "011"
+    "itemCode": "80D"
   },
   {
     "SNO": "3",
@@ -30,6 +30,6 @@
     "Amount": "",
     "min": "0",
     "max": "9999999999999",
-    "itemCode": "012"
+    "itemCode": "80E"
   }
 ]

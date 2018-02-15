@@ -9,9 +9,8 @@ import { IFieldTemplate } from '../IFieldTemplate';
   styleUrls: ['./investments.component.css']
 })
 export class InvestmentsComponent implements OnInit {
-  id:string=localStorage.getItem("VamID");
-  userName:string=localStorage.getItem("Username");
-  debugger;
+  id: string = localStorage.getItem("VamID");
+  userName: string = localStorage.getItem("Username");
   date: number = Date.now();
   Fields_80C: IFieldTemplate[];
   Fields_Others: IFieldTemplate[];
@@ -19,7 +18,7 @@ export class InvestmentsComponent implements OnInit {
   showUploadbtn: any = [];
   othersshowUploadbtn: any = [];
   fieldsData: any = [];
-  filesToUpload:Array<File>=[];  
+  filesToUpload: Array<File> = [];
   constructor(private investmentService: InvestmentService) { }
 
   ngOnInit() {
@@ -28,8 +27,7 @@ export class InvestmentsComponent implements OnInit {
   }
 
   GetJsonData() {
-    this.investmentService.GetJsonData().subscribe(response => {
-      debugger;
+    this.investmentService.GetJsonData().subscribe(response => {      
       this.Fields_80C = response["80C"];
       this.Fields_Others = response["Others"];
     }
@@ -43,21 +41,19 @@ export class InvestmentsComponent implements OnInit {
     );
   }
   AmountChanged(event, row, index) {
-    debugger;
     if (event.target.value == 0 || event.target.value == "") {
-      this.showUploadbtn[index] = false;      
+      this.showUploadbtn[index] = false;
       row.Amount = "";
-      row.FileInfo="";
-      let file:number=this.filesToUpload.findIndex(item=>item.name==row.FileName);
+      row.FileInfo = "";
+      let file: number = this.filesToUpload.findIndex(item => item.name == row.FileName);
       row.FileName = "";
-      this.filesToUpload.splice(file,1);
+      this.filesToUpload.splice(file, 1);
     }
     else {
       this.showUploadbtn[index] = true;
     }
   }
   OthersAmountChanged(event, row, index) {
-    debugger;
     if (event.target.value == 0 || event.target.value == "") {
       this.othersshowUploadbtn[index] = false;
       row.FileName = "";
@@ -68,63 +64,26 @@ export class InvestmentsComponent implements OnInit {
     }
   }
   fileChange(event, row: IFieldTemplate) {
-    debugger;
     let fileList: FileList = event.target.files;
     let file: File = fileList[0];
     row.FileName = file.name;
     row.FileInfo = file;
     this.filesToUpload.push(file);
-    // switch(name.toLowerCase())
-    // {
-    //   case 'lic':
-    //   this.investmentDetails.SNO="1";
-    //   this.investmentDetails.Amount=this.LICAmount;
-    //   this.LIC= fileList[0].name; 
-    //   break;
-    //   case 'ppf':
-    //   this.investmentDetails.SNO="2";
-    //   this.investmentDetails.Amount=this.PPFAmount;
-    //   this.PPF= fileList[0].name;  
-    //   break;
-    //   case 'nsc':
-    //   this.investmentDetails.SNO="3";
-    //   this.investmentDetails.Amount=this.NSCAmount;
-    //   this.NSC= fileList[0].name;  
-    //   break;
-    // }
-    // this.investmentDetails.FileInfo=file;
-    // this.invDetails.push(this.investmentDetails);
-    // if (fileList.length > 0) {
-    // if(name.toLowerCase()=="lic")
-    // {
-    //   this.LIC= fileList[0].name;  
-    // }
-    // else if(name.toLowerCase()=="ppf")
-    // {
-    //   this.PPF= fileList[0].name;  
-    // } 
-    // else if(name.toLowerCase()=="nsc")
-    // {
-    //   this.NSC= fileList[0].name;  
-    // } 
-    // let formData: FormData = new FormData();  
-    // formData.append('uploadFile', file, file.name);
-    // formData.append('VamID', localStorage.getItem("VamID")); 
-    // formData.append('FileType', name); 
-    // let headers = new Headers()  
+  }
 
-    // let options = new RequestOptions({ headers: headers });  
-    // let apiUrl1 = "http://localhost:61808/api/File/UploadFile"; 
-    // this.http.post(apiUrl1, formData, options)  
-    // .map(res => res.json())  
-    // .catch(error => Observable.throw(error))  
-    // .subscribe(  
-    // data => alert('success'),  
-    // error => alert(error)  
-    // )  
-    // }
-    //End of FileChange
-
+  isFormEmpty(): boolean {
+    let isEmpty: boolean = true;
+    this.Fields_80C.forEach(element => {
+      if (+element.Amount > 0) {
+        isEmpty = false;
+      }
+    });
+    this.Fields_Others.forEach(element => {
+      if (+element.Amount > 0) {
+        isEmpty = false;
+      }
+    });
+    return isEmpty;
   }
   SubmitClick() {
     this.fieldsData.push(this.Fields_80C);
@@ -133,10 +92,10 @@ export class InvestmentsComponent implements OnInit {
     formData.append('Data', JSON.stringify(this.fieldsData));
     formData.append('VamID', localStorage.getItem("VamID"));
     formData.append('EmployeeName', localStorage.getItem("Username"));
-    formData.append('SubmissionDate',this.date.toString());
+    formData.append('SubmissionDate', this.date.toString());
     for (var j = 0; j < this.filesToUpload.length; j++) {
       formData.append("file[]", this.filesToUpload[j], this.filesToUpload[j].name);
-  }
+    }
     this.investmentService.UploadData(formData).subscribe(response => {
 
     }

@@ -49,7 +49,7 @@
                 </tr>
             </table>
            <div class="right-align">
-              <a>
+              <a href="/assets/80CTemplate.json" download="Readme.json">
                 <h6>Click here to download the rules before filling the form</h6>
               </a>
             </div>
@@ -137,70 +137,6 @@
             </tbody>
           </table>
         </div>
-        <!-- <div class="table-responsive">
-              <table class="table table-bordered table-hover table-text">
-                  <thead>
-                    <tr class="active">
-                      <th class="col-md-1" scope="col">S.NO</th>
-                      <th scope="col" class="col-md-3">Investment Type</th>
-                      <th scope="col" class="col-md-3">Amount</th>
-                      <th scope="col" class="col-md-3">Upload</th>
-                      <th scope="col" class="col-md-2"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td >Life Insurance paid for self/spouse/children(Excluding the deduction through salary)</td>
-                      <td>
-                        <input type="text" value="0" class="form-control" [(ngModel)]='LICAmount' name="LICAmount">
-                      </td>
-                      <td>
-                        <input type="text" placeholder="Copy of Premium Receipt" class="form-control" name="LIC" [(ngModel)]='LIC'>                        
-                      </td>
-                      <td class="text-align-center">                          
-                          <div class="fileUpload btn btn-primary">  
-                              <span>Upload File</span>  
-                              <input type="file" id="btnUpload" value="Upload" (change)="fileChange($event,'LIC')" class="upload" />  
-                          </div>  
-                        </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td >Public Provident Fund Subscriptions for self/spouse/children</td>
-                      <td>
-                          <input type="text" value="0" class="form-control" [(ngModel)]='PPFAmount' name="PPFAmount">
-                        </td>
-                        <td>
-                          <input type="text" placeholder="Deposit Receipt for PPF Account/Passbook" name="PPF" class="form-control"  [(ngModel)]='PPF'>                        
-                        </td>
-                        <td class="text-align-center">                          
-                            <div class="fileUpload btn btn-primary">  
-                                <span>Upload File</span>  
-                                <input type="file" id="btnUpload" value="Upload" (change)="fileChange($event,'PPF')" class="upload" />  
-                            </div>    
-                        </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>NSC (Only in the name of self)</td>
-                      <td>
-                          <input type="text" value="0" class="form-control" [(ngModel)]='NSCAmount' name="NSCAmount">
-                        </td>
-                        <td>
-                          <input type="text" class="form-control" name="NSC" placeholder="Copy of NSC Certificate" [(ngModel)]='NSC'>                        
-                        </td>
-                        <td class="text-align-center">                          
-                            <div class="fileUpload btn btn-primary">  
-                                <span>Upload File</span>  
-                                <input type="file" id="btnUpload" value="Upload" (change)="fileChange($event,'NSC')" class="upload" />  
-                            </div>  
-                        </td>
-                    </tr>
-                  </tbody>
-                </table>
-                </div>
-            </div> -->
       </div>
     </div>
     <div class="panel panel-default">
@@ -215,7 +151,7 @@
           <span class="col-md-3"></span>
           <input type="reset" class="btn btn-primary text-center col-md-2">
           <span class="col-md-1"></span>
-          <input type="Submit" class="btn btn-primary text-center col-md-2" [disabled]="!sf.valid">
+          <input type="Submit" value="Submit" class="btn btn-primary text-center col-md-2" [disabled]="!sf.dirty || !sf.valid || isFormEmpty()">
           <span class="col-md-4"></span>
         </div>
 

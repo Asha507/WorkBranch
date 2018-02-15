@@ -7,7 +7,7 @@
     "Amount": "",
     "min": "0",
     "max": "70",
-    "itemCode": "001"
+    "itemCode": "LIC"
   },
   {
     "SNO": "2",
@@ -17,7 +17,7 @@
     "Amount": "",
     "min": "0",
     "max": "9999999999999",
-    "itemCode": "002"
+    "itemCode": "PPF"
   },
   {
     "SNO": "3",
@@ -27,6 +27,6 @@
     "Amount": "",
     "min": "0",
     "max": "9999999999999",
-    "itemCode": "003"
+    "itemCode": "NSC"
   }
 ]

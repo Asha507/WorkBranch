@@ -92,21 +92,31 @@ namespace InvestmentSubmissionAPI.Controllers
                 throw new Exception("Excel is not properly istalled");
             }
             misValue = System.Reflection.Missing.Value;
-            xlWorkBook = xlApp.Workbooks.Open(ConfigurationManager.AppSettings["ExcelLocation"]);
-            xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
-            int rowCount = xlWorkSheet.UsedRange.Rows.Count;
-            int columnCount = xlWorkSheet.UsedRange.Columns.Count;
-            Range objRange;
-            for (int r = 2; r <= rowCount; r++)
+            try
             {
-                if (xlWorkSheet.Cells[r, 1].Text == id)
+                xlWorkBook = xlApp.Workbooks.Open(ConfigurationManager.AppSettings["ExcelLocation"]);
+                xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
+                int rowCount = xlWorkSheet.UsedRange.Rows.Count;
+                int columnCount = xlWorkSheet.UsedRange.Columns.Count;
+                Range objRange;
+                for (int r = 2; r <= rowCount; r++)
                 {
-                    objRange = (Range)xlWorkSheet.Cells[r, columnCount];
-                    objRange.Value2 = status;
-                    break;
+                    if (xlWorkSheet.Cells[r, 1].Text == id)
+                    {
+                        objRange = (Range)xlWorkSheet.Cells[r, columnCount];
+                        objRange.Value2 = status;
+                        break;
+                    }
                 }
+                SaveExcelData(misValue, xlWorkBook);
+                DisposeExcel(ref xlApp, misValue, ref xlWorkBook, ref xlWorkSheet);
+                return Request.CreateResponse(HttpStatusCode.OK, "Success");
             }
-            return Request.CreateResponse(HttpStatusCode.OK, "");
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+
+            }
         }
 
         [HttpGet]
@@ -279,7 +289,7 @@ namespace InvestmentSubmissionAPI.Controllers
             datarow["Status"] = "Pending";
             foreach (var item in fieldsList)
             {
-                if (item.Amount != "" && Convert.ToInt64(item.Amount) > 0)
+                if (item.Amount != "" && Convert.ToDecimal(item.Amount) > 0)
                 {
                     datarow["Amount_" + item.itemCode] = item.Amount;
                     datarow["Filename_" + item.itemCode] = item.FileName;
