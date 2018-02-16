@@ -89,19 +89,19 @@
                 </td>
                 <td>
                   <input  type="text" [placeholder]="row.Placeholder" [required]="row.Amount>0?true:false" #fileType="ngModel"
-                   readonly class="form-control" name="{{'80Cfilename'+index}}"  [ngClass]="{'red-border-class': fileType.invalid && hasError}"
+                   readonly class="form-control" name="{{'80Cfilename'+index}}"  [ngClass]="{'red-border-class': (fileType.invalid && hasError)||(hasSizeError[index])}"
                     [(ngModel)]="row.FileName" pattern="([a-zA-Z0-9\s_\\.\-:])+(.pdf)$" accept="application\pdf">
-                    <div *ngIf="(fileType.invalid && hasError)"
+                    <div *ngIf="(fileType.invalid && hasError)||(hasSizeError[index])"
                     class="alert alert-danger">  
-                    File Type should be PDF only     
+                    {{errorMessage}}  
                     </div>
                 </td>
                 <td class="text-align-center">
                   <div class="fileUpload btn btn-primary" [ngClass]="{'upload-button-disable': !showUploadbtn[index]}">
                     <span>Upload File</span>
                     <input type="file" accept="application/pdf" id="btnUpload"
-                     [disabled]="!showUploadbtn[index]"   value="Upload" 
-                     (change)="fileChange($event,row)" class="upload" />
+                     [disabled]="!showUploadbtn[index]"  value="Upload" 
+                     (change)="fileChange($event,row,index,'first')" class="upload" />
                   </div>
                 </td>
               </tr>
@@ -131,12 +131,18 @@
                   </div>   
                 </td>
                 <td>
-                  <input type="text" [placeholder]="row.Placeholder" readonly class="form-control" name="{{'othersfilename'+index}}" [(ngModel)]="row.FileName">
+                  <input type="text" [placeholder]="row.Placeholder" #otherFileType="ngModel" 
+                  readonly class="form-control"  [ngClass]="{'red-border-class': (otherFileType.invalid && hasOthersError)||(hasOthersSizeError[index])}"
+                  name="{{'othersfilename'+index}}" [(ngModel)]="row.FileName" pattern="([a-zA-Z0-9\s_\\.\-:])+(.pdf)$" accept="application\pdf">
+                  <div *ngIf="(otherFileType.invalid && hasOthersError)||(hasOthersSizeError[index])"
+                  class="alert alert-danger">  
+                  {{errorMessage}}  
+                  </div>
                 </td>
                 <td class="text-align-center">
                   <div class="fileUpload btn btn-primary " [ngClass]="{'upload-button-disable': !othersshowUploadbtn[index]}">
                     <span>Upload File</span>
-                    <input type="file" id="btnUpload" value="Upload" [disabled]="!othersshowUploadbtn[index]"  (change)="fileChange($event,row)" class="upload" />
+                    <input type="file" id="btnUpload" value="Upload" [disabled]="!othersshowUploadbtn[index]"  (change)="fileChange($event,row,index,'others')" class="upload" />
                   </div>
                 </td>
               </tr>
@@ -155,9 +161,9 @@
         <h6>Date : {{date|date:'short'}}</h6>
         <div class="row">
           <span class="col-md-3"></span>
-          <input type="reset" class="btn btn-primary text-center col-md-2">
+          <input type="reset" (click)="ResetAll()" class="btn btn-primary text-center col-md-2">
           <span class="col-md-1"></span>
-          <input type="Submit" value="Submit" class="btn btn-primary text-center col-md-2" [disabled]="!sf.dirty || !sf.valid || isFormEmpty()">
+          <input type="Submit" value="Submit" class="btn btn-primary text-center col-md-2" [disabled]="!sf.dirty || !sf.valid || isFormEmpty()||formHasError">
           <span class="col-md-4"></span>
         </div>
 
