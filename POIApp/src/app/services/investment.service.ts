@@ -27,4 +27,11 @@ data:any;
     
   }
 
+GetConfigData():Observable<any>
+{
+  return this.http.get('/api/Configuration/GetConfiguration').map((res) => {
+    return res.json();       
+  });
+}
+
 }

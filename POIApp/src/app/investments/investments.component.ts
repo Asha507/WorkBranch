@@ -11,6 +11,8 @@ import { IFieldTemplate } from '../IFieldTemplate';
 export class InvestmentsComponent implements OnInit {
   id: string = localStorage.getItem("VamID");
   userName: string = localStorage.getItem("Username");
+  MobileNumber:number;
+  configValues:any;
   date: number = Date.now();
   Fields_80C: IFieldTemplate[];
   Fields_Others: IFieldTemplate[];
@@ -20,13 +22,17 @@ export class InvestmentsComponent implements OnInit {
   fieldsData: any = [];
   filesToUpload: Array<File> = [];
   hasError:boolean=false;
-  hasSizeError:boolean=false;
-  errorMessage:string="File should be in pdf format"
+  hasSizeError:any=[];
+  hasOthersError:boolean=false;
+  hasOthersSizeError:any=[];
+  errorMessage:string;
+  formHasError:boolean=false;
   constructor(private investmentService: InvestmentService) { }
 
   ngOnInit() {
     this.GetJsonData();
     this.GetGuideLines();
+this.GetConfigurationData();
   }
 
   GetJsonData() {
@@ -34,6 +40,14 @@ export class InvestmentsComponent implements OnInit {
       this.Fields_80C = response["80C"];
       this.Fields_Others = response["Others"];
     }
+    );
+  }
+
+  GetConfigurationData()
+  {
+    this.investmentService.GetConfigData().subscribe(response => {
+      this.configValues = response;
+         }
     );
   }
 
@@ -46,6 +60,7 @@ export class InvestmentsComponent implements OnInit {
   AmountChanged(event, row, index) {
     if (event.target.value == 0 || event.target.value == "") {
       this.showUploadbtn[index] = false;
+      this.hasSizeError[index]=false;
       row.Amount = "";
       row.FileInfo = "";
       let file: number = this.filesToUpload.findIndex(item => item.name == row.FileName);
@@ -59,27 +74,57 @@ export class InvestmentsComponent implements OnInit {
   OthersAmountChanged(event, row, index) {
     if (event.target.value == 0 || event.target.value == "") {
       this.othersshowUploadbtn[index] = false;
-      row.FileName = "";
+      this.hasOthersSizeError[index]=false;
       row.Amount = "";
+      row.FileInfo = "";
+      let file: number = this.filesToUpload.findIndex(item => item.name == row.FileName);
+      row.FileName = "";
+      this.filesToUpload.splice(file, 1);
     }
     else {
       this.othersshowUploadbtn[index] = true;
     }
   }
-  fileChange(event, row: IFieldTemplate) {
+  fileChange(event, row: IFieldTemplate,index,target) {
     let fileList: FileList = event.target.files;
     let file: File = fileList[0];
     row.FileName = file.name;
     row.FileInfo = file;
     if(+row.Amount>0 && !(row.FileName.endsWith(".pdf")))
     {
+      if(target=="first")
+      {
       this.hasError=true;
+      this.errorMessage="File should be in pdf format";
+      }
+     else if(target=="others")
+      {
+      this.hasOthersError=true;
+      this.errorMessage="File should be in pdf format";
+      }
     }
-    else if(file.size>1024)
+    else if(file.size>=10240)
     {
-      this.hasSizeError=true;
+      if(target=="first")
+      {
+      this.hasSizeError[index]=true;
+      }
+      else if(target=="others")
+      {
+        this.hasOthersSizeError[index]=true;
+      }
+      this.errorMessage="File size should be max 10240";
+      this.formHasError=true;
     }
   else{
+    if(target=="first")
+    {
+    this.hasSizeError[index]=false;
+    }
+    else if(target=="others")
+    {
+      this.hasOthersSizeError[index]=false;
+    }
     this.filesToUpload.push(file);
   }
   }
@@ -106,13 +151,22 @@ export class InvestmentsComponent implements OnInit {
     formData.append('VamID', localStorage.getItem("VamID"));
     formData.append('EmployeeName', localStorage.getItem("Username"));
     formData.append('SubmissionDate', this.date.toString());
+    formData.append('MobileNumber',this.MobileNumber.toString());
     for (var j = 0; j < this.filesToUpload.length; j++) {
       formData.append("file[]", this.filesToUpload[j], this.filesToUpload[j].name);
-    }
+    }    
     this.investmentService.UploadData(formData).subscribe(response => {
-
     }
     );
+  }
+
+  ResetAll()
+  {
+    for(var i = 0; i <= this.Fields_80C.length; i++){
+      this.showUploadbtn[i]=false;
+      this.hasSizeError[i]=false;
+   }
+    // this.showUploadbtn=false;
   }
 
 }

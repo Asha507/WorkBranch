@@ -45,7 +45,7 @@ export class AdminComponent implements OnInit {
   }
 
   ShouldDisable(item,Status)
-  {
+  {    
     if(item.Status == "Approve" && Status == "Approve")
     {
       return true;

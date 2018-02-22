@@ -14,6 +14,27 @@ namespace InvestmentSubmissionAPI.Controllers
    
 
         [HttpGet]
+        [ActionName("GetConfiguration")]
+
+        public HttpResponseMessage GetConfiguration()
+        {
+            Dictionary<string, string> configValues = new Dictionary<string, string>();
+            try
+            {
+                configValues.Add("FinancialYear", ConfigurationManager.AppSettings["FinancialYear"]);
+                configValues.Add("StartDate", ConfigurationManager.AppSettings["StartDate"]);
+                configValues.Add("EndDate", ConfigurationManager.AppSettings["EndDate"]);
+
+                return Request.CreateResponse(HttpStatusCode.OK, configValues);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+           
+        }
+
+        [HttpGet]
         [ActionName("GetGuideLines")]
         public HttpResponseMessage GetGuideLines()
         {

@@ -3,6 +3,7 @@
     "VamID": "String",
     "Name": "String",
     "Date": "Date",
+    "MobileNumber":"String",
     "Amount_LIC": "Number",
     "Filename_LIC": "String",
     "Amount_PPF": "Number",
