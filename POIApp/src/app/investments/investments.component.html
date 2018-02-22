@@ -5,180 +5,331 @@
         <h2>Investment Proof Submission for {{configValues["FinancialYear"]}}</h2>
       </div>
     </div>
-    <div class="row ">      
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Employee Details</h3>
+    <div class="row ">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Employee Details</h3>
+        </div>
+        <div class="panel-body labelText">
+          <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+              <label>Employee ID : {{id}}</label>
+            </div>
+            <div class="col-md-4">
+              <label>Employee Name : {{userName}}</label>
+            </div>
+            <div class="col-md-2"></div>
+          </div>
+          <div class="clear-fix"></div>
+          <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+              <label>Start Date : {{configValues["StartDate"]}}</label>
+            </div>
+            <div class="col-md-4">
+              <label>End Date : {{configValues["EndDate"]}}</label>
+            </div>
+           
+          </div>
+          <div class="clear-fix"></div>
+          <div class="row">
+       
+            <div class="col-md-6">
+              <div class="row">
+                  <div class="col-md-4"></div>
+                <div class="col-md-3">
+                    <label >Mobile Number:</label>
+                </div>
+                <div class="col-md-5" style="margin-left:-7%">
+                    <input type="number" #cell="ngModel" name="mobile" placeholder="mobileNumber" class="col-md-2 form-control" [(ngModel)]="MobileNumber"
+                    required>
+                
+                <div *ngIf="cell.invalid && cell.dirty" class="alert alert-danger">
+                  Mobile Number is required
+                </div> 
+                  </div>               
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-3">
+                      <label >Email ID :</label>
+                  </div>
+                  <div class="col-md-5" style="margin-left:-13%">
+                      <input type="email" #email="ngModel" name="email" placeholder="Email ID" class="form-control" [(ngModel)]="emailID"
+                      required>
+                  
+                      <div *ngIf="email.invalid && email.dirty" class="alert alert-danger">
+                          Email ID is required
+                         </div>
+                    </div>               
+                  </div>
+  
+              </div>
+          </div>
+        </div>
       </div>
-      <div class="panel-body labelText">
-        <div class="row">
-          <div class="col-md-2"></div>
-          <div class="col-md-4">
-            <label>Employee ID : {{id}}</label>
-          </div>
-          <div class="col-md-4">
-            <label>Employee Name : {{userName}}</label>
-          </div>
-          <div class="col-md-2"></div>
-        </div>
-        <div class="clear-fix"></div>
-        <div class="row">
-          <div class="col-md-2"></div>
-          <div class="col-md-4">
-            <label>Start Date : {{configValues["StartDate"]}}</label>
-          </div>
-          <div class="col-md-4">
-            <label>End Date : {{configValues["EndDate"]}}</label>
-          </div>
-          <div class="col-md-2"></div>
-        </div>
-        <div class="clear-fix"></div>
-        <div class="row">
-          <div class="col-md-2"></div>
-          <div class="col-md-6">
-            <span><label>Mobile Number: 
-              <input type="number" name="mobile" placeholder="mobileNumber" class="form-control" [(ngModel)]="MobileNumber"></label>
-          </span>
-          
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="panel panel-default">
+      <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">Guidelines</h3>
         </div>
-         <div class="panel-body" style="font-size:14px">
-            <table border=0>
+        <div class="panel-body" style="font-size:14px">
+          <table border=0>
+            <tr>
+              <td>
+                <ul *ngFor="let rule of guideLines">
+                  <li>
+                    <p>{{rule}}</p>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+          <div class="right-align">
+            <a href="/assets/80CTemplate.json" download="Readme.json">
+              <h6>Click here to download the rules before filling the form</h6>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Proof Submission</h3>
+        </div>
+        <div class="panel-body">
+          <div>
+            <h5>Investment Proposal under section 80C</h5>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover table-text">
+              <thead>
+                <tr class="active">
+                  <th class="col-md-1" scope="col">S.NO</th>
+                  <th scope="col" class="col-md-3">Investment Type</th>
+                  <th scope="col" class="col-md-3">Amount</th>
+                  <th scope="col" class="col-md-3">Upload</th>
+                  <th scope="col" class="col-md-2"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of Fields_80C;let index=index ">
+                  <th scope="row">{{row.SNO}}</th>
+                  <td>{{row.Name}}</td>
+                  <td>
+                    <input type="number" placeholder="0.0" #name="ngModel" [ngClass]="{'red-border-class': name.errors}" [min]="row.min" [max]="row.max"
+                      class="form-control" name="{{'amount'+index}}" [(ngModel)]="row.Amount" (change)="AmountChanged($event,row,index)">
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+                      Amount should not be greater than {{row.max}}
+                    </div>
+                  </td>
+                  <td>
+                    <input type="text" [placeholder]="row.Placeholder" [required]="row.Amount>0?true:false" #fileType="ngModel" readonly class="form-control"
+                      name="{{'80Cfilename'+index}}" [ngClass]="{'red-border-class': (fileType.invalid && hasError)||(hasSizeError[index])}"
+                      [(ngModel)]="row.FileName" pattern="([a-zA-Z0-9\s_\\.\-:])+(.pdf)$" accept="application\pdf">
+                    <div *ngIf="(fileType.invalid && hasError)||(hasSizeError[index])" class="alert alert-danger">
+                      {{errorMessage}}
+                    </div>
+                  </td>
+                  <td class="text-align-center">
+                    <div class="fileUpload btn btn-primary" [ngClass]="{'upload-button-disable': !showUploadbtn[index]}">
+                      <span>Upload File</span>
+                      <input type="file" accept="application/pdf" id="btnUpload" [disabled]="!showUploadbtn[index]" value="Upload" (change)="fileChange($event,row,index,'first')"
+                        class="upload" />
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="table table-bordered table-hover table-text">
+              <thead>
+                <tr class="active">
+                  <th class="col-md-1" scope="col">S.NO</th>
+                  <th scope="col" class="col-md-2">Section</th>
+                  <th scope="col" class="col-md-2">Investment Type</th>
+                  <th scope="col" class="col-md-2">Amount</th>
+                  <th scope="col" class="col-md-3">Upload</th>
+                  <th scope="col" class="col-md-2"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of Fields_Others;let index=index ">
+                  <th scope="row">{{row.SNO}}</th>
+                  <td>{{row.Section}}</td>
+                  <td>{{row.Name}}</td>
+                  <td>
+                    <input type="number" placeholder="0.0" #othername="ngModel" [ngClass]="{'red-border-class': othername.errors}" [min]="row.min"
+                      [max]="row.max" class="form-control" name="{{'otheramount'+index}}" [(ngModel)]="row.Amount" (change)="OthersAmountChanged($event,row,index)">
+                    <div *ngIf="othername.invalid && (othername.dirty || othername.touched)" class="alert alert-danger">
+                      Amount should not be greater than {{row.max}}
+                    </div>
+                  </td>
+                  <td>
+                    <input type="text" [placeholder]="row.Placeholder" #otherFileType="ngModel" readonly class="form-control" [ngClass]="{'red-border-class': (otherFileType.invalid && hasOthersError)||(hasOthersSizeError[index])}"
+                      name="{{'othersfilename'+index}}" [(ngModel)]="row.FileName" pattern="([a-zA-Z0-9\s_\\.\-:])+(.pdf)$"
+                      accept="application\pdf">
+                    <div *ngIf="(otherFileType.invalid && hasOthersError)||(hasOthersSizeError[index])" class="alert alert-danger">
+                      {{errorMessage}}
+                    </div>
+                  </td>
+                  <td class="text-align-center">
+                    <div class="fileUpload btn btn-primary " [ngClass]="{'upload-button-disable': !othersshowUploadbtn[index]}">
+                      <span>Upload File</span>
+                      <input type="file" id="btnUpload" value="Upload" [disabled]="!othersshowUploadbtn[index]" (change)="fileChange($event,row,index,'others')"
+                        class="upload" />
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div>
+              <h5>HRA</h5>
+            </div>
+            <table class="table table-bordered table-hover table-text">
+              <thead>
+                <tr class="active">
+                  <th class="col-md-1" scope="col">S.NO</th>
+                  <th scope="col" class="col-md-4">Amount</th>
+                  <th scope="col" class="col-md-3">Upload</th>
+                </tr>
+              </thead>
+              <tbody>
                 <tr>
+                  <td>1</td>
+                  <td>
+                    <table class="table table-bordered table-hover table-text">
+                      <thead>
+                        <tr class="active">
+                          <th class="col-md-1" scope="col">S.NO</th>
+                          <th class="col-md-1" scope="col">Month</th>
+                          <th scope="col" class="col-md-3">Amount</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let month of months;let index=index">
+                          <td>{{index+1}}</td>
+                          <td>{{month["Name"]}}</td>
+                          <td>
+                            <input type="number" name="month-{{index}}" [(ngModel)]="month.Amount" placeholder="Rent Amount" required class="form-control"
+                              (change)="SumRent($event)">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                          <td>Total Amount</td>
+                          <td>{{rentAmount}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                  <td>
+                    <div class="row hraUpload">
+                      <div class="col-md-8">
+                        <input type="text" #rent="ngModel" placeholder="Rent Receipt" readonly class="form-control" name="RentReceipt" [(ngModel)]="RntRctFile">
+                        <div *ngIf="rent.invalid" class="alert alert-danger">
+                          Please upload rent receipt
+                        </div>
+                      </div>
+                      <div class="col-md-3 hraUploadButton fileUpload btn btn-primary " [ngClass]="{'upload-button-disable': !showRentUploadbtn}">
+                        <span>Upload File</span>
+                        <input type="file" accept="application/pdf" id="btnUpload" [disabled]="!showRentUploadbtn" value="Upload" class="upload"
+                          (change)="fileUpload($event,'rent')" />
+                      </div>
+                    </div>
+                    <div class="row hrasecond">
+                      <div *ngIf="rentAmount>100001">
+                        <p>Yearly rent value is greater than 1L</p>
+                      </div>
+                      <div *ngIf="rentAmount>=100001">
+
+                        <div class="col-md-8">
+                          <input type="text" #pan="ngModel" placeholder="Pan copy" class="form-control" name="PanCopy" [(ngModel)]="PanFile" readonly>
+                          <div *ngIf="pan.invalid" class="alert alert-danger">
+                            Please upload Pan Card copy
+                          </div>
+                        </div>
+                        <div class="col-md-3 hraUploadButton fileUpload btn btn-primary ">
+                          <span>Upload File</span>
+                          <input type="file" accept="application/pdf" id="btnUpload" value="Upload" class="upload" (change)="fileUpload($event,'pan')"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row hrathird">
+                        <div *ngIf="rentAmount>=180001">
+                          <p>Yearly rent value is greater than  1.8L</p>
+                        </div>
+                        <div *ngIf="rentAmount>=180001">
+  
+                          <div class="col-md-8">
+                            <input type="text" #pan="ngModel" placeholder="Rent Aggrement" class="form-control" name="AggCopy" [(ngModel)]="RntAggFile" readonly>
+                            <div *ngIf="pan.invalid" class="alert alert-danger">
+                              Please upload rent aggrement
+                            </div>
+                          </div>
+                          <div class="col-md-3 hraUploadButton fileUpload btn btn-primary ">
+                            <span>Upload File</span>
+                            <input type="file" accept="application/pdf" id="btnUpload" value="Upload" class="upload" (change)="fileUpload($event,'aggrement')"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                  </td>
+                </tr>
+                <tr>
+                    <td>2</td>
                     <td>
-                    <ul *ngFor="let rule of guideLines">
-                    <li><p>{{rule}}</p></li>                   
-                    </ul>
+                      <div class="row">
+                        <div class="col-md-6">
+                            Medical bills monthly value Rs. 1250 yearly Rs. 15,000/-
+                        </div>
+                        <div class="col-md-6">
+                            <input type="number" class="form-control" [(ngModel)]="medAmount" name="medAmount" (change)="MedicalAmountChange($event)" [placeholder]='medAmount' >
+                        </div>
+                      </div>                      
+                    </td> 
+                    <td>
+                        <div class="row">
+                            <div class="col-md-8">
+                              <input type="text" #medrct="ngModel" placeholder="Medical Bills" readonly class="form-control" 
+                              name="MedicalReceipt" [(ngModel)]="medRctFile">
+                              <div *ngIf="rent.invalid" class="alert alert-danger">
+                                Please upload medical bills
+                              </div>
+                            </div>
+                            <div class="col-md-3 hraUploadButton fileUpload btn btn-primary " [ngClass]="{'upload-button-disable':!showMedicalUploadbtn}">
+                              <span>Upload File</span>
+                              <input type="file" accept="application/pdf" id="btnUpload" value="Upload" class="upload"
+                                (change)="fileUpload($event,'medical')"   />
+                            </div>
+                          </div>
                     </td>
                 </tr>
+              </tbody>
             </table>
-           <div class="right-align">
-              <a href="/assets/80CTemplate.json" download="Readme.json">
-                <h6>Click here to download the rules before filling the form</h6>
-              </a>
-            </div>
+          </div>
         </div>
       </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Proof Submission</h3>
-      </div>
-      <div class="panel-body">
-        <div>
-          <h5>Investment Proposal under section 80C</h5>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Declaration</h3>
         </div>
-        <div class="table-responsive">
-          <table class="table table-bordered table-hover table-text">
-            <thead>
-              <tr class="active">
-                <th class="col-md-1" scope="col">S.NO</th>
-                <th scope="col" class="col-md-3">Investment Type</th>
-                <th scope="col" class="col-md-3">Amount</th>
-                <th scope="col" class="col-md-3">Upload</th>
-                <th scope="col" class="col-md-2"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let row of Fields_80C;let index=index ">
-                <th scope="row">{{row.SNO}}</th>
-                <td>{{row.Name}}</td>
-                <td>
-                  <input type="number" placeholder="0.0" #name="ngModel"
-                   [ngClass]="{'red-border-class': name.errors}" [min]="row.min" [max]="row.max"  
-                   class="form-control" name="{{'amount'+index}}" [(ngModel)]="row.Amount" (change)="AmountChanged($event,row,index)">
-                  <div *ngIf="name.invalid && (name.dirty || name.touched)"
-                  class="alert alert-danger">  
-                  Amount should not be greater than {{row.max}}     
-                  </div>      
-                </td>
-                <td>
-                  <input  type="text" [placeholder]="row.Placeholder" [required]="row.Amount>0?true:false" #fileType="ngModel"
-                   readonly class="form-control" name="{{'80Cfilename'+index}}"  [ngClass]="{'red-border-class': (fileType.invalid && hasError)||(hasSizeError[index])}"
-                    [(ngModel)]="row.FileName" pattern="([a-zA-Z0-9\s_\\.\-:])+(.pdf)$" accept="application\pdf">
-                    <div *ngIf="(fileType.invalid && hasError)||(hasSizeError[index])"
-                    class="alert alert-danger">  
-                    {{errorMessage}}  
-                    </div>
-                </td>
-                <td class="text-align-center">
-                  <div class="fileUpload btn btn-primary" [ngClass]="{'upload-button-disable': !showUploadbtn[index]}">
-                    <span>Upload File</span>
-                    <input type="file" accept="application/pdf" id="btnUpload"
-                     [disabled]="!showUploadbtn[index]"  value="Upload" 
-                     (change)="fileChange($event,row,index,'first')" class="upload" />
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <table class="table table-bordered table-hover table-text">
-            <thead>
-              <tr class="active">
-                <th class="col-md-1" scope="col">S.NO</th>
-                <th scope="col" class="col-md-2">Section</th>
-                <th scope="col" class="col-md-2">Investment Type</th>
-                <th scope="col" class="col-md-2">Amount</th>
-                <th scope="col" class="col-md-3">Upload</th>
-                <th scope="col" class="col-md-2"></th>
-              </tr>
-            </thead> 
-            <tbody>
-              <tr *ngFor="let row of Fields_Others;let index=index ">
-                <th scope="row">{{row.SNO}}</th>
-                <td>{{row.Section}}</td>
-                <td>{{row.Name}}</td>
-                <td>
-                  <input type="number" placeholder="0.0"  #othername="ngModel" [ngClass]="{'red-border-class': othername.errors}" [min]="row.min" [max]="row.max"  class="form-control" name="{{'otheramount'+index}}" [(ngModel)]="row.Amount" (change)="OthersAmountChanged($event,row,index)">
-                  <div *ngIf="othername.invalid && (othername.dirty || othername.touched)"
-                  class="alert alert-danger">  
-                  Amount should not be greater than {{row.max}}     
-                  </div>   
-                </td>
-                <td>
-                  <input type="text" [placeholder]="row.Placeholder" #otherFileType="ngModel" 
-                  readonly class="form-control"  [ngClass]="{'red-border-class': (otherFileType.invalid && hasOthersError)||(hasOthersSizeError[index])}"
-                  name="{{'othersfilename'+index}}" [(ngModel)]="row.FileName" pattern="([a-zA-Z0-9\s_\\.\-:])+(.pdf)$" accept="application\pdf">
-                  <div *ngIf="(otherFileType.invalid && hasOthersError)||(hasOthersSizeError[index])"
-                  class="alert alert-danger">  
-                  {{errorMessage}}  
-                  </div>
-                </td>
-                <td class="text-align-center">
-                  <div class="fileUpload btn btn-primary " [ngClass]="{'upload-button-disable': !othersshowUploadbtn[index]}">
-                    <span>Upload File</span>
-                    <input type="file" id="btnUpload" value="Upload" [disabled]="!othersshowUploadbtn[index]"  (change)="fileChange($event,row,index,'others')" class="upload" />
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Declaration</h3>
-      </div>
-      <div class="panel-body labelText">
-        <h6> I hereby declare the information given above is true and correct. I undertake to inform immediately of any change
-          in the above facts. Any Income tax liability arising out of wrong declaration will be my responsibility. </h6>
-        <h6>Date : {{date|date:'short'}}</h6>
-        <div class="row">
-          <span class="col-md-3"></span>
-          <input type="reset" (click)="ResetAll()" class="btn btn-primary text-center col-md-2">
-          <span class="col-md-1"></span>
-          <input type="Submit" value="Submit" class="btn btn-primary text-center col-md-2" [disabled]="!sf.dirty || !sf.valid || isFormEmpty()||formHasError">
-          <span class="col-md-4"></span>
-        </div>
+        <div class="panel-body labelText">
+          <h6> I hereby declare the information given above is true and correct. I undertake to inform immediately of any change
+            in the above facts. Any Income tax liability arising out of wrong declaration will be my responsibility. </h6>
+          <h6>Date : {{date|date:'short'}}</h6>
+          <div class="row">
+            <span class="col-md-3"></span>
+            <input type="reset" (click)="ResetAll()" class="btn btn-primary text-center col-md-2">
+            <span class="col-md-1"></span>
+            <input type="Submit" value="Submit" class="btn btn-primary text-center col-md-2" [disabled]="!sf.dirty || !sf.valid || isFormEmpty()||formHasError">
+            <span class="col-md-4"></span>
+          </div>
 
+        </div>
       </div>
+
     </div>
-  </div>
   </div>
 </form>

@@ -2,7 +2,7 @@
   {
     "SNO": "1",
     "Name": "Life Insurance Premium paid certificate( Premium paid only for self, spouse and children)",
-    "Placeholder": "Copy of Premium Receipt",
+    "Placeholder": "Life Insurance Premium paid certificate",
     "FileName": "",
     "Amount": "",
     "min": "0",
@@ -12,7 +12,7 @@
   {
     "SNO": "2",
     "Name": "Children Educatiional expenses up to 2 Children",
-    "Placeholder": "????????",
+    "Placeholder": "School fee paid receipt",
     "FileName": "",
     "Amount": "",
     "min": "0",
@@ -22,7 +22,7 @@
   {
     "SNO": "3",
     "Name": "Sukanya Samriddhi Yojan",
-    "Placeholder": "??????",
+    "Placeholder": "Paid certificate",
     "FileName": "",
     "Amount": "",
     "min": "0",
@@ -32,7 +32,7 @@
   {
     "SNO": "4",
     "Name": "Public Provident Fund",
-    "Placeholder": "??????",
+    "Placeholder": "Passbook and bank statement",
     "FileName": "",
     "Amount": "",
     "min": "0",
@@ -42,7 +42,7 @@
   {
     "SNO": "5",
     "Name": "Housing Loan- Principal Repayment",
-    "Placeholder": "??????",
+    "Placeholder": "Provisional loan statement",
     "FileName": "",
     "Amount": "",
     "min": "0",
@@ -52,7 +52,7 @@
   {
     "SNO": "6",
     "Name": "National Savings Certificates (NSC)",
-    "Placeholder": "??????",
+    "Placeholder": "NSC Certificate",
     "FileName": "",
     "Amount": "",
     "min": "0",
@@ -62,7 +62,7 @@
   {
     "SNO": "7",
     "Name": "FD with national Banks / Post office minimum 5 years",
-    "Placeholder": "??????",
+    "Placeholder": "Fixed Deposit Certificate",
     "FileName": "",
     "Amount": "",
     "min": "0",
@@ -72,7 +72,7 @@
   {
     "SNO": "8",
     "Name": "Tax Savings Mutual Funds",
-    "Placeholder": "??????",
+    "Placeholder": "Mutual Fund Statement",
     "FileName": "",
     "Amount": "",
     "min": "0",
@@ -82,7 +82,7 @@
   {
     "SNO": "9",
     "Name": "Other Elgible Investments u/s 80C",
-    "Placeholder": "??????",
+    "Placeholder": "Investment proof",
     "FileName": "",
     "Amount": "",
     "min": "0",

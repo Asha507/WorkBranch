@@ -36,6 +36,13 @@ namespace InvestmentSubmissionAPI.Controllers
             string mobileNumber = httpRequest.Params["MobileNumber"];
             try
             {
+                foreach (var item in JArray.Parse(httpRequest.Params["Data"]))
+                {
+                    foreach (var field in item)
+                    {
+                        templateFieldsList.Add(field.ToObject<TemplateFields>());
+                    }
+                }
                 //Download files 
                 if (httpRequest.Files.Count > 0)
                 {
@@ -47,6 +54,8 @@ namespace InvestmentSubmissionAPI.Controllers
                             var filePath = ConfigurationManager.AppSettings["FilesShareLocation"];
                             string folderName = "VAM_" + id;
                             string fileName = postedFile.FileName;
+                            var code=(templateFieldsList.Where(x => x.FileName == postedFile.FileName)).First().itemCode;
+                            
                             if (!Directory.Exists(Path.Combine(filePath, folderName)))
                             {
                                 Directory.CreateDirectory(Path.Combine(filePath, folderName));
@@ -55,19 +64,13 @@ namespace InvestmentSubmissionAPI.Controllers
                             {
                                 File.Delete(Path.Combine(filePath, folderName, fileName));
                             }
-                            postedFile.SaveAs(Path.Combine(filePath, folderName, fileName));
+                            postedFile.SaveAs(Path.Combine(filePath, folderName, "VAM_" + id +"_"+code+"_"+fileName));
                         }
                     }
                 }
 
-                foreach (var item in JArray.Parse(httpRequest.Params["Data"]))
-                {
-                    foreach (var field in item)
-                    {
-                        templateFieldsList.Add(field.ToObject<TemplateFields>());
-                    }
-                }
-                CreateExcelDoc(id, userName,submissionDate,mobileNumber, templateFieldsList);
+               
+                CreateExcelDoc(httpRequest, templateFieldsList);
                 return Request.CreateResponse(HttpStatusCode.OK, "Uploaded Sucessfully");
             }
             catch (Exception ex)
@@ -123,6 +126,13 @@ namespace InvestmentSubmissionAPI.Controllers
         [HttpGet]
         public HttpResponseMessage GetExcelData(int id=0)
         {
+            string json = GetResponseJson(id);
+            return Request.CreateResponse(HttpStatusCode.OK, json);
+
+        }
+
+        public string GetResponseJson(int id)
+        {
             Application xlApp;
             object misValue;
             Workbook xlWorkBook;
@@ -167,11 +177,10 @@ namespace InvestmentSubmissionAPI.Controllers
             }
             DisposeExcel(ref xlApp, misValue, ref xlWorkBook, ref xlWorkSheet);
             string json = DataTableToJSON(dt);
-            return Request.CreateResponse(HttpStatusCode.OK, json);
-
+            return json;
         }
 
-        private void CreateExcelDoc(string id, string name,string submissionDate,string mobileNumber, List<TemplateFields> fieldsList)
+        private void CreateExcelDoc(HttpRequest httpRequest, List<TemplateFields> fieldsList)
         {
             Application xlApp;
             object misValue;
@@ -185,7 +194,7 @@ namespace InvestmentSubmissionAPI.Controllers
 
             System.Data.DataTable dt;
             DataRow datarow;
-            GenerateDataTable(id, name,submissionDate,mobileNumber, fieldsList, out dt, out datarow);
+            GenerateDataTable(httpRequest, fieldsList, out dt, out datarow);
 
             int row, col;
 
@@ -212,7 +221,7 @@ namespace InvestmentSubmissionAPI.Controllers
                 row = xlWorkSheet.UsedRange.Rows.Count + 1;
                 for (int i = 2; i < row; i++)
                 {
-                    if (xlWorkSheet.Cells[i, 1].Text == id)
+                    if (xlWorkSheet.Cells[i, 1].Text == httpRequest.Params["VamID"])
                     {
                         InsertToExcel(dt, datarow, i, xlWorkSheet, ref objRange);
                         recordExists = true;
@@ -272,7 +281,7 @@ namespace InvestmentSubmissionAPI.Controllers
             }
         }
 
-        private void GenerateDataTable(string id, string name,string submissionDate,string mobileNumber, List<TemplateFields> fieldsList, out System.Data.DataTable dt, out DataRow datarow)
+        private void GenerateDataTable(HttpRequest httpRequest, List<TemplateFields> fieldsList, out System.Data.DataTable dt, out DataRow datarow)
         {
             dt = new System.Data.DataTable();
             string file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Files", ConfigurationManager.AppSettings["ExcelData"]);
@@ -284,11 +293,18 @@ namespace InvestmentSubmissionAPI.Controllers
             }
 
             datarow = dt.NewRow();
-            datarow["VamID"] = id;
-            datarow["Name"] = name;
-            datarow["Date"] = submissionDate;
+            datarow["VamID"] = httpRequest.Params["VamID"];
+            datarow["Name"] = httpRequest.Params["EmployeeName"];
+            datarow["Date"] = httpRequest.Params["SubmissionDate"];
             datarow["Status"] = "Pending";
-            datarow["MobileNumber"] = mobileNumber;
+            datarow["MobileNumber"] = httpRequest.Params["MobileNumber"];
+            datarow["Email"]= httpRequest.Params["Email"];
+            datarow["HRA_Amount"]= httpRequest.Params["RentAmount"];
+            datarow["PanFile"] = httpRequest.Params["panFile"];
+            datarow["RentReciptFile"] = httpRequest.Params["RentReciptFile"];
+            datarow["AggrementFile"] = httpRequest.Params["AggrementFile"];
+            datarow["Medical_Amount"] = httpRequest.Params["Medical_Amount"];
+            datarow["Medical_File"] = httpRequest.Params["Medical_File"];
             foreach (var item in fieldsList)
             {
                 if (item.Amount != "" && Convert.ToDecimal(item.Amount) > 0)

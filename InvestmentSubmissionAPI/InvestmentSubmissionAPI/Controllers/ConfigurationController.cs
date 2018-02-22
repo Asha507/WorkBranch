@@ -10,8 +10,9 @@ using System.Web.Http;
 
 namespace InvestmentSubmissionAPI.Controllers
 {
-    public class ConfigurationController : ApiController    {
-   
+    public class ConfigurationController : ApiController
+    {
+
 
         [HttpGet]
         [ActionName("GetConfiguration")]
@@ -31,7 +32,7 @@ namespace InvestmentSubmissionAPI.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
-           
+
         }
 
         [HttpGet]
@@ -45,13 +46,13 @@ namespace InvestmentSubmissionAPI.Controllers
             }
             catch (Exception ex)
             {
-              return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
-        
+
         }
         [HttpGet]
         [ActionName("GetFields")]
-        public HttpResponseMessage GetFieldTemplates()
+        public HttpResponseMessage GetFieldTemplates(int id)
         {
             try
             {
@@ -60,8 +61,47 @@ namespace InvestmentSubmissionAPI.Controllers
                 string file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Files", ConfigurationManager.AppSettings["80CFileName"]);
                 fields = JsonConvert.DeserializeObject<List<TemplateFields>>(File.ReadAllText(file));
                 fieldsData.Add("80C", fields);
+                FileController fileController = new FileController();
+                string jsonString = fileController.GetResponseJson(id);
+                if (jsonString != "[]")
+                {
+                    dynamic json = JsonConvert.DeserializeObject(jsonString);
+
+                    foreach (TemplateFields field in fields)
+                    {
+                        foreach (var item in json[0])
+                        {
+                            if (item.Name.Contains("Amount_" + field.itemCode) && item.Value != "--")
+                            {
+                                field.Amount = item.Value;
+                            }
+                            if (item.Name.Contains("Filename_" + field.itemCode) && item.Value != "--")
+                            {
+                                field.FileName = item.Value;
+                            }
+                        }
+                    }
+                }
                 file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Files", ConfigurationManager.AppSettings["OthersFileName"]);
                 fields = JsonConvert.DeserializeObject<List<TemplateFields>>(File.ReadAllText(file));
+                if (jsonString != "[]")
+                {
+                    dynamic json = JsonConvert.DeserializeObject(jsonString);
+                    foreach (TemplateFields field in fields)
+                    {
+                        foreach (var item in json[0])
+                        {
+                            if (item.Name.Contains("Amount_" + field.itemCode) && item.Value != "--")
+                            {
+                                field.Amount = item.Value;
+                            }
+                            if (item.Name.Contains("Filename_" + field.itemCode) && item.Value != "--")
+                            {
+                                field.FileName = item.Value;
+                            }
+                        }
+                    }
+                }
                 fieldsData.Add("Others", fields);
                 return Request.CreateResponse(HttpStatusCode.OK, fieldsData);
             }

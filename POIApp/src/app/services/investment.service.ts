@@ -9,7 +9,7 @@ data:any;
   constructor(private http: Http) { }
 
   GetJsonData(): Observable<any> {
-    return this.http.get('/api/Configuration/GetFields').map((res) => {
+    return this.http.get('/api/Configuration/GetFields?id='+localStorage.getItem("VamID")).map((res) => {
       return res.json();       
     });
   }

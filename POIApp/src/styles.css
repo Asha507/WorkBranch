@@ -46,3 +46,7 @@ body
     width: 30%;
     padding-right: 50%;
 }
+.tbl-align
+{
+    text-align: center;
+}
