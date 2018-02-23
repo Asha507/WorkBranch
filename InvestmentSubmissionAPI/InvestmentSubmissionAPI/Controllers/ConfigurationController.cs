@@ -12,7 +12,7 @@ namespace InvestmentSubmissionAPI.Controllers
 {
     public class ConfigurationController : ApiController
     {
-
+        public bool isRecordExists = false;
 
         [HttpGet]
         [ActionName("GetConfiguration")]
@@ -34,6 +34,61 @@ namespace InvestmentSubmissionAPI.Controllers
             }
 
         }
+
+        [HttpGet]
+        public HttpResponseMessage CheckIfAdmin(int id)
+        {
+            string status = "false";
+            try
+            {
+                List<string> adminIDs = ConfigurationManager.AppSettings["Admins"].Split(',').ToList();
+                status=adminIDs.Contains(id.ToString())?"true":"false";
+                return Request.CreateResponse(HttpStatusCode.OK, status);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
+        [HttpGet]
+        [ActionName("GetMobileEmail")]
+
+        public HttpResponseMessage GetMobileEmail(int id)
+        {
+            string email = "";
+            string mobile = "";
+            try
+            {
+                FileController fileController = new FileController();
+                string jsonString = fileController.GetResponseJson(id);
+                if (jsonString != "[]")
+                {
+                    dynamic json = JsonConvert.DeserializeObject(jsonString);
+                    foreach (var item in json[0])
+                    {
+                        if (item.Name.Contains("MobileNumber"))
+                        {
+                            mobile = item.Value;
+                        }
+                        else if (item.Name.Contains("Email"))
+                        {
+                            email = item.Value;
+                        }
+
+                    }
+                    return Request.CreateResponse(HttpStatusCode.OK, "MobileNumber:" + mobile + ",Email:" + email);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, "");
+                }
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
+
 
         [HttpGet]
         [ActionName("GetGuideLines")]
@@ -71,6 +126,10 @@ namespace InvestmentSubmissionAPI.Controllers
                     {
                         foreach (var item in json[0])
                         {
+                            if (item.Name.Contains("MobileNumber"))
+                            {
+
+                            }
                             if (item.Name.Contains("Amount_" + field.itemCode) && item.Value != "--")
                             {
                                 field.Amount = item.Value;
@@ -86,6 +145,7 @@ namespace InvestmentSubmissionAPI.Controllers
                 fields = JsonConvert.DeserializeObject<List<TemplateFields>>(File.ReadAllText(file));
                 if (jsonString != "[]")
                 {
+                    isRecordExists = true;
                     dynamic json = JsonConvert.DeserializeObject(jsonString);
                     foreach (TemplateFields field in fields)
                     {

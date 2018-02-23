@@ -1,35 +1,90 @@
 ﻿[
   {
     "SNO": "1",
-    "Section": "Section 80CCC Pension Scheme ",
-    "Name": "Investments made in Jeevan Suraksha of LIC or any other insurer.",
-    "Placeholder": "Copy of premium paid receipt",
+    "Section": "80CCD-Max. is Rs. 50,000/",
+    "Name": "National Pension System",
+    "Placeholder": "Paid Certificate",
     "FileName": "",
     "Amount": "",
     "min": "0",
-    "max": "9999999999999",
-    "itemCode": "010"
+    "max": "50000",
+    "itemCode": "80CCD"
   },
   {
     "SNO": "2",
-    "Section": "Section 80D Mediclaim Insurance Premium",
-    "Name": "Premium should be paid by cheque only to avail deduction",
-    "Placeholder": "Copy of premium paid receipt",
+    "Section": "Section 80D ",
+    "Name": "Mediclaim Insurance Premium. a.Self/spouse/children up to Rs. 25,000 b.Self/spouse/children and Parents up to Rs. 25,000 + 25,000. c.Self/spouse/children and Parents up to Rs. 25,000 + 25,000 + 5,000.(if  any one of the  parents is Senior Citizen Rs. 5,000 Extra) ",
+    "Placeholder": "Premium paid certificate",
     "FileName": "",
     "Amount": "",
     "min": "0",
-    "max": "9999999999999",
-    "itemCode": "011"
+    "max": "55000",
+    "itemCode": "80D"
   },
   {
     "SNO": "3",
-    "Section": "Section 80 E",
-    "Name": "Repayment of education loan Interest for self and dependant",
-    "Placeholder": "Certificate from Lender",
+    "Section": "Section 80E",
+    "Name": "Payment of Intererst on  Loan for  higher education.",
+    "Placeholder": "Interest Paid Statement",
     "FileName": "",
     "Amount": "",
     "min": "0",
     "max": "9999999999999",
-    "itemCode": "012"
+    "itemCode": "80E"
+  },
+  {
+    "SNO": "4",
+    "Section": "Section 80 DDB",
+    "Name": "Exp.for medical treatment of dependent on speicified disease.",
+    "Placeholder": "10 I Certificate",
+    "FileName": "",
+    "Amount": "",
+    "min": "0",
+    "max": "750000",
+    "itemCode": "80DDB"
+  },
+  {
+    "SNO": "5",
+    "Section": "Section 80 EE",
+    "Name": "First time home buyer tax benefit Rs. 50,000",
+    "Placeholder": "Required Certificate",
+    "FileName": "",
+    "Amount": "",
+    "min": "0",
+    "max": "50000",
+    "itemCode": "80EE"
+  },
+  {
+    "SNO": "6",
+    "Section": "Section 80 U",
+    "Name": "if Physical Disability up to  Rs. 75,000 if Severe Disability up to  Rs. 1,25,000",
+    "Placeholder": "10-IA Certificate",
+    "FileName": "",
+    "Amount": "",
+    "min": "0",
+    "max": "125000",
+    "itemCode": "80U"
+  },
+  {
+    "SNO": "7",
+    "Section": "Section 24",
+    "Name": "Intrest on Housing Loan Max is  2,00,000/- a. If House is Selfoccupied  No HRA should be claimed b.if house is  Let out Loss on house property wil be alloed Rs.2 lakh.",
+    "Placeholder": "Housing Loan Statement",
+    "FileName": "",
+    "Amount": "",
+    "min": "0",
+    "max": "200000",
+    "itemCode": "24"
+  },
+  {
+    "SNO": "8",
+    "Section": "Others",
+    "Name": "Food Coupons",
+    "Placeholder": "",
+    "FileName": "",
+    "Amount": "",
+    "min": "0",
+    "max": "200000",
+    "itemCode": "FC"
   }
 ]

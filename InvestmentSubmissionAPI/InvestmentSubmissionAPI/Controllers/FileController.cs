@@ -43,6 +43,7 @@ namespace InvestmentSubmissionAPI.Controllers
                         templateFieldsList.Add(field.ToObject<TemplateFields>());
                     }
                 }
+                var code="";
                 //Download files 
                 if (httpRequest.Files.Count > 0)
                 {
@@ -54,7 +55,26 @@ namespace InvestmentSubmissionAPI.Controllers
                             var filePath = ConfigurationManager.AppSettings["FilesShareLocation"];
                             string folderName = "VAM_" + id;
                             string fileName = postedFile.FileName;
-                            var code=(templateFieldsList.Where(x => x.FileName == postedFile.FileName)).First().itemCode;
+                            if (fileName.Equals(httpRequest.Params["PanFile"]))
+                            {
+                                code = "Pan";
+                            }
+                            else if (fileName.Equals(httpRequest.Params["RentReciptFile"]))
+                            {
+                                code = "Rent";
+                            }
+                            else if (fileName.Equals(httpRequest.Params["AggrementFile"]))
+                            {
+                                code = "RentAggrement";
+                            }
+                            else if (fileName.Equals(httpRequest.Params["Medical_File"]))
+                            {
+                                code = "Medical";
+                            }
+                            else
+                            {
+                                code = (templateFieldsList.Where(x => x.FileName == postedFile.FileName)).First().itemCode;
+                            }
                             
                             if (!Directory.Exists(Path.Combine(filePath, folderName)))
                             {
@@ -64,11 +84,10 @@ namespace InvestmentSubmissionAPI.Controllers
                             {
                                 File.Delete(Path.Combine(filePath, folderName, fileName));
                             }
-                            postedFile.SaveAs(Path.Combine(filePath, folderName, "VAM_" + id +"_"+code+"_"+fileName));
+                            postedFile.SaveAs(Path.Combine(filePath, folderName,code+"_"+fileName));
                         }
                     }
                 }
-
                
                 CreateExcelDoc(httpRequest, templateFieldsList);
                 return Request.CreateResponse(HttpStatusCode.OK, "Uploaded Sucessfully");
@@ -300,11 +319,11 @@ namespace InvestmentSubmissionAPI.Controllers
             datarow["MobileNumber"] = httpRequest.Params["MobileNumber"];
             datarow["Email"]= httpRequest.Params["Email"];
             datarow["HRA_Amount"]= httpRequest.Params["RentAmount"];
-            datarow["PanFile"] = httpRequest.Params["panFile"];
-            datarow["RentReciptFile"] = httpRequest.Params["RentReciptFile"];
-            datarow["AggrementFile"] = httpRequest.Params["AggrementFile"];
+            datarow["PanFile"] = httpRequest.Params["panFile"] != "" ? httpRequest.Params["panFile"] : "--";
+            datarow["RentReciptFile"] = httpRequest.Params["RentReciptFile"] != "" ? httpRequest.Params["RentReciptFile"] : "--";
+            datarow["AggrementFile"] = httpRequest.Params["AggrementFile"] != "" ? httpRequest.Params["AggrementFile"] : "--";
             datarow["Medical_Amount"] = httpRequest.Params["Medical_Amount"];
-            datarow["Medical_File"] = httpRequest.Params["Medical_File"];
+            datarow["Medical_File"] = httpRequest.Params["Medical_File"]!=""? httpRequest.Params["Medical_File"]:"--";
             foreach (var item in fieldsList)
             {
                 if (item.Amount != "" && Convert.ToDecimal(item.Amount) > 0)

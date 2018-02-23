@@ -3,7 +3,7 @@
     <ul class="nav navbar-nav">
       <li><a href="#">Home</a></li>
       <li><a [routerLink]="['Status']">Status</a></li>
-      <li><a [routerLink]="['Admin']">Admin</a></li>
+      <li><a [routerLink]="['Admin']" *ngIf="show">Admin</a></li>
     </ul>
       </nav>
 </div>

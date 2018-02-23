@@ -33,5 +33,10 @@ GetConfigData():Observable<any>
     return res.json();       
   });
 }
-
+GetMobileEmailDetails(id:number):Observable<any>
+{
+  return this.http.get('/api/Configuration/GetMobileEmail?id='+id).map((res) => {
+    return res.json();       
+  });
+}
 }

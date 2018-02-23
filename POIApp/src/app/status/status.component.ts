@@ -12,6 +12,7 @@ export class StatusComponent implements OnInit {
   constructor(private statusService: StatusService) { }
 
   ngOnInit() {    
+   debugger;
       this.statusService.GetStatus(localStorage.getItem("VamID")).subscribe(response=>
       {        
         this.data=Array.of(JSON.parse(response))[0];

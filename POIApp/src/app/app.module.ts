@@ -17,6 +17,7 @@ import {AdminService} from './services/admin.service';
 import { DataFilterPipe } from './data-filter.pipe';
 import { StatusComponent } from './status/status.component'
 import { StatusService } from './services/status.service';
+import { MenuService } from './services/menu.service';
 const routes:Routes=[
   { path: '', redirectTo: '/Investment', pathMatch: 'full' },
   {path:'Admin',component:AdminComponent},
@@ -40,11 +41,11 @@ const routes:Routes=[
     BrowserModule,
     FormsModule,
     CustomFormsModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, {useHash: true}),
     HttpModule,
     DataTableModule
   ],
-  providers: [InvestmentService,AdminService,StatusService],
+  providers: [InvestmentService,AdminService,StatusService,MenuService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

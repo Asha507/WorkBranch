@@ -44,6 +44,7 @@ export class InvestmentsComponent implements OnInit {
     this.GetJsonData();
     this.GetGuideLines();
     this.GetConfigurationData();
+    this.GetMobileEmail();
     this.months = MonthNames;
   }
 
@@ -69,6 +70,17 @@ export class InvestmentsComponent implements OnInit {
     }
     );
   }
+
+GetMobileEmail()
+{
+  this.investmentService.GetMobileEmailDetails(+this.id).subscribe(response=>{
+ 
+    this.MobileNumber=+JSON.stringify(response).split(',')[0].split(':')[1];
+    this.emailID=JSON.stringify(response).split(',')[1].split(':')[1];
+
+  });
+}
+
   AmountChanged(event, row, index) {
     if (event.target.value == 0 || event.target.value == "") {
       this.showUploadbtn[index] = false;
@@ -91,7 +103,7 @@ export class InvestmentsComponent implements OnInit {
       row.FileInfo = "";
       let file: number = this.filesToUpload.findIndex(item => item.name == row.FileName);
       row.FileName = "";
-      this.filesToUpload.splice(file, 1);
+      
     }
     else {
       this.othersshowUploadbtn[index] = true;
@@ -103,8 +115,15 @@ export class InvestmentsComponent implements OnInit {
     this.formHasError = false;
     let fileList: FileList = event.target.files;
     let file: File = fileList[0];
+    //if file already exists remove that file from filesToUpload array
+    if(row.FileName!="")
+    {
+      let file: number = this.filesToUpload.findIndex(item => item.name == row.FileName);
+      this.filesToUpload.splice(file, 1);
+    }
     row.FileName = file.name;
     row.FileInfo = file;
+    //Check file format
     if (+row.Amount > 0 && !(row.FileName.endsWith(".pdf"))) {
       if (target == "first") {
         this.hasError = true;
@@ -115,6 +134,7 @@ export class InvestmentsComponent implements OnInit {
         this.errorMessage = "File should be in pdf format";
       }
     }
+    //check for file size
     else if (file.size >= 1024000000) {
       if (target == "first") {
         this.hasSizeError[index] = true;

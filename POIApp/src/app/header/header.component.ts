@@ -22,17 +22,15 @@ export class HeaderComponent implements OnInit {
         }
         if (undefined != id) {
           localStorage.setItem("VamID", id);
+        }     
         }
-
-        this.vamID = localStorage.getItem("VamID");
-        this.vamName = localStorage.getItem("Username");
-       
-        }
-      });
+      });  
+       this.vamID = localStorage.getItem("VamID");
+      this.vamName = localStorage.getItem("Username");    
   }
 
   ngOnInit() {
 
   }
-
+  
 }

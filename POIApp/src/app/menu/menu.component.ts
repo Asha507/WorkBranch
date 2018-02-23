@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MenuService} from '../services/menu.service';
 
 @Component({
   selector: 'app-menu',
@@ -6,10 +7,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-
-  constructor() { }
+show:boolean=false;
+  constructor(private menuService:MenuService) { }
 
   ngOnInit() {
+    this.IsAdmin();
   }
-
+  IsAdmin()
+  {
+    let VamID=localStorage.getItem("VamID");
+    this.menuService.IsAdmin(+VamID).subscribe(response=>{
+      if(response=="true")
+      {
+        this.show=true;
+      }
+      else
+      {
+        this.show=false;
+      }
+    });
+   
+  }
 }
