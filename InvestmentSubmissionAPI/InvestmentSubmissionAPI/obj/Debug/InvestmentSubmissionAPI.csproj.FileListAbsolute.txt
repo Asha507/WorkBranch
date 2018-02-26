@@ -234,3 +234,6 @@ D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmission
 D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\obj\Debug\InvestmentSubmissionAPI.csproj.ResolveComReference.cache
 D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\obj\Debug\InvestmentSubmissionAPI.dll
 D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\obj\Debug\InvestmentSubmissionAPI.pdb
+D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\System.Web.Cors.dll
+D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\System.Web.Http.Cors.dll
+D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\System.Web.Http.Cors.xml

@@ -8,8 +8,12 @@ export class StatusService {
 
   constructor(private http:Http) {  }
 
-  GetStatus(id:String):Observable<any>
+  GetStatus(id:number):Observable<any>
   {
+    if(id==null)
+    {
+      id=0;
+    }
     return this.http.get(environment.api+'/api/File/GetExcelData?id='+id).map(res=>
     {
       return res.json();

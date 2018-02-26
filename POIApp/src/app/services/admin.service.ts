@@ -3,6 +3,7 @@ import {Http} from '@angular/http'
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AdminService {
@@ -10,7 +11,7 @@ export class AdminService {
 
   GetExcelData():Observable<any>
   {
-    return this.http.get('/api/File/GetExcelData').map(res=>
+    return this.http.get(environment.api+'/api/File/GetExcelData').map(res=>
       {
         return res.json();
       });
@@ -18,7 +19,7 @@ export class AdminService {
 
   ApproveRecord(item):Observable<any>
   {
-    return this.http.post('/api/File/UpdateStatus',{"VamID":item.VamID,"Status":"Approved"}).map(res=>
+    return this.http.post(environment.api+'/api/File/UpdateStatus',{"VamID":item.VamID,"Status":"Approved"}).map(res=>
       {
         return res.json();
       });

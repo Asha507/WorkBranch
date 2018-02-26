@@ -5,6 +5,9 @@
         <h2>Investment Proof Submission for {{configValues["FinancialYear"]}}</h2>
       </div>
     </div>
+    <div *ngIf="loading">
+        <div class="loading"></div>
+    </div>
     <div class="row ">
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -114,6 +117,7 @@
                 </tr>
               </thead>
               <tbody>
+                <tr class="loader" *ngIf="loading"></tr>
                 <tr *ngFor="let row of Fields_80C;let index=index ">
                   <th scope="row">{{row.SNO}}</th>
                   <td>{{row.Name}}</td>
@@ -318,7 +322,7 @@
         <div class="panel-body labelText">
           <h6> I hereby declare the information given above is true and correct. I undertake to inform immediately of any change
             in the above facts. Any Income tax liability arising out of wrong declaration will be my responsibility. </h6>
-          <h6>Date : {{date|date:'short'}}</h6>
+          <h6>Date : {{date}}</h6>
           <div class="row">
             <span class="col-md-3"></span>
             <input type="reset" (click)="ResetAll()" class="btn btn-primary text-center col-md-2">

@@ -18,6 +18,8 @@ import { DataFilterPipe } from './data-filter.pipe';
 import { StatusComponent } from './status/status.component'
 import { StatusService } from './services/status.service';
 import { MenuService } from './services/menu.service';
+import { DatePipe } from '@angular/common';
+import {BusyModule} from 'angular2-busy';
 const routes:Routes=[
   { path: '', redirectTo: '/Investment', pathMatch: 'full' },
   {path:'Admin',component:AdminComponent},
@@ -45,7 +47,7 @@ const routes:Routes=[
     HttpModule,
     DataTableModule
   ],
-  providers: [InvestmentService,AdminService,StatusService,MenuService],
+  providers: [InvestmentService,AdminService,StatusService,MenuService,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

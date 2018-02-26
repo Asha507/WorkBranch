@@ -7,9 +7,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace InvestmentSubmissionAPI.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ConfigurationController : ApiController
     {
         public bool isRecordExists = false;
@@ -117,8 +119,13 @@ namespace InvestmentSubmissionAPI.Controllers
                 fields = JsonConvert.DeserializeObject<List<TemplateFields>>(File.ReadAllText(file));
                 fieldsData.Add("80C", fields);
                 FileController fileController = new FileController();
-                string jsonString = fileController.GetResponseJson(id);
-                if (jsonString != "[]")
+                string jsonString = "";
+                if (File.Exists(ConfigurationManager.AppSettings["ExcelLocation"]))
+                {
+                   jsonString = fileController.GetResponseJson(id);
+                }
+                
+                if (jsonString != "[]" && jsonString != "")
                 {
                     dynamic json = JsonConvert.DeserializeObject(jsonString);
 
@@ -143,9 +150,8 @@ namespace InvestmentSubmissionAPI.Controllers
                 }
                 file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Files", ConfigurationManager.AppSettings["OthersFileName"]);
                 fields = JsonConvert.DeserializeObject<List<TemplateFields>>(File.ReadAllText(file));
-                if (jsonString != "[]")
+                if (jsonString != "[]" && jsonString != "")
                 {
-                    isRecordExists = true;
                     dynamic json = JsonConvert.DeserializeObject(jsonString);
                     foreach (TemplateFields field in fields)
                     {

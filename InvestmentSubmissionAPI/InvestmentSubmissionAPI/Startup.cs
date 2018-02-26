@@ -12,6 +12,7 @@ namespace InvestmentSubmissionAPI
     {
         public void Configuration(IAppBuilder app)
         {
+            
             ConfigureAuth(app);
         }
     }

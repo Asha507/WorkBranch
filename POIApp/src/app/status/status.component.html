@@ -6,6 +6,9 @@
         <div class="panel-body">
                     <table  class="table table-bordered borderless">
                        <tbody>
+                         <tr *ngIf="loading">
+                           <div class="loading"></div>
+                         </tr>
                         <tr *ngFor="let key of keys">
                           <td *ngIf="checkIfNull(item[key])" class="col-md-6" >{{key}} : </td>
                           <td  *ngIf="checkIfNull(item[key])" class="col-md-6">{{item[key]}}</td>                

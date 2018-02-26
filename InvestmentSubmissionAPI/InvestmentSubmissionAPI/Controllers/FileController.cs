@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -13,9 +14,11 @@ using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace InvestmentSubmissionAPI.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class FileController : ApiController
     {
         public void DownloadFile(string fileName)
@@ -314,7 +317,7 @@ namespace InvestmentSubmissionAPI.Controllers
             datarow = dt.NewRow();
             datarow["VamID"] = httpRequest.Params["VamID"];
             datarow["Name"] = httpRequest.Params["EmployeeName"];
-            datarow["Date"] = httpRequest.Params["SubmissionDate"];
+            datarow["Date"] =httpRequest.Params["SubmissionDate"];
             datarow["Status"] = "Pending";
             datarow["MobileNumber"] = httpRequest.Params["MobileNumber"];
             datarow["Email"]= httpRequest.Params["Email"];
@@ -354,7 +357,7 @@ namespace InvestmentSubmissionAPI.Controllers
             for (int i = 0; i < count; i++)
             {
                 objRange = (Range)xlWorkSheet.Cells[row, k];
-                objRange.Value2 = datarow[i].ToString();
+                objRange.Value2 = datarow[i];
                 k++;
             }
         }

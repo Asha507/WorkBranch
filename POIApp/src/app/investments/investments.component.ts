@@ -4,17 +4,19 @@ import { Observable } from 'rxjs/Rx';
 import { InvestmentService } from '../services/investment.service';
 import { IFieldTemplate } from '../IFieldTemplate';
 import { MonthNames } from '../Months';
+import { DatePipe } from '@angular/common';
+
 @Component({
   selector: 'app-investments',
   templateUrl: './investments.component.html',
   styleUrls: ['./investments.component.css']
 })
 export class InvestmentsComponent implements OnInit {
-  id: string = localStorage.getItem("VamID");
-  userName: string = localStorage.getItem("Username");
-  MobileNumber: number;
+  id: string = sessionStorage.getItem("VamID");
+  userName: string = sessionStorage.getItem("Username");
+  MobileNumber: string;
   configValues: any;
-  date: number = Date.now();
+  date: any = Date.now();
   Fields_80C: IFieldTemplate[];
   Fields_Others: IFieldTemplate[];
   guideLines: Array<string>;
@@ -38,7 +40,10 @@ export class InvestmentsComponent implements OnInit {
   medRctFile:String="";
   showMedicalUploadbtn:boolean=false;
   medAmount:number=0;
-  constructor(private investmentService: InvestmentService) { }
+  loading:boolean= true;
+  constructor(private investmentService: InvestmentService,private datePipe:DatePipe) { 
+    this.date = this.datePipe.transform(new Date()).toString();
+  }
 
   ngOnInit() {
     this.GetJsonData();
@@ -75,9 +80,9 @@ GetMobileEmail()
 {
   this.investmentService.GetMobileEmailDetails(+this.id).subscribe(response=>{
  
-    this.MobileNumber=+JSON.stringify(response).split(',')[0].split(':')[1];
+    this.MobileNumber=JSON.stringify(response).split(',')[0].split(':')[1];
     this.emailID=JSON.stringify(response).split(',')[1].split(':')[1];
-
+    this.loading=false;
   });
 }
 
@@ -246,8 +251,8 @@ GetMobileEmail()
     this.fieldsData.push(this.Fields_Others);
     let formData: FormData = new FormData();
     formData.append('Data', JSON.stringify(this.fieldsData));
-    formData.append('VamID', localStorage.getItem("VamID"));
-    formData.append('EmployeeName', localStorage.getItem("Username"));
+    formData.append('VamID', sessionStorage.getItem("VamID"));
+    formData.append('EmployeeName', sessionStorage.getItem("Username"));
     formData.append('SubmissionDate', this.date.toString());
     formData.append('MobileNumber', this.MobileNumber.toString());
     formData.append('RentAmount', this.rentAmount.toString());
@@ -261,6 +266,7 @@ GetMobileEmail()
       formData.append("file[]", this.filesToUpload[j], this.filesToUpload[j].name);
     }
     this.investmentService.UploadData(formData).subscribe(response => {
+      this.loading=false;
     }
     );
   }

@@ -18,15 +18,15 @@ export class HeaderComponent implements OnInit {
         var id=decodedString.split('&')[0];
         var userName=decodedString.split('&')[1];
         if (undefined != userName) {
-          localStorage.setItem("Username", userName);
+          sessionStorage.setItem("Username", userName);
         }
         if (undefined != id) {
-          localStorage.setItem("VamID", id);
+          sessionStorage.setItem("VamID", id);
         }     
         }
       });  
-       this.vamID = localStorage.getItem("VamID");
-      this.vamName = localStorage.getItem("Username");    
+       this.vamID = sessionStorage.getItem("VamID");
+      this.vamName = sessionStorage.getItem("Username");    
   }
 
   ngOnInit() {

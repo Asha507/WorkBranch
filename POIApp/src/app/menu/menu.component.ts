@@ -15,7 +15,7 @@ show:boolean=false;
   }
   IsAdmin()
   {
-    let VamID=localStorage.getItem("VamID");
+    let VamID=sessionStorage.getItem("VamID");
     this.menuService.IsAdmin(+VamID).subscribe(response=>{
       if(response=="true")
       {
