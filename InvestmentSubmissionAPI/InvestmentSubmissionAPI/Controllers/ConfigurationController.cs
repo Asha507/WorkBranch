@@ -59,11 +59,16 @@ namespace InvestmentSubmissionAPI.Controllers
         {
             string email = "";
             string mobile = "";
+            string jsonString = "";
             try
             {
                 FileController fileController = new FileController();
-                string jsonString = fileController.GetResponseJson(id);
-                if (jsonString != "[]")
+                if (File.Exists(ConfigurationManager.AppSettings["ExcelLocation"]))
+                {
+                    jsonString = fileController.GetResponseJson(id);
+                }
+
+                if (jsonString != "[]" && jsonString != "")
                 {
                     dynamic json = JsonConvert.DeserializeObject(jsonString);
                     foreach (var item in json[0])
@@ -85,7 +90,7 @@ namespace InvestmentSubmissionAPI.Controllers
                     return Request.CreateResponse(HttpStatusCode.OK, "");
                 }
             }
-            catch (Exception ex)
+           catch (Exception ex)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
@@ -108,6 +113,15 @@ namespace InvestmentSubmissionAPI.Controllers
 
         }
         [HttpGet]
+        public HttpResponseMessage GetHRAFields(int id = 0)
+        {
+            FileController controller = new FileController();
+            string json = controller.GetHRAResponseJson(id);
+            return Request.CreateResponse(HttpStatusCode.OK, json);
+
+        }
+
+        [HttpGet]
         [ActionName("GetFields")]
         public HttpResponseMessage GetFieldTemplates(int id)
         {
@@ -120,6 +134,7 @@ namespace InvestmentSubmissionAPI.Controllers
                 fieldsData.Add("80C", fields);
                 FileController fileController = new FileController();
                 string jsonString = "";
+
                 if (File.Exists(ConfigurationManager.AppSettings["ExcelLocation"]))
                 {
                    jsonString = fileController.GetResponseJson(id);

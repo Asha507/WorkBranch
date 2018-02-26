@@ -37,6 +37,7 @@ namespace InvestmentSubmissionAPI.Controllers
             string userName = httpRequest.Params["EmployeeName"];
             string submissionDate = httpRequest.Params["SubmissionDate"];
             string mobileNumber = httpRequest.Params["MobileNumber"];
+            string months = httpRequest.Params["HraAmount"];
             try
             {
                 foreach (var item in JArray.Parse(httpRequest.Params["Data"]))
@@ -93,6 +94,8 @@ namespace InvestmentSubmissionAPI.Controllers
                 }
                
                 CreateExcelDoc(httpRequest, templateFieldsList);
+                //Add HRA Data
+                
                 return Request.CreateResponse(HttpStatusCode.OK, "Uploaded Sucessfully");
             }
             catch (Exception ex)
@@ -153,6 +156,8 @@ namespace InvestmentSubmissionAPI.Controllers
 
         }
 
+
+
         public string GetResponseJson(int id)
         {
             Application xlApp;
@@ -202,6 +207,55 @@ namespace InvestmentSubmissionAPI.Controllers
             return json;
         }
 
+        public string GetHRAResponseJson(int id)
+        {
+            Application xlApp;
+            object misValue;
+            Workbook xlWorkBook;
+            Worksheet xlWorkSheet;
+            xlApp = new Application();
+            System.Data.DataTable dt = new System.Data.DataTable();
+            if (xlApp == null)
+            {
+                throw new Exception("Excel is not properly istalled");
+            }
+            misValue = System.Reflection.Missing.Value;
+            xlWorkBook = xlApp.Workbooks.Open(ConfigurationManager.AppSettings["ExcelLocation"]);
+            xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(2);
+            int rowCount = xlWorkSheet.UsedRange.Rows.Count;
+            int columnCount = xlWorkSheet.UsedRange.Columns.Count;
+            int rowNumber = 1;
+            for (int c = 3; c <= columnCount; c++)
+            {
+                string colname = xlWorkSheet.Cells[1, c].Text;
+                dt.Columns.Add(colname);
+                rowNumber = 2;
+            }
+            for (int r = rowNumber; r <= rowCount; r++)
+            {
+                DataRow dr = dt.NewRow();
+                for (int c = 3; c <= columnCount; c++)
+                {
+                    dr[c - 1] = xlWorkSheet.Cells[r, c].Text;
+                }
+                if (0 != id)
+                {
+                    if (Convert.ToInt32(dr["VamID"]) == id)
+                    {
+                        dt.Rows.Add(dr);
+                        break;
+                    }
+                }
+                else
+                {
+                    dt.Rows.Add(dr);
+                }
+            }
+            DisposeExcel(ref xlApp, misValue, ref xlWorkBook, ref xlWorkSheet);
+            string json = DataTableToJSON(dt);
+            return json;
+        }
+
         private void CreateExcelDoc(HttpRequest httpRequest, List<TemplateFields> fieldsList)
         {
             Application xlApp;
@@ -216,8 +270,10 @@ namespace InvestmentSubmissionAPI.Controllers
 
             System.Data.DataTable dt;
             DataRow datarow;
+            System.Data.DataTable hradt;
+            DataRow hradatarow;
             GenerateDataTable(httpRequest, fieldsList, out dt, out datarow);
-
+            GenerateHraDataTable(httpRequest, fieldsList, out hradt, out hradatarow);
             int row, col;
 
             Worksheet xlWorkSheet = null;
@@ -234,6 +290,18 @@ namespace InvestmentSubmissionAPI.Controllers
                 GenerateHeaders(dt, row, xlWorkSheet, ref objRange, ref j);
                 row++;
                 InsertToExcel(dt, datarow, row, xlWorkSheet, ref objRange);
+
+                row = 1; col = 1;
+                 j = col;
+                objRange = null;
+                xlWorkBook.Sheets.Add(After: xlWorkBook.Sheets[xlWorkBook.Sheets.Count]);
+                xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(2);
+                xlWorkSheet.Name = "HRA Details";
+
+                GenerateHeaders(hradt, row, xlWorkSheet, ref objRange, ref j);
+                row++;
+                InsertToExcel(hradt, hradatarow, row, xlWorkSheet, ref objRange);
+
             }
             else
             {
@@ -254,9 +322,64 @@ namespace InvestmentSubmissionAPI.Controllers
                 {
                     InsertToExcel(dt, datarow, row, xlWorkSheet, ref objRange);
                 }
+
+                bool hrarecordExists = false;
+                xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(2);
+                row = xlWorkSheet.UsedRange.Rows.Count + 1;
+                for (int i = 2; i < row; i++)
+                {
+                    if (xlWorkSheet.Cells[i, 1].Text == httpRequest.Params["VamID"])
+                    {
+                        InsertToExcel(hradt, hradatarow, i, xlWorkSheet, ref objRange);
+                        hrarecordExists = true;
+                        break;
+                    }
+                }
+                if (!hrarecordExists)
+                {
+                    InsertToExcel(hradt, hradatarow, row, xlWorkSheet, ref objRange);
+                }
             }
+            //Save HRA Data
+
             SaveExcelData(misValue, xlWorkBook);
             DisposeExcel(ref xlApp, misValue, ref xlWorkBook, ref xlWorkSheet);
+        }
+
+        private void GenerateHraDataTable(HttpRequest httpRequest, List<TemplateFields> fieldsList, out System.Data.DataTable hradt, out DataRow hradatarow)
+        {
+            hradt = new System.Data.DataTable();
+
+            hradt.Columns.Add("VamID");
+            hradt.Columns.Add("Name");
+            foreach (dynamic item in JArray.Parse(httpRequest.Params["HraAmount"]))
+            {
+                hradt.Columns.Add(item.Name.Value);
+            }
+            hradt.Columns.Add("Total_Rent");
+            hradatarow = hradt.NewRow();
+            hradatarow["VamID"] = httpRequest.Params["VamID"];
+            hradatarow["Name"] = httpRequest.Params["EmployeeName"];
+            foreach (dynamic item in JArray.Parse(httpRequest.Params["HraAmount"]))
+            {
+                if (item.Name.Value != "")
+                {
+                    hradatarow[item.Name.Value] = item.Amount.Value;
+                }
+                else
+                {
+                    hradatarow[item.Name.Value] = "--";
+                }
+            }
+            hradatarow["Total_Rent"] = httpRequest.Params["RentAmount"];
+
+        }
+
+        public string DataTableToJSON(System.Data.DataTable table)
+        {
+            string JSONString = string.Empty;
+            JSONString = JsonConvert.SerializeObject(table);
+            return JSONString;
         }
 
         private static void GenerateHeaders(System.Data.DataTable dt, int row, Worksheet xlWorkSheet, ref Range objRange, ref int j)
@@ -340,13 +463,6 @@ namespace InvestmentSubmissionAPI.Controllers
                     datarow["Filename_" + item.itemCode] = "--";
                 }
             }           
-        }
-
-        public string DataTableToJSON(System.Data.DataTable table)
-        {
-            string JSONString = string.Empty;
-            JSONString = JsonConvert.SerializeObject(table);
-            return JSONString;
         }
 
         private void InsertToExcel(System.Data.DataTable dt, DataRow datarow, int row, Worksheet xlWorkSheet, ref Range objRange)

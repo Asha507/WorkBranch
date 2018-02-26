@@ -51,9 +51,20 @@ export class InvestmentsComponent implements OnInit {
     this.GetConfigurationData();
     this.GetMobileEmail();
     this.months = MonthNames;
+    this.UpdateMonths();
+ 
   }
 
-
+  UpdateMonths()
+  {
+this.investmentService.GetMonthlyHra().subscribe(response=>{
+  debugger;
+  if(response!=null)
+  {
+this.months=JSON.parse(response);
+  }
+});
+  }
   GetJsonData() {
     this.investmentService.GetJsonData().subscribe(response => {
       this.Fields_80C = response["80C"];
@@ -78,11 +89,13 @@ export class InvestmentsComponent implements OnInit {
 
 GetMobileEmail()
 {
-  this.investmentService.GetMobileEmailDetails(+this.id).subscribe(response=>{
- 
+ this.investmentService.GetMobileEmailDetails(+this.id).subscribe(response=>{
+ if(response!="")
+ {
     this.MobileNumber=JSON.stringify(response).split(',')[0].split(':')[1];
-    this.emailID=JSON.stringify(response).split(',')[1].split(':')[1];
-    this.loading=false;
+    this.emailID=JSON.stringify(response).split(',')[1].split(':')[1]; 
+ }
+ this.loading=false;
   });
 }
 
@@ -247,6 +260,7 @@ GetMobileEmail()
   }
 
   SubmitClick() {
+    this.loading=true;
     this.fieldsData.push(this.Fields_80C);
     this.fieldsData.push(this.Fields_Others);
     let formData: FormData = new FormData();
@@ -262,6 +276,7 @@ GetMobileEmail()
     formData.append('Email',this.emailID.toString());
     formData.append('Medical_Amount',this.medAmount.toString());
     formData.append('Medical_File',this.medRctFile!=""?this.medRctFile.toString():"");
+    formData.append('HraAmount',JSON.stringify(this.months));
     for (var j = 0; j < this.filesToUpload.length; j++) {
       formData.append("file[]", this.filesToUpload[j], this.filesToUpload[j].name);
     }
@@ -269,6 +284,8 @@ GetMobileEmail()
       this.loading=false;
     }
     );
+    this.loading=false;
+
   }
 
   ResetAll() {

@@ -9,9 +9,19 @@ export class InvestmentService {
 data:any;
   constructor(private http: Http) { }
 
+
+
   GetJsonData(): Observable<any> {
     let id=sessionStorage.getItem("VamID")!=null?sessionStorage.getItem("VamID"):0;
     return this.http.get(environment.api+'/api/Configuration/GetFields?id='+id).map((res) => {
+      return res.json();       
+    });
+  }
+
+  GetMonthlyHra():Observable<any>
+  {
+    let id=sessionStorage.getItem("VamID")!=null?sessionStorage.getItem("VamID"):0;    
+    return this.http.get(environment.api+'/api/Configuration/GetHRAFields?id='+id).map((res) => {
       return res.json();       
     });
   }
