@@ -19,7 +19,7 @@ export class AdminService {
 
   ApproveRecord(item):Observable<any>
   {
-    return this.http.post(environment.api+'/api/File/UpdateStatus',{"VamID":item.VamID,"Status":"Approved"}).map(res=>
+    return this.http.post(environment.api+'/api/File/UpdateStatus',{"VamID":item.VamID,"Status":"Approved","Remark":item.Remark}).map(res=>
       {
         return res.json();
       });
@@ -27,7 +27,8 @@ export class AdminService {
 
   RejectRecord(item):Observable<any>
   {
-    return this.http.post('/api/File/UpdateStatus',{"VamID":item.VamID,"Status":"Rejected"}).map(res=>
+    debugger;
+    return this.http.post(environment.api+'/api/File/UpdateStatus',{"VamID":item.VamID,"Status":"Rejected","Remark":item.Remark}).map(res=>
       {
         return res.json();
       });

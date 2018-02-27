@@ -37,7 +37,12 @@
             <tbody>
               <tr *ngFor="let item of mf.data">
                 <td *ngFor="let key of keys">
+                  <div *ngIf="key=='Remark'">
+                    <input type="text" placeholder="Remarks" [ngModel]="remark" (change)=AddRemark(item,key) >
+                  </div>
+                  <div *ngIf="!(key=='Remark')">
                   {{item[key]}}
+                  </div>
                 </td>
                 <td>
                   <div class="row">

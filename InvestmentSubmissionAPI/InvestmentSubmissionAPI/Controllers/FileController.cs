@@ -126,7 +126,7 @@ namespace InvestmentSubmissionAPI.Controllers
                 {
                     if (xlWorkSheet.Cells[r, 1].Text == id)
                     {
-                        objRange = (Range)xlWorkSheet.Cells[r, columnCount];
+                        objRange = (Range)xlWorkSheet.Cells[r, columnCount-1];
                         objRange.Value2 = status;
                         break;
                     }
@@ -447,6 +447,7 @@ namespace InvestmentSubmissionAPI.Controllers
             datarow["Name"] = httpRequest.Params["EmployeeName"];
             datarow["Date"] =httpRequest.Params["SubmissionDate"];
             datarow["Status"] = "Pending";
+            datarow["Remark"] = "--";
             datarow["MobileNumber"] = httpRequest.Params["MobileNumber"];
             datarow["Email"]= httpRequest.Params["Email"];
             datarow["HRA_Amount"]= httpRequest.Params["RentAmount"];

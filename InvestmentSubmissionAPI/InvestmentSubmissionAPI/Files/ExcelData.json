@@ -45,6 +45,7 @@
     "AggrementFile": "String",
     "Medical_Amount": "String",
     "Medical_File": "String",
-    "Status": "String"
+    "Status": "String",
+    "Remark": "String"
   }
 ]

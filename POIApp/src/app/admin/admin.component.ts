@@ -12,6 +12,7 @@ export class AdminComponent implements OnInit {
   public filterQuery = "";
   public showApproveButton:boolean=true;
   public showRejectButton:boolean=true;
+  public remark:string;
 
   constructor(private adminService: AdminService) {
     this.adminService.GetExcelData().subscribe(response => {
@@ -28,7 +29,7 @@ export class AdminComponent implements OnInit {
     this.adminService.ApproveRecord(item).subscribe(response => {
       if(response=="Success")
       {
-        item.Status="Approve";
+        item.Status="Approved";
       }
     }
     );
@@ -38,7 +39,7 @@ export class AdminComponent implements OnInit {
     this.adminService.RejectRecord(item).subscribe(response => {
       if(response=="Success")
       {
-        item.Status="Reject";
+        item.Status="Rejected";
       }
     }
     );
@@ -62,5 +63,15 @@ export class AdminComponent implements OnInit {
     {
       return true;
     }
+    if(item.Status == "Pending")
+    {
+      return false;
+    }
+  }
+
+  AddRemark(item,key)
+  {
+    debugger;
+    item[key]=this.remark;
   }
 }
