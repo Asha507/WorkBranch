@@ -237,3 +237,6 @@ D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmission
 D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\System.Web.Cors.dll
 D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\System.Web.Http.Cors.dll
 D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\System.Web.Http.Cors.xml
+C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\System.Web.Cors.dll
+C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\System.Web.Http.Cors.dll
+C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\System.Web.Http.Cors.xml

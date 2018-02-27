@@ -10,16 +10,25 @@ export class StatusComponent implements OnInit {
   public item:any;
   public keys:string[]=[];
   loading:boolean=true;
+  hasData:boolean=false;
   constructor(private statusService: StatusService) { }
 
   ngOnInit() {    
    debugger;
       this.statusService.GetStatus(+sessionStorage.getItem("VamID")).subscribe(response=>
-      {        
-        this.data=Array.of(JSON.parse(response))[0];
-        this.item=this.data[0];
-        this.keys=Object.keys(this.data[0]);
-        this.loading=false;
+      { 
+         if(!(response=="[]"))
+          {           
+            this.data=Array.of(JSON.parse(response))[0];
+            this.item=this.data[0];
+            this.keys=Object.keys(this.data[0]);
+            this.loading=false;
+            this.hasData=true;
+          }
+          else
+          {
+            this.loading=false;
+          }
       });
   }
 

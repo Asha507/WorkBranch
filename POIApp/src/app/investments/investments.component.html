@@ -169,7 +169,7 @@
                       Amount should not be greater than {{row.max}}
                     </div>
                   </td>
-                  <td>
+                  <td *ngIf="!(row.Section=='Others')">
                     <input type="text" [placeholder]="row.Placeholder" #otherFileType="ngModel" readonly class="form-control" [ngClass]="{'red-border-class': (otherFileType.invalid && hasOthersError)||(hasOthersSizeError[index])}"
                       name="{{'othersfilename'+index}}" [(ngModel)]="row.FileName" pattern="([a-zA-Z0-9\s_\\.\-:])+(.pdf)$"
                       accept="application\pdf">
@@ -177,7 +177,7 @@
                       {{errorMessage}}
                     </div>
                   </td>
-                  <td class="text-align-center">
+                  <td class="text-align-center" *ngIf="!(row.Section=='Others')">
                     <div class="fileUpload btn btn-primary " [ngClass]="{'upload-button-disable': !othersshowUploadbtn[index]}">
                       <span>Upload File</span>
                       <input type="file" id="btnUpload" value="Upload" [disabled]="!othersshowUploadbtn[index]" (change)="fileChange($event,row,index,'others')"
@@ -230,9 +230,9 @@
                   <td>
                     <div class="row hraUpload">
                       <div class="col-md-8">
-                        <input type="text" #rent="ngModel" placeholder="Rent Receipt" readonly class="form-control" name="RentReceipt" [(ngModel)]="RntRctFile">
-                        <div *ngIf="rent.invalid" class="alert alert-danger">
-                          Please upload rent receipt
+                        <input type="text" #rent="ngModel" [required]="showRentUploadbtn" placeholder="Rent Receipt" readonly class="form-control" name="RentReceipt" [(ngModel)]="RntRctFile">
+                        <div *ngIf="rent.invalid && rent.touched||hasrentError" class="alert alert-danger">
+                            {{errorRentMessage}}
                         </div>
                       </div>
                       <div class="col-md-3 hraUploadButton fileUpload btn btn-primary " [ngClass]="{'upload-button-disable': !showRentUploadbtn}">
@@ -248,14 +248,14 @@
                       <div *ngIf="rentAmount>=100001">
 
                         <div class="col-md-8">
-                          <input type="text" #pan="ngModel" placeholder="Pan copy" class="form-control" name="PanCopy" [(ngModel)]="PanFile" readonly>
-                          <div *ngIf="pan.invalid" class="alert alert-danger">
-                            Please upload Pan Card copy
+                          <input type="text" #pan="ngModel" placeholder="Pan copy" [required]="showPanUploadbtn" class="form-control" name="PanCopy" [(ngModel)]="PanFile" readonly>
+                          <div *ngIf="pan.invalid && pan.touched||hasPanError" class="alert alert-danger">
+                            {{errorPanMessage}}
                           </div>
                         </div>
-                        <div class="col-md-3 hraUploadButton fileUpload btn btn-primary ">
+                        <div class="col-md-3 hraUploadButton fileUpload btn btn-primary "  [ngClass]="{'upload-button-disable': !showPanUploadbtn}">
                           <span>Upload File</span>
-                          <input type="file" accept="application/pdf" id="btnUpload" value="Upload" class="upload" (change)="fileUpload($event,'pan')"
+                          <input type="file" accept="application/pdf" id="btnUpload" value="Upload" [disabled]="!showPanUploadbtn" class="upload" (change)="fileUpload($event,'pan')"
                           />
                         </div>
                       </div>
@@ -267,14 +267,14 @@
                         <div *ngIf="rentAmount>=180001">
   
                           <div class="col-md-8">
-                            <input type="text" #pan="ngModel" placeholder="Rent Aggrement" class="form-control" name="AggCopy" [(ngModel)]="RntAggFile" readonly>
-                            <div *ngIf="pan.invalid" class="alert alert-danger">
-                              Please upload rent aggrement
+                            <input type="text" #agg="ngModel" placeholder="Rent Aggrement" [required]="showAggrementUploadbtn" class="form-control" name="AggCopy" [(ngModel)]="RntAggFile" readonly>
+                            <div *ngIf="agg.invalid && agg.touched||hasAggError" class="alert alert-danger">
+                                {{errorRentMessage}}
                             </div>
                           </div>
-                          <div class="col-md-3 hraUploadButton fileUpload btn btn-primary ">
+                          <div class="col-md-3 hraUploadButton fileUpload btn btn-primary "  [ngClass]="{'upload-button-disable': !showAggrementUploadbtn}">
                             <span>Upload File</span>
-                            <input type="file" accept="application/pdf" id="btnUpload" value="Upload" class="upload" (change)="fileUpload($event,'aggrement')"
+                            <input type="file" accept="application/pdf" id="btnUpload" [disabled]="!showAggrementUploadbtn" value="Upload" class="upload" (change)="fileUpload($event,'aggrement')"
                             />
                           </div>
                         </div>
@@ -298,8 +298,8 @@
                             <div class="col-md-8">
                               <input type="text" #medrct="ngModel" placeholder="Medical Bills" readonly class="form-control" 
                               name="MedicalReceipt" [(ngModel)]="medRctFile">
-                              <div *ngIf="rent.invalid" class="alert alert-danger">
-                                Please upload medical bills
+                              <div *ngIf="medrct.invalid&&medrct.touched||hasMedError" class="alert alert-danger">
+                               {{errorMedMessage}}
                               </div>
                             </div>
                             <div class="col-md-3 hraUploadButton fileUpload btn btn-primary " [ngClass]="{'upload-button-disable':!showMedicalUploadbtn}">
@@ -327,10 +327,28 @@
             <span class="col-md-3"></span>
             <input type="reset" (click)="ResetAll()" class="btn btn-primary text-center col-md-2">
             <span class="col-md-1"></span>
-            <input type="Submit" value="Submit" class="btn btn-primary text-center col-md-2" [disabled]="!sf.dirty || !sf.valid || isFormEmpty()||formHasError">
+            <input type="Submit" value="Submit" data-toggle="modal" data-target="#myModal" class="btn btn-primary text-center col-md-2" [disabled]="!sf.dirty || !sf.valid || isFormEmpty()||formHasError">
             <span class="col-md-4"></span>
           </div>
-
+          <div class="modal fade" id="myModal" role="dialog">
+              <div class="modal-dialog">
+              
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>{{SubmitStatus}}</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
         </div>
       </div>
 

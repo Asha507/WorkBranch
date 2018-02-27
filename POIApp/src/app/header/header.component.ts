@@ -23,14 +23,14 @@ export class HeaderComponent implements OnInit {
         if (undefined != id) {
           sessionStorage.setItem("VamID", id);
         }     
-        }
-      });  
-       this.vamID = sessionStorage.getItem("VamID");
-      this.vamName = sessionStorage.getItem("Username");    
+        }        
+          this.vamID = sessionStorage.getItem("VamID");
+          this.vamName = sessionStorage.getItem("Username");   
+      });     
   }
 
   ngOnInit() {
-
+     
   }
   
 }
