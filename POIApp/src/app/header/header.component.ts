@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
       .subscribe(params => {
         if (undefined != params.param) {
         let decodedString=Base64.decode(params.param);
-        var id=decodedString.split('&')[0];
+        var id=decodedString.split('&')[0].replace("VAM ","");
         var userName=decodedString.split('&')[1];
         if (undefined != userName) {
           sessionStorage.setItem("Username", userName);
@@ -23,9 +23,8 @@ export class HeaderComponent implements OnInit {
         if (undefined != id) {
           sessionStorage.setItem("VamID", id);
         }     
-        }        
-          this.vamID = sessionStorage.getItem("VamID");
-          this.vamName = sessionStorage.getItem("Username");   
+        }     
+        
       });     
   }
 

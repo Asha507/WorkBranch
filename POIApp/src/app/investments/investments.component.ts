@@ -5,15 +5,19 @@ import { InvestmentService } from '../services/investment.service';
 import { IFieldTemplate } from '../IFieldTemplate';
 import { MonthNames } from '../Months';
 import { DatePipe } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+import { JwtauthenticationService } from '../services/jwtauthentication.service';
 
 @Component({
   selector: 'app-investments',
   templateUrl: './investments.component.html',
-  styleUrls: ['./investments.component.css']
+  styleUrls: ['./investments.component.css'],
+  providers: [JwtauthenticationService]
 })
 export class InvestmentsComponent implements OnInit {
-  id: string = sessionStorage.getItem("VamID");
-  userName: string = sessionStorage.getItem("Username");
+  debugger;
+  id: string = "";
+  userName: string = "";
   MobileNumber: string;
   configValues: any;
   date: any = Date.now();
@@ -27,9 +31,9 @@ export class InvestmentsComponent implements OnInit {
   showAggrementUploadbtn: any = false;
   fieldsData: any = [];
   filesToUpload: Array<File> = [];
-  hasError: boolean = false;
+  hasError: any = [];
   hasSizeError: any = [];
-  hasOthersError: boolean = false;
+  hasOthersError: any = [];
   hasOthersSizeError: any = [];
   errorMessage: string;
   formHasError: boolean = false;
@@ -43,46 +47,73 @@ export class InvestmentsComponent implements OnInit {
   showMedicalUploadbtn: boolean = false;
   medAmount: number = 0;
   loading: boolean = true;
-  hasPanError:boolean=false;
-  hasrentError:boolean=false;
-  hasAggError:boolean=false;
-  hasMedError:boolean=false;
-  errorPanMessage:string="Please upload Pan Card copy";
-  errorRentMessage:string="Please upload rent receipt";
-  errorAggMessage:string="Please upload rent aggrement"
-  errorMedMessage:string="Please upload Medical documents";
-  SubmitStatus:string="Processing";
-  constructor(private investmentService: InvestmentService, private datePipe: DatePipe) {
+  hasPanError: boolean = false;
+  hasrentError: boolean = false;
+  hasAggError: boolean = false;
+  hasMedError: boolean = false;
+  errorPanMessage: string = "Please upload Pan Card copy";
+  errorRentMessage: string = "Please upload rent receipt";
+  errorAggMessage: string = "Please upload rent aggrement"
+  errorMedMessage: string = "Please upload Medical documents";
+  SubmitStatus: string = "Processing";
+  appError: boolean = false;
+  errorMesage: string = "";
+  errorMessage_Others:any=[];
+  errorMessage_80C:any=[];
+  constructor(private investmentService: InvestmentService, private jwtauthenticationService: JwtauthenticationService, private datePipe: DatePipe, private route: ActivatedRoute) {
     this.date = this.datePipe.transform(new Date()).toString();
+    this.userName=sessionStorage.getItem("Username");
+    this.id=sessionStorage.getItem("VamID");
   }
 
   ngOnInit() {
-    this.GetJsonData();
-    this.GetGuideLines();
-    this.GetConfigurationData();
-    this.months = MonthNames;
-    this.UpdateMonths();
-    this.GetMobileEmail();
+    debugger;
+    if (sessionStorage.getItem("IsValidSession") == "true") {
+      this.loading = true;
+      this.GetJsonData();
+      this.GetGuideLines();
+      this.GetConfigurationData();
+      this.months = MonthNames;
+      this.UpdateMonths();
+      this.GetMobileEmail();
+      this.GetMedicalDetails();
+    }
+    else {
+      this.loading = false;
+    }
 
+  }
+  GetMedicalDetails()
+  {
+    this.investmentService.GetMedicalDetails(+this.id).subscribe(response => {
+      response=JSON.parse(this.jwtauthenticationService.decode(response).PayloadData);
+      if (response != "") {
+        
+        }
+    },
+      err => {
+        this.appError = true;
+      });
+    this.loading = false;
   }
 
   UpdateMonths() {
     this.investmentService.GetMonthlyHra().subscribe(response => {
-      debugger;
-      if (response != "[]") {
-        var updatedMonthDetails = JSON.parse(response, )[0];
+      response=JSON.parse(this.jwtauthenticationService.decode(response).PayloadData);
+      if (response != "[]" && response != "") {
+        var updatedMonthDetails = JSON.parse(response)[0];
         Object.entries(updatedMonthDetails).forEach(element => {
           if (element[0] == "RentReciptFile") {
             this.RntRctFile = element[1];
-            this.showRentUploadbtn=false;
+            this.showRentUploadbtn = false;
           }
           else if (element[0] == "PanFile") {
             this.PanFile = element[1];
-            this.showPanUploadbtn=false;
+            this.showPanUploadbtn = false;
           }
           else if (element[0] == "AggrementFile") {
             this.RntAggFile = element[1];
-            this.showAggrementUploadbtn=false;
+            this.showAggrementUploadbtn = false;
           }
           else if (element[0] == "Total_Rent") {
             this.rentAmount = element[1];
@@ -100,44 +131,66 @@ export class InvestmentsComponent implements OnInit {
       else {
         this.months = MonthNames;
       }
-    });
+    },
+      err => {
+        this.appError = true;
+
+      }
+    );
   }
   GetJsonData() {
     this.investmentService.GetJsonData().subscribe(response => {
+      response=JSON.parse(this.jwtauthenticationService.decode(response).PayloadData);
       this.Fields_80C = response["80C"];
       this.Fields_Others = response["Others"];
-    }
+    },
+      err => {
+        this.appError = true;
+      }
     );
   }
 
   GetConfigurationData() {
     this.investmentService.GetConfigData().subscribe(response => {
-      this.configValues = response;
-    }
+      this.configValues = JSON.parse(this.jwtauthenticationService.decode(response).PayloadData);
+    },
+      err => {
+        this.appError = true;
+      }
     );
   }
 
   GetGuideLines() {
     this.investmentService.GetGuidelines().subscribe(response => {
-      this.guideLines = response;
-    }
+      this.guideLines = JSON.parse(this.jwtauthenticationService.decode(response).PayloadData);
+    },
+      err => {
+        this.appError = true;
+      }
     );
   }
 
   GetMobileEmail() {
     this.investmentService.GetMobileEmailDetails(+this.id).subscribe(response => {
+      response=JSON.parse(this.jwtauthenticationService.decode(response).PayloadData);
       if (response != "") {
         this.MobileNumber = JSON.stringify(response).split(',')[0].split(':')[1];
         this.emailID = JSON.stringify(response).split(',')[1].split(':')[1];
+        if (this.emailID.endsWith('"')) {
+          this.emailID = this.emailID.replace("\"", "");
+        }
       }
-      this.loading = false;
-    });
+    },
+      err => {
+        this.appError = true;
+      });
   }
 
   AmountChanged(event, row, index) {
     if (event.target.value == 0 || event.target.value == "") {
       this.showUploadbtn[index] = false;
       this.hasSizeError[index] = false;
+      this.hasError[index] = false;
       row.Amount = "";
       row.FileInfo = "";
       let file: number = this.filesToUpload.findIndex(item => item.name == row.FileName);
@@ -152,6 +205,7 @@ export class InvestmentsComponent implements OnInit {
     if (event.target.value == 0 || event.target.value == "") {
       this.othersshowUploadbtn[index] = false;
       this.hasOthersSizeError[index] = false;
+      this.hasOthersError[index] = false;
       row.Amount = "";
       row.FileInfo = "";
       let file: number = this.filesToUpload.findIndex(item => item.name == row.FileName);
@@ -163,8 +217,6 @@ export class InvestmentsComponent implements OnInit {
     }
   }
   fileChange(event, row: IFieldTemplate, index, target) {
-    this.hasError = false;
-    this.hasOthersError = false;
     this.formHasError = false;
     let fileList: FileList = event.target.files;
     let file: File = fileList[0];
@@ -176,33 +228,50 @@ export class InvestmentsComponent implements OnInit {
     row.FileName = file.name;
     row.FileInfo = file;
     //Check file format
-    if (+row.Amount > 0 && !(row.FileName.endsWith(".pdf"))) {
+    debugger;
+    if (+row.Amount > 0 && !(row.FileName.endsWith(".pdf") || row.FileName.endsWith(".zip") || row.FileName.endsWith(".jpeg") || row.FileName.endsWith(".jpg") || row.FileName.endsWith(".png") || row.FileName.endsWith(".rar"))) {
       if (target == "first") {
-        this.hasError = true;
-        this.errorMessage = "File should be in pdf format";
+        this.hasError[index] = true;
+        this.errorMessage_80C[index] = "File should be only in formats mentioned in guidelines";
       }
       else if (target == "others") {
-        this.hasOthersError = true;
-        this.errorMessage = "File should be in pdf format";
+        this.hasOthersError[index] = true;
+        this.errorMessage_Others[index] = "File should be only in formats mentioned in guidelines";
       }
+      this.formHasError = true;
     }
     //check for file size
-    else if (file.size >= 1024000000) {
+    else if ((file.name.endsWith('.zip') || file.name.endsWith('.rar')) && file.size >= 5000000) {
       if (target == "first") {
         this.hasSizeError[index] = true;
+        this.errorMessage_80C[index] = "File size should not exceed 5MB";
       }
       else if (target == "others") {
         this.hasOthersSizeError[index] = true;
+        this.errorMessage_Others[index] = "File size should not exceed 5MB";
       }
-      this.errorMessage = "File size should be max 10240";
+    
+      this.formHasError = true;
+    }
+    else if (!(file.name.endsWith('.zip') || file.name.endsWith('.rar')) && file.size >= 600000) {
+      if (target == "first") {
+        this.hasSizeError[index] = true;
+        this.errorMessage_80C[index] = "File size should not exceed 600KB";
+      }
+      else if (target == "others") {
+        this.hasOthersSizeError[index] = true;
+        this.errorMessage_Others[index] = "File size should not exceed 600KB";
+      }
       this.formHasError = true;
     }
     else {
       if (target == "first") {
         this.hasSizeError[index] = false;
+        this.hasError[index]=false;
       }
       else if (target == "others") {
         this.hasOthersSizeError[index] = false;
+        this.hasOthersError[index]=false;
       }
       this.filesToUpload.push(file);
     }
@@ -269,109 +338,106 @@ export class InvestmentsComponent implements OnInit {
       this.RntAggFile = "";
       this.showAggrementUploadbtn = false;
     }
-    
+
   }
 
   fileUpload(event, hracopy) {
-    this.formHasError=false;
+    this.formHasError = false;
     let fileList: FileList = event.target.files;
     let file: File = fileList[0];
     if (hracopy == "pan") {
       this.PanFile = event.target.files[0].name;
-      this.hasPanError =this.CheckFileFormat(event.target.files[0].name)
-      if(this.hasPanError)
-      {
-        this.formHasError=true;
-        this.errorPanMessage="File should be in pdf format";
+      this.hasPanError = this.CheckFileFormat(event.target.files[0].name)
+      if (this.hasPanError) {
+        this.formHasError = true;
+        this.errorPanMessage = "File should be only in formats mentioned in guidelines";
       }
-      else
-      {
-        this.hasPanError =this.CheckFileSize(event)
-        if(this.hasPanError)
-        {
-          this.formHasError=true;
-          this.errorPanMessage="File should max 102400";
+      else {
+        this.hasPanError = this.CheckFileSize(event)
+        if (this.hasPanError) {
+          this.formHasError = true;
+          this.errorPanMessage = "File should be within the size mentioned in guidelines";
         }
       }
     }
     else if (hracopy == "rent") {
       this.RntRctFile = event.target.files[0].name;
-      this.hasrentError =this.CheckFileFormat(event.target.files[0].name)
-      if(this.hasrentError)
-      {
-        this.errorRentMessage="File should be in pdf format";
-        this.formHasError=true;
+      this.hasrentError = this.CheckFileFormat(event.target.files[0].name)
+      if (this.hasrentError) {
+        this.errorRentMessage = "File should be only in formats mentioned in guidelines";
+        this.formHasError = true;
       }
-      else
-      {
-        this.hasrentError =this.CheckFileSize(event)
-        if(this.hasrentError)
-        {
-          this.errorRentMessage="File should max 102400";
-          this.formHasError=true;
+      else {
+        this.hasrentError = this.CheckFileSize(event)
+        if (this.hasrentError) {
+          this.errorRentMessage = "File should be within the size mentioned in guidelines";
+          this.formHasError = true;
         }
       }
     }
     else if (hracopy == "aggrement") {
       this.RntAggFile = event.target.files[0].name;
-      this.hasAggError =this.CheckFileFormat(event.target.files[0].name)
-      if(this.hasAggError)
-      {
-        this.errorRentMessage="File should be in pdf format";
-        this.formHasError=true;
+      this.hasAggError = this.CheckFileFormat(event.target.files[0].name)
+      if (this.hasAggError) {
+        this.errorRentMessage = "File should be only in formats mentioned in guidelines";
+        this.formHasError = true;
       }
-      else
-      {
-        this.hasAggError =this.CheckFileSize(event)
-        if(this.hasAggError)
-        {
-          this.errorRentMessage="File should max 102400";
-          this.formHasError=true;
+      else {
+        this.hasAggError = this.CheckFileSize(event)
+        if (this.hasAggError) {
+          this.errorRentMessage = "File should be within the size mentioned in guidelines";
+          this.formHasError = true;
         }
       }
     }
     else if (hracopy == "medical") {
       this.medRctFile = event.target.files[0].name;
-      this.hasMedError =this.CheckFileFormat(event.target.files[0].name)
-      if(this.hasMedError)
-      {
-        this.errorMedMessage="File should be in pdf format";
-        this.formHasError=true;
+      this.hasMedError = this.CheckFileFormat(event.target.files[0].name)
+      if (this.hasMedError) {
+        this.errorMedMessage = "File should be only in formats mentioned in guidelines";
+        this.formHasError = true;
       }
-      else
-      {
-        this.hasMedError =this.CheckFileSize(event)
-        if(this.hasMedError)
-        {
-          this.errorMedMessage="File should max 102400";
-          this.formHasError=true;
+      else {
+        this.hasMedError = this.CheckFileSize(event)
+        if (this.hasMedError) {
+          this.errorMedMessage = "File should be within the size mentioned in guidelines";
+          this.formHasError = true;
         }
       }
     }
     this.filesToUpload.push(file);
   }
-  CheckFileFormat(fileName):boolean
-  {
-    return !fileName.endsWith(".pdf")?true:false;
+  CheckFileFormat(fileName): boolean {
+    return !(fileName.endsWith(".pdf") || fileName.endsWith(".rar") || fileName.endsWith(".zip") || fileName.endsWith(".jpeg") || fileName.endsWith(".jpg") || fileName.endsWith(".png")) ? true : false;
   }
-  CheckFileSize(event):boolean
-  {
+  CheckFileSize(event): boolean {
     let fileList: FileList = event.target.files;
     let file: File = fileList[0];
-    return file.size >= 102400?true:false;
-      }
+    if (file.name.endsWith(".zip") || file.name.endsWith(".rar")) {
+      return file.size >= 5000000 ? true : false;
+    }
+    else {
+      return file.size >= 600000 ? true : false;
+    }
+  }
   MedicalAmountChange(event) {
     if (event.target.value > 0) {
       this.showMedicalUploadbtn = true;
       this.medAmount = event.target.value;
     }
     else if (event.target.value == 0 || event.target.value == "") {
-      this.showMedicalUploadbtn = true;
+      this.medAmount=0;
       this.medRctFile = "";
+      this.showMedicalUploadbtn = false;
+    }
+
+    if(event.target.value>0&& this.medRctFile=="")
+    {
+      this.formHasError=true;
     }
   }
 
-  SubmitClick() {
+  SubmitClick(status) {
     this.loading = true;
     this.fieldsData.push(this.Fields_80C);
     this.fieldsData.push(this.Fields_Others);
@@ -389,17 +455,21 @@ export class InvestmentsComponent implements OnInit {
     formData.append('Medical_Amount', this.medAmount.toString());
     formData.append('Medical_File', this.medRctFile != "" ? this.medRctFile.toString() : "");
     formData.append('HraAmount', JSON.stringify(this.months));
+    formData.append('Status', status);
     for (var j = 0; j < this.filesToUpload.length; j++) {
       formData.append("file[]", this.filesToUpload[j], this.filesToUpload[j].name);
     }
     this.investmentService.UploadData(formData).subscribe(response => {
-      this.loading = false;
-      if(response=="Uploaded Sucessfully")
-      {
-        this.SubmitStatus="Data Submitted Successfully";
+      debugger;
+      response=JSON.parse(this.jwtauthenticationService.decode(response).PayloadData);
+      if (response == "Uploaded Sucessfully") {
+        this.SubmitStatus = "Data Submitted Successfully";
       }
-    }
-    );
+    },
+      err => {
+        this.appError = true;
+      });
+    this.loading = false;
   }
 
   ResetAll() {
@@ -407,6 +477,7 @@ export class InvestmentsComponent implements OnInit {
       this.showUploadbtn[i] = false;
       this.hasSizeError[i] = false;
     }
+    this.rentAmount=0;
     // this.showUploadbtn=false;
   }
 

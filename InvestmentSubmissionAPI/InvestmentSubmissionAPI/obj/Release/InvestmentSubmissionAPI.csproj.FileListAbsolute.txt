@@ -77,3 +77,15 @@ D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmission
 D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\obj\Release\InvestmentSubmissionAPI.csproj.ResolveComReference.cache
 D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\obj\Release\InvestmentSubmissionAPI.dll
 D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\obj\Release\InvestmentSubmissionAPI.pdb
+D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\System.Web.Cors.dll
+D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\System.Web.Http.Cors.dll
+D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\System.Web.Http.Cors.xml
+D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\log4net.dll
+D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\log4net.xml
+D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\jose-jwt.dll
+D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\Microsoft.IdentityModel.Logging.dll
+D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\Microsoft.IdentityModel.Tokens.dll
+D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\System.IdentityModel.Tokens.Jwt.dll
+D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\Microsoft.IdentityModel.Logging.xml
+D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\Microsoft.IdentityModel.Tokens.xml
+D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\System.IdentityModel.Tokens.Jwt.xml

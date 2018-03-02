@@ -2,7 +2,7 @@
   {
     "VamID": "String",
     "Name": "String",
-    "Date": "Date",
+    "Submission_Date": "Date",
     "MobileNumber": "String",
     "Email": "String",
     "Amount_LIC": "Number",
@@ -37,14 +37,25 @@
     "Filename_80U": "String",
     "Amount_24": "String",
     "Filename_24": "String",
-    "Amount_FC": "String",
-    "Filename_FC": "String",
     "HRA_Amount": "String",
     "PanFile": "String",
     "RentReciptFile": "String",
     "AggrementFile": "String",
     "Medical_Amount": "String",
     "Medical_File": "String",
-    "Status": "String"
+    "Amount_O1": "String",
+    "Filename_O1": "String",
+    "Amount_O2": "String",
+    "Filename_O2": "String",
+    "Amount_O3": "String",
+    "Filename_O3": "String",
+    "Amount_AOI": "String",
+    "Filename_AOI": "String",
+    "Amount_25": "String",
+    "Filename_25": "String",
+    "Amount_26": "String",
+    "Filename_26": "String",
+    "Status": "String",
+    "Remark": "String"
   }
 ]

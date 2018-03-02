@@ -7,7 +7,7 @@
     "FileName": "",
     "Amount": "",
     "min": "0",
-    "max": "50000",
+    "max": "99999999999",
     "itemCode": "80CCD"
   },
   {
@@ -24,23 +24,23 @@
   {
     "SNO": "3",
     "Section": "Section 80E",
-    "Name": "Payment of Intererst on  Loan for  higher education.",
-    "Placeholder": "Interest Paid Statement",
+    "Name": "Payment of Interest on  Loan for  higher education.",
+    "Placeholder": "Letter / certificate from the Bank / Financial Institution ",
     "FileName": "",
     "Amount": "",
     "min": "0",
-    "max": "9999999999999",
+    "max": "99999999999",
     "itemCode": "80E"
   },
   {
     "SNO": "4",
     "Section": "Section 80 DDB",
-    "Name": "Exp.for medical treatment of dependent on speicified disease.",
+    "Name": "Exp.for medical treatment of dependent on specified disease.",
     "Placeholder": "10 I Certificate",
     "FileName": "",
     "Amount": "",
     "min": "0",
-    "max": "750000",
+    "max": "99999999999",
     "itemCode": "80DDB"
   },
   {
@@ -51,7 +51,7 @@
     "FileName": "",
     "Amount": "",
     "min": "0",
-    "max": "50000",
+    "max": "99999999999",
     "itemCode": "80EE"
   },
   {
@@ -62,29 +62,85 @@
     "FileName": "",
     "Amount": "",
     "min": "0",
-    "max": "125000",
+    "max": "99999999999",
     "itemCode": "80U"
   },
   {
     "SNO": "7",
-    "Section": "Section 24",
-    "Name": "Intrest on Housing Loan Max is  2,00,000/- a. If House is Selfoccupied  No HRA should be claimed b.if house is  Let out Loss on house property wil be alloed Rs.2 lakh.",
-    "Placeholder": "Housing Loan Statement",
+    "Section": "Any other incone other than profit/loss from house property",
+    "Name": "Form 12-C",
+    "Placeholder": "Form 12-C",
     "FileName": "",
     "Amount": "",
     "min": "0",
-    "max": "200000",
-    "itemCode": "24"
+    "max": "99999999999",
+    "itemCode": "26"
   },
   {
     "SNO": "8",
-    "Section": "Others",
-    "Name": "Food Coupons",
-    "Placeholder": "",
+    "Section": "Housing Loan Interest Section 24",
+    "Name": "Interest on Housing Loan Max is  2,00,000/- a. If House is Self occupied  No HRA should be claimed b.if house is  Let out Loss on house property will be allowed Rs.2 lakh.",
+    "Placeholder": "Housing Loan Statement",
+    "FileName": "",
+    "Amount": "",
+    "min": "-200000",
+    "max": "99999999999",
+    "itemCode": "24"
+  },
+  {
+    "SNO": "9",
+    "Section": "Housing Loan Interest Section 24",
+    "Name": "Calculation Sheet",
+    "Placeholder": "Calculation Sheet",
     "FileName": "",
     "Amount": "",
     "min": "0",
-    "max": "200000",
-    "itemCode": "FC"
+    "max": "99999999999",
+    "itemCode": "25"
+  },
+
+  {
+    "SNO": "10",
+    "Section": "Others-1",
+    "Name": "Any Other Investments",
+    "Placeholder": "Investment Proof",
+    "FileName": "",
+    "Amount": "",
+    "min": "0",
+    "max": "99999999999",
+    "itemCode": "O1"
+  },
+  {
+    "SNO": "11",
+    "Section": "Others-2",
+    "Name": "Any Other Investments",
+    "Placeholder": "Investment Proof",
+    "FileName": "",
+    "Amount": "",
+    "min": "0",
+    "max": "99999999999",
+    "itemCode": "O2"
+  },
+  {
+    "SNO": "12",
+    "Section": "Net taxable salary from previous employer for financial year 2017-2018",
+    "Name": "Salary from previous employer",
+    "Placeholder": "Form16/TDS calculation sheet/Form12B",
+    "FileName": "",
+    "Amount": "",
+    "min": "0",
+    "max": "99999999999",
+    "itemCode": "O3"
+  },
+  {
+    "SNO": "13",
+    "Section": "Tax deducted by previous employer for Financial year 2017-2018",
+    "Name": "Tax deducted by previous employer",
+    "Placeholder": "Form16/TDS calculation sheet/Form12B",
+    "FileName": "",
+    "Amount": "",
+    "min": "0",
+    "max": "99999999999",
+    "itemCode": "AOI"
   }
 ]

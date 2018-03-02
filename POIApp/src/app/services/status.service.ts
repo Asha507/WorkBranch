@@ -18,7 +18,10 @@ export class StatusService {
     {
       return res.json();
     }
-    )
+    ).catch((error)=> {
+      return Observable.throw(
+        new Error(`${ error.status } ${ error.statusText }`));
+      });
   }
 
 }

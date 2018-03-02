@@ -14,7 +14,10 @@ export class AdminService {
     return this.http.get(environment.api+'/api/File/GetExcelData').map(res=>
       {
         return res.json();
-      });
+      }).catch((error)=> {
+        return Observable.throw(
+          new Error(`${ error.status } ${ error.statusText }`));
+        });
   }
 
   ApproveRecord(item):Observable<any>
@@ -22,16 +25,21 @@ export class AdminService {
     return this.http.post(environment.api+'/api/File/UpdateStatus',{"VamID":item.VamID,"Status":"Approved","Remark":item.Remark}).map(res=>
       {
         return res.json();
-      });
+      }).catch((error)=> {
+        return Observable.throw(
+          new Error(`${ error.status } ${ error.statusText }`));
+        });
   }
 
   RejectRecord(item):Observable<any>
   {
-    debugger;
     return this.http.post(environment.api+'/api/File/UpdateStatus',{"VamID":item.VamID,"Status":"Rejected","Remark":item.Remark}).map(res=>
       {
         return res.json();
-      });
+      }).catch((error)=> {
+        return Observable.throw(
+          new Error(`${ error.status } ${ error.statusText }`));
+        });
   }
 
 }

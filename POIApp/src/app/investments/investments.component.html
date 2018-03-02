@@ -1,12 +1,24 @@
-<form id="submissionForm" #sf="ngForm" (ngSubmit)="SubmitClick()">
-  <div class="container">
-    <div class="row">
-      <div class="title-style">
-        <h2>Investment Proof Submission for {{configValues["FinancialYear"]}}</h2>
-      </div>
-    </div>
+<form id="submissionForm" #sf="ngForm" (ngSubmit)="SubmitClick('Pending')">
     <div *ngIf="loading">
         <div class="loading"></div>
+    </div>
+  <div class="container">
+    <div class="row">
+      <div class="title-style" >
+        <h2>Investment Proof Submission for <span *ngIf="undefined!=configValues">{{configValues["FinancialYear"]}}</span></h2>
+      </div>
+    </div>
+    <div *ngIf="errorMessage">
+        <div class="alert alert-danger fade in">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+          <h5>  <strong>Error!</strong> {{errorMessage}}  </h5>
+        </div>
+    </div>
+    <div *ngIf="appError">
+        <div class="alert alert-danger fade in">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+          <h5>  <strong>Error!</strong> Something went wrong please try after sometime. If the issue persists please contact Finance Team  </h5>
+        </div>
     </div>
     <div class="row ">
       <div class="panel panel-default">
@@ -27,10 +39,10 @@
           <div class="clear-fix"></div>
           <div class="row">
             <div class="col-md-2"></div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="undefined!=configValues">
               <label>Start Date : {{configValues["StartDate"]}}</label>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="undefined!=configValues">
               <label>End Date : {{configValues["EndDate"]}}</label>
             </div>
            
@@ -45,11 +57,13 @@
                     <label >Mobile Number:</label>
                 </div>
                 <div class="col-md-5" style="margin-left:-7%">
-                    <input type="number" #cell="ngModel" name="mobile" placeholder="mobileNumber" class="col-md-2 form-control" [(ngModel)]="MobileNumber"
-                    required>
-                
-                <div *ngIf="cell.invalid && cell.dirty" class="alert alert-danger">
+                    <input type="number" #cell="ngModel" pattern="^((\\+91-?)|0)?[0-9]{10}$" name="mobile" placeholder="mobileNumber" class="col-md-2 form-control" [(ngModel)]="MobileNumber"
+                    required>                
+                <div *ngIf="(cell.invalid && cell.dirty && !cell.errors?.pattern)" class="alert alert-danger">
                   Mobile Number is required
+                </div> 
+                <div *ngIf="(cell.touched && cell.errors?.pattern)" class="alert alert-danger">
+                  Mobile Number is invalid
                 </div> 
                   </div>               
                 </div>
@@ -61,12 +75,15 @@
                       <label >Email ID :</label>
                   </div>
                   <div class="col-md-5" style="margin-left:-13%">
-                      <input type="email" #email="ngModel" name="email" placeholder="Email ID" class="form-control" [(ngModel)]="emailID"
+                      <input type="email" #email="ngModel" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email" placeholder="Email ID" class="form-control" [(ngModel)]="emailID"
                       required>
                   
-                      <div *ngIf="email.invalid && email.dirty" class="alert alert-danger">
+                      <div *ngIf="(email.invalid && email.dirty && !email.errors?.pattern)" class="alert alert-danger">
                           Email ID is required
                          </div>
+                         <div *ngIf="(email.touched && email.errors?.pattern)" class="alert alert-danger">
+                            Email ID is invalid
+                           </div>
                     </div>               
                   </div>
   
@@ -91,7 +108,7 @@
             </tr>
           </table>
           <div class="right-align">
-            <a href="/assets/80CTemplate.json" download="Readme.json">
+            <a href="/assets/Investment Guide Lines-2017-18.pdf" download="Investment Guide Lines-2017-18.pdf">
               <h6>Click here to download the rules before filling the form</h6>
             </a>
           </div>
@@ -130,16 +147,16 @@
                   </td>
                   <td>
                     <input type="text" [placeholder]="row.Placeholder" [required]="row.Amount>0?true:false" #fileType="ngModel" readonly class="form-control"
-                      name="{{'80Cfilename'+index}}" [ngClass]="{'red-border-class': (fileType.invalid && hasError)||(hasSizeError[index])}"
-                      [(ngModel)]="row.FileName" pattern="([a-zA-Z0-9\s_\\.\-:])+(.pdf)$" accept="application\pdf">
-                    <div *ngIf="(fileType.invalid && hasError)||(hasSizeError[index])" class="alert alert-danger">
-                      {{errorMessage}}
+                      name="{{'80Cfilename'+index}}" accept="application/pdf" [ngClass]="{'red-border-class': (fileType.invalid && hasError[index])||(hasSizeError[index])}"
+                      [(ngModel)]="row.FileName" >
+                    <div *ngIf="(hasError[index])||(hasSizeError[index])" class="alert alert-danger">
+                      {{errorMessage_80C[index]}}
                     </div>
                   </td>
                   <td class="text-align-center">
                     <div class="fileUpload btn btn-primary" [ngClass]="{'upload-button-disable': !showUploadbtn[index]}">
                       <span>Upload File</span>
-                      <input type="file" accept="application/pdf" id="btnUpload" [disabled]="!showUploadbtn[index]" value="Upload" (change)="fileChange($event,row,index,'first')"
+                      <input type="file" accept="application/pdf|application/zip|application/png|application/jpg|application/jpeg" id="btnUpload" [disabled]="!showUploadbtn[index]" value="Upload" (change)="fileChange($event,row,index,'first')"
                         class="upload" />
                     </div>
                   </td>
@@ -150,7 +167,7 @@
               <thead>
                 <tr class="active">
                   <th class="col-md-1" scope="col">S.NO</th>
-                  <th scope="col" class="col-md-2">Section</th>
+                  <th scope="col" class="col-md-2">Description</th>
                   <th scope="col" class="col-md-2">Investment Type</th>
                   <th scope="col" class="col-md-2">Amount</th>
                   <th scope="col" class="col-md-3">Upload</th>
@@ -168,14 +185,15 @@
                     <div *ngIf="othername.invalid && (othername.dirty || othername.touched)" class="alert alert-danger">
                       Amount should not be greater than {{row.max}}
                     </div>
+                   
                   </td>
                   <td *ngIf="!(row.Section=='Others')">
                     <input type="text" [placeholder]="row.Placeholder" #otherFileType="ngModel" readonly class="form-control" [ngClass]="{'red-border-class': (otherFileType.invalid && hasOthersError)||(hasOthersSizeError[index])}"
-                      name="{{'othersfilename'+index}}" [(ngModel)]="row.FileName" pattern="([a-zA-Z0-9\s_\\.\-:])+(.pdf)$"
-                      accept="application\pdf">
-                    <div *ngIf="(otherFileType.invalid && hasOthersError)||(hasOthersSizeError[index])" class="alert alert-danger">
-                      {{errorMessage}}
-                    </div>
+                      name="{{'othersfilename'+index}}" [(ngModel)]="row.FileName">
+                      <div *ngIf="(hasOthersError[index])||(hasOthersSizeError[index])" class="alert alert-danger">
+                          {{errorMessage_Others[index]}}
+                        </div>
+                        
                   </td>
                   <td class="text-align-center" *ngIf="!(row.Section=='Others')">
                     <div class="fileUpload btn btn-primary " [ngClass]="{'upload-button-disable': !othersshowUploadbtn[index]}">
@@ -289,7 +307,7 @@
                             Medical bills monthly value Rs. 1250 yearly Rs. 15,000/-
                         </div>
                         <div class="col-md-6">
-                            <input type="number" class="form-control" [(ngModel)]="medAmount" name="medAmount" (change)="MedicalAmountChange($event)" [placeholder]='medAmount' >
+                            <input type="number" class="form-control" placeholder="0.0" [(ngModel)]="medAmount" name="medAmount" (change)="MedicalAmountChange($event)" [placeholder]='medAmount' >
                         </div>
                       </div>                      
                     </td> 
@@ -304,7 +322,7 @@
                             </div>
                             <div class="col-md-3 hraUploadButton fileUpload btn btn-primary " [ngClass]="{'upload-button-disable':!showMedicalUploadbtn}">
                               <span>Upload File</span>
-                              <input type="file" accept="application/pdf" id="btnUpload" value="Upload" class="upload"
+                              <input type="file" id="btnUpload" value="Upload" class="upload"
                                 (change)="fileUpload($event,'medical')"   />
                             </div>
                           </div>
@@ -320,12 +338,14 @@
           <h3 class="panel-title">Declaration</h3>
         </div>
         <div class="panel-body labelText">
-          <h6> I hereby declare the information given above is true and correct. I undertake to inform immediately of any change
-            in the above facts. Any Income tax liability arising out of wrong declaration will be my responsibility. </h6>
+          <h6> I , {{userName}} hereby certify that the information given above is complete and correct.</h6>
           <h6>Date : {{date}}</h6>
+          <div class="clear-fix"></div>
           <div class="row">
             <span class="col-md-3"></span>
             <input type="reset" (click)="ResetAll()" class="btn btn-primary text-center col-md-2">
+            <span class="col-md-1"></span>
+            <input type="Submit" value="Save" (click)="SubmitClick('InProgress')" data-toggle="modal" data-target="#myModal" class="btn btn-primary text-center col-md-2" [disabled]="!sf.dirty || !sf.valid || isFormEmpty()||formHasError">            
             <span class="col-md-1"></span>
             <input type="Submit" value="Submit" data-toggle="modal" data-target="#myModal" class="btn btn-primary text-center col-md-2" [disabled]="!sf.dirty || !sf.valid || isFormEmpty()||formHasError">
             <span class="col-md-4"></span>
@@ -337,10 +357,10 @@
                 <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
+                    <h4 class="modal-title">Status</h4>
                   </div>
                   <div class="modal-body">
-                    <p>{{SubmitStatus}}</p>
+                    <h6>{{SubmitStatus}}</h6>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

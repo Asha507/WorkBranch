@@ -1,4 +1,5 @@
-﻿using Microsoft.Office.Interop.Excel;
+﻿using log4net;
+using Microsoft.Office.Interop.Excel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -18,13 +19,14 @@ using System.Web.Http.Cors;
 
 namespace InvestmentSubmissionAPI.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     public class FileController : ApiController
     {
 
         [HttpPost]
         public HttpResponseMessage UploadFile()
         {
+            Logger.Info("Started downloading files");
             List<TemplateFields> templateFieldsList = new List<TemplateFields>();
             var httpRequest = HttpContext.Current.Request;
             string id = httpRequest.Params["VamID"];
@@ -82,18 +84,25 @@ namespace InvestmentSubmissionAPI.Controllers
                             {
                                 File.Delete(Path.Combine(filePath, folderName, fileName));
                             }
+                            string[] files = Directory.GetFiles(Path.Combine(filePath, folderName), code+"*.*");
+                            foreach (var file in files)
+                            {
+                                File.Delete(file);
+                            }
                             postedFile.SaveAs(Path.Combine(filePath, folderName,code+"_"+fileName));
                         }
                     }
                 }
-               
+                Logger.Info("Downloaded all files");
                 CreateExcelDoc(httpRequest, templateFieldsList);
+                Logger.Info("Saving in excel completed");
                 //Add HRA Data
-                
-                return Request.CreateResponse(HttpStatusCode.OK, "Uploaded Sucessfully");
+                String encryptedResponse = new JSONWebTokens("Uploaded Sucessfully", 300).GetEncryptedJwtToken();
+                return Request.CreateResponse(HttpStatusCode.OK, encryptedResponse);
             }
             catch (Exception ex)
             {
+                Logger.Fatal("VAMID: " + id+"Failed at Upload File", ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
@@ -104,11 +113,13 @@ namespace InvestmentSubmissionAPI.Controllers
             var httpRequest = HttpContext.Current.Request;
             string id =data["VamID"].Value;
             string status = data["Status"].Value;
+            string remark = data["Remark"].Value;
             Application xlApp;
             object misValue;
             Workbook xlWorkBook;
             Worksheet xlWorkSheet;
             xlApp = new Application();
+            xlApp.DisplayAlerts = false;
             System.Data.DataTable dt = new System.Data.DataTable();
             if (xlApp == null)
             {
@@ -128,15 +139,19 @@ namespace InvestmentSubmissionAPI.Controllers
                     {
                         objRange = (Range)xlWorkSheet.Cells[r, columnCount-1];
                         objRange.Value2 = status;
+                        objRange = (Range)xlWorkSheet.Cells[r, columnCount];
+                        objRange.Value2 = remark;
                         break;
                     }
                 }
                 SaveExcelData(misValue, xlWorkBook);
                 DisposeExcel(ref xlApp, misValue, ref xlWorkBook, ref xlWorkSheet);
-                return Request.CreateResponse(HttpStatusCode.OK, "Success");
+                String encryptedResponse = new JSONWebTokens("Success", 300).GetEncryptedJwtToken();
+                return Request.CreateResponse(HttpStatusCode.OK, encryptedResponse);
             }
             catch (Exception ex)
             {
+                Logger.Fatal("VAMID: "+ id +"Failed at Update Status", ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
 
             }
@@ -145,8 +160,17 @@ namespace InvestmentSubmissionAPI.Controllers
         [HttpGet]
         public HttpResponseMessage GetExcelData(int id=0)
         {
-            string json = GetResponseJson(id);
-            return Request.CreateResponse(HttpStatusCode.OK, json);
+            try
+            {
+                string json = GetResponseJson(id);
+                String encryptedResponse = new JSONWebTokens(json, 300).GetEncryptedJwtToken();
+                return Request.CreateResponse(HttpStatusCode.OK, encryptedResponse);
+            }
+            catch (Exception ex)
+            {
+                Logger.Fatal("VAMID: " + id + "Failed at GetExcelData", ex);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
 
         }
 
@@ -212,6 +236,7 @@ namespace InvestmentSubmissionAPI.Controllers
             Workbook xlWorkBook;
             Worksheet xlWorkSheet;
             xlApp = new Application();
+            xlApp.DisplayAlerts = false;
             System.Data.DataTable dt = new System.Data.DataTable();
             if (xlApp == null)
             {
@@ -260,6 +285,7 @@ namespace InvestmentSubmissionAPI.Controllers
             object misValue;
             Workbook xlWorkBook;
             xlApp = new Application();
+            xlApp.DisplayAlerts = false;
             if (xlApp == null)
             {
                 throw new Exception("Excel is not properly istalled");
@@ -445,8 +471,8 @@ namespace InvestmentSubmissionAPI.Controllers
             datarow = dt.NewRow();
             datarow["VamID"] = httpRequest.Params["VamID"];
             datarow["Name"] = httpRequest.Params["EmployeeName"];
-            datarow["Date"] =httpRequest.Params["SubmissionDate"];
-            datarow["Status"] = "Pending";
+            datarow["Submission_Date"] =httpRequest.Params["SubmissionDate"];
+            datarow["Status"] = httpRequest.Params["Status"];
             datarow["Remark"] = "--";
             datarow["MobileNumber"] = httpRequest.Params["MobileNumber"];
             datarow["Email"]= httpRequest.Params["Email"];

@@ -7,6 +7,12 @@
       <div *ngIf="loading">
         <div class="loading"></div>
       </div>
+      <div *ngIf="appError">
+          <div class="alert alert-danger fade in">
+              <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <h5>  <strong>Error!</strong> Something went wrong please try after sometime. If the issue persists please contact Finance Team  </h5>
+          </div>
+      </div>
       <div *ngIf="!hasData">
         <h6>No Data to display</h6>
       </div>

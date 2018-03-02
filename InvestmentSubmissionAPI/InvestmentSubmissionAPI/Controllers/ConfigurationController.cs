@@ -11,27 +11,28 @@ using System.Web.Http.Cors;
 
 namespace InvestmentSubmissionAPI.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     public class ConfigurationController : ApiController
     {
         public bool isRecordExists = false;
 
         [HttpGet]
         [ActionName("GetConfiguration")]
-
         public HttpResponseMessage GetConfiguration()
         {
+            Logger.Info("Getting Configuration");
             Dictionary<string, string> configValues = new Dictionary<string, string>();
             try
             {
                 configValues.Add("FinancialYear", ConfigurationManager.AppSettings["FinancialYear"]);
                 configValues.Add("StartDate", ConfigurationManager.AppSettings["StartDate"]);
                 configValues.Add("EndDate", ConfigurationManager.AppSettings["EndDate"]);
-
-                return Request.CreateResponse(HttpStatusCode.OK, configValues);
+                String encryptedResponse = new JSONWebTokens(configValues, 300).GetEncryptedJwtToken();
+                return Request.CreateResponse(HttpStatusCode.OK, encryptedResponse);
             }
             catch (Exception ex)
             {
+                Logger.Fatal("Failed at Getting Configuration", ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
 
@@ -45,10 +46,12 @@ namespace InvestmentSubmissionAPI.Controllers
             {
                 List<string> adminIDs = ConfigurationManager.AppSettings["Admins"].Split(',').ToList();
                 status=adminIDs.Contains(id.ToString())?"true":"false";
-                return Request.CreateResponse(HttpStatusCode.OK, status);
+                String encryptedResponse = new JSONWebTokens(status, 300).GetEncryptedJwtToken();
+                return Request.CreateResponse(HttpStatusCode.OK, encryptedResponse);
             }
             catch (Exception ex)
             {
+                Logger.Fatal("VAMID : "+id+"Failed at CheckIFAdmin", ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
@@ -83,7 +86,8 @@ namespace InvestmentSubmissionAPI.Controllers
                         }
 
                     }
-                    return Request.CreateResponse(HttpStatusCode.OK, "MobileNumber:" + mobile + ",Email:" + email);
+                    String encryptedResponse = new JSONWebTokens("MobileNumber:" + mobile + ",Email:" + email, 300).GetEncryptedJwtToken();
+                    return Request.CreateResponse(HttpStatusCode.OK, encryptedResponse);
                 }
                 else
                 {
@@ -92,11 +96,56 @@ namespace InvestmentSubmissionAPI.Controllers
             }
            catch (Exception ex)
             {
+                Logger.Fatal("VAMID: "+ id +"Failed at GetMobileEmail", ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
         }
 
+        [HttpGet]
+        [ActionName("GetMedicalDetails")]
 
+        public HttpResponseMessage GetMedicalDetails(int id)
+        {
+            string medAmount = "";
+            string medFile = "";
+            string jsonString = "";
+            try
+            {
+                FileController fileController = new FileController();
+                if (File.Exists(ConfigurationManager.AppSettings["ExcelLocation"]))
+                {
+                    jsonString = fileController.GetResponseJson(id);
+                }
+
+                if (jsonString != "[]" && jsonString != "")
+                {
+                    dynamic json = JsonConvert.DeserializeObject(jsonString);
+                    foreach (var item in json[0])
+                    {
+                        //if (item.Name.Contains("MobileNumber"))
+                        //{
+                        //    mobile = item.Value;
+                        //}
+                        //else if (item.Name.Contains("Email"))
+                        //{
+                        //    email = item.Value;
+                        //}
+
+                    }
+                    String encryptedResponse = new JSONWebTokens("", 300).GetEncryptedJwtToken();
+                    return Request.CreateResponse(HttpStatusCode.OK, encryptedResponse);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, "");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Fatal("VAMID: " + id + "Failed at GetMobileEmail", ex);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+        }
         [HttpGet]
         [ActionName("GetGuideLines")]
         public HttpResponseMessage GetGuideLines()
@@ -104,10 +153,12 @@ namespace InvestmentSubmissionAPI.Controllers
             try
             {
                 List<string> guidelinesList = ConfigurationManager.AppSettings["GuideLines"].Split(',').ToList();
-                return Request.CreateResponse(HttpStatusCode.OK, guidelinesList);
+                String encryptedResponse = new JSONWebTokens(guidelinesList, 300).GetEncryptedJwtToken();
+                return Request.CreateResponse(HttpStatusCode.OK, encryptedResponse);
             }
             catch (Exception ex)
             {
+                Logger.Fatal("Failed at GetGuideLines", ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
 
@@ -115,9 +166,18 @@ namespace InvestmentSubmissionAPI.Controllers
         [HttpGet]
         public HttpResponseMessage GetHRAFields(int id = 0)
         {
-            FileController controller = new FileController();
-            string json = controller.GetHRAResponseJson(id);
-            return Request.CreateResponse(HttpStatusCode.OK, json);
+            try
+            {
+                FileController controller = new FileController();
+                string json = controller.GetHRAResponseJson(id);
+                String encryptedResponse = new JSONWebTokens(json, 300).GetEncryptedJwtToken();
+                return Request.CreateResponse(HttpStatusCode.OK, encryptedResponse); ;
+            }
+            catch (Exception ex)
+            {
+                Logger.Fatal("VAMID: " + id +"Failed at GetHRAFields", ex);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
 
         }
 
@@ -184,10 +244,12 @@ namespace InvestmentSubmissionAPI.Controllers
                     }
                 }
                 fieldsData.Add("Others", fields);
-                return Request.CreateResponse(HttpStatusCode.OK, fieldsData);
+                String encryptedResponse = new JSONWebTokens(fieldsData, 300).GetEncryptedJwtToken();
+                return Request.CreateResponse(HttpStatusCode.OK, encryptedResponse);
             }
             catch (Exception ex)
             {
+                Logger.Fatal("VAMID: "+id+"Failed at GetFieldTemplates", ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
 

@@ -11,7 +11,7 @@
   },
   {
     "SNO": "2",
-    "Name": "Children Educatiional expenses up to 2 Children",
+    "Name": "Children Educational Expenses up to 2 children",
     "Placeholder": "School fee paid receipt",
     "FileName": "",
     "Amount": "",
@@ -21,7 +21,7 @@
   },
   {
     "SNO": "3",
-    "Name": "Sukanya Samriddhi Yojan",
+    "Name": "Sukanya Samriddhi Yojana",
     "Placeholder": "Paid certificate",
     "FileName": "",
     "Amount": "",
@@ -42,10 +42,10 @@
   {
     "SNO": "5",
     "Name": "Housing Loan- Principal Repayment",
-    "Placeholder": "Provisional loan statement",
+    "Placeholder": "Housing loan repayment certificate",
     "FileName": "",
     "Amount": "",
-    "min": "0",
+    "min": "0", 
     "max": "9999999999999",
     "itemCode": "HLPR"
   },
@@ -61,8 +61,8 @@
   },
   {
     "SNO": "7",
-    "Name": "FD with national Banks / Post office minimum 5 years",
-    "Placeholder": "Fixed Deposit Certificate",
+    "Name": "FD with National Banks / Post office minimum 5 years",
+    "Placeholder": "Fixed deposit certificate",
     "FileName": "",
     "Amount": "",
     "min": "0",
@@ -81,7 +81,7 @@
   },
   {
     "SNO": "9",
-    "Name": "Other Elgible Investments u/s 80C",
+    "Name": "Other eligible investments u/s 80C",
     "Placeholder": "Investment proof",
     "FileName": "",
     "Amount": "",

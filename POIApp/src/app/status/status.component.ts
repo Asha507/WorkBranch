@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { StatusService } from '../services/status.service'
+import { JwtauthenticationService } from '../services/jwtauthentication.service';
 @Component({
   selector: 'app-status',
   templateUrl: './status.component.html',
-  styleUrls: ['./status.component.css']
+  styleUrls: ['./status.component.css'],
+  providers:[JwtauthenticationService]
 })
 export class StatusComponent implements OnInit {
   public data:any; 
@@ -11,25 +13,25 @@ export class StatusComponent implements OnInit {
   public keys:string[]=[];
   loading:boolean=true;
   hasData:boolean=false;
-  constructor(private statusService: StatusService) { }
+  appError:boolean=false;
+  constructor(private statusService: StatusService, private jwtauthenticationService: JwtauthenticationService) { }
 
   ngOnInit() {    
-   debugger;
       this.statusService.GetStatus(+sessionStorage.getItem("VamID")).subscribe(response=>
       { 
-         if(!(response=="[]"))
+        response=JSON.parse(this.jwtauthenticationService.decode(response).PayloadData);
+         if(!(response=="[]")||!(response=="") )
           {           
             this.data=Array.of(JSON.parse(response))[0];
             this.item=this.data[0];
-            this.keys=Object.keys(this.data[0]);
-            this.loading=false;
+            this.keys=Object.keys(this.data[0]);          
             this.hasData=true;
           }
-          else
-          {
-            this.loading=false;
-          }
+      },
+      err=>{  
+        this.appError = true;
       });
+      this.loading=false;
   }
 
   checkIfNull(item:string):boolean

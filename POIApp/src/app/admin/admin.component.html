@@ -21,6 +21,13 @@
         </div>
       </div>
       <div class="panel-body">
+        <div class="loading" *ngIf="loading"></div>
+        <div *ngIf="appError">
+            <div class="alert alert-danger fade in">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+              <h5>  <strong>Error!</strong> Something went wrong please try after sometime. If the issue persists please contact Finance Team  </h5>
+            </div>
+        </div>
         <div class="table-responsive font-custom">
           <table class="table table-bordered table-striped " [mfData]="data| dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage">
 
@@ -29,7 +36,7 @@
                 <th sty class="table-header-padding" *ngFor="let key of keys" w>
                   <mfDefaultSorter [by]="key">{{key}}</mfDefaultSorter>
                 </th>
-                <th sty class="table-header-padding" w>
+                <th class="table-header-padding">
                   <mfDefaultSorter>Approve/Reject Request</mfDefaultSorter>
                 </th>
               </tr>
@@ -38,7 +45,12 @@
               <tr *ngFor="let item of mf.data">
                 <td *ngFor="let key of keys">
                   <div *ngIf="key=='Remark'">
-                    <input type="text" placeholder="Remarks" [ngModel]="remark" (change)=AddRemark(item,key) >
+                    <div >
+                    <input type="text" class="form-control width-style"   placeholder="Update Remarks" [(ngModel)]="remark" (change)=AddRemark(item,key) >
+                    </div>
+                    <div >
+                       Remark :  {{item[key]}}
+                    </div>
                   </div>
                   <div *ngIf="!(key=='Remark')">
                   {{item[key]}}
@@ -47,10 +59,10 @@
                 <td>
                   <div class="row">
                     <div class="col-xs-6">
-                      <button type="button" [disabled]="ShouldDisable(item,'Approve')" class="btn btn-success" (click)="ApproveRequest(item)">Approve</button>
+                      <button type="button" [disabled]="ShouldDisable(item,'Approved')" class="btn btn-success" (click)="ApproveRequest(item)">Approve</button>
                     </div>
                     <div class="col-xs-6">
-                      <button type="button"  [disabled]="ShouldDisable(item,'Reject')" class="btn btn-danger" (click)="RejectRequest(item)">Reject</button>
+                      <button type="button"  [disabled]="ShouldDisable(item,'Rejected')" class="btn btn-danger" (click)="RejectRequest(item)">Reject</button>
                     </div>
                   </div>
                 </td>
