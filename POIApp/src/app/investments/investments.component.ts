@@ -15,12 +15,15 @@ import { JwtauthenticationService } from '../services/jwtauthentication.service'
   providers: [JwtauthenticationService]
 })
 export class InvestmentsComponent implements OnInit {
+  is80CAddButton: boolean=true;
   debugger;
   id: string = "";
   userName: string = "";
   MobileNumber: string;
   configValues: any;
   date: any = Date.now();
+  isOthersAddButton:boolean=true;
+  isHRAAddButton:boolean=true;
   Fields_80C: IFieldTemplate[];
   Fields_Others: IFieldTemplate[];
   guideLines: Array<string>;
@@ -43,9 +46,6 @@ export class InvestmentsComponent implements OnInit {
   PanFile: String = "";
   RntAggFile: String = "";
   emailID: String;
-  medRctFile: String = "";
-  showMedicalUploadbtn: boolean = false;
-  medAmount: number = 0;
   loading: boolean = true;
   hasPanError: boolean = false;
   hasrentError: boolean = false;
@@ -76,27 +76,12 @@ export class InvestmentsComponent implements OnInit {
       this.months = MonthNames;
       this.UpdateMonths();
       this.GetMobileEmail();
-      this.GetMedicalDetails();
     }
     else {
       this.loading = false;
     }
-
   }
-  GetMedicalDetails()
-  {
-    this.investmentService.GetMedicalDetails(+this.id).subscribe(response => {
-      response=JSON.parse(this.jwtauthenticationService.decode(response).PayloadData);
-      if (response != "") {
-        
-        }
-    },
-      err => {
-        this.appError = true;
-      });
-    this.loading = false;
-  }
-
+ 
   UpdateMonths() {
     this.investmentService.GetMonthlyHra().subscribe(response => {
       response=JSON.parse(this.jwtauthenticationService.decode(response).PayloadData);
@@ -180,9 +165,11 @@ export class InvestmentsComponent implements OnInit {
           this.emailID = this.emailID.replace("\"", "");
         }
       }
+      this.loading=false;
     },
       err => {
         this.appError = true;
+        this.loading=false;
       });
   }
 
@@ -390,21 +377,7 @@ export class InvestmentsComponent implements OnInit {
         }
       }
     }
-    else if (hracopy == "medical") {
-      this.medRctFile = event.target.files[0].name;
-      this.hasMedError = this.CheckFileFormat(event.target.files[0].name)
-      if (this.hasMedError) {
-        this.errorMedMessage = "File should be only in formats mentioned in guidelines";
-        this.formHasError = true;
-      }
-      else {
-        this.hasMedError = this.CheckFileSize(event)
-        if (this.hasMedError) {
-          this.errorMedMessage = "File should be within the size mentioned in guidelines";
-          this.formHasError = true;
-        }
-      }
-    }
+    
     this.filesToUpload.push(file);
   }
   CheckFileFormat(fileName): boolean {
@@ -420,24 +393,9 @@ export class InvestmentsComponent implements OnInit {
       return file.size >= 600000 ? true : false;
     }
   }
-  MedicalAmountChange(event) {
-    if (event.target.value > 0) {
-      this.showMedicalUploadbtn = true;
-      this.medAmount = event.target.value;
-    }
-    else if (event.target.value == 0 || event.target.value == "") {
-      this.medAmount=0;
-      this.medRctFile = "";
-      this.showMedicalUploadbtn = false;
-    }
-
-    if(event.target.value>0&& this.medRctFile=="")
-    {
-      this.formHasError=true;
-    }
-  }
-
+  
   SubmitClick(status) {
+    this.SubmitStatus="Processing";
     this.loading = true;
     this.fieldsData.push(this.Fields_80C);
     this.fieldsData.push(this.Fields_Others);
@@ -452,8 +410,6 @@ export class InvestmentsComponent implements OnInit {
     formData.append('RentReciptFile', this.RntRctFile.toString());
     formData.append('AggrementFile', this.RntAggFile != "" ? this.RntAggFile.toString() : "");
     formData.append('Email', this.emailID.toString());
-    formData.append('Medical_Amount', this.medAmount.toString());
-    formData.append('Medical_File', this.medRctFile != "" ? this.medRctFile.toString() : "");
     formData.append('HraAmount', JSON.stringify(this.months));
     formData.append('Status', status);
     for (var j = 0; j < this.filesToUpload.length; j++) {
@@ -464,13 +420,71 @@ export class InvestmentsComponent implements OnInit {
       response=JSON.parse(this.jwtauthenticationService.decode(response).PayloadData);
       if (response == "Uploaded Sucessfully") {
         this.SubmitStatus = "Data Submitted Successfully";
+        this.loading = false;
       }
     },
       err => {
+        this.SubmitStatus="Something went wrong !."
         this.appError = true;
+        this.loading = false;
       });
-    this.loading = false;
+
   }
+
+  ButtonIcon(event,name)
+  {
+    switch(name)
+    {
+      case '80C':
+      if( this.is80CAddButton==true)
+      {
+       event.target.classList.add('glyphicon-minus');
+       event.target.classList.remove('glyphicon-plus');
+       this.is80CAddButton=false;
+      }
+      else
+      {
+       event.target.classList.add('glyphicon-plus');
+       event.target.classList.remove('glyphicon-minus');
+       this.is80CAddButton=true;
+   
+      }
+      break;
+      case 'others':
+      if( this.isOthersAddButton==true)
+      {
+       event.target.classList.add('glyphicon-minus');
+       event.target.classList.remove('glyphicon-plus');
+       this.isOthersAddButton=false;
+      }
+      else
+      {
+       event.target.classList.add('glyphicon-plus');
+       event.target.classList.remove('glyphicon-minus');
+       this.isOthersAddButton=true;
+   
+      }
+      break;
+      case 'hra':
+      if( this.isHRAAddButton==true)
+      {
+       event.target.classList.add('glyphicon-minus');
+       event.target.classList.remove('glyphicon-plus');
+       this.isHRAAddButton=false;
+      }
+      else
+      {
+       event.target.classList.add('glyphicon-plus');
+       event.target.classList.remove('glyphicon-minus');
+       this.isHRAAddButton=true;
+   
+      }
+      break;
+    }
+    debugger;
+  
+  }
+
 
   ResetAll() {
     for (var i = 0; i <= this.Fields_80C.length; i++) {

@@ -2,20 +2,24 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.InteropServices;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
 namespace InvestmentSubmissionAPI.Controllers
 {
     [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
+
     public class ConfigurationController : ApiController
     {
+      
         public bool isRecordExists = false;
-
+      
         [HttpGet]
         [ActionName("GetConfiguration")]
         public HttpResponseMessage GetConfiguration()

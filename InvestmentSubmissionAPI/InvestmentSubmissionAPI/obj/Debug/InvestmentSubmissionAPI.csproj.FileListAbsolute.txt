@@ -250,3 +250,13 @@ D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmission
 D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\Microsoft.IdentityModel.Logging.xml
 D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\Microsoft.IdentityModel.Tokens.xml
 D:\Projects\GitWorkSpace\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\jose-jwt.dll
+C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\log4net.dll
+C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\Microsoft.IdentityModel.Logging.dll
+C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\log4net.xml
+C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\Microsoft.IdentityModel.Logging.xml
+C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\Microsoft.IdentityModel.Tokens.xml
+C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\Asha\WorkBranch\InvestmentSubmissionAPI\InvestmentSubmissionAPI\bin\InvestmentSubmissionAPI.tlb

@@ -3,15 +3,18 @@ using Microsoft.Office.Interop.Excel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Http;
@@ -22,7 +25,6 @@ namespace InvestmentSubmissionAPI.Controllers
     [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     public class FileController : ApiController
     {
-
         [HttpPost]
         public HttpResponseMessage UploadFile()
         {
@@ -116,8 +118,8 @@ namespace InvestmentSubmissionAPI.Controllers
             string remark = data["Remark"].Value;
             Application xlApp;
             object misValue;
-            Workbook xlWorkBook;
-            Worksheet xlWorkSheet;
+            Workbook xlWorkBook=null;
+            Worksheet xlWorkSheet=null;
             xlApp = new Application();
             xlApp.DisplayAlerts = false;
             System.Data.DataTable dt = new System.Data.DataTable();
@@ -145,7 +147,7 @@ namespace InvestmentSubmissionAPI.Controllers
                     }
                 }
                 SaveExcelData(misValue, xlWorkBook);
-                DisposeExcel(ref xlApp, misValue, ref xlWorkBook, ref xlWorkSheet);
+              
                 String encryptedResponse = new JSONWebTokens("Success", 300).GetEncryptedJwtToken();
                 return Request.CreateResponse(HttpStatusCode.OK, encryptedResponse);
             }
@@ -154,6 +156,10 @@ namespace InvestmentSubmissionAPI.Controllers
                 Logger.Fatal("VAMID: "+ id +"Failed at Update Status", ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
 
+            }
+            finally
+            {
+                DisposeExcel(ref xlApp, misValue, ref xlWorkBook, ref xlWorkSheet);
             }
         }
 
@@ -180,8 +186,8 @@ namespace InvestmentSubmissionAPI.Controllers
         {
             Application xlApp;
             object misValue;
-            Workbook xlWorkBook;
-            Worksheet xlWorkSheet;
+            Workbook xlWorkBook=null;
+            Worksheet xlWorkSheet=null;
             xlApp = new Application();
             System.Data.DataTable dt = new System.Data.DataTable();
             if (xlApp == null)
@@ -190,41 +196,53 @@ namespace InvestmentSubmissionAPI.Controllers
             }
             misValue = System.Reflection.Missing.Value;
             string json = "";
-            if (File.Exists(ConfigurationManager.AppSettings["ExcelLocation"]))
+            try
             {
-                xlWorkBook = xlApp.Workbooks.Open(ConfigurationManager.AppSettings["ExcelLocation"]);
-                xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
-                int rowCount = xlWorkSheet.UsedRange.Rows.Count;
-                int columnCount = xlWorkSheet.UsedRange.Columns.Count;
-                int rowNumber = 1;
-                for (int c = 1; c <= columnCount; c++)
+                if (File.Exists(ConfigurationManager.AppSettings["ExcelLocation"]))
                 {
-                    string colname = xlWorkSheet.Cells[1, c].Text;
-                    dt.Columns.Add(colname);
-                    rowNumber = 2;
-                }
-                for (int r = rowNumber; r <= rowCount; r++)
-                {
-                    DataRow dr = dt.NewRow();
+                    xlWorkBook = xlApp.Workbooks.Open(ConfigurationManager.AppSettings["ExcelLocation"]);
+                    xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
+                    int rowCount = xlWorkSheet.UsedRange.Rows.Count;
+                    int columnCount = xlWorkSheet.UsedRange.Columns.Count;
+                    int rowNumber = 1;
                     for (int c = 1; c <= columnCount; c++)
                     {
-                        dr[c - 1] = xlWorkSheet.Cells[r, c].Text;
+                        string colname = xlWorkSheet.Cells[1, c].Text;
+                        dt.Columns.Add(colname);
+                        rowNumber = 2;
                     }
-                    if (0 != id)
+                    for (int r = rowNumber; r <= rowCount; r++)
                     {
-                        if (Convert.ToInt32(dr["VamID"]) == id)
+                        DataRow dr = dt.NewRow();
+                        for (int c = 1; c <= columnCount; c++)
+                        {
+                            dr[c - 1] = xlWorkSheet.Cells[r, c].Text;
+                        }
+                        if (0 != id)
+                        {
+                            if (Convert.ToInt32(dr["VamID"]) == id)
+                            {
+                                dt.Rows.Add(dr);
+                                break;
+                            }
+                        }
+                        else
                         {
                             dt.Rows.Add(dr);
-                            break;
                         }
                     }
-                    else
-                    {
-                        dt.Rows.Add(dr);
-                    }
+                    
+                    json = DataTableToJSON(dt);
                 }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
                 DisposeExcel(ref xlApp, misValue, ref xlWorkBook, ref xlWorkSheet);
-                json = DataTableToJSON(dt);
             }
             return json;
         }
@@ -233,8 +251,8 @@ namespace InvestmentSubmissionAPI.Controllers
         {
             Application xlApp;
             object misValue;
-            Workbook xlWorkBook;
-            Worksheet xlWorkSheet;
+            Workbook xlWorkBook=null;
+            Worksheet xlWorkSheet=null;
             xlApp = new Application();
             xlApp.DisplayAlerts = false;
             System.Data.DataTable dt = new System.Data.DataTable();
@@ -244,46 +262,60 @@ namespace InvestmentSubmissionAPI.Controllers
             }
             misValue = System.Reflection.Missing.Value;
             string json = "";
-            if (File.Exists(ConfigurationManager.AppSettings["ExcelLocation"]))
+            try
             {
-                xlWorkBook = xlApp.Workbooks.Open(ConfigurationManager.AppSettings["ExcelLocation"]);
-                xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(2);
-                int rowCount = xlWorkSheet.UsedRange.Rows.Count;
-                int columnCount = xlWorkSheet.UsedRange.Columns.Count;
-                int rowNumber = 1;
-                for (int c = 3; c <= columnCount; c++)
+                if (File.Exists(ConfigurationManager.AppSettings["ExcelLocation"]))
                 {
-                    string colname = xlWorkSheet.Cells[1, c].Text;
-                    dt.Columns.Add(colname);
-                    rowNumber = 2;
-                }
-                for (int r = rowNumber; r <= rowCount; r++)
-                {
-                    DataRow dr = dt.NewRow();
+                    xlWorkBook = xlApp.Workbooks.Open(ConfigurationManager.AppSettings["ExcelLocation"]);
+                    xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(2);
+                    int rowCount = xlWorkSheet.UsedRange.Rows.Count;
+                    int columnCount = xlWorkSheet.UsedRange.Columns.Count;
+                    int rowNumber = 1;
                     for (int c = 3; c <= columnCount; c++)
                     {
-                        dr[c - 3] = xlWorkSheet.Cells[r, c].Text;
+                        string colname = xlWorkSheet.Cells[1, c].Text;
+                        dt.Columns.Add(colname);
+                        rowNumber = 2;
                     }
-                    if (0 != id)
+                    for (int r = rowNumber; r <= rowCount; r++)
                     {
-                        if (Convert.ToInt32(xlWorkSheet.Cells[r, 1].Text) == id)
+                        DataRow dr = dt.NewRow();
+                        for (int c = 3; c <= columnCount; c++)
                         {
-                            dt.Rows.Add(dr);
-                            break;
+                            dr[c - 3] = xlWorkSheet.Cells[r, c].Text;
+                        }
+                        if (0 != id)
+                        {
+                            if (Convert.ToInt32(xlWorkSheet.Cells[r, 1].Text) == id)
+                            {
+                                dt.Rows.Add(dr);
+                                break;
+                            }
                         }
                     }
+                    json = DataTableToJSON(dt);
+
                 }
+            }
+            catch (Exception)
+            {
+                
+                throw ;
+            }
+            finally
+            {
                 DisposeExcel(ref xlApp, misValue, ref xlWorkBook, ref xlWorkSheet);
-                json = DataTableToJSON(dt);
+
             }
             return json;
         }
+
 
         private void CreateExcelDoc(HttpRequest httpRequest, List<TemplateFields> fieldsList)
         {
             Application xlApp;
             object misValue;
-            Workbook xlWorkBook;
+            Workbook xlWorkBook=null;
             xlApp = new Application();
             xlApp.DisplayAlerts = false;
             if (xlApp == null)
@@ -296,78 +328,90 @@ namespace InvestmentSubmissionAPI.Controllers
             DataRow datarow;
             System.Data.DataTable hradt;
             DataRow hradatarow;
-            GenerateDataTable(httpRequest, fieldsList, out dt, out datarow);
-            GenerateHraDataTable(httpRequest, fieldsList, out hradt, out hradatarow);
-            int row, col;
-
             Worksheet xlWorkSheet = null;
-            Range objRange = null;
-            if (!File.Exists(ConfigurationManager.AppSettings["ExcelLocation"]))
+            try
             {
-                row = 1; col = 1;
-                int j = col;
 
-                xlWorkBook = xlApp.Workbooks.Add(1);
-                xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
-                xlWorkSheet.Name = "Proofs Submitted";
+                GenerateDataTable(httpRequest, fieldsList, out dt, out datarow);
+                GenerateHraDataTable(httpRequest, fieldsList, out hradt, out hradatarow);
+                int row, col;
 
-                GenerateHeaders(dt, row, xlWorkSheet, ref objRange, ref j);
-                row++;
-                InsertToExcel(dt, datarow, row, xlWorkSheet, ref objRange);
-
-                row = 1; col = 1;
-                 j = col;
-                objRange = null;
-                xlWorkBook.Sheets.Add(After: xlWorkBook.Sheets[xlWorkBook.Sheets.Count]);
-                xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(2);
-                xlWorkSheet.Name = "HRA Details";
-
-                GenerateHeaders(hradt, row, xlWorkSheet, ref objRange, ref j);
-                row++;
-                InsertToExcel(hradt, hradatarow, row, xlWorkSheet, ref objRange);
-
-            }
-            else
-            {
-                bool recordExists = false;
-                xlWorkBook = xlApp.Workbooks.Open(ConfigurationManager.AppSettings["ExcelLocation"]);
-                xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
-                row = xlWorkSheet.UsedRange.Rows.Count + 1;
-                for (int i = 2; i < row; i++)
+               
+                Range objRange = null;
+                if (!File.Exists(ConfigurationManager.AppSettings["ExcelLocation"]))
                 {
-                    if (xlWorkSheet.Cells[i, 1].Text == httpRequest.Params["VamID"])
-                    {
-                        InsertToExcel(dt, datarow, i, xlWorkSheet, ref objRange);
-                        recordExists = true;
-                        break;
-                    }
-                }
-                if (!recordExists)
-                {
+                    row = 1; col = 1;
+                    int j = col;
+
+                    xlWorkBook = xlApp.Workbooks.Add(1);
+                    xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
+                    xlWorkSheet.Name = "Proofs Submitted";
+
+                    GenerateHeaders(dt, row, xlWorkSheet, ref objRange, ref j);
+                    row++;
                     InsertToExcel(dt, datarow, row, xlWorkSheet, ref objRange);
-                }
 
-                bool hrarecordExists = false;
-                xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(2);
-                row = xlWorkSheet.UsedRange.Rows.Count + 1;
-                for (int i = 2; i < row; i++)
+                    row = 1; col = 1;
+                    j = col;
+                    objRange = null;
+                    xlWorkBook.Sheets.Add(After: xlWorkBook.Sheets[xlWorkBook.Sheets.Count]);
+                    xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(2);
+                    xlWorkSheet.Name = "HRA Details";
+
+                    GenerateHeaders(hradt, row, xlWorkSheet, ref objRange, ref j);
+                    row++;
+                    InsertToExcel(hradt, hradatarow, row, xlWorkSheet, ref objRange);
+
+                }
+                else
                 {
-                    if (xlWorkSheet.Cells[i, 1].Text == httpRequest.Params["VamID"])
+                    bool recordExists = false;
+                    xlWorkBook = xlApp.Workbooks.Open(ConfigurationManager.AppSettings["ExcelLocation"]);
+                    xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
+                    row = xlWorkSheet.UsedRange.Rows.Count + 1;
+                    for (int i = 2; i < row; i++)
                     {
-                        InsertToExcel(hradt, hradatarow, i, xlWorkSheet, ref objRange);
-                        hrarecordExists = true;
-                        break;
+                        if (xlWorkSheet.Cells[i, 1].Text == httpRequest.Params["VamID"])
+                        {
+                            InsertToExcel(dt, datarow, i, xlWorkSheet, ref objRange);
+                            recordExists = true;
+                            break;
+                        }
+                    }
+                    if (!recordExists)
+                    {
+                        InsertToExcel(dt, datarow, row, xlWorkSheet, ref objRange);
+                    }
+
+                    bool hrarecordExists = false;
+                    xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(2);
+                    row = xlWorkSheet.UsedRange.Rows.Count + 1;
+                    for (int i = 2; i < row; i++)
+                    {
+                        if (xlWorkSheet.Cells[i, 1].Text == httpRequest.Params["VamID"])
+                        {
+                            InsertToExcel(hradt, hradatarow, i, xlWorkSheet, ref objRange);
+                            hrarecordExists = true;
+                            break;
+                        }
+                    }
+                    if (!hrarecordExists)
+                    {
+                        InsertToExcel(hradt, hradatarow, row, xlWorkSheet, ref objRange);
                     }
                 }
-                if (!hrarecordExists)
-                {
-                    InsertToExcel(hradt, hradatarow, row, xlWorkSheet, ref objRange);
-                }
-            }
-            //Save HRA Data
+                //Save HRA Data
 
-            SaveExcelData(misValue, xlWorkBook);
-            DisposeExcel(ref xlApp, misValue, ref xlWorkBook, ref xlWorkSheet);
+                SaveExcelData(misValue, xlWorkBook);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                DisposeExcel(ref xlApp, misValue, ref xlWorkBook, ref xlWorkSheet);
+            }
         }
 
         private void GenerateHraDataTable(HttpRequest httpRequest, List<TemplateFields> fieldsList, out System.Data.DataTable hradt, out DataRow hradatarow)
@@ -442,6 +486,8 @@ namespace InvestmentSubmissionAPI.Controllers
             GC.WaitForPendingFinalizers();
             GC.Collect();
             GC.GetTotalMemory(true);
+
+
         }
 
         private static void SaveExcelData(object misValue, Workbook xlWorkBook)
@@ -480,8 +526,6 @@ namespace InvestmentSubmissionAPI.Controllers
             datarow["PanFile"] = httpRequest.Params["panFile"] != "" ? httpRequest.Params["panFile"] : "--";
             datarow["RentReciptFile"] = httpRequest.Params["RentReciptFile"] != "" ? httpRequest.Params["RentReciptFile"] : "--";
             datarow["AggrementFile"] = httpRequest.Params["AggrementFile"] != "" ? httpRequest.Params["AggrementFile"] : "--";
-            datarow["Medical_Amount"] = httpRequest.Params["Medical_Amount"];
-            datarow["Medical_File"] = httpRequest.Params["Medical_File"]!=""? httpRequest.Params["Medical_File"]:"--";
             foreach (var item in fieldsList)
             {
                 if (item.Amount != "" && Convert.ToDecimal(item.Amount) > 0)

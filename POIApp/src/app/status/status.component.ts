@@ -26,12 +26,12 @@ export class StatusComponent implements OnInit {
             this.item=this.data[0];
             this.keys=Object.keys(this.data[0]);          
             this.hasData=true;
+            this.loading=false;
           }
       },
       err=>{  
-        this.appError = true;
+        this.loading=false;
       });
-      this.loading=false;
   }
 
   checkIfNull(item:string):boolean
