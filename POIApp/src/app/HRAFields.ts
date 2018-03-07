@@ -1,0 +1,21 @@
+export class HRAFields
+{
+    VamID:String;
+    Name:String;    
+    April:String;    
+    May:String;  
+    June:String;  
+    July:String;  
+    August:String;  
+    September:String;  
+    October:String;  
+    November:String;  
+    December:String;  
+    January:String;  
+    February:String;  
+    March:String;  
+    Total_Rent:String;  
+    RentReciptFile:String;
+    PanFile:String;
+    AggrementFile:String;
+}

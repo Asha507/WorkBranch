@@ -1,5 +1,6 @@
 <div class="container">
   <div class="col-md-12">
+      <div class="loading" *ngIf="loading"></div>
     <div class="panel panel-default panel-table">
       <div class="panel-heading">
         <div class="row">
@@ -21,7 +22,7 @@
         </div>
       </div>
       <div class="panel-body">
-        <div class="loading" *ngIf="loading"></div>
+       
         <div *ngIf="appError">
             <div class="alert alert-danger fade in">
                 <a href="#" class="close" data-dismiss="alert">&times;</a>
@@ -42,11 +43,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of mf.data">
+              <tr *ngFor="let item of mf.data; let idx = index">
                 <td *ngFor="let key of keys">
                   <div *ngIf="key=='Remark'">
                     <div >
-                    <input type="text" class="form-control width-style"   placeholder="Update Remarks" [(ngModel)]="remark" (change)=AddRemark(item,key) >
+                    <input type="text" class="form-control width-style"   placeholder="Update Remarks" [(ngModel)]="remark[idx]" (change)=AddRemark(item,key,idx) >
                     </div>
                     <div >
                        Remark :  {{item[key]}}

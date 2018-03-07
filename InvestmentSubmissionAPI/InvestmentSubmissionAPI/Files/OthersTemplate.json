@@ -18,7 +18,7 @@
     "FileName": "",
     "Amount": "",
     "min": "0",
-    "max": "55000",
+    "max": "99999999999999999",
     "itemCode": "80D"
   },
   {
@@ -74,7 +74,7 @@
     "Amount": "",
     "min": "0",
     "max": "99999999999",
-    "itemCode": "26"
+    "itemCode": "12C"
   },
   {
     "SNO": "8",
@@ -85,7 +85,7 @@
     "Amount": "",
     "min": "-200000",
     "max": "99999999999",
-    "itemCode": "24"
+    "itemCode": "HLS24"
   },
   {
     "SNO": "9",
@@ -96,7 +96,7 @@
     "Amount": "",
     "min": "0",
     "max": "99999999999",
-    "itemCode": "25"
+    "itemCode": "CS24"
   },
 
   {
@@ -130,7 +130,7 @@
     "Amount": "",
     "min": "0",
     "max": "99999999999",
-    "itemCode": "O3"
+    "itemCode": "TSPE"
   },
   {
     "SNO": "13",
@@ -141,6 +141,17 @@
     "Amount": "",
     "min": "0",
     "max": "99999999999",
-    "itemCode": "AOI"
+    "itemCode": "TDPE"
+  },
+  {
+    "SNO": "14",
+    "Section": "Medical Bills",
+    "Name": "Medical bills monthly value Rs. 1250 yearly Rs. 15,000/-",
+    "Placeholder": "Bill copies",
+    "FileName": "",
+    "Amount": "",
+    "min": "0",
+    "max": "99999999999",
+    "itemCode": "MDB"
   }
 ]

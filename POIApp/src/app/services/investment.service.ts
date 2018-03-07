@@ -24,7 +24,6 @@ data:any;
   GetMonthlyHra():Observable<any>
   {
     let id=sessionStorage.getItem("VamID")!=null?sessionStorage.getItem("VamID"):0; 
-    debugger;   
     return this.http.get(environment.api+'/api/Configuration/GetHRAFields?id='+id).map((res) => {
       return res.json();       
     }).catch((error)=> {
@@ -37,7 +36,6 @@ data:any;
      return this.http.get(environment.api+'/api/Configuration/GetGuideLines').map((res) => {
       return res.json();       
     }).catch((error)=> {
-      debugger;
       return Observable.throw(
         new Error(`${ error.status } ${ error.statusText }`));
     }).catch((error)=> {

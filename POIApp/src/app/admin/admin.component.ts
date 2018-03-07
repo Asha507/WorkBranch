@@ -14,34 +14,34 @@ export class AdminComponent implements OnInit {
   public filterQuery = "";
   public showApproveButton:boolean=true;
   public showRejectButton:boolean=true;
-  public remark:string;
+  public remark:any =[];
   loading:boolean=true;
   appError:boolean=false;
-
+index:number=0;
   constructor(private adminService: AdminService,private jwtauthenticationService:JwtauthenticationService) {
-    debugger;
+   this.loading=true;
     this.adminService.GetExcelData().subscribe(response => {
       response=JSON.parse(this.jwtauthenticationService.decode(response).PayloadData);
       if(response!="")
       {
       this.data = JSON.parse(response);
       this.keys = Object.keys(this.data[0]);
-     
+      this.loading=false;
+      }
+      else
+      {
+        this.loading=false;
       }
     },
     err=>{  
       this.appError = true;
+      this.loading=false;
     });
-    this.loading=false;
+   
   }
 
   ngOnInit() {
 
-  }
-  SetRemark(item)
-  {
-   this.remark=item;
-    return true;
   }
   ApproveRequest(item) {
     this.loading=true;
@@ -50,13 +50,19 @@ export class AdminComponent implements OnInit {
       if(response=="Success")
       {
         item.Status="Approved";
+        this.loading=false;
+      }
+      else
+      {
+        this.loading=false;
       }
     },
     err=>{  
       this.appError = true;
+      this.loading=false;
     }
     );
-    this.loading=false;
+   
   }
 
   RejectRequest(item) {
@@ -66,13 +72,19 @@ export class AdminComponent implements OnInit {
       if(response=="Success")
       {
         item.Status="Rejected";
+        this.loading=false;
+      }
+      else
+      {
+        this.loading=false;
       }
     },
     err=>{  
       this.appError = true;
+       this.loading=false;
     }
     );
-    this.loading=false;
+  
   }
 
   ShouldDisable(item,Status)
@@ -99,8 +111,8 @@ export class AdminComponent implements OnInit {
     }
   }
 
-  AddRemark(item,key)
+  AddRemark(item,key,index)
   {
-    item[key]=this.remark;
+    item[key]=this.remark[index];
   }
 }

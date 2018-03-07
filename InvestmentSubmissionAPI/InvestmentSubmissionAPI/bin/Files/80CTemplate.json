@@ -6,7 +6,7 @@
     "FileName": "",
     "Amount": "",
     "min": "0",
-    "max": "999999",
+    "max": "99999999999999",
     "itemCode": "LIC"
   },
   {

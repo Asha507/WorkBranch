@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
+import 'mdn-polyfills/Object.entries';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,7 +14,7 @@ export class AppComponent {
   constructor(private route: ActivatedRoute) {
     this.route.queryParams
       .subscribe(params => {
-        debugger;
+
         if (undefined != params.param) {
           let decodedString = Base64.decode(params.param);
 

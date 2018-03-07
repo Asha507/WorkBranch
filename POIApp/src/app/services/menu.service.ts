@@ -12,7 +12,6 @@ constructor(private http:Http) { }
 
 IsAdmin(id:number):Observable<any>
 {
-  debugger;
   return this.http.get(environment.api+'/api/Configuration/CheckIfAdmin?id='+id).map((res) => {
     return res.json();       
   }).catch((error)=> {

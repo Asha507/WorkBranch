@@ -19,19 +19,24 @@ export class StatusComponent implements OnInit {
   ngOnInit() {    
       this.statusService.GetStatus(+sessionStorage.getItem("VamID")).subscribe(response=>
       { 
+        debugger;
         response=JSON.parse(this.jwtauthenticationService.decode(response).PayloadData);
-         if(!(response=="[]")||!(response=="") )
+         if(!(response=="[]")&&!(response=="") )
           {           
             this.data=Array.of(JSON.parse(response))[0];
             this.item=this.data[0];
             this.keys=Object.keys(this.data[0]);          
             this.hasData=true;
+            this.loading=false;
+          }
+          else
+          {
+            this.loading=false;
           }
       },
       err=>{  
-        this.appError = true;
+        this.loading=false;
       });
-      this.loading=false;
   }
 
   checkIfNull(item:string):boolean
