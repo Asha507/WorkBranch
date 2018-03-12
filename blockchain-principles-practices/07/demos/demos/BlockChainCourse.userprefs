@@ -1,0 +1,39 @@
+﻿<Properties StartupConfiguration="{55CC237F-FBAA-44BE-9821-6BC08CE2B6A7}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="BlockWithMultipleTransactions/Block.cs">
+    <Files>
+      <File FileName="BlockWithSingleTransaction/Program.cs" Line="1" Column="1" />
+      <File FileName="BlockWithSingleTransaction/Block.cs" Line="42" Column="34" />
+      <File FileName="BlockWithSingleTransaction/Interfaces/IBlock.cs" Line="1" Column="1" />
+      <File FileName="BlockWithSingleTransaction/Interfaces/IBlockChain.cs" Line="5" Column="40" />
+      <File FileName="BlockWithSingleTransaction/BlockChain.cs" Line="30" Column="10" />
+      <File FileName="BlockWithSingleTransaction/ClaimType.cs" Line="1" Column="1" />
+      <File FileName="BlockWithProofOfWork/Program.cs" Line="15" Column="1" />
+      <File FileName="BlockWithMultipleTransactions/Program.cs" Line="66" Column="21" />
+      <File FileName="BlockWithMultipleTransactions/Block.cs" Line="78" Column="31" />
+      <File FileName="BlockWithMultipleTransactions/Merkle/MerkleTree.cs" Line="26" Column="1" />
+      <File FileName="BlockWithTransactionPool/Transaction.cs" Line="1" Column="1" />
+      <File FileName="BlockWithTransactionPool/TransactionPool.cs" Line="1" Column="1" />
+      <File FileName="BlockWithTransactionPool/Program.cs" Line="17" Column="22" />
+      <File FileName="BlockWithTransactionPool/Block.cs" Line="18" Column="37" />
+      <File FileName="BlockWithMultipleTransactions/Interfaces/ITransaction.cs" Line="1" Column="1" />
+      <File FileName="BlockWithMultipleTransactions/Merkle/Constants.cs" Line="2" Column="29" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/stephenhaunts/Documents/Git/Blockchain-Pluralsight/ProofOfWorkTest/Program.cs" relfile="ProofOfWorkTest/Program.cs" line="17" column="20" />
+      <Breakpoint file="/Users/stephenhaunts/Documents/Git/Blockchain-Pluralsight/BlockWithTransactionPool/Program.cs" relfile="BlockWithTransactionPool/Program.cs" line="17" column="1" />
+      <Breakpoint file="/Users/stephenhaunts/Documents/Git/Blockchain-Pluralsight/BlockWithSingleTransaction/Program.cs" relfile="BlockWithSingleTransaction/Program.cs" line="15" column="1" />
+      <Breakpoint file="/Users/stephenhaunts/Documents/Git/Blockchain-Pluralsight/BlockWithMultipleTransactions/Program.cs" relfile="BlockWithMultipleTransactions/Program.cs" line="14" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Module_2203_220-_220Storing_220Transactions.BlockWithSingleTransaction PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.Module_2203_220-_220Storing_220Transactions.BlockWithTransactionPool PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.Module_2203_220-_220Storing_220Transactions.BlockWithMultipleTransactions PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Module_2202_220-_220Cryptography.Cryptography PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.Module_2204_220-_220Proof_220of_220Work.ProofOfWorkTest PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.Module_2204_220-_220Proof_220of_220Work.BlockWithProofOfWork PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>

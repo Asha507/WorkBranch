@@ -1,0 +1,11 @@
+D:\Projects\GitWorkSpace\WorkBranch\blockchain-principles-practices\04\demos\demos\BlockChainCourse\bin\Debug\netcoreapp2.0\Cryptography.deps.json
+D:\Projects\GitWorkSpace\WorkBranch\blockchain-principles-practices\04\demos\demos\BlockChainCourse\bin\Debug\netcoreapp2.0\Cryptography.runtimeconfig.json
+D:\Projects\GitWorkSpace\WorkBranch\blockchain-principles-practices\04\demos\demos\BlockChainCourse\bin\Debug\netcoreapp2.0\Cryptography.runtimeconfig.dev.json
+D:\Projects\GitWorkSpace\WorkBranch\blockchain-principles-practices\04\demos\demos\BlockChainCourse\bin\Debug\netcoreapp2.0\Cryptography.dll
+D:\Projects\GitWorkSpace\WorkBranch\blockchain-principles-practices\04\demos\demos\BlockChainCourse\bin\Debug\netcoreapp2.0\Cryptography.pdb
+D:\Projects\GitWorkSpace\WorkBranch\blockchain-principles-practices\04\demos\demos\BlockChainCourse\obj\Debug\netcoreapp2.0\Cryptography.csprojResolveAssemblyReference.cache
+D:\Projects\GitWorkSpace\WorkBranch\blockchain-principles-practices\04\demos\demos\BlockChainCourse\obj\Debug\netcoreapp2.0\Cryptography.csproj.CoreCompileInputs.cache
+D:\Projects\GitWorkSpace\WorkBranch\blockchain-principles-practices\04\demos\demos\BlockChainCourse\obj\Debug\netcoreapp2.0\Cryptography.AssemblyInfoInputs.cache
+D:\Projects\GitWorkSpace\WorkBranch\blockchain-principles-practices\04\demos\demos\BlockChainCourse\obj\Debug\netcoreapp2.0\Cryptography.AssemblyInfo.cs
+D:\Projects\GitWorkSpace\WorkBranch\blockchain-principles-practices\04\demos\demos\BlockChainCourse\obj\Debug\netcoreapp2.0\Cryptography.dll
+D:\Projects\GitWorkSpace\WorkBranch\blockchain-principles-practices\04\demos\demos\BlockChainCourse\obj\Debug\netcoreapp2.0\Cryptography.pdb

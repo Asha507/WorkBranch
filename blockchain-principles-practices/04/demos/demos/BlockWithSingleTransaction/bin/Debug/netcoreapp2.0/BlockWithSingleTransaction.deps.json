@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v2.0",
+    "signature": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v2.0": {
+      "BlockWithSingleTransaction/1.0.0": {
+        "dependencies": {
+          "Cryptography": "1.0.0"
+        },
+        "runtime": {
+          "BlockWithSingleTransaction.dll": {}
+        }
+      },
+      "Cryptography/1.0.0": {
+        "runtime": {
+          "Cryptography.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "BlockWithSingleTransaction/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Cryptography/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

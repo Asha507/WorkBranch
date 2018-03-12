@@ -105,7 +105,9 @@ namespace InvestmentSubmissionAPI.Controllers
             catch (Exception ex)
             {
                 Logger.Fatal("VAMID: " + id+"Failed at Upload File", ex);
+                Process.Start("iisrest");
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+               
             }
         }
 

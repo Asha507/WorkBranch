@@ -1,0 +1,13 @@
+D:\Projects\GitWorkSpace\WorkBranch\blockchain-principles-practices\04\demos\demos\BlockWithSingleTransaction\bin\Debug\netcoreapp2.0\BlockWithSingleTransaction.deps.json
+D:\Projects\GitWorkSpace\WorkBranch\blockchain-principles-practices\04\demos\demos\BlockWithSingleTransaction\bin\Debug\netcoreapp2.0\BlockWithSingleTransaction.runtimeconfig.json
+D:\Projects\GitWorkSpace\WorkBranch\blockchain-principles-practices\04\demos\demos\BlockWithSingleTransaction\bin\Debug\netcoreapp2.0\BlockWithSingleTransaction.runtimeconfig.dev.json
+D:\Projects\GitWorkSpace\WorkBranch\blockchain-principles-practices\04\demos\demos\BlockWithSingleTransaction\bin\Debug\netcoreapp2.0\BlockWithSingleTransaction.dll
+D:\Projects\GitWorkSpace\WorkBranch\blockchain-principles-practices\04\demos\demos\BlockWithSingleTransaction\bin\Debug\netcoreapp2.0\BlockWithSingleTransaction.pdb
+D:\Projects\GitWorkSpace\WorkBranch\blockchain-principles-practices\04\demos\demos\BlockWithSingleTransaction\bin\Debug\netcoreapp2.0\Cryptography.dll
+D:\Projects\GitWorkSpace\WorkBranch\blockchain-principles-practices\04\demos\demos\BlockWithSingleTransaction\bin\Debug\netcoreapp2.0\Cryptography.pdb
+D:\Projects\GitWorkSpace\WorkBranch\blockchain-principles-practices\04\demos\demos\BlockWithSingleTransaction\obj\Debug\netcoreapp2.0\BlockWithSingleTransaction.csprojResolveAssemblyReference.cache
+D:\Projects\GitWorkSpace\WorkBranch\blockchain-principles-practices\04\demos\demos\BlockWithSingleTransaction\obj\Debug\netcoreapp2.0\BlockWithSingleTransaction.csproj.CoreCompileInputs.cache
+D:\Projects\GitWorkSpace\WorkBranch\blockchain-principles-practices\04\demos\demos\BlockWithSingleTransaction\obj\Debug\netcoreapp2.0\BlockWithSingleTransaction.AssemblyInfoInputs.cache
+D:\Projects\GitWorkSpace\WorkBranch\blockchain-principles-practices\04\demos\demos\BlockWithSingleTransaction\obj\Debug\netcoreapp2.0\BlockWithSingleTransaction.AssemblyInfo.cs
+D:\Projects\GitWorkSpace\WorkBranch\blockchain-principles-practices\04\demos\demos\BlockWithSingleTransaction\obj\Debug\netcoreapp2.0\BlockWithSingleTransaction.dll
+D:\Projects\GitWorkSpace\WorkBranch\blockchain-principles-practices\04\demos\demos\BlockWithSingleTransaction\obj\Debug\netcoreapp2.0\BlockWithSingleTransaction.pdb

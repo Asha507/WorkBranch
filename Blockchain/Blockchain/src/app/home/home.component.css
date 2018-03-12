@@ -1,0 +1,42 @@
+/**
+ * Position icons into circle (SO)
+ * http://stackoverflow.com/q/12813573/1397351 
+ */
+ .circle-container {
+	position: relative;
+	width: 24em;
+	height: 24em;
+	padding: 2.8em; /*= 2em * 1.4 (2em = half the width of an img, 1.4 = sqrt(2))*/
+	border: dashed 1px;
+	border-radius: 50%;
+	margin: 1.75em auto 0;
+}
+.circle-container div {
+	display: block;
+	overflow: hidden;
+	position: absolute;
+	top: 50%; left: 50%;
+	width: 8em; height: 4em;
+	margin: -2em; /* 2em = 4em/2 */ /* half the width */
+}
+.circle-container div { display: block; width: 100%; }
+.deg0 { transform: rotate(270deg) translate(12em) rotate(-270deg); } /* 12em = half the width of the wrapper */
+.deg45 { transform: rotate(0deg) translate(12em) rotate(0deg); }
+.deg135 { transform: rotate(90deg) translate(12em) rotate(-90deg); }
+.deg180 { transform: translate(-12em); }
+
+.circle-container div:hover:before { opacity: 1; }
+
+
+.circle-container:hover:after { opacity: 1; }
+
+.circle-container:hover div:after { opacity: 1; }
+.circle-container div:hover:after { opacity: .3; }
+
+.box
+{
+    background: lightskyblue;
+    width: 10%;
+    height: 20%;
+    padding: 5%;
+}
