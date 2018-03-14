@@ -1,1 +1,32 @@
-<app-home></app-home>
+<div class="container">
+    <div class="page-header">
+        <h3>ValueMomentum</h3>
+    </div>
+    <div class="row menu">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Blockchain</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a routerLink='/'>Home</a>
+                    </li>
+                    <li>
+                        <a href="#">SelfService</a>
+                    </li>
+                    <li>
+                        <a href="#">Insurance</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="row">
+        <router-outlet></router-outlet>
+        
+    </div>
+    <div class="row">
+        <h5>CopyRight information</h5>
+    </div>
+</div>
