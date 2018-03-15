@@ -2,18 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Runtime.InteropServices;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
 namespace InvestmentSubmissionAPI.Controllers
 {
-    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
 
     public class ConfigurationController : ApiController
     {
@@ -105,51 +103,51 @@ namespace InvestmentSubmissionAPI.Controllers
             }
         }
 
-        [HttpGet]
-        [ActionName("GetMedicalDetails")]
+        //[HttpGet]
+        //[ActionName("GetMedicalDetails")]
 
-        public HttpResponseMessage GetMedicalDetails(int id)
-        {
-            string medAmount = "";
-            string medFile = "";
-            string jsonString = "";
-            try
-            {
-                FileController fileController = new FileController();
-                if (File.Exists(ConfigurationManager.AppSettings["ExcelLocation"]))
-                {
-                    jsonString = fileController.GetResponseJson(id);
-                }
+        //public HttpResponseMessage GetMedicalDetails(int id)
+        //{
+        //    string medAmount = "";
+        //    string medFile = "";
+        //    string jsonString = "";
+        //    try
+        //    {
+        //        FileController fileController = new FileController();
+        //        if (File.Exists(ConfigurationManager.AppSettings["ExcelLocation"]))
+        //        {
+        //            jsonString = fileController.GetResponseJson(id);
+        //        }
 
-                if (jsonString != "[]" && jsonString != "")
-                {
-                    dynamic json = JsonConvert.DeserializeObject(jsonString);
-                    foreach (var item in json[0])
-                    {
-                        //if (item.Name.Contains("MobileNumber"))
-                        //{
-                        //    mobile = item.Value;
-                        //}
-                        //else if (item.Name.Contains("Email"))
-                        //{
-                        //    email = item.Value;
-                        //}
+        //        if (jsonString != "[]" && jsonString != "")
+        //        {
+        //            dynamic json = JsonConvert.DeserializeObject(jsonString);
+        //            foreach (var item in json[0])
+        //            {
+        //                //if (item.Name.Contains("MobileNumber"))
+        //                //{
+        //                //    mobile = item.Value;
+        //                //}
+        //                //else if (item.Name.Contains("Email"))
+        //                //{
+        //                //    email = item.Value;
+        //                //}
 
-                    }
-                    String encryptedResponse = new JSONWebTokens("", 300).GetEncryptedJwtToken();
-                    return Request.CreateResponse(HttpStatusCode.OK, encryptedResponse);
-                }
-                else
-                {
-                    return Request.CreateResponse(HttpStatusCode.OK, "");
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.Fatal("VAMID: " + id + "Failed at GetMobileEmail", ex);
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
-            }
-        }
+        //            }
+        //            String encryptedResponse = new JSONWebTokens("", 300).GetEncryptedJwtToken();
+        //            return Request.CreateResponse(HttpStatusCode.OK, encryptedResponse);
+        //        }
+        //        else
+        //        {
+        //            return Request.CreateResponse(HttpStatusCode.OK, "");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Logger.Fatal("VAMID: " + id + "Failed at GetMobileEmail", ex);
+        //        return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+        //    }
+        //}
         [HttpGet]
         [ActionName("GetGuideLines")]
         public HttpResponseMessage GetGuideLines()
@@ -199,10 +197,7 @@ namespace InvestmentSubmissionAPI.Controllers
                 FileController fileController = new FileController();
                 string jsonString = "";
 
-                if (File.Exists(ConfigurationManager.AppSettings["ExcelLocation"]))
-                {
                    jsonString = fileController.GetResponseJson(id);
-                }
                 
                 if (jsonString != "[]" && jsonString != "")
                 {
@@ -212,10 +207,7 @@ namespace InvestmentSubmissionAPI.Controllers
                     {
                         foreach (var item in json[0])
                         {
-                            if (item.Name.Contains("MobileNumber"))
-                            {
-
-                            }
+                           
                             if (item.Name.Contains("Amount_" + field.itemCode) && item.Value != "--")
                             {
                                 field.Amount = item.Value;

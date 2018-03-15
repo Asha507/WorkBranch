@@ -1,28 +1,21 @@
-﻿using log4net;
-using Microsoft.Office.Interop.Excel;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Diagnostics;
-using System.Globalization;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Runtime.InteropServices;
-using System.Threading;
 using System.Web;
-using System.Web.Helpers;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
 namespace InvestmentSubmissionAPI.Controllers
 {
-    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class FileController : ApiController
     {
         [HttpPost]
@@ -96,7 +89,9 @@ namespace InvestmentSubmissionAPI.Controllers
                     }
                 }
                 Logger.Info("Downloaded all files");
-                CreateExcelDoc(httpRequest, templateFieldsList);
+               
+                CreateRecordInDatabase(httpRequest, templateFieldsList, id);
+            //    CreateExcelDoc(httpRequest, templateFieldsList);
                 Logger.Info("Saving in excel completed");
                 //Add HRA Data
                 String encryptedResponse = new JSONWebTokens("Uploaded Sucessfully", 300).GetEncryptedJwtToken();
@@ -105,11 +100,29 @@ namespace InvestmentSubmissionAPI.Controllers
             catch (Exception ex)
             {
                 Logger.Fatal("VAMID: " + id+"Failed at Upload File", ex);
-                Process.Start("iisrest");
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
                
             }
         }
+
+        private void CreateRecordInDatabase(HttpRequest httpRequest, List<TemplateFields> templateFieldsList,string id)
+        {
+            System.Data.DataTable dt;
+    
+            System.Data.DataTable hradt;
+            DataRow hradatarow;
+            try
+            {
+
+                GenerateDataTable(httpRequest, templateFieldsList, out dt);
+                GenerateHraDataTable(httpRequest, templateFieldsList, out hradt);
+                InsertToDatabase(dt,hradt,id);
+            }
+            catch(Exception ex)
+            {
+
+            }
+         }
 
         [HttpPost]
         public HttpResponseMessage UpdateStatus([FromBody] dynamic data)
@@ -118,38 +131,24 @@ namespace InvestmentSubmissionAPI.Controllers
             string id =data["VamID"].Value;
             string status = data["Status"].Value;
             string remark = data["Remark"].Value;
-            Application xlApp;
-            object misValue;
-            Workbook xlWorkBook=null;
-            Worksheet xlWorkSheet=null;
-            xlApp = new Application();
-            xlApp.DisplayAlerts = false;
+
             System.Data.DataTable dt = new System.Data.DataTable();
-            if (xlApp == null)
-            {
-                throw new Exception("Excel is not properly istalled");
-            }
-            misValue = System.Reflection.Missing.Value;
+
             try
             {
-                xlWorkBook = xlApp.Workbooks.Open(ConfigurationManager.AppSettings["ExcelLocation"]);
-                xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
-                int rowCount = xlWorkSheet.UsedRange.Rows.Count;
-                int columnCount = xlWorkSheet.UsedRange.Columns.Count;
-                Range objRange;
-                for (int r = 2; r <= rowCount; r++)
+                using (var cnnSQL = new SqlConnection(ConfigurationManager.ConnectionStrings["SqlConnection"].ToString()))
                 {
-                    if (xlWorkSheet.Cells[r, 1].Text == id)
+                    cnnSQL.Open();
+                    using (SqlCommand cmmSQL = new SqlCommand("sp_UpdateStatus", cnnSQL))
                     {
-                        objRange = (Range)xlWorkSheet.Cells[r, columnCount-1];
-                        objRange.Value2 = status;
-                        objRange = (Range)xlWorkSheet.Cells[r, columnCount];
-                        objRange.Value2 = remark;
-                        break;
+                        cmmSQL.CommandType = System.Data.CommandType.StoredProcedure;
+
+                        cmmSQL.Parameters.AddWithValue("@ID", id);
+                        cmmSQL.Parameters.AddWithValue("@Status", status);
+                        cmmSQL.Parameters.AddWithValue("@Remark", remark);
+                        cmmSQL.ExecuteNonQuery();
                     }
                 }
-                SaveExcelData(misValue, xlWorkBook);
-              
                 String encryptedResponse = new JSONWebTokens("Success", 300).GetEncryptedJwtToken();
                 return Request.CreateResponse(HttpStatusCode.OK, encryptedResponse);
             }
@@ -159,14 +158,10 @@ namespace InvestmentSubmissionAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
 
             }
-            finally
-            {
-                DisposeExcel(ref xlApp, misValue, ref xlWorkBook, ref xlWorkSheet);
-            }
         }
 
         [HttpGet]
-        public HttpResponseMessage GetExcelData(int id=0)
+        public HttpResponseMessage GetEmployeeData(int id=0)
         {
             try
             {
@@ -186,238 +181,49 @@ namespace InvestmentSubmissionAPI.Controllers
 
         public string GetResponseJson(int id)
         {
-            Application xlApp;
-            object misValue;
-            Workbook xlWorkBook=null;
-            Worksheet xlWorkSheet=null;
-            xlApp = new Application();
-            System.Data.DataTable dt = new System.Data.DataTable();
-            if (xlApp == null)
-            {
-                throw new Exception("Excel is not properly istalled");
-            }
-            misValue = System.Reflection.Missing.Value;
             string json = "";
-            try
+            System.Data.DataTable dt = new System.Data.DataTable();
+            using (var cnnSQL = new SqlConnection(ConfigurationManager.ConnectionStrings["SqlConnection"].ToString()))
             {
-                if (File.Exists(ConfigurationManager.AppSettings["ExcelLocation"]))
+                cnnSQL.Open();
+                using (SqlCommand cmmSQL = new SqlCommand("sp_GetProofsData", cnnSQL))
                 {
-                    xlWorkBook = xlApp.Workbooks.Open(ConfigurationManager.AppSettings["ExcelLocation"]);
-                    xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
-                    int rowCount = xlWorkSheet.UsedRange.Rows.Count;
-                    int columnCount = xlWorkSheet.UsedRange.Columns.Count;
-                    int rowNumber = 1;
-                    for (int c = 1; c <= columnCount; c++)
-                    {
-                        string colname = xlWorkSheet.Cells[1, c].Text;
-                        dt.Columns.Add(colname);
-                        rowNumber = 2;
-                    }
-                    for (int r = rowNumber; r <= rowCount; r++)
-                    {
-                        DataRow dr = dt.NewRow();
-                        for (int c = 1; c <= columnCount; c++)
-                        {
-                            dr[c - 1] = xlWorkSheet.Cells[r, c].Text;
-                        }
-                        if (0 != id)
-                        {
-                            if (Convert.ToInt32(dr["VamID"]) == id)
-                            {
-                                dt.Rows.Add(dr);
-                                break;
-                            }
-                        }
-                        else
-                        {
-                            dt.Rows.Add(dr);
-                        }
-                    }
-                    
-                    json = DataTableToJSON(dt);
+                    cmmSQL.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    cmmSQL.Parameters.AddWithValue("@ID", id);
+                    SqlDataReader dataReader = cmmSQL.ExecuteReader();
+                    dt.Load(dataReader);
                 }
             }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally
-            {
-                DisposeExcel(ref xlApp, misValue, ref xlWorkBook, ref xlWorkSheet);
-            }
+            json = DataTableToJSON(dt);              
+            
             return json;
         }
 
         public string GetHRAResponseJson(int id)
         {
-            Application xlApp;
-            object misValue;
-            Workbook xlWorkBook=null;
-            Worksheet xlWorkSheet=null;
-            xlApp = new Application();
-            xlApp.DisplayAlerts = false;
             System.Data.DataTable dt = new System.Data.DataTable();
-            if (xlApp == null)
-            {
-                throw new Exception("Excel is not properly istalled");
-            }
-            misValue = System.Reflection.Missing.Value;
-            string json = "";
-            try
-            {
-                if (File.Exists(ConfigurationManager.AppSettings["ExcelLocation"]))
-                {
-                    xlWorkBook = xlApp.Workbooks.Open(ConfigurationManager.AppSettings["ExcelLocation"]);
-                    xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(2);
-                    int rowCount = xlWorkSheet.UsedRange.Rows.Count;
-                    int columnCount = xlWorkSheet.UsedRange.Columns.Count;
-                    int rowNumber = 1;
-                    for (int c = 3; c <= columnCount; c++)
-                    {
-                        string colname = xlWorkSheet.Cells[1, c].Text;
-                        dt.Columns.Add(colname);
-                        rowNumber = 2;
-                    }
-                    for (int r = rowNumber; r <= rowCount; r++)
-                    {
-                        DataRow dr = dt.NewRow();
-                        for (int c = 3; c <= columnCount; c++)
-                        {
-                            dr[c - 3] = xlWorkSheet.Cells[r, c].Text;
-                        }
-                        if (0 != id)
-                        {
-                            if (Convert.ToInt32(xlWorkSheet.Cells[r, 1].Text) == id)
-                            {
-                                dt.Rows.Add(dr);
-                                break;
-                            }
-                        }
-                    }
-                    json = DataTableToJSON(dt);
 
+            string json = "";
+
+            using (var cnnSQL = new SqlConnection(ConfigurationManager.ConnectionStrings["SqlConnection"].ToString()))
+            {
+                cnnSQL.Open();
+                using (SqlCommand cmmSQL = new SqlCommand("sp_GetHraData", cnnSQL))
+                {
+                    cmmSQL.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmmSQL.Parameters.AddWithValue("@ID", id);
+                    SqlDataReader dataReader = cmmSQL.ExecuteReader();
+                    dt.Load(dataReader);
                 }
             }
-            catch (Exception)
-            {
-                
-                throw ;
-            }
-            finally
-            {
-                DisposeExcel(ref xlApp, misValue, ref xlWorkBook, ref xlWorkSheet);
-
-            }
+            json = DataTableToJSON(dt);
             return json;
         }
 
-
-        private void CreateExcelDoc(HttpRequest httpRequest, List<TemplateFields> fieldsList)
+        private void GenerateHraDataTable(HttpRequest httpRequest, List<TemplateFields> fieldsList, out System.Data.DataTable hradt)
         {
-            Application xlApp;
-            object misValue;
-            Workbook xlWorkBook=null;
-            xlApp = new Application();
-            xlApp.DisplayAlerts = false;
-            if (xlApp == null)
-            {
-                throw new Exception("Excel is not properly istalled");
-            }
-            misValue = System.Reflection.Missing.Value;
-
-            System.Data.DataTable dt;
-            DataRow datarow;
-            System.Data.DataTable hradt;
             DataRow hradatarow;
-            Worksheet xlWorkSheet = null;
-            try
-            {
-
-                GenerateDataTable(httpRequest, fieldsList, out dt, out datarow);
-                GenerateHraDataTable(httpRequest, fieldsList, out hradt, out hradatarow);
-                int row, col;
-
-               
-                Range objRange = null;
-                if (!File.Exists(ConfigurationManager.AppSettings["ExcelLocation"]))
-                {
-                    row = 1; col = 1;
-                    int j = col;
-
-                    xlWorkBook = xlApp.Workbooks.Add(1);
-                    xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
-                    xlWorkSheet.Name = "Proofs Submitted";
-
-                    GenerateHeaders(dt, row, xlWorkSheet, ref objRange, ref j);
-                    row++;
-                    InsertToExcel(dt, datarow, row, xlWorkSheet, ref objRange);
-
-                    row = 1; col = 1;
-                    j = col;
-                    objRange = null;
-                    xlWorkBook.Sheets.Add(After: xlWorkBook.Sheets[xlWorkBook.Sheets.Count]);
-                    xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(2);
-                    xlWorkSheet.Name = "HRA Details";
-
-                    GenerateHeaders(hradt, row, xlWorkSheet, ref objRange, ref j);
-                    row++;
-                    InsertToExcel(hradt, hradatarow, row, xlWorkSheet, ref objRange);
-
-                }
-                else
-                {
-                    bool recordExists = false;
-                    xlWorkBook = xlApp.Workbooks.Open(ConfigurationManager.AppSettings["ExcelLocation"]);
-                    xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
-                    row = xlWorkSheet.UsedRange.Rows.Count + 1;
-                    for (int i = 2; i < row; i++)
-                    {
-                        if (xlWorkSheet.Cells[i, 1].Text == httpRequest.Params["VamID"])
-                        {
-                            InsertToExcel(dt, datarow, i, xlWorkSheet, ref objRange);
-                            recordExists = true;
-                            break;
-                        }
-                    }
-                    if (!recordExists)
-                    {
-                        InsertToExcel(dt, datarow, row, xlWorkSheet, ref objRange);
-                    }
-
-                    bool hrarecordExists = false;
-                    xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(2);
-                    row = xlWorkSheet.UsedRange.Rows.Count + 1;
-                    for (int i = 2; i < row; i++)
-                    {
-                        if (xlWorkSheet.Cells[i, 1].Text == httpRequest.Params["VamID"])
-                        {
-                            InsertToExcel(hradt, hradatarow, i, xlWorkSheet, ref objRange);
-                            hrarecordExists = true;
-                            break;
-                        }
-                    }
-                    if (!hrarecordExists)
-                    {
-                        InsertToExcel(hradt, hradatarow, row, xlWorkSheet, ref objRange);
-                    }
-                }
-                //Save HRA Data
-
-                SaveExcelData(misValue, xlWorkBook);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                DisposeExcel(ref xlApp, misValue, ref xlWorkBook, ref xlWorkSheet);
-            }
-        }
-
-        private void GenerateHraDataTable(HttpRequest httpRequest, List<TemplateFields> fieldsList, out System.Data.DataTable hradt, out DataRow hradatarow)
-        {
             hradt = new System.Data.DataTable();
 
             hradt.Columns.Add("VamID");
@@ -449,7 +255,7 @@ namespace InvestmentSubmissionAPI.Controllers
             hradatarow["RentReciptFile"] = httpRequest.Params["RentReciptFile"];
             hradatarow["PanFile"] = httpRequest.Params["PanFile"];
             hradatarow["AggrementFile"] = httpRequest.Params["AggrementFile"];
-
+            hradt.Rows.Add(hradatarow);
         }
 
         public string DataTableToJSON(System.Data.DataTable table)
@@ -459,65 +265,9 @@ namespace InvestmentSubmissionAPI.Controllers
             return JSONString;
         }
 
-        private static void GenerateHeaders(System.Data.DataTable dt, int row, Worksheet xlWorkSheet, ref Range objRange, ref int j)
+        private void GenerateDataTable(HttpRequest httpRequest, List<TemplateFields> fieldsList, out System.Data.DataTable dt)
         {
-            foreach (DataColumn column in dt.Columns)
-            {
-
-                objRange = (Range)xlWorkSheet.Cells[row, j];
-                objRange.Value2 = column.ColumnName;
-                j++;
-            }
-        }
-
-        private static void DisposeExcel(ref Application xlApp, object misValue, ref Workbook xlWorkBook, ref Worksheet xlWorkSheet)
-        {
-            if (xlWorkBook != null)
-            {
-                xlWorkBook.Close(true, misValue, misValue);
-            }
-            xlApp.Quit();
-            if(xlWorkBook!=null)
-            {
-               
-                Marshal.ReleaseComObject(xlWorkBook);
-            }
-            if (xlWorkSheet != null)
-            {
-                Marshal.ReleaseComObject(xlWorkSheet);
-            }
-          
-            Marshal.ReleaseComObject(xlApp);
-
-
-            xlWorkSheet = null;
-            xlWorkBook = null;
-            xlApp = null;
-
-            GC.GetTotalMemory(false);
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            GC.Collect();
-            GC.GetTotalMemory(true);
-
-
-        }
-
-        private static void SaveExcelData(object misValue, Workbook xlWorkBook)
-        {
-            if (!File.Exists(ConfigurationManager.AppSettings["ExcelLocation"]))
-            {
-                xlWorkBook.SaveAs(ConfigurationManager.AppSettings["ExcelLocation"], XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
-
-            }
-            else
-            {
-                xlWorkBook.Save();
-            }
-        }
-
-        private void GenerateDataTable(HttpRequest httpRequest, List<TemplateFields> fieldsList, out System.Data.DataTable dt, out DataRow datarow)
-        {
+            DataRow datarow;
             dt = new System.Data.DataTable();
             string file = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Files", ConfigurationManager.AppSettings["ExcelData"]);
             List<Dictionary<string, string>> excelFields = JsonConvert.DeserializeObject<List<Dictionary<string, string>>>(File.ReadAllText(file));
@@ -551,22 +301,34 @@ namespace InvestmentSubmissionAPI.Controllers
                     datarow["Amount_" + item.itemCode] = "--";
                     datarow["Filename_" + item.itemCode] = "--";
                 }
-            }           
+            }
+            dt.Rows.Add(datarow);         
         }
 
-        private void InsertToExcel(System.Data.DataTable dt, DataRow datarow, int row, Worksheet xlWorkSheet, ref Range objRange)
+        private void InsertToDatabase(System.Data.DataTable dt, System.Data.DataTable hradt,string id)
         {
-            int col = 1;
-            int count = dt.Columns.Count;
-            int k = col;
-            for (int i = 0; i < count; i++)
+            using (var cnnSQL = new SqlConnection(ConfigurationManager.ConnectionStrings["SqlConnection"].ToString()))
             {
-                objRange = (Range)xlWorkSheet.Cells[row, k];
-                objRange.Value2 = datarow[i];
-                k++;
+                cnnSQL.Open();
+                using (SqlCommand cmmSQL = new SqlCommand("sp_SaveProofsData", cnnSQL))
+                {                   
+                    cmmSQL.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    cmmSQL.Parameters.AddWithValue("@ID", id);
+                    cmmSQL.Parameters.AddWithValue("@Details", dt);
+                    cmmSQL.ExecuteNonQuery();
+                }
+                using (SqlCommand cmmSQL = new SqlCommand("sp_SaveHraData", cnnSQL))
+                {
+                    cmmSQL.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    cmmSQL.Parameters.AddWithValue("@ID", id);
+                    cmmSQL.Parameters.AddWithValue("@Details", hradt);
+                    cmmSQL.ExecuteNonQuery();
+                }
             }
         }
+       
 
-        
     }
 }

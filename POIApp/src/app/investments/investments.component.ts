@@ -420,9 +420,12 @@ export class InvestmentsComponent implements OnInit {
     }
     this.investmentService.UploadData(formData).subscribe(response => {
       response=JSON.parse(this.jwtauthenticationService.decode(response).PayloadData);
+      debugger;
       if (response == "Uploaded Sucessfully") {
+        debugger;
         this.SubmitStatus = "Data Submitted Successfully";
         this.loading = false;
+        this.appError=false;
       }
     },
       err => {

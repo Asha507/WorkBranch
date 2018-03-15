@@ -14,7 +14,7 @@ export class StatusService {
     {
       id=0;
     }
-    return this.http.get(environment.api+'/api/File/GetExcelData?id='+id).map(res=>
+    return this.http.get(environment.api+'/api/File/GetEmployeeData?id='+id).map(res=>
     {
       return res.json();
     }
