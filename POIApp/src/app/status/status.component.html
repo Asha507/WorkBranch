@@ -1,4 +1,8 @@
 <div class="container">
+  <div>
+    <h5>Please verify the files mentioned in Status section with the list of Sucessfully Uploaded Files.
+      Please re-upload in case of issues</h5>
+  </div>
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">Status</h3>
@@ -8,10 +12,12 @@
         <div class="loading"></div>
       </div>
       <div *ngIf="appError">
-          <div class="alert alert-danger fade in">
-              <a href="#" class="close" data-dismiss="alert">&times;</a>
-            <h5>  <strong>Error!</strong> Something went wrong please try after sometime. If the issue persists please contact Finance Team  </h5>
-          </div>
+        <div class="alert alert-danger fade in">
+          <a href="#" class="close" data-dismiss="alert">&times;</a>
+          <h5>
+            <strong>Error!</strong> Something went wrong please try after sometime. If the issue persists please contact Finance
+            Team </h5>
+        </div>
       </div>
       <div *ngIf="!hasData">
         <h6>No Data to display</h6>
@@ -26,6 +32,28 @@
           </tbody>
         </table>
       </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Successfully Uploaded Files</h3>
+    </div>
+    <div class="panel-body">
+      <div *ngIf="loading">
+        <div class="loading"></div>
+      </div>
+      <div *ngIf="!hasData">
+          <h6>No Data to display</h6>
+        </div>
+        <div *ngIf="hasData">
+          <table class="table table-bordered borderless">
+            <tbody>
+                <tr *ngFor="let key of files">
+                    <td class="col-md-6">{{key}}</td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
     </div>
   </div>
 </div>

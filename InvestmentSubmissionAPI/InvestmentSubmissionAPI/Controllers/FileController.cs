@@ -29,6 +29,7 @@ namespace InvestmentSubmissionAPI.Controllers
             string submissionDate = httpRequest.Params["SubmissionDate"];
             string mobileNumber = httpRequest.Params["MobileNumber"];
             string months = httpRequest.Params["HraAmount"];
+            List<string> errorMsgs = new List<string>();
             try
             {
                 foreach (var item in JArray.Parse(httpRequest.Params["Data"]))
@@ -38,7 +39,7 @@ namespace InvestmentSubmissionAPI.Controllers
                         templateFieldsList.Add(field.ToObject<TemplateFields>());
                     }
                 }
-                var code="";
+                var code = "";
                 //Download files 
                 if (httpRequest.Files.Count > 0)
                 {
@@ -70,7 +71,7 @@ namespace InvestmentSubmissionAPI.Controllers
                             {
                                 code = (templateFieldsList.Where(x => x.FileName == postedFile.FileName)).First().itemCode;
                             }
-                            
+
                             if (!Directory.Exists(Path.Combine(filePath, folderName)))
                             {
                                 Directory.CreateDirectory(Path.Combine(filePath, folderName));
@@ -79,36 +80,50 @@ namespace InvestmentSubmissionAPI.Controllers
                             {
                                 File.Delete(Path.Combine(filePath, folderName, fileName));
                             }
-                            string[] files = Directory.GetFiles(Path.Combine(filePath, folderName), code+"*.*");
+                            string[] files = Directory.GetFiles(Path.Combine(filePath, folderName), code + "_*.*");
                             foreach (var file in files)
                             {
                                 File.Delete(file);
                             }
-                            postedFile.SaveAs(Path.Combine(filePath, folderName,code+"_"+fileName));
+                            postedFile.SaveAs(Path.Combine(filePath, folderName, code + "_" + fileName));
+                            if (!File.Exists(Path.Combine(filePath, folderName, code + "_" + fileName)))
+                            {
+                                errorMsgs.Add("Failed to Upload : " + fileName);
+                            }
                         }
                     }
                 }
                 Logger.Info("Downloaded all files");
-               
+
                 CreateRecordInDatabase(httpRequest, templateFieldsList, id);
-            //    CreateExcelDoc(httpRequest, templateFieldsList);
+                //    CreateExcelDoc(httpRequest, templateFieldsList);
                 Logger.Info("Saving in excel completed");
                 //Add HRA Data
-                String encryptedResponse = new JSONWebTokens("Uploaded Sucessfully", 300).GetEncryptedJwtToken();
-                return Request.CreateResponse(HttpStatusCode.OK, encryptedResponse);
+                String encryptedResponse;
+                if (errorMsgs.Count > 0)
+                {
+                    encryptedResponse = new JSONWebTokens("Upload failed with errors " + errorMsgs, 300).GetEncryptedJwtToken();
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError, encryptedResponse);
+                }
+                else
+                {
+                    encryptedResponse = new JSONWebTokens("Uploaded Sucessfully", 300).GetEncryptedJwtToken();
+                    return Request.CreateResponse(HttpStatusCode.OK, encryptedResponse);
+                }
+
             }
             catch (Exception ex)
             {
-                Logger.Fatal("VAMID: " + id+"Failed at Upload File", ex);
+                Logger.Fatal("VAMID: " + id + " Failed at Upload File", ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
-               
+
             }
         }
 
-        private void CreateRecordInDatabase(HttpRequest httpRequest, List<TemplateFields> templateFieldsList,string id)
+        private void CreateRecordInDatabase(HttpRequest httpRequest, List<TemplateFields> templateFieldsList, string id)
         {
             System.Data.DataTable dt;
-    
+
             System.Data.DataTable hradt;
             DataRow hradatarow;
             try
@@ -116,19 +131,19 @@ namespace InvestmentSubmissionAPI.Controllers
 
                 GenerateDataTable(httpRequest, templateFieldsList, out dt);
                 GenerateHraDataTable(httpRequest, templateFieldsList, out hradt);
-                InsertToDatabase(dt,hradt,id);
+                InsertToDatabase(dt, hradt, id);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
-         }
+        }
 
         [HttpPost]
         public HttpResponseMessage UpdateStatus([FromBody] dynamic data)
         {
             var httpRequest = HttpContext.Current.Request;
-            string id =data["VamID"].Value;
+            string id = data["VamID"].Value;
             string status = data["Status"].Value;
             string remark = data["Remark"].Value;
 
@@ -154,20 +169,28 @@ namespace InvestmentSubmissionAPI.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Fatal("VAMID: "+ id +"Failed at Update Status", ex);
+                Logger.Fatal("VAMID: " + id + "Failed at Update Status", ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
 
             }
         }
 
         [HttpGet]
-        public HttpResponseMessage GetEmployeeData(int id=0)
+        public HttpResponseMessage GetEmployeeData(int id)
         {
             try
             {
-                string json = GetResponseJson(id);
-                String encryptedResponse = new JSONWebTokens(json, 300).GetEncryptedJwtToken();
-                return Request.CreateResponse(HttpStatusCode.OK, encryptedResponse);
+                if (id != 0)
+                {
+                    string json = GetResponseJson(id);
+                    String encryptedResponse = new JSONWebTokens(json, 300).GetEncryptedJwtToken();
+                    return Request.CreateResponse(HttpStatusCode.OK, encryptedResponse);
+                }
+                else
+                {
+                    Logger.Fatal("VAMID: " + id + "cannot be null");
+                    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError,"");
+                }
             }
             catch (Exception ex)
             {
@@ -175,9 +198,58 @@ namespace InvestmentSubmissionAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
             }
 
+
         }
 
+        [HttpGet]
+        public HttpResponseMessage GetAllEmployeeData()
+        {
+            try
+            {                
+                    string json = GetResponseJson(0);
+                    String encryptedResponse = new JSONWebTokens(json, 300).GetEncryptedJwtToken();
+                    return Request.CreateResponse(HttpStatusCode.OK, encryptedResponse);                
+            }
+            catch (Exception ex)
+            {
+                Logger.Fatal("VAMID: " + "Failed at GetExcelData", ex);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
 
+
+        }
+
+        [HttpGet]
+        public HttpResponseMessage GetEmployeeFiles(int id)
+        {
+            try
+            {
+                string files = GetResponseFilesJson(id);
+                String encryptedResponse = new JSONWebTokens(files, 300).GetEncryptedJwtToken();
+                return Request.CreateResponse(HttpStatusCode.OK, encryptedResponse);
+            }
+            catch (Exception ex)
+            {
+                Logger.Fatal("VAMID: " + id + "Failed at GetEmployeeFiles", ex);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
+
+        }
+
+        private string GetResponseFilesJson(int id)
+        {
+            var filePath = ConfigurationManager.AppSettings["FilesShareLocation"];
+            string folderName = "VAM_" + id;
+            string[] files = Directory.GetFiles(Path.Combine(filePath, folderName));
+            string filesList = string.Empty;
+            foreach (var item in files)
+            {
+                filesList += Path.GetFileName(item)+',';
+  
+            }
+            filesList= filesList.TrimEnd(',');
+            return filesList;
+        }
 
         public string GetResponseJson(int id)
         {
@@ -195,8 +267,8 @@ namespace InvestmentSubmissionAPI.Controllers
                     dt.Load(dataReader);
                 }
             }
-            json = DataTableToJSON(dt);              
-            
+            json = DataTableToJSON(dt);
+
             return json;
         }
 
@@ -280,12 +352,12 @@ namespace InvestmentSubmissionAPI.Controllers
             datarow = dt.NewRow();
             datarow["VamID"] = httpRequest.Params["VamID"];
             datarow["Name"] = httpRequest.Params["EmployeeName"];
-            datarow["Submission_Date"] =httpRequest.Params["SubmissionDate"];
+            datarow["Submission_Date"] = httpRequest.Params["SubmissionDate"];
             datarow["Status"] = httpRequest.Params["Status"];
             datarow["Remark"] = "--";
             datarow["MobileNumber"] = httpRequest.Params["MobileNumber"];
-            datarow["Email"]= httpRequest.Params["Email"];
-            datarow["HRA_Amount"]= httpRequest.Params["RentAmount"];
+            datarow["Email"] = httpRequest.Params["Email"];
+            datarow["HRA_Amount"] = httpRequest.Params["RentAmount"];
             datarow["PanFile"] = httpRequest.Params["panFile"] != "" ? httpRequest.Params["panFile"] : "--";
             datarow["RentReciptFile"] = httpRequest.Params["RentReciptFile"] != "" ? httpRequest.Params["RentReciptFile"] : "--";
             datarow["AggrementFile"] = httpRequest.Params["AggrementFile"] != "" ? httpRequest.Params["AggrementFile"] : "--";
@@ -302,16 +374,16 @@ namespace InvestmentSubmissionAPI.Controllers
                     datarow["Filename_" + item.itemCode] = "--";
                 }
             }
-            dt.Rows.Add(datarow);         
+            dt.Rows.Add(datarow);
         }
 
-        private void InsertToDatabase(System.Data.DataTable dt, System.Data.DataTable hradt,string id)
+        private void InsertToDatabase(System.Data.DataTable dt, System.Data.DataTable hradt, string id)
         {
             using (var cnnSQL = new SqlConnection(ConfigurationManager.ConnectionStrings["SqlConnection"].ToString()))
             {
                 cnnSQL.Open();
                 using (SqlCommand cmmSQL = new SqlCommand("sp_SaveProofsData", cnnSQL))
-                {                   
+                {
                     cmmSQL.CommandType = System.Data.CommandType.StoredProcedure;
 
                     cmmSQL.Parameters.AddWithValue("@ID", id);
@@ -328,7 +400,7 @@ namespace InvestmentSubmissionAPI.Controllers
                 }
             }
         }
-       
+
 
     }
 }

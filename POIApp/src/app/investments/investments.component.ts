@@ -60,6 +60,7 @@ export class InvestmentsComponent implements OnInit {
   errorMesage: string = "";
   errorMessage_Others:any=[];
   errorMessage_80C:any=[];
+  status:string;
   constructor(private investmentService: InvestmentService, private jwtauthenticationService: JwtauthenticationService, private datePipe: DatePipe, private route: ActivatedRoute) {
     this.date = this.datePipe.transform(new Date()).toString();
     this.userName=sessionStorage.getItem("Username");
@@ -158,11 +159,16 @@ export class InvestmentsComponent implements OnInit {
   GetMobileEmail() {
     this.investmentService.GetMobileEmailDetails(+this.id).subscribe(response => {
       response=JSON.parse(this.jwtauthenticationService.decode(response).PayloadData);
+      debugger;
       if (response != "") {
         this.MobileNumber = JSON.stringify(response).split(',')[0].split(':')[1];
         this.emailID = JSON.stringify(response).split(',')[1].split(':')[1];
+        this.status=JSON.stringify(response).split(',')[2].split(':')[1];
         if (this.emailID.endsWith('"')) {
           this.emailID = this.emailID.replace("\"", "");
+        }
+        if (this.status.endsWith('"')) {
+          this.status = this.status.replace("\"", "");
         }
       }
       this.loading=false;

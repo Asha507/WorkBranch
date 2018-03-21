@@ -12,7 +12,6 @@ using System.Web.Http.Cors;
 namespace InvestmentSubmissionAPI.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-
     public class ConfigurationController : ApiController
     {
       
@@ -64,14 +63,12 @@ namespace InvestmentSubmissionAPI.Controllers
         {
             string email = "";
             string mobile = "";
+            string status = "";
             string jsonString = "";
             try
             {
-                FileController fileController = new FileController();
-                if (File.Exists(ConfigurationManager.AppSettings["ExcelLocation"]))
-                {
+                FileController fileController = new FileController();               
                     jsonString = fileController.GetResponseJson(id);
-                }
 
                 if (jsonString != "[]" && jsonString != "")
                 {
@@ -86,9 +83,13 @@ namespace InvestmentSubmissionAPI.Controllers
                         {
                             email = item.Value;
                         }
+                        else if (item.Name.Contains("Status"))
+                        {
+                            status = item.Value;
+                        }
 
                     }
-                    String encryptedResponse = new JSONWebTokens("MobileNumber:" + mobile + ",Email:" + email, 300).GetEncryptedJwtToken();
+                    String encryptedResponse = new JSONWebTokens("MobileNumber:" + mobile + ",Email:" + email + ",Status:" + status, 300).GetEncryptedJwtToken();
                     return Request.CreateResponse(HttpStatusCode.OK, encryptedResponse);
                 }
                 else

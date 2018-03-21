@@ -11,7 +11,7 @@ export class AdminService {
 
   GetExcelData():Observable<any>
   {
-    return this.http.get(environment.api+'/api/File/GetEmployeeData').map(res=>
+    return this.http.get(environment.api+'/api/File/GetAllEmployeeData').map(res=>
       {
         return res.json();
       }).catch((error)=> {

@@ -1,0 +1,28 @@
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+}
+.navbar
+{
+    margin-bottom: 0% !important;
+}
+.navbar-inverse a{
+    color: white;
+}
+.footer
+{
+    background: black;
+    color: white;
+    height:20%;
+    padding:2%;
+    margin-top: 1%;
+}
+.footer a{
+    color: white;
+}
+.row
+{
+    margin-right: 0% !important;
+    margin-left: 0% !important;
+}

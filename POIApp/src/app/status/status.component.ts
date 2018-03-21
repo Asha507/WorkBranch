@@ -14,6 +14,7 @@ export class StatusComponent implements OnInit {
   loading:boolean=true;
   hasData:boolean=false;
   appError:boolean=false;
+  files:string[];
   constructor(private statusService: StatusService, private jwtauthenticationService: JwtauthenticationService) { }
 
   ngOnInit() {    
@@ -37,6 +38,22 @@ export class StatusComponent implements OnInit {
       err=>{  
         this.loading=false;
       });
+      this.statusService.GetFilesStatus(+sessionStorage.getItem("VamID")).subscribe(response=>
+        { 
+          response=JSON.parse(this.jwtauthenticationService.decode(response).PayloadData);
+          debugger;
+          if(!(response=="[]")&&!(response=="") )
+            {           
+            this.files=JSON.stringify(response).split(',');
+            }
+            else
+            {
+              this.loading=false;
+            }
+        },
+        err=>{  
+          this.loading=false;
+        });
   }
 
   checkIfNull(item:string):boolean

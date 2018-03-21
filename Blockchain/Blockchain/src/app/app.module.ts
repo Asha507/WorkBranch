@@ -8,11 +8,15 @@ import { ShopComponent } from './shop/shop.component';
 import { HeaderComponent } from './header/header.component';
 import { CarShopComponent } from './car-shop/car-shop.component';
 import { PhoneShopComponent } from './phone-shop/phone-shop.component';
+import { InsuranceComponent } from './insurance/insurance.component';
+import { BlockexplorerComponent } from './blockexplorer/blockexplorer.component';
+import { BikeInsurancComponent } from './bike-insuranc/bike-insuranc.component';
+import { BikeInsuranceComponent } from './bike-insurance/bike-insurance.component';
 const routes:Routes=[
   { path: '',component:HomeComponent },
-  {path:'Shop',component:ShopComponent},
-  {path:'Shop/CarShop',component:CarShopComponent},
-  {path:'Shop/PhoneShop',component:PhoneShopComponent}
+  {path:'shop',component:ShopComponent},
+  {path:'shop/car-shop',component:CarShopComponent},
+  {path:'shop/phone-shop',component:PhoneShopComponent}
   // {path:'RepairShop',component:StatusComponent},
   // {path:'Insurance',component:InvestmentsComponent},
  ];
@@ -24,7 +28,11 @@ const routes:Routes=[
     ShopComponent,
     HeaderComponent,
     CarShopComponent,
-    PhoneShopComponent
+    PhoneShopComponent,
+    InsuranceComponent,
+    BlockexplorerComponent,
+    BikeInsurancComponent,
+    BikeInsuranceComponent
   ],
   imports: [
     BrowserModule,

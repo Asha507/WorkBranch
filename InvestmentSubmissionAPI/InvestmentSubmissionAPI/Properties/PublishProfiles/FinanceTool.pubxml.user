@@ -85,7 +85,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/05/2018 13:46:50</publishTime>
     </File>
     <File Include="bin/InvestmentSubmissionAPI.dll">
-      <publishTime>03/14/2018 16:44:21</publishTime>
+      <publishTime>03/20/2018 17:40:27</publishTime>
     </File>
     <File Include="bin/jose-jwt.dll">
       <publishTime>06/21/2017 19:57:54</publishTime>

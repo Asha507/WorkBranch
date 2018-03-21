@@ -10,10 +10,8 @@ export class StatusService {
 
   GetStatus(id:number):Observable<any>
   {
-    if(id==null)
+    if(id!=undefined)
     {
-      id=0;
-    }
     return this.http.get(environment.api+'/api/File/GetEmployeeData?id='+id).map(res=>
     {
       return res.json();
@@ -22,6 +20,24 @@ export class StatusService {
       return Observable.throw(
         new Error(`${ error.status } ${ error.statusText }`));
       });
+    }
   }
+
+  GetFilesStatus(id:number):Observable<any>
+  {
+    if(id!=undefined)
+    {
+    return this.http.get(environment.api+'/api/File/GetEmployeeFiles?id='+id).map(res=>
+    {
+      return res.json();
+    }
+    ).catch((error)=> {
+      return Observable.throw(
+        new Error(`${ error.status } ${ error.statusText }`));
+      });
+    }
+  }
+
+  
 
 }
