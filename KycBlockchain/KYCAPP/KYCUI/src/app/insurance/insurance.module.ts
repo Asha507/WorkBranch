@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 const routes:Routes=[
   { path: '',component:InsuranceHomeComponent },
-  {path:'home',component:InsuranceHomeComponent},
+  {path:'insurancehome',component:InsuranceHomeComponent},
   // {path:'Insurance',component:InvestmentsComponent},
  ];
 @NgModule({
