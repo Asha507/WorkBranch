@@ -7,12 +7,15 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { IndexComponent } from './index/index.component';
-import {DefaultComponent} from './default/default.component'
+import {DefaultComponent} from './default/default.component';
+import { DemoComponent } from './demo/demo.component'
+import { InsuranceModule } from './insurance/insurance.module';
 const routes:Routes=[
   { path: '',component:DefaultComponent },
   {path:'default',component:DefaultComponent},
-  {path:'home',component:HomeComponent}
-  // {path:'RepairShop',component:StatusComponent},
+  {path:'home',component:HomeComponent},
+   {path:'demo',component:DemoComponent},
+   {path: 'insurance', loadChildren: 'app/insurance/insurance.module#InsuranceModule'},
   // {path:'Insurance',component:InvestmentsComponent},
  ];
 
@@ -22,10 +25,12 @@ const routes:Routes=[
     LoginComponent,
     HomeComponent,
     IndexComponent,
-    DefaultComponent
+    DefaultComponent,
+    DemoComponent
   ],
   imports: [
-    BrowserModule,    
+    BrowserModule, 
+    InsuranceModule,   
     FormsModule,
     RouterModule.forRoot(routes, {useHash: true}),
   ],

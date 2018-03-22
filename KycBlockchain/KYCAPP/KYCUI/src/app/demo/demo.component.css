@@ -1,0 +1,22 @@
+#image_div{
+    background-image: url("/assets/blockchain11.jpg");
+    width:100%;
+    height:500px;
+    background-repeat:no-repeat;
+    background-size:cover;
+    margin-top: 2%;
+    margin-left: 0% !important;
+}
+.caption
+{
+   padding:10% 0% 0% 10%;
+   color:cadetblue;
+
+}
+.domainrow
+{
+    border :ridge;
+    padding :2%;
+    margin :2%;
+    
+}
