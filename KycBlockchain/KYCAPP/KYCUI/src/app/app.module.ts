@@ -15,7 +15,7 @@ const routes:Routes=[
   {path:'default',component:DefaultComponent},
   {path:'home',component:HomeComponent},
    {path:'demo',component:DemoComponent},
-   {path: 'insurance', loadChildren: 'app/insurance/insurance.module#InsuranceModule'},
+  {path: 'insurance', loadChildren: 'app/insurance/insurance.module#InsuranceModule'},
   // {path:'Insurance',component:InvestmentsComponent},
  ];
 
@@ -30,9 +30,9 @@ const routes:Routes=[
   ],
   imports: [
     BrowserModule, 
-    InsuranceModule,   
-    FormsModule,
     RouterModule.forRoot(routes, {useHash: true}),
+    //InsuranceModule,   
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

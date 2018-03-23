@@ -1,0 +1,10 @@
+{
+  "Locations": [
+    { 
+        "Name":"Lisboa",
+        "Folder":"Lisboa",
+        "WebsiteUrl":"http://gablisboa.azurewebsites.net", 
+        "Show": true
+    }
+  ]
+}

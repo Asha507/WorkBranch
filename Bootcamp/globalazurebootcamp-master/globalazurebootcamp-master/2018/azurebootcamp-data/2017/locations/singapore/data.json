@@ -1,0 +1,544 @@
+﻿{
+  "Event": {
+    "Date": "22-04-2017"
+  },
+  "Location": {
+    "Name": "Singapore",
+    "Latitude": 1.282387,
+    "Longitude": 103.850243,
+    "Address": "One Marina Boulevard, Singapore"
+  },
+  "Social": {
+    "Meetup": "https://www.meetup.com/mssgug/events/236349222",
+    "Facebook": "https://www.facebook.com/MWAPSG"
+  },
+  "Callout": {
+    "Text": "RSVP Today ",
+    "Link": "https://www.meetup.com/mssgug/events/236349222",
+    "Type": "default"
+  },
+  "Organizers": [
+    {
+      "Name": "Mohamed Faizal",
+      "Social": {
+        "Email": "kmdfaizal@yahoo.com"
+      }
+    },
+    {
+      "Name": "Puneet Ghanshani",
+      "Social": {
+        "Email": "punit.ganshani@gmail.com"
+      }
+    },
+    {
+      "Name": "Sakthis Kumar",
+      "Social": {
+        "Email": "sakthis@sakthis.net"
+      }
+    },
+    {
+      "Name": "Senthamil Selvan",
+      "Social": {
+        "Email": "altfo@hotmail.com"
+      }
+    },
+    {
+      "Name": "Alvin Lau",
+      "Social": {
+        "Email": "microlau@gmail.com"
+      }
+    }
+  ],
+  "Sponsors": [
+
+  ],
+  "Prizes": [
+    {
+      "ImageUrl": "https://raw.githubusercontent.com/punitganshani/azurebootcamp-data/master/2017/locations/singapore/xbox.jpg",
+      "Link": "http://www.xbox.com/en-SG/xbox-one",
+      "Name": "Xbox One"
+    },
+    {
+      "ImageUrl": "https://raw.githubusercontent.com/punitganshani/azurebootcamp-data/master/2017/locations/singapore/msiotkit.jpg",
+      "Link": "https://www.adafruit.com/products/2733",
+      "Name": "Microsoft IoT Kit / RPi 3"
+    },
+    {
+      "ImageUrl": "https://raw.githubusercontent.com/punitganshani/azurebootcamp-data/master/2017/locations/singapore/rpi31.jpg",
+      "Link": "http://sg.element14.com/buy-raspberry-pi?ICID=I-HP-PP-raspberrypi-bundle-boards-01",
+      "Name": "Raspberry Pi 3"
+    },
+    {
+      "ImageUrl": "https://raw.githubusercontent.com/punitganshani/azurebootcamp-data/master/2017/locations/singapore/azpass1.png",
+      "Link": "#",
+      "Name": "Azure Passes"
+    },
+    {
+      "ImageUrl": "https://raw.githubusercontent.com/punitganshani/azurebootcamp-data/master/2017/locations/singapore/USB.png",
+      "Link": "#",
+      "Name": "USB Drives"
+    },
+    {
+      "ImageUrl": "https://raw.githubusercontent.com/punitganshani/azurebootcamp-data/master/2017/locations/singapore/comingsoon.png",
+      "Link": "#",
+      "Name": "Coming Soon"
+    }
+  ],
+  "Tracks": [
+    {
+      "Name": "Developer Track",
+      "Sessions": [
+        {
+          "SessionId": "Common1",
+          "Time": "8:00 AM - 8:30 AM",
+          "Title": "Registration"
+        },
+        {
+          "SessionId": "Common2",
+          "Time": "8:30 AM - 9:00 AM",
+          "Title": "Keynote",
+          "Room": "22CF12",
+          "Speaker": {
+            "Name": "Luka Debeljak",
+            "Organization": "Microsoft",
+            "Description": "Luka Debeljak is the Cloud Infrastructure Sales Lead for the Asia Pacific Region (APAC), focused on selling hybrid and advanced cloud scenarios targeting Microsoft Azure. In his role, he is primarily responsible for rapid adoption of Microsoft’s Hybrid Cloud solutions with key Enterprise customers. He supports customers’ journey to the cloud by focusing on both public (Azure) and private cloud (Azure Stack), and Azure solutions supporting multi cloud management, business continuity and disaster recovery, security, application infrastructure optimization and networking.",
+            "ImageUrl": "https://raw.githubusercontent.com/punitganshani/azurebootcamp-data/master/2017/locations/singapore/Luka.jpg"
+          }
+        },
+        {
+          "SessionId": "Common3",
+          "Time": "9:00 AM - 9:15 AM",
+          "Title": "Break"
+        },
+        {
+          "SessionId": "DEV1",
+          "Time": "9:15 AM - 10:15 AM",
+          "Title": "Intelligent Bots: Zero to One",
+          "Room":  "22CF12",
+          "Speaker": {
+            "Name": "Puneet Ghanshani",
+            "Organization": "Microsoft",
+            "Description": "Bots aren't introverts, but can they strike a meaningful conversation with you? This session will take you in a flight to building a Bot with natural language processing and an intelligence of a human, hosting it on Azure and accessing through a digital channel of your choice. Puneet an Architect in Microsoft, helps customers envision their digital journey, modernise enterprise technology landscape and build cloud and cross platform device apps. He has authored a book and 22+ articles in international magazines and spoken in 30+ conferences. He is active on www.ganshani.com and on MSDN blogs",
+            "ImageUrl": "https://raw.githubusercontent.com/punitganshani/azurebootcamp-data/master/2016/locations/singapore/punitganshani.jpg",
+            "Social": {
+              "Twitter": "http://www.twitter.com/ganshani",
+              "Website": "http://www.ganshani.com",
+              "Facebook": "http://www.facebook.com/PunitBGanshani"
+            }
+          }
+        },
+        {
+          "SessionId": "DEV2",
+          "Time": "10:15 AM - 11:15 AM",
+          "Title": "Serverless Computing with Azure Functions and Logic Apps",
+          "Room": "22CF12",
+          "Speaker": {
+            "Name": "Wely Lau",
+            "Organization": "Microsoft",
+            "Description": "This session will walk you through two serverless offering from Azure: Functions which enables you to host and execute your code and Logic Apps which is the managed-workflow on the cloud",
+            "ImageUrl": "https://media.licdn.com/media/AAEAAQAAAAAAAAtEAAAAJDU3ZDIxMjdiLTQzYTItNDQ2Mi1hNjY0LWVkMTgyODcxMjFiZQ.jpg",
+            "Social": {
+              "Website": "http://wely-lau.net/"
+            }
+          }
+        },
+        {
+          "SessionId": "DEV3",
+          "Time": "11:15 AM - 12:15 PM",
+          "Title": "Using Azure Function to Build Serverless SharePoint App",
+          "Room": "22CF12",
+          "Speaker": {
+            "Name": "Riwut Libinuko",
+            "Organization": "MVP",
+            "Description": "In this session we will explore what is azure function and how we can leverage it to build serverless application. We will then use this serverless architecture to build customization for SharePoint modern apps.",
+            "ImageUrl": "https://raw.githubusercontent.com/punitganshani/azurebootcamp-data/master/2016/locations/singapore/Riwut-Libinoko.jpg",
+            "Social": {
+              "Website": "https://mvp.microsoft.com/en-us/PublicProfile/4024516?fullName=riwut%20libinuko"
+            }
+          }
+        },
+        {
+          "SessionId": "Common4",
+          "Time": "12:15 PM - 1:15 PM",
+          "Title": "Lunch"
+        },
+        {
+          "SessionId": "DEV4",
+          "Time": "1:15 PM - 2:15 PM",
+          "Title": "Using Azure Notification Hub with Xamarin",
+          "Room": "22CF12",
+          "Speaker": {
+            "Name": "Sohel Shekha",
+            "Organization": "MVP",
+            "Description": "Xamarin Mobile Lead",
+            "ImageUrl": "https://mvp.microsoft.com/en-us/PublicProfile/Photo/5002598",
+            "Social": {
+            }
+          }
+        },
+        {
+          "SessionId": "Common5",
+          "Time": "2:15 PM - 2:30 PM",
+          "Title": "Break"
+        },
+        {
+          "SessionId": "DEV5",
+          "Time": "2:30 PM - 3:30 PM",
+          "Title": "Azure.mobile.com - Xamarin & VS Mobile Services",
+          "Room": "22CF12",
+          "Speaker": {
+            "Name": "Ben ishiyama-levy",
+            "Organization": "MVP",
+            "Description": "Visual Studio Mobile Center: This new platform aggregates tools from azure, and other mobile offerings under one brand. In this session, we'll dig each features in details and demo real life scenarios, Test (Xamarin TestCloud), Distribute (HockeyApp), Crashes (part of HockeyApp), Analytic (Xamarin Insights), Tables (Repository: Connected to Azure), Identity (Authentication: Connected to Azure)",
+            "ImageUrl": "https://mvp.microsoft.com/en-us/PublicProfile/Photo/5002408",
+            "Social": {
+              "Website": "https://mvp.microsoft.com/en-us/PublicProfile/5002408?fullName=ben%20%20ishiyama-levy"
+            }
+          }
+        },
+        {
+          "SessionId": "DEV6",
+          "Time": "3:30 PM - 4:30 PM",
+          "Title": "Digital Transformation with Blockchain As A Service",
+          "Room": "22CF12",
+          "Speaker": {
+            "Name": "Ujjwal Kumar",
+            "Organization": "Microsoft",
+            "Description": "Ujjwal is Sr Technical Evangelist in Microsoft Singapore and he focuses on Azure",
+            "ImageUrl": "http://www.pgconnects.com/bangalore/wp-content/uploads/sites/6/2015/03/Ujjwal-Kumar-500x500.jpg",
+            "Social": {
+            }
+          }
+        },
+        {
+          "SessionId": "DEV7",
+          "Time": "4:30 PM - 5:30 PM",
+          "Title": "Containers on Azure",
+          "Room": "22CF12",
+          "Speaker": {
+            "Name": "Uli Hitzel",
+            "Organization": "Microsoft",
+            "Description": "Learn about Containers on Azure",
+            "ImageUrl": "https://www.linkedin.com/mpr/mpr/AAEAAQAAAAAAAAk6AAAAJDU3YjkxMTJhLTMyNjMtNDlmYy05ZGY3LTdhM2E4YWI5Mjk5Zg.jpg",
+            "Social": {
+              "Website": "http://linkedin.com/in/uhitzel"
+            }
+          }
+        },
+        {
+          "SessionId": "Common6",
+          "Time": "5:30 PM - 6:00 PM",
+          "Title": "Closing & Luck Draw"
+        }
+      ]
+    },
+    {
+      "Name": "IT Pro Track",
+      "Sessions": [
+        {
+          "SessionId": "Common1",
+          "Time": "8:00 AM - 8:30 AM",
+          "Title": "Registration"
+        },
+        {
+          "SessionId": "Common2",
+          "Time": "8:30 AM - 9:00 AM",
+          "Title": "Keynote",
+          "Speaker": {
+            "Name": "TBD",
+            "Description": "TBD",
+            "ImageUrl": "",
+            "Social": {
+              "Twitter": "#",
+              "Website": "#",
+              "Facebook": "#"
+            }
+          }
+        },
+        {
+          "SessionId": "Common3",
+          "Time": "9:00 AM - 9:15 AM",
+          "Title": "Break"
+        },
+        {
+          "SessionId": "ITPRO1",
+          "Time": "9:15 AM - 10:15 AM",
+          "Title": "Accelerating your Journey to the Cloud",
+          "Room": "BPC",
+          "Speaker": {
+            "Name": "Milton Goh",
+            "Organization": "MVP",
+            "Description": "Feeling skeptical about the Cloud? Not sure if that will bring any benefits to you personally, to your job or to your organization? Wait no more, come to my session and we will trash all this out. :)",
+            "ImageUrl": "https://raw.githubusercontent.com/punitganshani/azurebootcamp-data/master/2016/locations/singapore/miltongoh.jpg",
+            "Social": {
+              "Twitter": "https://twitter.com/miltongoh",
+              "Website": "https://mvp.microsoft.com/en-us/PublicProfile/5001323?fullName=Sheng%20Wei%20Milton%20%20Goh",
+              "Facebook": "https://www.facebook.com/miltongoh"
+            }
+          }
+        },
+        {
+          "SessionId": "ITPRO2",
+          "Time": "10:15 AM - 11:15 AM",
+          "Title": "A Practical approach to High Availability in Azure",
+          "Room": "BPC",
+          "Speaker": {
+            "Name": "MS Anand",
+            "Organization": "Microsoft",
+            "Description": "Attend this session to understand the different options available for building highly available IaaS solutions on Azure. We will cover which options work best for different scenarios and will also include demos. The technologies that we will cover during this session include (but not limited to): Availability Sets, VM Scale Sets, Traffic Manager, Recovery Services.",
+            "ImageUrl": "https://raw.githubusercontent.com/punitganshani/azurebootcamp-data/master/2016/locations/singapore/anandms.jpg",
+            "Social": {
+            }
+          }
+        },
+        {
+          "SessionId": "ITPRO3",
+          "Time": "11:15 AM - 12:15 PM",
+          "Title": "Design A Secure Azure IaaS - Lesson Learnt from Government Cloud",
+          "Room": "BPC",
+          "Speaker": {
+            "Name": "Thuan Ng",
+            "Organization": "MVP",
+            "Description": "Security has never stopped being a hot topic in the wave of digital transformation. Moving to cloud does not mean your system is protected. The responsibility of information security is still shared by both parties: cloud provider and you, and has been a challenge to you in the design & implementation. This session will give you a practical design for a secure system hosted on Microsoft Azure. There will be also the model and lesson learnt from Government Cloud which is the principle to the architecture design & implementation",
+            "ImageUrl": "https://mvp.microsoft.com/en-us/PublicProfile/Photo/4033607",
+            "Social": {
+            }
+          }
+        },
+        {
+          "SessionId": "Common4",
+          "Time": "12:15 PM - 1:15 PM",
+          "Title": "Lunch"
+        },
+        {
+          "SessionId": "ITPRO4",
+          "Time": "1:15 PM - 2:15 PM",
+          "Title": "Azure Governance",
+          "Room": "BPC",
+          "Speaker": {
+            "Name": "Mohamed Faizal",
+            "Organization": "Microsoft",
+            "Description": "Mohamed Faizal, MSFT, has 18+years' experience in Enterprise Solutions, SharePoint, Cloud Architect (PaaS/SaaS) with extensive experience on developing .NET, SharePoint 2007,2010 and 2013 solutions on the cloud or on premise. Faizal has consulted for many enterprise companies and government agencies",
+            "ImageUrl": "https://raw.githubusercontent.com/punitganshani/azurebootcamp-data/master/2016/locations/singapore/faizal.jpg",
+            "Social": {
+              "Twitter": "http://www.twitter.com/kmdfaizal",
+              "Facebook": "https://www.facebook.com/kmdfaizal"
+
+            }
+          }
+        },
+        {
+          "SessionId": "Common5",
+          "Time": "2:15 PM - 2:30 PM",
+          "Title": "Break"
+        },
+        {
+          "SessionId": "ITPRO5",
+          "Time": "2:30 PM - 3:30 PM",
+          "Title": "Azure Networking New Capabilities",
+          "Room": "BPC",
+          "Speaker": {
+            "Name": "Kunal Bhatia",
+            "Organization": "Microsoft",
+            "Description": "This session will provide a recap of some Azure Networking capabilities and scenarios  announced in the last few months - Shared Vnet, High Performance Networking, Load Balancer etc.",
+            "ImageUrl": "https://raw.githubusercontent.com/punitganshani/azurebootcamp-data/master/2017/locations/singapore/KunalBhatia.jpg",
+            "Social": {
+              "Website": "https://www.linkedin.com/in/kunalbhatia123",
+                "Twitter": "#"
+            }
+          }
+        },
+        {
+          "SessionId": "ITPRO6",
+          "Time": "3:30 PM - 4:30 PM",
+          "Title": "Securing Azure Assets",
+          "Room": "BPC",
+          "Speaker": {
+            "Name": "Sakthis Kumar",
+            "Organization": "MVP",
+            "Description": "Sakthis, Microsoft Azure MVP has 17+ years of IT experience spanning enterprise consulting, architecting hybrid solutions using Microsoft technologies like Exchange, SharePoint, Windows Server, Directory Services, Office 365 Platform, Azure.",
+            "ImageUrl": "https://raw.githubusercontent.com/punitganshani/azurebootcamp-data/master/2016/locations/singapore/sakthis.jpg",
+            "Social": {
+              "Twitter": "https://twitter.com/Sakthis",
+              "Facebook": "https://www.facebook.com/rsakthis",
+              "website": "https://mvp.microsoft.com/en-us/PublicProfile/5002387?fullName=Sakthis%20%20Kumar"
+            }
+          }
+        },
+        {
+          "SessionId": "ITPRO7",
+          "Time": "4:30 PM - 5:30 PM",
+          "Title": "Operations Management Suite: Planning for Failure",
+          "Room": "BPC",
+          "Speaker": {
+            "Name": "Steven Li Yan",
+            "Organization": "Microsoft",
+            "Description": "Learn how you can build a contingency plan for your on premise as well as Azure assets and protect your services from probable causes of failure. Learn about backing up and replicating on premise solutions onto Azure and scheduling daily backup of Azure VMs. During the demo session, a ransomware attack will be simulated and see how to recover fast.",
+            "ImageUrl": "https://www.linkedin.com/mpr/mpr/AAEAAQAAAAAAAAjgAAAAJDk1Njc1YTMyLTg5OGEtNDg5ZS05MjVhLTczMWEzNzcyMzM0Mg.jpg",
+            "Social": {
+              "Website": "https://www.linkedin.com/in/steven-li-yan-0a9b33135"
+            }
+          }
+        },
+        {
+          "SessionId": "Common6",
+          "Time": "5:30 PM - 6:00 PM",
+          "Title": "Closing & Luck Draw"
+        }
+      ]
+    },
+    {
+      "Name": "Special Track",
+      "Sessions": [
+        {
+          "SessionId": "Common1",
+          "Time": "8:00 AM - 8:30 AM",
+          "Title": "Registration"
+        },
+        {
+          "SessionId": "Common2",
+          "Time": "8:30 AM - 9:00 AM",
+          "Title": "Keynote",
+          "Speaker": {
+            "Name": "TBD",
+            "Description": "TBD",
+            "ImageUrl": "",
+            "Social": {
+              "Twitter": "#",
+              "Website": "#",
+              "Facebook": "#"
+            }
+          }
+        },
+        {
+          "SessionId": "Common3",
+          "Time": "9:00 AM - 9:15 AM",
+          "Title": "Break"
+        },
+        {
+          "SessionId": "DATA1",
+          "Time": "9:15 AM - 10:15 AM",
+          "Title": "Big Data Compute with Azure HDInsight",
+          "Room": "22CF15",
+          "Speaker": {
+            "Name": "Ben Sadeghi",
+            "Organization": "Microsoft",
+            "Description": "HDInsight - A managed Apache Hadoop, Spark, Storm, HBase, and R cloud service",
+            "ImageUrl": "https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAm1AAAAJDMwN2Y0ZDI0LTNjNzctNDQzYi05ZDI5LTY1MWRjZjk5N2VhZQ.jpg",
+            "Social": {
+              "Website": "https://www.linkedin.com/in/bensadeghi"
+            }
+          }
+        },
+
+        {
+          "SessionId": "DATA2",
+          "Time": "10:15 AM - 11:15 AM",
+          "Title": "Getting Started With Azure Machine Learning",
+          "Room": "22CF15",
+          "Speaker": {
+            "Name": "Setu Chokshi",
+            "Organization": "Community",
+            "Description": "An entry level session, that will walk them through the algorithms available within Azure ML (some of them) and then step by step walk them through one or two examples that they can practise. Complete hands on exercise.",
+            "ImageUrl": "https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/000/22a/0c5/21b7e54.jpg",
+            "Social": {
+            }
+          }
+        },
+        {
+          "SessionId": "DATA3",
+          "Time": "11:15 AM - 12:15 PM",
+          "Title": "Disrupting the Media and Broadcast industry",
+          "Room": "22CF15",
+          "Speaker": {
+            "Name": "Alex Chan",
+            "Organization": "Community",
+            "Description": "Learn how you can you create your own Netflix using Azure Media Services. If that's not enough, use Media Analytics and Cognitive Services to create your own niche.",
+            "ImageUrl": "https://media.licdn.com/media/AAEAAQAAAAAAAAJvAAAAJDMyZTZkOGQyLTYxYmItNGUzNC04NzdlLTgyODZmMjk4NTBiNg.jpg",
+            "Social": {
+              "Website": "https://www.linkedin.com/in/alexchanhw"
+            }
+          }
+        },
+        {
+          "SessionId": "Common4",
+          "Time": "12:15 PM - 1:15 PM",
+          "Title": "Lunch"
+        },
+        {
+          "SessionId": "DATA4",
+          "Time": "1:15 PM - 2:15 PM",
+          "Title": "Bleed Blue for the clouds - SQL Azure",
+          "Room": "22CF15",
+          "Speaker": {
+            "Name": "Dharmendra Keshari",
+            "Organization": "MVP",
+            "Description": "Bleed Bright Blue for the clouds in the Sky. Yes I would be presenting Microsoft Azure and how SQL Server DBA's can benefit with Azure as your platform. This session would introduce you to Microsoft SQL Azure and helps to put Production DBA's mind at ease that their jobs will not be going away with Azure. This session would give a complete clarity and good foundation of where to start and what would be the next step with the Azure. It would cover on how to plan for Azure and demonstrate on DTU Calculator on Azure suitability and also important tools that are very handy and crucial to understand.",
+            "ImageUrl": "https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAVBAAAAJGVkZTVkOGVhLWQ0MzYtNDE1ZS1hYjhiLTJiNjRmZTdiMGY0MQ.jpg",
+            "Social": {
+              "Facebook": "https://www.facebook.com/dharmendra.keshari.9",
+              "Website": "http://www.dharmendrakeshari.com/about"
+            }
+          }
+        },
+        {
+          "SessionId": "Common5",
+          "Time": "2:15 PM - 2:30 PM",
+          "Title": "Break"
+        },
+        {
+          "SessionId": "DATA5",
+          "Time": "2:30 PM - 3:30 PM",
+          "Title": "Hololense with Azure (Live Demo!)",
+          "Room": "22CF15",
+          "Speaker": {
+            "Name": "Senthamil Selvan",
+            "Organization": "MVP",
+            "Description": "Senthamil Selvan is awarded as Microsoft MVP in Windows Development. He has 11+ years of experience in Microsoft Platform including Windows Forms, SharePoint and Universal Apps development. He has published several Windows Apps in the Store - 8 Windows Phone and 5 Windows Store Apps.",
+            "ImageUrl": "https://raw.githubusercontent.com/punitganshani/azurebootcamp-data/master/2016/locations/singapore/senthamil.jpg",
+            "Social": {
+              "Twitter": "http://www.twitter.com/altfo",
+              "Facebook": "https://www.facebook.com/altfo"
+            }
+          }
+        },
+        {
+          "SessionId": "DATA6",
+          "Time": "3:30 PM - 4:30 PM",
+          "Title": "Xamarin Application Insights",
+          "Room": "22CF15",
+          "Speaker": {
+            "Name": "Louis Leong",
+            "Organization": "Microsoft",
+            "Description": "Louis is a Technical Evangelist at Microsoft Singapore working with teams to adopt DevOps and to build great cloud and mobile apps. He is a certified Scrum Master and has an extensive background in software development and architecting enterprise scale solutions",
+            "ImageUrl": "https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAMXAAAAJGU5YzU5NTk0LTFlNGMtNDY3MC05YmM5LWVlYzY1YTExM2VhNQ.jpg",
+            "Social": {
+              "Twitter": "#",
+              "Website": "https://www.linkedin.com/in/louisleongwy",
+              "Facebook": "#"
+            }
+          }
+        },
+        {
+          "SessionId": "DATA7",
+          "Time": "4:30 PM - 5:30 PM",
+          "Title": "Building Intelligent Apps and Securing using Azure Security Center",
+          "Room": "22CF15",
+          "Speaker": {
+            "Name": "Saranya Sriram",
+            "Organization": "Microsoft",
+            "Description": "In this session, we will take a quick look at how a modern, intelligent cross platform Application that can is built for real time data feed, visualization and predictive analytics, might look like on Azure platform - tools. Building & deploying Apps is half the story. The key to a successful deployment on Cloud is securing the deployments. We will introduce Azure Security Center to the audience with step-by-step demo of how to secure a newly created Azure environment including patch & baseline assessment of the VMs, identifying & securing open endpoints to the Internet using NSGs and NGFW using 3rd party solution, identifying & securing Azure storage and SQL Azure instances, identifying & securing Azure Web App instance and setting a security policy for the subscription.",
+            "ImageUrl": "https://github.com/azurebootcamp/azurebootcamp-data/raw/master/2017/locations/singapore/saranya.jpg",
+            "Social": {}
+          }
+        },
+        {
+          "SessionId": "Common6",
+          "Time": "5:30 PM - 6:00 PM",
+          "Title": "Closing & Lucky Draw"
+        }
+
+      ]
+    }
+  ]
+}
