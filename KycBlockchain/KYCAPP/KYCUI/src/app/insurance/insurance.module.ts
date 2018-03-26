@@ -10,6 +10,7 @@ import { CarShopComponent } from './car-shop/car-shop.component';
 import { PhoneShopComponent } from './phone-shop/phone-shop.component';
 import { InsureComponent } from './insure/insure.component';
 import { MyDatePickerModule } from 'mydatepicker';
+import { SummaryComponent } from './summary/summary.component';
 const routes: Routes = [
   {
     path: '', component: InsuranceLayoutComponent,
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: 'shop/car-shop', component: CarShopComponent },
       { path: 'shop/phone-shop', component: PhoneShopComponent },
       { path: 'shop/car-shop/insure', component: InsureComponent },
+      { path: 'shop/car-shop/summary', component:SummaryComponent }
     ]
   }
   // {path:'Insurance',component:InvestmentsComponent},
@@ -33,6 +35,6 @@ const routes: Routes = [
 
   ],
 
-  declarations: [InsuranceHomeComponent, InsuranceLayoutComponent, ShopComponent, CarShopComponent, PhoneShopComponent, InsureComponent]
+  declarations: [InsuranceHomeComponent, InsuranceLayoutComponent, ShopComponent, CarShopComponent, PhoneShopComponent, InsureComponent, SummaryComponent]
 })
 export class InsuranceModule { }

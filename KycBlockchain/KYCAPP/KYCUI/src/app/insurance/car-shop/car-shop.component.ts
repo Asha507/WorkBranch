@@ -14,11 +14,10 @@ export class CarShopComponent implements OnInit {
   sNumber: number = 0;
   sdNumber: number = 0;
   carShopItem:ShopModel;
+  model:string;
   constructor(private router:Router) { 
     this.carShopItem =new ShopModel();
     this.carShopItem.Item="Car";
-  
-
   }
 
   ngOnInit() {
@@ -28,7 +27,7 @@ export class CarShopComponent implements OnInit {
     this.sNumber = this.GenerateRandomNumber();
     switch (event.target.selectedIndex) {
       case 1:
-        this.costS = "6L"
+        this.costS = "6L";
         break;
       case 2:
         this.costS = "8L"
@@ -40,7 +39,9 @@ export class CarShopComponent implements OnInit {
         this.costS = "";
         break;
     }
-
+    debugger;
+    this.carShopItem.Name="Suziki swift";
+    this.carShopItem.Model=event.target.value;
     this.carShopItem.cost=this.costS;
     this.carShopItem.SerialNumber=this.sNumber.toString();
   }
@@ -65,12 +66,15 @@ export class CarShopComponent implements OnInit {
         this.costSD = "";
         break;
     }
+    this.carShopItem.Name="Suziki swift Dezir";
+    this.carShopItem.cost=this.costSD;
+    this.carShopItem.SerialNumber=this.sdNumber.toString();
   }
-
   NextClick()
   {
     debugger;
     sessionStorage.setItem("Item",JSON.stringify(this.carShopItem));
-    this.router.navigate['shop/insure'];
+   this.router.navigate(['insurance/shop/car-shop/insure']); 
   }
+ 
 }

@@ -3,9 +3,6 @@
         <h3>Car Shop</h3>
     </div>
     <div class="row">
-        <h4>Buy insurance for the car</h4>
-    </div>
-    <div class="row">
             <div class="panel panel-default">
                     <div class="panel-heading">Buy Insurance for Car </div>
                     <div class="panel-body">
@@ -15,7 +12,7 @@
                                             <label>Contract</label>
                                     </td>
                                     <td class="col-md-3">
-                                            <input type="text" class="form-control" name="contract" [(ngModel)]="item.insuranceRecord.Contract">
+                                            <input type="text" class="form-control" name="contract" [(ngModel)]="contract">
                                     </td>
                                     <td class="col-md-7 noborder"></td>
                                 </tr>
@@ -24,7 +21,7 @@
                                                 <label>Daily Price</label>
                                         </td>
                                         <td class="col-md-3">
-                                                <input type="text" class="form-control" name="dailyPrice" [(ngModel)]="item.insuranceRecord.DailyPrice">
+                                                <input type="text" class="form-control" name="dailyPrice" [(ngModel)]="dailyPrice">
                                         </td>
                                         <td class="col-md-7 noborder"></td>
                                     </tr>
@@ -33,7 +30,7 @@
                                                     <label>Theft Protection</label>
                                             </td>
                                             <td class="col-md-3">
-                                                    <input type="checkbox" name="theftProtection" [(ngModel)]="item.insuranceRecord.TheftProtection">
+                                                    <input type="checkbox" name="theftProtection" [(ngModel)]="theftProtection">
                                             </td>
                                             <td class="col-md-7 noborder"></td>
                                         </tr>
@@ -42,7 +39,7 @@
                                                         <label>Contract Terms</label>
                                                 </td>
                                                 <td class="col-md-3">
-                                                        <input type="text" class="form-control" name="contractTerms" [(ngModel)]="item.insuranceRecord.ContractTerms">
+                                                        <input type="text" class="form-control" name="contractTerms" [(ngModel)]="contractTerms">
                                                 </td>
                                                 <td class="col-md-7 noborder"></td>
                                             </tr>
@@ -51,7 +48,7 @@
                                                             <label>FirstName</label>
                                                     </td>
                                                     <td class="col-md-3">
-                                                            <input type="text" class="form-control" name="firstName" [(ngModel)]="item.insuranceRecord.FirstName">
+                                                            <input type="text" class="form-control" name="firstName" [(ngModel)]="firstName">
                                                     </td>
                                                     <td class="col-md-7 noborder"></td>
                                                 </tr>
@@ -60,7 +57,7 @@
                                                                 <label>LastName</label>
                                                         </td>
                                                         <td class="col-md-3">
-                                                                <input type="text" class="form-control" name="lastName" [(ngModel)]="item.insuranceRecord.LastName">
+                                                                <input type="text" class="form-control" name="lastName" [(ngModel)]="lastName">
                                                         </td>
                                                         <td class="col-md-7 noborder"></td>
                                                     </tr>
@@ -69,7 +66,7 @@
                                                                     <label>Email</label>
                                                             </td>
                                                             <td class="col-md-3">
-                                                                    <input type="email" class="form-control" name="email" [(ngModel)]="item.insuranceRecord.Email" >
+                                                                    <input type="email" class="form-control" name="email" [(ngModel)]="email" >
                                                             </td>
                                                             <td class="col-md-7 noborder"></td>
                                                         </tr>

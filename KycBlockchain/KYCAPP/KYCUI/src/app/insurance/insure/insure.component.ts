@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {IMyDpOptions} from 'mydatepicker';
 import { ShopModel } from '../ShopModel';
+import { InsuranceModel } from '../InsuranceModel';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-insure',
@@ -23,18 +25,27 @@ theftProtection:string;
 firstName:string;
 lastName:string;
 email:string;
-item:ShopModel;
+shopitem:ShopModel;
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit() {
     debugger;
-    this.item=JSON.parse(sessionStorage.getItem("Item"));
+    this.shopitem=JSON.parse(sessionStorage.getItem("Item"));
   }
   NextClick()
   {
     debugger;
-   this.item.insuranceRecord.StartDate=this.startDate;
-   this.item.insuranceRecord.LastDate=this.endDate;
+    this.shopitem.insuranceRecord=new InsuranceModel();
+    this.shopitem.insuranceRecord.Contract=this.contract;
+    this.shopitem.insuranceRecord.DailyPrice=this.dailyPrice;
+    this.shopitem.insuranceRecord.ContractTerms=this.contractTerms;
+    this.shopitem.insuranceRecord.FirstName=this.firstName;
+    this.shopitem.insuranceRecord.LastName=this.lastName;
+    this.shopitem.insuranceRecord.TheftProtection=this.theftProtection;
+   this.shopitem.insuranceRecord.StartDate=this.startDate;
+   this.shopitem.insuranceRecord.LastDate=this.endDate;
+   sessionStorage.setItem("Item",JSON.stringify(this.shopitem));
+   this.router.navigate(['insurance/shop/car-shop/summary']);
   }
 }
