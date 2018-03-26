@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ShopModel } from '../ShopModel';
 @Component({
   selector: 'app-car-shop',
   templateUrl: './car-shop.component.html',
@@ -12,7 +13,13 @@ export class CarShopComponent implements OnInit {
   costSD: string = "";
   sNumber: number = 0;
   sdNumber: number = 0;
-  constructor(private router:Router) { }
+  carShopItem:ShopModel;
+  constructor(private router:Router) { 
+    this.carShopItem =new ShopModel();
+    this.carShopItem.Item="Car";
+  
+
+  }
 
   ngOnInit() {
   }
@@ -34,6 +41,8 @@ export class CarShopComponent implements OnInit {
         break;
     }
 
+    this.carShopItem.cost=this.costS;
+    this.carShopItem.SerialNumber=this.sNumber.toString();
   }
 
   GenerateRandomNumber() {
@@ -61,6 +70,7 @@ export class CarShopComponent implements OnInit {
   NextClick()
   {
     debugger;
-    this.router.navigateByUrl('shop/insure');
+    sessionStorage.setItem("Item",JSON.stringify(this.carShopItem));
+    this.router.navigate['shop/insure'];
   }
 }

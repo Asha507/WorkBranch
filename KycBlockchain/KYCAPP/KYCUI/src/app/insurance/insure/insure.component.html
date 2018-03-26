@@ -1,18 +1,106 @@
 <div class="container">
-<div class="row">
-<h3>Car Shop</h3>
-</div>
-<div class="row">
-<h4>Buy insurance for the car</h4>
-</div>
-<div class="row">
-<div class="row">
-    <div class="col-md-6">
-
+    <div class="row">
+        <h3>Car Shop</h3>
     </div>
     <div class="row">
-
+        <h4>Buy insurance for the car</h4>
     </div>
-</div>
-</div>
+    <div class="row">
+            <div class="panel panel-default">
+                    <div class="panel-heading">Buy Insurance for Car </div>
+                    <div class="panel-body">
+                        	<table class="table table-hover" >
+                                <tr class="row">
+                                    <td class="col-md-2">
+                                            <label>Contract</label>
+                                    </td>
+                                    <td class="col-md-3">
+                                            <input type="text" class="form-control" name="contract" [(ngModel)]="item.insuranceRecord.Contract">
+                                    </td>
+                                    <td class="col-md-7 noborder"></td>
+                                </tr>
+                                <tr class="row">
+                                        <td class="col-md-2 ">
+                                                <label>Daily Price</label>
+                                        </td>
+                                        <td class="col-md-3">
+                                                <input type="text" class="form-control" name="dailyPrice" [(ngModel)]="item.insuranceRecord.DailyPrice">
+                                        </td>
+                                        <td class="col-md-7 noborder"></td>
+                                    </tr>
+                                    <tr class="row">
+                                            <td class="col-md-2 ">
+                                                    <label>Theft Protection</label>
+                                            </td>
+                                            <td class="col-md-3">
+                                                    <input type="checkbox" name="theftProtection" [(ngModel)]="item.insuranceRecord.TheftProtection">
+                                            </td>
+                                            <td class="col-md-7 noborder"></td>
+                                        </tr>
+                                        <tr class="row">
+                                                <td class="col-md-2 ">
+                                                        <label>Contract Terms</label>
+                                                </td>
+                                                <td class="col-md-3">
+                                                        <input type="text" class="form-control" name="contractTerms" [(ngModel)]="item.insuranceRecord.ContractTerms">
+                                                </td>
+                                                <td class="col-md-7 noborder"></td>
+                                            </tr>
+                                            <tr class="row">
+                                                    <td class="col-md-2 ">
+                                                            <label>FirstName</label>
+                                                    </td>
+                                                    <td class="col-md-3">
+                                                            <input type="text" class="form-control" name="firstName" [(ngModel)]="item.insuranceRecord.FirstName">
+                                                    </td>
+                                                    <td class="col-md-7 noborder"></td>
+                                                </tr>
+                                                <tr class="row">
+                                                        <td class="col-md-2 ">
+                                                                <label>LastName</label>
+                                                        </td>
+                                                        <td class="col-md-3">
+                                                                <input type="text" class="form-control" name="lastName" [(ngModel)]="item.insuranceRecord.LastName">
+                                                        </td>
+                                                        <td class="col-md-7 noborder"></td>
+                                                    </tr>
+                                                    <tr class="row">
+                                                            <td class="col-md-2 ">
+                                                                    <label>Email</label>
+                                                            </td>
+                                                            <td class="col-md-3">
+                                                                    <input type="email" class="form-control" name="email" [(ngModel)]="item.insuranceRecord.Email" >
+                                                            </td>
+                                                            <td class="col-md-7 noborder"></td>
+                                                        </tr>
+                                                        <tr class="row">
+                                                                <td class="col-md-2 ">
+                                                                        <label>Start Date</label>
+                                                                </td>
+                                                                <td class="col-md-3">
+                                                                        <my-date-picker name="mydate" [options]="myDatePickerOptions"
+                                                                        [(ngModel)]="startDate" required></my-date-picker>
+                                                                </td>
+                                                                <td class="col-md-7 noborder"></td>
+                                                            </tr>
+                                                            <tr class="row">
+                                                                    <td class="col-md-2 ">
+                                                                            <label>EndDate</label>
+                                                                    </td>
+                                                                    <td class="col-md-3">
+                                                                        <my-date-picker name="mydate" [options]="myDatePickerOptions"
+                                                                        [(ngModel)]="endDate" required></my-date-picker>
+                                                                    </td>
+                                                                    <td class="col-md-7 noborder"></td>
+                                                                </tr>
+
+                            </table>
+                            <div class="row">
+                                    <div class="col-md-4"></div>
+                                <button class="btn btn-primary col-md-2" (click)="NextClick()">Next</button>
+                            </div>
+                    </div>
+            </div>
+
+            </div>
 </div>

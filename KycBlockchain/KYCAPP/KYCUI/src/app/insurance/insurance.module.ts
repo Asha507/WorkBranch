@@ -9,6 +9,7 @@ import { ShopComponent } from './shop/shop.component';
 import { CarShopComponent } from './car-shop/car-shop.component';
 import { PhoneShopComponent } from './phone-shop/phone-shop.component';
 import { InsureComponent } from './insure/insure.component';
+import { MyDatePickerModule } from 'mydatepicker';
 const routes: Routes = [
   {
     path: '', component: InsuranceLayoutComponent,
@@ -27,7 +28,9 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    FormsModule
+    FormsModule,
+    MyDatePickerModule 
+
   ],
 
   declarations: [InsuranceHomeComponent, InsuranceLayoutComponent, ShopComponent, CarShopComponent, PhoneShopComponent, InsureComponent]

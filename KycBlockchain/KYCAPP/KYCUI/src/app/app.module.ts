@@ -31,7 +31,6 @@ const routes:Routes=[
   imports: [
     BrowserModule, 
     RouterModule.forRoot(routes, {useHash: true}),
-    //InsuranceModule,   
     FormsModule
   ],
   providers: [],
