@@ -10,6 +10,8 @@ import { IndexComponent } from './index/index.component';
 import {DefaultComponent} from './default/default.component';
 import { DemoComponent } from './demo/demo.component'
 import { InsuranceModule } from './insurance/insurance.module';
+import { ShopService } from './insurance/shop.service';
+import { HttpModule } from '@angular/http';
 const routes:Routes=[
   { path: '',component:DefaultComponent },
   {path:'default',component:DefaultComponent},
@@ -31,7 +33,8 @@ const routes:Routes=[
   imports: [
     BrowserModule, 
     RouterModule.forRoot(routes, {useHash: true}),
-    FormsModule
+    FormsModule,
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]

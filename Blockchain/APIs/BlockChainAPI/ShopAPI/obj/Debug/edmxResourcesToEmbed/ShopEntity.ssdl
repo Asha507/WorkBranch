@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ProductDetails">
+    <Key>
+      <PropertyRef Name="UBN" />
+    </Key>
+    <Property Name="Item" Type="varchar" MaxLength="20" />
+    <Property Name="Name" Type="varchar" MaxLength="20" />
+    <Property Name="Model" Type="varchar" MaxLength="20" />
+    <Property Name="Cost" Type="varchar" MaxLength="20" />
+    <Property Name="SerialNumber" Type="varchar" MaxLength="20" />
+    <Property Name="UBN" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProductInsuranceDetails">
+    <Key>
+      <PropertyRef Name="UBN" />
+    </Key>
+    <Property Name="UBN" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DailyPrice" Type="varchar" MaxLength="20" />
+    <Property Name="FirstName" Type="varchar" MaxLength="20" />
+    <Property Name="LastName" Type="varchar" MaxLength="20" />
+    <Property Name="Email" Type="varchar" MaxLength="20" />
+    <Property Name="LastDate" Type="varchar" MaxLength="20" />
+    <Property Name="StartDate" Type="varchar" MaxLength="20" />
+    <Property Name="ContractTerms" Type="varchar" MaxLength="20" />
+    <Property Name="_contract" Type="varchar" MaxLength="20" />
+    <Property Name="theftProtection" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="ProductInsureLoginDetails">
+    <Key>
+      <PropertyRef Name="UBN" />
+    </Key>
+    <Property Name="UBN" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" />
+    <Property Name="_password" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__ProductInsu__UBN__1367E606">
+    <End Role="ProductDetails" Type="Self.ProductDetails" Multiplicity="1" />
+    <End Role="ProductInsuranceDetails" Type="Self.ProductInsuranceDetails" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="ProductDetails">
+        <PropertyRef Name="UBN" />
+      </Principal>
+      <Dependent Role="ProductInsuranceDetails">
+        <PropertyRef Name="UBN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductInsu__UBN__164452B1">
+    <End Role="ProductDetails" Type="Self.ProductDetails" Multiplicity="1" />
+    <End Role="ProductInsureLoginDetails" Type="Self.ProductInsureLoginDetails" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="ProductDetails">
+        <PropertyRef Name="UBN" />
+      </Principal>
+      <Dependent Role="ProductInsureLoginDetails">
+        <PropertyRef Name="UBN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ShopModelStoreContainer">
+    <EntitySet Name="ProductDetails" EntityType="Self.ProductDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductInsuranceDetails" EntityType="Self.ProductInsuranceDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductInsureLoginDetails" EntityType="Self.ProductInsureLoginDetails" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__ProductInsu__UBN__1367E606" Association="Self.FK__ProductInsu__UBN__1367E606">
+      <End Role="ProductDetails" EntitySet="ProductDetails" />
+      <End Role="ProductInsuranceDetails" EntitySet="ProductInsuranceDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductInsu__UBN__164452B1" Association="Self.FK__ProductInsu__UBN__164452B1">
+      <End Role="ProductDetails" EntitySet="ProductDetails" />
+      <End Role="ProductInsureLoginDetails" EntitySet="ProductInsureLoginDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

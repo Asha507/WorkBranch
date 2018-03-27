@@ -1,4 +1,4 @@
-import { InsuranceModel } from "./InsuranceModel";
+import { ShopInsuranceModel } from "./InsuranceModel";
 
 export class ShopModel
 {
@@ -7,7 +7,8 @@ export class ShopModel
     Name:string;
     Model:string;
     cost:string;
+    TotalAmount:string
     SerialNumber:string;
-    insuranceRecord:InsuranceModel;
+    insuranceRecord:ShopInsuranceModel;
 
 }

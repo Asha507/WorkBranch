@@ -11,6 +11,9 @@ import { PhoneShopComponent } from './phone-shop/phone-shop.component';
 import { InsureComponent } from './insure/insure.component';
 import { MyDatePickerModule } from 'mydatepicker';
 import { SummaryComponent } from './summary/summary.component';
+import { ShopService } from './shop.service';
+import { HttpModule } from '@angular/http';
+import { BlockService } from './block.service';
 const routes: Routes = [
   {
     path: '', component: InsuranceLayoutComponent,
@@ -31,10 +34,10 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     FormsModule,
-    MyDatePickerModule 
-
+    MyDatePickerModule,
+    HttpModule
   ],
-
+  providers:[ShopService,BlockService],
   declarations: [InsuranceHomeComponent, InsuranceLayoutComponent, ShopComponent, CarShopComponent, PhoneShopComponent, InsureComponent, SummaryComponent]
 })
 export class InsuranceModule { }

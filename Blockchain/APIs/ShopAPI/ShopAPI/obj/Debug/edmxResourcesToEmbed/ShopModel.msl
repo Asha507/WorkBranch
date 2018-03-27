@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ShopModelStoreContainer" CdmEntityContainer="ShopEntities">
+    <EntitySetMapping Name="ProductDetails">
+      <EntityTypeMapping TypeName="ShopModel.ProductDetail">
+        <MappingFragment StoreEntitySet="ProductDetails">
+          <ScalarProperty Name="Item" ColumnName="Item" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+          <ScalarProperty Name="UBN" ColumnName="UBN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductInsuranceDetails">
+      <EntityTypeMapping TypeName="ShopModel.ProductInsuranceDetail">
+        <MappingFragment StoreEntitySet="ProductInsuranceDetails">
+          <ScalarProperty Name="UBN" ColumnName="UBN" />
+          <ScalarProperty Name="DailyPrice" ColumnName="DailyPrice" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="LastDate" ColumnName="LastDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="ContractTerms" ColumnName="ContractTerms" />
+          <ScalarProperty Name="C_contract" ColumnName="_contract" />
+          <ScalarProperty Name="theftProtection" ColumnName="theftProtection" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductInsureLoginDetails">
+      <EntityTypeMapping TypeName="ShopModel.ProductInsureLoginDetail">
+        <MappingFragment StoreEntitySet="ProductInsureLoginDetails">
+          <ScalarProperty Name="UBN" ColumnName="UBN" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="C_password" ColumnName="_password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

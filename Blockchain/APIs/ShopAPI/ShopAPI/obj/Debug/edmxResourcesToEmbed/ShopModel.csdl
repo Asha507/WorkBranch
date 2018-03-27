@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ProductDetail">
+    <Key>
+      <PropertyRef Name="UBN" />
+    </Key>
+    <Property Name="Item" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Model" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Cost" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="SerialNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="UBN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="ProductInsuranceDetail" Relationship="Self.FK__ProductInsu__UBN__1367E606" FromRole="ProductDetails" ToRole="ProductInsuranceDetails" />
+    <NavigationProperty Name="ProductInsureLoginDetail" Relationship="Self.FK__ProductInsu__UBN__164452B1" FromRole="ProductDetails" ToRole="ProductInsureLoginDetails" />
+  </EntityType>
+  <EntityType Name="ProductInsuranceDetail">
+    <Key>
+      <PropertyRef Name="UBN" />
+    </Key>
+    <Property Name="UBN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DailyPrice" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LastDate" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="StartDate" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ContractTerms" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="C_contract" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="theftProtection" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ProductDetail" Relationship="Self.FK__ProductInsu__UBN__1367E606" FromRole="ProductInsuranceDetails" ToRole="ProductDetails" />
+  </EntityType>
+  <EntityType Name="ProductInsureLoginDetail">
+    <Key>
+      <PropertyRef Name="UBN" />
+    </Key>
+    <Property Name="UBN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="C_password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ProductDetail" Relationship="Self.FK__ProductInsu__UBN__164452B1" FromRole="ProductInsureLoginDetails" ToRole="ProductDetails" />
+  </EntityType>
+  <Association Name="FK__ProductInsu__UBN__1367E606">
+    <End Role="ProductDetails" Type="Self.ProductDetail" Multiplicity="1" />
+    <End Role="ProductInsuranceDetails" Type="Self.ProductInsuranceDetail" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="ProductDetails">
+        <PropertyRef Name="UBN" />
+      </Principal>
+      <Dependent Role="ProductInsuranceDetails">
+        <PropertyRef Name="UBN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductInsu__UBN__164452B1">
+    <End Role="ProductDetails" Type="Self.ProductDetail" Multiplicity="1" />
+    <End Role="ProductInsureLoginDetails" Type="Self.ProductInsureLoginDetail" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="ProductDetails">
+        <PropertyRef Name="UBN" />
+      </Principal>
+      <Dependent Role="ProductInsureLoginDetails">
+        <PropertyRef Name="UBN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ShopEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ProductDetails" EntityType="Self.ProductDetail" />
+    <EntitySet Name="ProductInsuranceDetails" EntityType="Self.ProductInsuranceDetail" />
+    <EntitySet Name="ProductInsureLoginDetails" EntityType="Self.ProductInsureLoginDetail" />
+    <AssociationSet Name="FK__ProductInsu__UBN__1367E606" Association="Self.FK__ProductInsu__UBN__1367E606">
+      <End Role="ProductDetails" EntitySet="ProductDetails" />
+      <End Role="ProductInsuranceDetails" EntitySet="ProductInsuranceDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductInsu__UBN__164452B1" Association="Self.FK__ProductInsu__UBN__164452B1">
+      <End Role="ProductDetails" EntitySet="ProductDetails" />
+      <End Role="ProductInsureLoginDetails" EntitySet="ProductInsureLoginDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

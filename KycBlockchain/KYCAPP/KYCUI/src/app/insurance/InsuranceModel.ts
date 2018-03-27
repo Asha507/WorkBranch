@@ -1,4 +1,4 @@
-export class InsuranceModel
+export class ShopInsuranceModel
 {
     FirstName:string;
     LastName:string;

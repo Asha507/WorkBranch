@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {IMyDpOptions} from 'mydatepicker';
 import { ShopModel } from '../ShopModel';
-import { InsuranceModel } from '../InsuranceModel';
+import { ShopInsuranceModel } from '../InsuranceModel';
 import { Router } from '@angular/router';
 
 @Component({
@@ -36,15 +36,15 @@ shopitem:ShopModel;
   NextClick()
   {
     debugger;
-    this.shopitem.insuranceRecord=new InsuranceModel();
+    this.shopitem.insuranceRecord=new ShopInsuranceModel();
     this.shopitem.insuranceRecord.Contract=this.contract;
     this.shopitem.insuranceRecord.DailyPrice=this.dailyPrice;
     this.shopitem.insuranceRecord.ContractTerms=this.contractTerms;
     this.shopitem.insuranceRecord.FirstName=this.firstName;
     this.shopitem.insuranceRecord.LastName=this.lastName;
     this.shopitem.insuranceRecord.TheftProtection=this.theftProtection;
-   this.shopitem.insuranceRecord.StartDate=this.startDate;
-   this.shopitem.insuranceRecord.LastDate=this.endDate;
+   this.shopitem.insuranceRecord.StartDate=this.startDate.formatted;
+   this.shopitem.insuranceRecord.LastDate=this.endDate.formatted;
    sessionStorage.setItem("Item",JSON.stringify(this.shopitem));
    this.router.navigate(['insurance/shop/car-shop/summary']);
   }
