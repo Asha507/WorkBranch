@@ -27,13 +27,13 @@ export class CarShopComponent implements OnInit {
     this.sNumber = this.GenerateRandomNumber();
     switch (event.target.selectedIndex) {
       case 1:
-        this.costS = "6L";
+        this.costS = "2500";
         break;
       case 2:
-        this.costS = "8L"
+        this.costS = "3500"
         break;
       case 3:
-        this.costS = "10L"
+        this.costS = "4500"
         break;
       default:
         this.costS = "";
@@ -54,13 +54,13 @@ export class CarShopComponent implements OnInit {
     this.sdNumber = this.GenerateRandomNumber();
     switch (event.target.selectedIndex) {
       case 1:
-        this.costSD = "6L"
+        this.costSD = "3500"
         break;
       case 2:
-        this.costSD = "8L"
+        this.costSD = "4500"
         break;
       case 3:
-        this.costSD = "10L"
+        this.costSD = "5500"
         break;
       default:
         this.costSD = "";

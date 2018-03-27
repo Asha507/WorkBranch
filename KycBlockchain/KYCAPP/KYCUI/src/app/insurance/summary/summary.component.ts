@@ -9,10 +9,13 @@ import { ShopModel } from '../ShopModel';
 export class SummaryComponent implements OnInit {
 
   shopItem:ShopModel;
+  totalAmount:number;
   constructor() { }
 
   ngOnInit() {
+    debugger;
     this.shopItem=JSON.parse(sessionStorage.getItem("Item"));
+    this.totalAmount=(+this.shopItem.cost)+(+this.shopItem.insuranceRecord.DailyPrice);
   }
 
 }

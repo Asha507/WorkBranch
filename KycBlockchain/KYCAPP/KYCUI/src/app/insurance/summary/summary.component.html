@@ -1,13 +1,15 @@
 <div class="container">
 <div class="row">
-    <div class="col-md-8">
-        <div>Product</div>
+    <div class="col-md-6">
         <div>
-          <table class="table table-responsive">
+          <table class="table table-bordered  table-responsive">
             <tr>
               <td>
                 <h4>Product</h4>
               </td>
+              <td>
+                  <h4>Amount</h4>
+                </td>
             </tr>
             <tr>
               <td>
@@ -18,7 +20,29 @@
                Serial Number :  {{shopItem.SerialNumber}}
               </td>
               <td>
-                 Cost :  {{shopItem.Cost}}
+              {{shopItem.cost}} $
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h4>Services</h4>
+              </td>
+              <td>
+                  <h4>Amount</h4>
+                </td>
+            </tr>
+            <tr>
+              <td>Insurance : </td>
+              <td>{{shopItem.insuranceRecord.DailyPrice}} $</td>
+            </tr>
+            <tr>
+              <td>
+                <h4>
+                  Total Amount 
+                </h4>
+              </td>
+              <td>
+                {{totalAmount}} $
               </td>
             </tr>
           </table>
@@ -26,6 +50,7 @@
     </div>
 </div>
 <div class="row">
-    
+  <div class="col-md-7"></div>
+    <button (click)="OrderClick()" class="btn btn-primary col-md-2">Order</button>
 </div>
 </div>
