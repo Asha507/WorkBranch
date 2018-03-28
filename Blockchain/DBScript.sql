@@ -9,5 +9,18 @@ select * from ProductDetails
 select * from ProductInsuranceDetails
 select * from ProductInsureLoginDetails
 
+select * from Blocks
+
 
 create table Blocks(BlockNumber varchar(20) primary key,UBN varchar(50),BlockHash varchar(255),CreatedDate varchar(50),PreviousBlockHash varchar(255),NextBlock varchar(255))
+
+Use Police
+select * from Blocks
+
+
+Use InsuranceCompany
+select * from Blocks
+
+
+Use RepairShop
+select * from Blocks

@@ -29,7 +29,7 @@ export class SummaryComponent implements OnInit {
     this.shopService.UploadData(formData).subscribe(response => {    
       debugger; 
       console.log(response);
-           this.ubn=response;
+           this.ubn=response["UBN"];
            let blockData=new FormData();
            blockData.append("Data",JSON.stringify(this.shopItem));
            blockData.append("UBN",this.ubn);
