@@ -1,56 +1,12 @@
-<div class="container">
-<div class="row">
-    <div class="col-md-6">
-        <div>
-          <table class="table table-bordered  table-responsive">
-            <tr>
-              <td>
-                <h4>Product</h4>
-              </td>
-              <td>
-                  <h4>Amount</h4>
-                </td>
-            </tr>
-            <tr>
-              <td>
-                Name : {{shopItem.Name}}
-                <br/>
-                Model : {{shopItem.Model}}
-                <br />
-               Serial Number :  {{shopItem.SerialNumber}}
-              </td>
-              <td>
-              {{shopItem.cost}} $
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <h4>Services</h4>
-              </td>
-              <td>
-                  <h4>Amount</h4>
-                </td>
-            </tr>
-            <tr>
-              <td>Insurance : </td>
-              <td>{{shopItem.insuranceRecord.DailyPrice}} $</td>
-            </tr>
-            <tr>
-              <td>
-                <h4>
-                  Total Amount 
-                </h4>
-              </td>
-              <td>
-                {{totalAmount}} $
-              </td>
-            </tr>
-          </table>
-        </div>
-    </div>
+<div class="container ">
+<div class="row marginleft">
+   Summary
 </div>
-<div class="row">
-  <div class="col-md-7"></div>
-    <button (click)="OrderClick()" class="btn btn-primary col-md-2">Order</button>
-</div>
+<div class="row marginleft margintop col-md-4 border">
+    Transaction Completed 
+    <br/>
+    <span>UserName : {{user}} </span>
+    <br/>
+    <span>Password : {{password}} </span>
+ </div>
 </div>

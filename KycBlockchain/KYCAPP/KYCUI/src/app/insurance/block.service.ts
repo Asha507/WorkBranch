@@ -18,4 +18,14 @@ export class BlockService {
       });  
     
   }
+
+  GetBlocks():Observable<any>
+  {
+    return this.http.get(environment.blockapi+'/api/BlockChain/GetLatestBlocks?number=5')  
+    .map(res =>{ return res.json()}).catch((error)=> {
+      return Observable.throw(
+        new Error(`${ error.status } ${ error.statusText }`));
+      });  
+    
+  }
 }

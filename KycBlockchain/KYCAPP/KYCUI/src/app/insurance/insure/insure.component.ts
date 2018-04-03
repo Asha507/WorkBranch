@@ -40,12 +40,13 @@ shopitem:ShopModel;
     this.shopitem.insuranceRecord.Contract=this.contract;
     this.shopitem.insuranceRecord.DailyPrice=this.dailyPrice;
     this.shopitem.insuranceRecord.ContractTerms=this.contractTerms;
+    this.shopitem.insuranceRecord.Email=this.email;
     this.shopitem.insuranceRecord.FirstName=this.firstName;
     this.shopitem.insuranceRecord.LastName=this.lastName;
     this.shopitem.insuranceRecord.TheftProtection=this.theftProtection;
    this.shopitem.insuranceRecord.StartDate=this.startDate.formatted;
    this.shopitem.insuranceRecord.LastDate=this.endDate.formatted;
    sessionStorage.setItem("Item",JSON.stringify(this.shopitem));
-   this.router.navigate(['insurance/shop/car-shop/summary']);
+   this.router.navigate(['insurance/shop/car-shop/payment']);
   }
 }

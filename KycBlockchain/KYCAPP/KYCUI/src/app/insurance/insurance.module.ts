@@ -14,6 +14,11 @@ import { SummaryComponent } from './summary/summary.component';
 import { ShopService } from './shop.service';
 import { HttpModule } from '@angular/http';
 import { BlockService } from './block.service';
+import { PaymentComponent } from './payment/payment.component';
+import { SelfServiceComponent } from './self-service/self-service.component';
+import { LoginService } from './login.service';
+import { ContractsComponent } from './contracts/contracts.component';
+
 const routes: Routes = [
   {
     path: '', component: InsuranceLayoutComponent,
@@ -24,10 +29,12 @@ const routes: Routes = [
       { path: 'shop/car-shop', component: CarShopComponent },
       { path: 'shop/phone-shop', component: PhoneShopComponent },
       { path: 'shop/car-shop/insure', component: InsureComponent },
-      { path: 'shop/car-shop/summary', component:SummaryComponent }
+      { path: 'shop/car-shop/payment', component:PaymentComponent },
+      { path: 'shop/car-shop/summary', component:SummaryComponent },
+      { path: 'self-service', component:SelfServiceComponent },
+      { path: 'self-service/contracts', component:ContractsComponent }
     ]
   }
-  // {path:'Insurance',component:InvestmentsComponent},
 ];
 @NgModule({
   imports: [
@@ -37,7 +44,7 @@ const routes: Routes = [
     MyDatePickerModule,
     HttpModule
   ],
-  providers:[ShopService,BlockService],
-  declarations: [InsuranceHomeComponent, InsuranceLayoutComponent, ShopComponent, CarShopComponent, PhoneShopComponent, InsureComponent, SummaryComponent]
+  providers:[ShopService,BlockService,LoginService],
+  declarations: [InsuranceHomeComponent, InsuranceLayoutComponent, ShopComponent, CarShopComponent, PhoneShopComponent, InsureComponent, SummaryComponent, PaymentComponent, SelfServiceComponent, ContractsComponent]
 })
 export class InsuranceModule { }
