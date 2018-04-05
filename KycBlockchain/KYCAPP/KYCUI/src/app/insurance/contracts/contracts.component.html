@@ -1,12 +1,43 @@
 <div class="container">
-    <div class="row">
-        <h3 class="marginleft">
-          Claim Self-Service
-        </h3>
-    </div>
   <div class="row">
-   <h4 class="marginleft">
-     Contracts
-   </h4>
+    <h3 class="marginleft">
+      Claim Self-Service
+    </h3>
+  </div>
+  <div class="row">
+    <h4 class="marginleft">
+      Contracts
+    </h4>
+  </div>
+  <div class="row" >
+    <div class="col-md-3 contract" *ngFor="let contract of contracts">
+      <table class="table borderless tablestyle" >
+        <tr>
+          <td> Brand : {{contract.Item}}</td>
+        </tr>
+        <tr>
+          <td> Name :  {{contract.Model}}</td>
+        </tr>
+        <tr>
+          <td>Serial Number : {{contract.SerialNumber}}</td>
+        </tr>
+        <tr>
+          <td>Valid From : {{contract.ProductInsuranceDetail.StartDate}}</td>
+        </tr>
+        <tr>
+          <td> Valid Till :  {{contract.ProductInsuranceDetail.LastDate}}</td>
+        </tr>
+        <tr>
+          <td>
+           <button (click)="FileClaim(contract.UBN)"> File New Claim </button>
+          </td>
+        </tr>
+        <tr>
+            <td>
+             <a routerLink=""> View Claims </a>
+            </td>
+          </tr>
+      </table>
+    </div>
   </div>
 </div>

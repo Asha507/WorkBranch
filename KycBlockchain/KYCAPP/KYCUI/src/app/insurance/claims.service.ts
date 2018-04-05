@@ -16,13 +16,23 @@ export class ClaimsService {
      .map(res =>{ 
       debugger; 
       return res.json()})
-     .catch((error)=> {
+     .catch((error)=> { 
        debugger;
       return Observable.throw(
         new Error(`${ error.status } ${ error.statusText }`));
-      });  
-    
+      });    
     
   }
-
+  RaiseClaim(claimData)
+  {
+    return this.http.post(environment.shopapi+'api/Contracts/NewClaim',claimData)  
+    .map(res =>{ 
+     debugger; 
+     return res.json()})
+    .catch((error)=> { 
+      debugger;
+     return Observable.throw(
+       new Error(`${ error.status } ${ error.statusText }`));
+     }); 
+  }
 }

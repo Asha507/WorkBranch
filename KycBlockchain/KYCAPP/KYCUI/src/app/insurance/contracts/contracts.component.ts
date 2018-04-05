@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClaimsService } from '../claims.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contracts',
@@ -8,11 +9,24 @@ import { ClaimsService } from '../claims.service';
 })
 export class ContractsComponent implements OnInit {
 
-  email:string;
-  constructor(private claimsService:ClaimsService) { }
+  email: string;
+  contracts: any;
+  constructor(private claimsService: ClaimsService,private router:Router) { }
 
   ngOnInit() {
-    this.claimsService.GetContracts(this.email).subscribe(response=>{});
+    this.email = sessionStorage.getItem("Email");
+    this.claimsService.GetContracts(this.email).subscribe(response => {
+      debugger;
+      if (response != null) {
+        
+        this.contracts = JSON.parse(response);
+      }
+    });
   }
 
+  FileClaim(ubn)
+  {
+    sessionStorage.setItem("ClaimUBN",ubn);
+    this.router.navigate(['insurance/self-service/contracts/file-claim']);
+  }
 }

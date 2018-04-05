@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <h3 class="marginleft">
+      Claim Self-Service
+    </h3>
+  </div>
+  <div class="row">
+      <h4 class="marginleft">
+       File a Claim
+      </h4>
+    </div>
+    <div class="row">
+      <div class="col-md-5 box">
+        <div class="row">
+            <div class="col-md-3">
+                <label>Theft </label>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-1">
+                <input type="checkbox" name="theft" [(ngModel)]="theft" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                Description
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-6">
+                <textarea class="form-control" rows="2" cols="7" id="comment"
+                name="description" [(ngModel)]="description" required></textarea>
+            </div>
+        </div>
+     
+      </div>
+      
+    </div>
+    <div class="row col-md-6">
+        <button  type="Submit" class="btn btn-primary col-md-3 submit" (click)="SubmitClaim()">Submit</button>
+    </div>
+</div>

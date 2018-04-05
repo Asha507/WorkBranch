@@ -2,7 +2,7 @@ Use Shop
 
 drop table ProductDetails
 drop table ProductInsuranceDetails
-
+drop table ProductInsureLoginDetails
 
 
 Use Shop
