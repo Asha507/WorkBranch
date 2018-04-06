@@ -29,4 +29,10 @@ export class ContractsComponent implements OnInit {
     sessionStorage.setItem("ClaimUBN",ubn);
     this.router.navigate(['insurance/self-service/contracts/file-claim']);
   }
+
+  ViewClaim(ubn)
+  {
+    sessionStorage.setItem("ViewUBN",ubn);
+    this.router.navigate(['insurance/self-service/contracts/view-claim']);
+  }
 }

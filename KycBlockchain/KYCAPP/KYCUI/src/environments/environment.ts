@@ -6,6 +6,8 @@
 export const environment = {
   production: false,
   shopapi:"http://localhost:63373/",
+  policeApi:"http://localhost:51343/",
+  insuranceCompanyApi:"http://localhost:58805/",
   blockapi:"http://localhost:64396/"
 };
  

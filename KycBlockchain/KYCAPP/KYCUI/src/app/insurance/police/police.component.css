@@ -1,0 +1,14 @@
+.tablestyle
+{
+    margin:2% 0% 0% 6%;
+    border-style: none;
+}
+.borderless td, .borderless th {
+    border: none;
+}
+.contract
+{
+    border-style: ridge;
+    margin-left: 8%;
+    margin-top: 2%;
+}

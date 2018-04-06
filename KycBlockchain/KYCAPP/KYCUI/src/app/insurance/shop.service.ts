@@ -25,4 +25,18 @@ export class ShopService {
     
   }
 
+  GetProduct(ubn)
+  {
+    return this.http.get(environment.shopapi+'/api/Shop/GetProduct?ubn='+ubn)  
+    .map(res =>
+      { 
+        debugger;
+        return res.json()
+      }).catch((error)=> {
+        debugger;
+      return Observable.throw(
+        new Error(`${ error.status } ${ error.statusText }`));
+      });  
+  }
+
 }

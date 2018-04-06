@@ -25,7 +25,7 @@ export class ClaimsService {
   }
   RaiseClaim(claimData)
   {
-    return this.http.post(environment.shopapi+'api/Contracts/NewClaim',claimData)  
+    return this.http.post(environment.insuranceCompanyApi+'api/Claims/NewClaim',claimData)  
     .map(res =>{ 
      debugger; 
      return res.json()})
@@ -35,4 +35,58 @@ export class ClaimsService {
        new Error(`${ error.status } ${ error.statusText }`));
      }); 
   }
-}
+
+  GetClaims(viewUbn)
+  {
+    return this.http.get(environment.insuranceCompanyApi+'api/Claims/GetClaims?ubn='+viewUbn)  
+    .map(res =>{ 
+     debugger; 
+     return res.json()})
+    .catch((error)=> { 
+      debugger;
+     return Observable.throw(
+       new Error(`${ error.status } ${ error.statusText }`));
+     }); 
+  }
+
+  GetUnprocessedClaims()
+  {
+    return this.http.get(environment.insuranceCompanyApi+'api/Claims/GetUnprocessedClaims')  
+    .map(res =>{ 
+     debugger; 
+     return res.json()})
+    .catch((error)=> { 
+      debugger;
+     return Observable.throw(
+       new Error(`${ error.status } ${ error.statusText }`));
+     }); 
+  }
+
+  PoliceVerification(police)
+  {
+    let formData=new FormData();
+    formData.append("Data",JSON.stringify(police));
+    return this.http.post(environment.policeApi+'api/Police/TheftDetails',formData)  
+    .map(res =>{ 
+     debugger; 
+     return res.json()})
+    .catch((error)=> { 
+      debugger;
+     return Observable.throw(
+       new Error(`${ error.status } ${ error.statusText }`));
+     }); 
+  }
+
+  UpdateClaimStatus(formData)
+  {
+    return this.http.post(environment.insuranceCompanyApi+'api/Claims/UpdateClaim',formData)  
+    .map(res =>{ 
+     debugger; 
+     return res.json()})
+    .catch((error)=> { 
+      debugger;
+     return Observable.throw(
+       new Error(`${ error.status } ${ error.statusText }`));
+     }); 
+  }
+  }

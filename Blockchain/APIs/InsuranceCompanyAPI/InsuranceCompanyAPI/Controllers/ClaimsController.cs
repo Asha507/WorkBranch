@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -31,7 +32,45 @@ namespace InsuranceCompanyAPI.Controllers
                 db.Claims.Add(claim);
                 db.SaveChanges();
             }
-            return Request.CreateResponse(HttpStatusCode.OK, claim.ClaimNumber);
+            return Request.CreateResponse(HttpStatusCode.OK,claim.ClaimNumber+","+claim.CreationDate);
+        }
+        [HttpGet]
+        public HttpResponseMessage GetClaims(string ubn)
+        {
+          
+            using (InsuranceCompanyEntities db = new InsuranceCompanyEntities())
+            {
+            List<Claim> claims= db.Claims.Where(x=>x.UBN==ubn).ToList();
+              return Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(claims));
+            }
+          
+        }
+
+        [HttpGet]
+        public HttpResponseMessage GetUnprocessedClaims()
+        {
+            using (InsuranceCompanyEntities db = new InsuranceCompanyEntities())
+            {
+                List<Claim> claims = db.Claims.Where(x => x.claimstatus == "Claim Submitted" || x.claimstatus == "Sent for Police verification").ToList();
+                return Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(claims));
+            }
+
+        }
+
+        [HttpPost]
+        public HttpResponseMessage UpdateClaim()
+        {
+            var httpRequest = HttpContext.Current.Request;
+            using (InsuranceCompanyEntities db = new InsuranceCompanyEntities())
+            {
+               Claim claim = db.Claims.Where(x =>x.ClaimNumber== httpRequest.Params["ClaimNumber"]).FirstOrDefault();
+                if(claim !=null)
+                {
+                    claim.claimstatus = httpRequest.Params["Status"];
+                    db.SaveChanges();
+                }
+                return Request.CreateResponse(HttpStatusCode.OK, "Updated Claim Status");
+            }
         }
     }
 }
