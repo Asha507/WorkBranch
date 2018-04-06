@@ -21,10 +21,23 @@ select * from Blocks
 Use InsuranceCompany
 select * from Blocks
 
+Use InsuranceCompany
+select * from claim
+
 
 Use RepairShop
 select * from Blocks
 
 Use InsuranceCompany
 
-create table Claim(UBN varchar(50) PRIMARY KEY,ClaimNumber varchar(50),TheftProtection varchar(50),Description varchar(50),claimstatus varchar(50),CreationDate varchar(50),reimbursable varchar(50))
+create table Claim(UBN varchar(50),ClaimNumber varchar(50) PRIMARY KEY,TheftProtection varchar(50),Description varchar(50),claimstatus varchar(50),CreationDate varchar(50),reimbursable varchar(50))
+
+
+select * from claim where UBN='630c2b45-4323-4f9e-8477-12b143d01513'
+
+
+Use Police
+create table TheftData(Item varchar(20),Name varchar(20),Model varchar(20),SerialNumber varchar(20),ClaimNumber varchar(255),Description varchar(255),FIRNumber varchar(255),UBN varchar(50) primary  key)
+
+	Use Police
+	select * from TheftData
