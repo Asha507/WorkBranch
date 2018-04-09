@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row">
+      <h3 class="marginleft">
+        Insurance
+      </h3>
+    </div>
+    <div class="row">
+      <h4 class="marginleft">
+          Unprocessed Claims
+      </h4>
+    </div>
+    <div class="row" style="font-size:10px" >
+      <div class="col-md-6 claim" *ngFor="let claim of claims;let index=index">
+          <table class="table borderless tablestyle" >
+              <tr>
+                <td> Claim Number : </td> <td>{{claim.ClaimNumber}}</td>
+              </tr>
+              <tr>
+                <td> Theft Involved : </td> <td> {{claim.TheftProtection}}</td>
+              </tr>
+              <tr>
+                <td>Claim Status : </td> <td>{{claim.claimstatus}}</td>
+              </tr>
+              <tr>
+                <td>Description : </td> <td>{{claim.Description}}</td>
+              </tr>
+              <tr>
+                <td> Creation Date :  </td> <td>{{claim.CreationDate}}</td>
+              </tr>
+              <tr>
+                  <td> Reimbursable Amount :  </td>
+                <td>  <input type="number" placeholder="0.0" #name="ngModel" class="form-control" name="{{'amount'+index}}" [(ngModel)]="claim.reimbursable" >
+                </td>
+                </tr>   
+                <tr>
+                  <td></td>
+                <td>
+                  <button *ngIf="claim.TheftProtection=='false'" class="btn btn-primary" style="float:right" (click)="RepairClick(claim)">Repair</button>
+                </td>
+                <td>
+                  <button *ngIf="claim.TheftProtection=='false'" class="btn btn-primary">Reimburse</button>
+                </td>
+                <td>
+                  <button class="btn btn-primary" (click)="RejectClick(claim)">Reject</button>
+                </td>  
+                </tr>           
+            </table>
+      </div>
+    </div>
+  </div>

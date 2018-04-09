@@ -51,26 +51,12 @@ namespace InsuranceCompanyAPI.Controllers
         {
             using (InsuranceCompanyEntities db = new InsuranceCompanyEntities())
             {
-                List<Claim> claims = db.Claims.Where(x => x.claimstatus == "Claim Submitted" || x.claimstatus == "Sent for Police verification").ToList();
+                List<Claim> claims = db.Claims.Where(x => x.claimstatus != "Completed" || x.claimstatus != "Claim Rejected").ToList();
                 return Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(claims));
             }
 
         }
 
-        [HttpPost]
-        public HttpResponseMessage UpdateClaim()
-        {
-            var httpRequest = HttpContext.Current.Request;
-            using (InsuranceCompanyEntities db = new InsuranceCompanyEntities())
-            {
-               Claim claim = db.Claims.Where(x =>x.ClaimNumber== httpRequest.Params["ClaimNumber"]).FirstOrDefault();
-                if(claim !=null)
-                {
-                    claim.claimstatus = httpRequest.Params["Status"];
-                    db.SaveChanges();
-                }
-                return Request.CreateResponse(HttpStatusCode.OK, "Updated Claim Status");
-            }
-        }
+      
     }
 }

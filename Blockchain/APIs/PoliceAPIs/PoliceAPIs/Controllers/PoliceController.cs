@@ -17,15 +17,15 @@ namespace PoliceAPIs.Controllers
         public HttpResponseMessage TheftDetails()
         {
             var httpRequest = HttpContext.Current.Request;
-            var x = JsonConvert.DeserializeObject<TheftData>(httpRequest.Params["Data"]);
             using (PoliceEntities db = new PoliceEntities())
             {
-                
+
                 TheftData theftDetails = JsonConvert.DeserializeObject<TheftData>(httpRequest.Params["Data"]);
+                theftDetails.firStatus = "New";
                 db.TheftDatas.Add(theftDetails);
                 db.SaveChanges();
             }
-                return Request.CreateResponse(HttpStatusCode.OK, "");
+            return Request.CreateResponse(HttpStatusCode.OK, "");
         }
 
         [HttpGet]
@@ -33,10 +33,12 @@ namespace PoliceAPIs.Controllers
         {
             using (PoliceEntities db = new PoliceEntities())
             {
-                List<TheftData> theftData = db.TheftDatas.ToList();
+                List<TheftData> theftData = db.TheftDatas.Where(x=>x.firStatus=="New").ToList();
+
                 return Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(theftData));
-            }                
+            }
         }
 
+   
     }
 }

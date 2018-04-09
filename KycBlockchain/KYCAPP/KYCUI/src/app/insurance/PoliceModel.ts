@@ -8,4 +8,5 @@ export class PoliceModel
     ClaimNumber:string;
     Description:string;
     FIRNumber:string;
+    FirStatus:string;
 }

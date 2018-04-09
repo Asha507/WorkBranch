@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+      <h3 class="marginleft">
+       Repair Shop
+      </h3>
+    </div>    
+
+    <div class="row" *ngIf="hasrecords" >
+      <div  class="col-md-5 contract" *ngFor="let repair of repairRecords">
+        <table class="table borderless tablestyle" >
+          <tr>
+            <td> Item : </td><td>{{repair.Item}}</td>
+          </tr>
+          <tr>
+            <td> Name : </td><td>{{repair.Model}}</td>
+          </tr>
+          <tr>
+            <td>Serial Number : </td><td>{{repair.SerialNumber}}</td>
+          </tr>
+          <tr>
+            <td>Claim Number : </td><td>{{repair.ClaimNumber}}</td>
+          </tr>
+          <tr>
+            <td> Description : </td><td>{{repair.Description}}</td>
+          </tr>
+          <tr>
+            <td>
+             <button class="btn btn-primary">Mark as Completed </button>
+            </td>
+            </tr>
+        </table>
+      </div>
+
+    </div>
+    <div class="row" *ngIf="!hasrecords" >
+       <p style="margin:5%">No records</p>
+    </div>
+  </div>

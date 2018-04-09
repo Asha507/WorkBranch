@@ -1,0 +1,117 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <div class="row">
+          <h3>Car Shop</h3>
+        </div>
+        <div class="row">
+          <h4>Buy a Car</h4>
+        </div>
+        <div class="row">
+          <h5>Choose a Product</h5>
+        </div>
+        <div class="row">
+  
+          <div class="col-md-6">
+            <img [src]="'../assets/Car.jpg'">
+          </div>
+          <div class="col-md-1"></div>
+          <div class="col-md-5">
+            <h6> Color : Red</h6>
+            <h6> Name : Maruti Suzuki Swift</h6>
+            <h6> Fuel Type : Diesel / Petrol</h6>
+            <h6> Mileage : 22 Kmpl to 28 Kmpl </h6>
+            <h6> Engine : 1197 CC to 1248 CC</h6>
+            <h6> Transmission : Automatic / Manual</h6>
+            <h6> Year : 2018 </h6>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row">
+            <div class="form-group">
+              <label for="modelLabel" class="col-sm-2 control-label">Model</label>
+              <div class="col-sm-4">
+                <select class="form-control" id="modelSelect" (change)="Cost($event)">
+                  <option>Select</option>
+                  <option>VDI</option>
+                  <option>ZDI</option>
+                  <option>LXI</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row topPadding">
+            <div class="form-group">
+              <label for="costLabel" class="col-sm-2 control-label">Cost</label>
+              <div class="col-sm-4">
+                <input type="text" placeholder="Cost" class="form-control" readonly name="costData" [(ngModel)]="costS">
+              </div>
+            </div>
+          </div>
+          <div class="row topPadding">
+            <div class="form-group">
+              <label for="seialLabel" class="col-sm-2 control-label">SerialNumber</label>
+              <div class="col-sm-4">
+                <input type="text" placeholder="Serial Number" class="form-control" readonly name="serialData" [(ngModel)]="sNumber">
+              </div>
+            </div>
+          </div>
+          <div class="row" style="text-align:right">
+            <button class="btn btn-primary" (click)="NextClick()">Next</button>
+          </div>
+        </div>
+        <div class="row" style="padding-top:20%">
+   
+          <div class="col-md-6">
+            <img [src]="'../assets/Car2.jpg'">
+          </div>
+          <div class="col-md-1"></div>
+          <div class="col-md-5">
+            <h6> Color : Red</h6>
+            <h6> Name : Maruti Suzuki Swift Dzire</h6>
+            <h6> Fuel Type : Diesel / Petrol</h6>
+            <h6> Mileage : 22 Kmpl to 28 Kmpl </h6>
+            <h6> Engine : 1197 CC to 1248 CC</h6>
+            <h6> Transmission : Automatic / Manual</h6>
+            <h6> Year : 2018 </h6>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row">
+            <div class="form-group">
+              <label for="modelSDLabel" class="col-sm-2 control-label">Model</label>
+              <div class="col-sm-4">
+                <select class="form-control" id="modelSDSelect" (change)="CostSD($event)">
+                  <option>Select</option>
+                  <option>VDI</option>
+                  <option>ZDI</option>
+                  <option>LXI</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row topPadding">
+            <div class="form-group">
+              <label for="costSDLabel" class="col-sm-2 control-label">Cost</label>
+              <div class="col-sm-4">
+                <input type="text" placeholder="Cost" class="form-control" readonly name="costSDData" [(ngModel)]="costSD">
+              </div>
+            </div>
+          </div>
+          <div class="row topPadding">
+            <div class="form-group">
+              <label for="seialSDLabel" class="col-sm-2 control-label">SerialNumber</label>
+              <div class="col-sm-4">
+                <input type="text" placeholder="Serial Number" class="form-control" readonly name="serialSDData" [(ngModel)]="sdNumber">
+              </div>
+            </div>
+          </div>
+          <div class="row" style="text-align:right">
+              <button class="btn btn-primary" (click)="NextClick()">Next</button>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+  </div>

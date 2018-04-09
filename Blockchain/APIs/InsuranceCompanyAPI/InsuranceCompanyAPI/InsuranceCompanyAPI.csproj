@@ -217,29 +217,31 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Block.cs">
-      <DependentUpon>InsuranceModel.tt</DependentUpon>
+      <DependentUpon>InsuranceCompany.tt</DependentUpon>
     </Compile>
     <Compile Include="Claim.cs">
-      <DependentUpon>InsuranceModel.tt</DependentUpon>
+      <DependentUpon>InsuranceCompany.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\ClaimsController.cs" />
+    <Compile Include="Controllers\PoliceController.cs" />
+    <Compile Include="Controllers\ReimburseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="InsuranceModel.Context.cs">
+    <Compile Include="InsuranceCompany.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>InsuranceModel.Context.tt</DependentUpon>
+      <DependentUpon>InsuranceCompany.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="InsuranceModel.cs">
+    <Compile Include="InsuranceCompany.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>InsuranceModel.tt</DependentUpon>
+      <DependentUpon>InsuranceCompany.tt</DependentUpon>
     </Compile>
-    <Compile Include="InsuranceModel.Designer.cs">
+    <Compile Include="InsuranceCompany.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>InsuranceModel.edmx</DependentUpon>
+      <DependentUpon>InsuranceCompany.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -256,15 +258,15 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="InsuranceModel.Context.tt">
+    <Content Include="InsuranceCompany.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>InsuranceModel.edmx</DependentUpon>
-      <LastGenOutput>InsuranceModel.Context.cs</LastGenOutput>
+      <DependentUpon>InsuranceCompany.edmx</DependentUpon>
+      <LastGenOutput>InsuranceCompany.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="InsuranceModel.tt">
+    <Content Include="InsuranceCompany.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>InsuranceModel.edmx</DependentUpon>
-      <LastGenOutput>InsuranceModel.cs</LastGenOutput>
+      <DependentUpon>InsuranceCompany.edmx</DependentUpon>
+      <LastGenOutput>InsuranceCompany.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -287,12 +289,12 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <EntityDeploy Include="InsuranceModel.edmx">
+    <EntityDeploy Include="InsuranceCompany.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>InsuranceModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>InsuranceCompany.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="InsuranceModel.edmx.diagram">
-      <DependentUpon>InsuranceModel.edmx</DependentUpon>
+    <Content Include="InsuranceCompany.edmx.diagram">
+      <DependentUpon>InsuranceCompany.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

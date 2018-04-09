@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PoliceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PoliceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Blocks">
           <Key>
             <PropertyRef Name="BlockNumber" />
@@ -28,13 +28,13 @@
           <Property Name="Description" Type="varchar" MaxLength="255" />
           <Property Name="FIRNumber" Type="varchar" MaxLength="255" />
           <Property Name="UBN" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="firStatus" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityContainer Name="PoliceModelStoreContainer">
           <EntitySet Name="Blocks" EntityType="Self.Blocks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TheftData" EntityType="Self.TheftData" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PoliceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -61,6 +61,7 @@
           <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="FIRNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="UBN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="firStatus" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="PoliceEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Blocks" EntityType="Self.Block" />
@@ -87,6 +88,7 @@
           <EntitySetMapping Name="TheftDatas">
             <EntityTypeMapping TypeName="PoliceModel.TheftData">
               <MappingFragment StoreEntitySet="TheftData">
+                <ScalarProperty Name="firStatus" ColumnName="firStatus" />
                 <ScalarProperty Name="Item" ColumnName="Item" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Model" ColumnName="Model" />

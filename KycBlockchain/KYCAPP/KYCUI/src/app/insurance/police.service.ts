@@ -13,6 +13,18 @@ export class PoliceService {
   {
     return this.http.get(environment.policeApi+'api/Police/GetTheftDetails')  
     .map(res =>{ 
+     return res.json()})
+    .catch((error)=> { 
+     return Observable.throw(
+       new Error(`${ error.status } ${ error.statusText }`));
+     }); 
+  }
+
+  UpdateClaim(claimData)
+  {
+    debugger;
+    return this.http.post(environment.policeApi+'api/Status/UpdateTheftDetails',claimData)  
+    .map(res =>{ 
      debugger; 
      return res.json()})
     .catch((error)=> { 

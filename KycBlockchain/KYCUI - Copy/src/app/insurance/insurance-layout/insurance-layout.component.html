@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="row menu">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a routerLink='/insurance'>Peers</a>
+                    </li>
+                    <li>
+                        <a routerLink='shop'>Shop</a>
+                    </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Insurance
+                            <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                              <li><a routerLink='self-service'>Claim Self-Service</a></li>
+                              <li><a routerLink='process-claim'>Claim Processing</a></li>
+                             
+                            </ul>
+                          </li>
+                    <li>
+                        <a href="#">Repair shop</a>
+                    </li>
+                    <li>
+                        <a routerLink='police'>Police</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+<div class="row ">
+    <router-outlet></router-outlet>
+</div>
+<div class="row floatright margintop" style="margin-bottom:1%">
+    <button (click)=ShowHideexplorer() >{{buttonStatus}} Explorer</button>
+</div> 
+<div class="row margintop ">
+
+  <div class="row" *ngIf="isBlockExplorer" style="margin-top:3%"> 
+    <div class="row">
+    <div *ngFor="let block of blocks">
+     <div class="col-sm-2 block" >
+         Number: {{block.BlockNumber}}
+         <br/>
+         Hash : {{block.BlockHash}}
+         <br/>
+         Previous BlockHash: {{block.PreviousBlockHash}}
+     </div>
+    </div>
+    </div>
+  </div>
+</div>

@@ -9,8 +9,9 @@
         Theft Claim
       </h4>
     </div>
-    <div class="row" >
-      <div class="col-md-5 contract" *ngFor="let theft of thefts">
+
+    <div class="row" *ngIf="hasrecords" >
+      <div  class="col-md-5 contract" *ngFor="let theft of thefts">
         <table class="table borderless tablestyle" >
           <tr>
             <td> Item : </td><td>{{theft.Item}}</td>
@@ -35,13 +36,17 @@
             </tr>
           <tr>
             <td>
-             <button (click)="ConfirmClick()" class="btn btn-primary">Confirm </button>
+             <button (click)="updateclaim('Claim Accepted by Police.',theft)" class="btn btn-primary">Confirm </button>
             </td>
               <td>
-                  <button (click)="RejectClick()" class="btn btn-primary"> Reject </button>
+                  <button (click)="updateclaim('Claim Rejected by Police',theft)" class="btn btn-primary"> Reject </button>
               </td>
             </tr>
         </table>
       </div>
+
+    </div>
+    <div class="row" *ngIf="!hasrecords" >
+       <p style="margin:5%">No records</p>
     </div>
   </div>

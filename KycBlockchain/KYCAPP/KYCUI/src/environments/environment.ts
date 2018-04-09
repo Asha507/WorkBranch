@@ -8,6 +8,7 @@ export const environment = {
   shopapi:"http://localhost:63373/",
   policeApi:"http://localhost:51343/",
   insuranceCompanyApi:"http://localhost:58805/",
+  repairApi:"http://localhost:54141/",
   blockapi:"http://localhost:64396/"
 };
  

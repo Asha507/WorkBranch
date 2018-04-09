@@ -22,5 +22,6 @@ namespace PoliceAPIs
         public string Description { get; set; }
         public string FIRNumber { get; set; }
         public string UBN { get; set; }
+        public string firStatus { get; set; }
     }
 }

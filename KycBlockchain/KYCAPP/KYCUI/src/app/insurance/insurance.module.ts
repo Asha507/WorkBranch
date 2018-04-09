@@ -24,6 +24,8 @@ import { ProcessClaimComponent } from './process-claim/process-claim.component';
 import { ViewClaimComponent } from './view-claim/view-claim.component';
 import { PoliceComponent } from './police/police.component';
 import { PoliceService } from './police.service';
+import { RepairService } from './repair.service';
+import { RepairShopComponent } from './repair-shop/repair-shop.component';
 
 const routes: Routes = [
   {
@@ -40,6 +42,7 @@ const routes: Routes = [
       { path: 'self-service', component:SelfServiceComponent },
       { path: 'process-claim', component:ProcessClaimComponent },
       { path: 'police', component:PoliceComponent },
+      { path: 'repair', component:RepairShopComponent },
       { path: 'self-service/contracts', component:ContractsComponent },
       {path:'self-service/contracts/file-claim',component:FileClaimComponent},
       {path:'self-service/contracts/view-claim',component:ViewClaimComponent}
@@ -54,7 +57,7 @@ const routes: Routes = [
     MyDatePickerModule,
     HttpModule
   ],
-  providers:[ShopService,BlockService,LoginService,ClaimsService,PoliceService],
-  declarations: [InsuranceHomeComponent, InsuranceLayoutComponent, ShopComponent, CarShopComponent, PhoneShopComponent, InsureComponent, SummaryComponent, PaymentComponent, SelfServiceComponent, ContractsComponent, FileClaimComponent, ProcessClaimComponent, ViewClaimComponent, PoliceComponent]
+  providers:[ShopService,BlockService,LoginService,ClaimsService,PoliceService,RepairService],
+  declarations: [InsuranceHomeComponent, InsuranceLayoutComponent, ShopComponent, CarShopComponent, PhoneShopComponent, InsureComponent, SummaryComponent, PaymentComponent, SelfServiceComponent, ContractsComponent, FileClaimComponent, ProcessClaimComponent, ViewClaimComponent, PoliceComponent, RepairShopComponent]
 })
 export class InsuranceModule { }

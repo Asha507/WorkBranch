@@ -35,10 +35,10 @@
                 <tr>
                   <td></td>
                 <td>
-                  <button *ngIf="claim.TheftProtection=='false'" class="btn btn-primary" style="float:right" (click)="RepairClick(claim)">Repair</button>
+                  <button *ngIf="Show(claim)" class="btn btn-primary" style="float:right" (click)="RepairClick(claim)">Repair</button>
                 </td>
                 <td>
-                  <button *ngIf="claim.TheftProtection=='false'" class="btn btn-primary">Reimburse</button>
+                  <button *ngIf="Show(claim)" class="btn btn-primary" (click)="Reimburse(claim)">Reimburse</button>
                 </td>
                 <td>
                   <button class="btn btn-primary" (click)="RejectClick(claim)">Reject</button>

@@ -77,16 +77,26 @@ export class ClaimsService {
      }); 
   }
 
-  UpdateClaimStatus(formData)
+  UpdateClaimStatus(claimData)
   {
-    return this.http.post(environment.insuranceCompanyApi+'api/Claims/UpdateClaim',formData)  
+    debugger;
+    return this.http.post(environment.insuranceCompanyApi+'api/Police/UpdateClaim',claimData)  
     .map(res =>{ 
-     debugger; 
      return res.json()})
     .catch((error)=> { 
-      debugger;
      return Observable.throw(
        new Error(`${ error.status } ${ error.statusText }`));
-     }); 
+     });
   }
+  ReimburseAmount(claimData)
+  {
+    debugger;
+    return this.http.post(environment.insuranceCompanyApi+'api/Reimburse/ReimburseClaim',claimData) 
+    .map(res =>{ 
+     return res.json()})
+    .catch((error)=> { 
+     return Observable.throw(
+       new Error(`${ error.status } ${ error.statusText }`));
+     });
   }
+}

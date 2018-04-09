@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row">
+      <h3 class="marginleft">
+        Claim Self-Service
+      </h3>
+    </div>
+    <div class="row">
+        <h4 class="marginleft">
+         Views claims for Selected Contract
+        </h4>
+    </div>
+    <div class="row">
+      <div class="col-md-4 claim" *ngFor="let claim of claims">
+          <table class="table borderless tablestyle" >
+              <tr>
+                <td> Claim Number : {{claim.ClaimNumber}}</td>
+              </tr>
+              <tr>
+                <td> Theft Protection :  {{claim.TheftProtection}}</td>
+              </tr>
+              <tr>
+                <td>Claim Status : {{claim.claimstatus}}</td>
+              </tr>
+              <tr>
+                <td>Description : {{claim.Description}}</td>
+              </tr>
+              <tr>
+                <td> Creation Date :  {{claim.CreationDate}}</td>
+              </tr>
+              <tr>
+                  <td> Reimbursable Amount :  {{claim.reimbursable}}</td>
+                </tr>
+              
+            </table>
+      </div>
+    </div>
+    <div class="row">
+      <button class="btn btn-primary" (click)="Back()">Back</button>
+    </div>
+</div>

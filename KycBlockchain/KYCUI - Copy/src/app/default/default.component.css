@@ -1,0 +1,27 @@
+img {
+    width: 100%;
+    height: auto;
+}
+.btn {
+    position: absolute;
+    top: 67%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: black;
+    color: rgb(40, 129, 177);
+    font-size: 22px;
+    padding: 12px 24px;
+    border: solid;
+    border-color: rgb(40, 129, 177);
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+ .btn:hover {
+    background-color: black;
+}
+.glyphicon-circle-arrow-right
+{
+    top:4px;
+}

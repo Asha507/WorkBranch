@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="InsuranceCompanyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Blocks">
+          <Key>
+            <PropertyRef Name="BlockNumber" />
+          </Key>
+          <Property Name="BlockNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="UBN" Type="varchar" MaxLength="50" />
+          <Property Name="BlockHash" Type="varchar" MaxLength="255" />
+          <Property Name="CreatedDate" Type="varchar" MaxLength="50" />
+          <Property Name="PreviousBlockHash" Type="varchar" MaxLength="255" />
+          <Property Name="NextBlock" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Claim">
+          <Key>
+            <PropertyRef Name="ClaimNumber" />
+          </Key>
+          <Property Name="UBN" Type="varchar" MaxLength="50" />
+          <Property Name="ClaimNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TheftProtection" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+          <Property Name="claimstatus" Type="varchar" MaxLength="250" />
+          <Property Name="CreationDate" Type="varchar" MaxLength="50" />
+          <Property Name="reimbursable" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="InsuranceCompanyModelStoreContainer">
+          <EntitySet Name="Blocks" EntityType="Self.Blocks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Claim" EntityType="Self.Claim" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InsuranceCompanyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Block">
+          <Key>
+            <PropertyRef Name="BlockNumber" />
+          </Key>
+          <Property Name="BlockNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UBN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BlockHash" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PreviousBlockHash" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="NextBlock" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Claim">
+          <Key>
+            <PropertyRef Name="ClaimNumber" />
+          </Key>
+          <Property Name="UBN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClaimNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TheftProtection" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="claimstatus" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CreationDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reimbursable" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="InsuranceCompanyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Blocks" EntityType="Self.Block" />
+          <EntitySet Name="Claims" EntityType="Self.Claim" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InsuranceCompanyModelStoreContainer" CdmEntityContainer="InsuranceCompanyEntities">
+          <EntitySetMapping Name="Blocks">
+            <EntityTypeMapping TypeName="InsuranceCompanyModel.Block">
+              <MappingFragment StoreEntitySet="Blocks">
+                <ScalarProperty Name="BlockNumber" ColumnName="BlockNumber" />
+                <ScalarProperty Name="UBN" ColumnName="UBN" />
+                <ScalarProperty Name="BlockHash" ColumnName="BlockHash" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="PreviousBlockHash" ColumnName="PreviousBlockHash" />
+                <ScalarProperty Name="NextBlock" ColumnName="NextBlock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Claims">
+            <EntityTypeMapping TypeName="InsuranceCompanyModel.Claim">
+              <MappingFragment StoreEntitySet="Claim">
+                <ScalarProperty Name="UBN" ColumnName="UBN" />
+                <ScalarProperty Name="ClaimNumber" ColumnName="ClaimNumber" />
+                <ScalarProperty Name="TheftProtection" ColumnName="TheftProtection" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="claimstatus" ColumnName="claimstatus" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="reimbursable" ColumnName="reimbursable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
