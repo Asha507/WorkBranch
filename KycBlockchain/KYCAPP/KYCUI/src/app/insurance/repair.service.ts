@@ -32,4 +32,16 @@ export class RepairService {
        new Error(`${ error.status } ${ error.statusText }`));
      }); 
   }
+  UpdateStatus(repairData)
+  {
+    debugger;
+   
+    return this.http.post(environment.repairApi+'api/Repair/UpdateStatus',repairData)  
+    .map(res =>{ 
+     return res.json()})
+    .catch((error)=> { 
+     return Observable.throw(
+       new Error(`${ error.status } ${ error.statusText }`));
+     }); 
+  }
 }

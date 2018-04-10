@@ -44,7 +44,7 @@ export class ProcessClaimComponent implements OnInit {
     debugger;
     claim.claimstatus="Sent for Repair";
     this.shopService.GetProduct(sessionStorage.getItem("ClaimUBN")).subscribe(response => {
-      this.shopData=response;
+      this.shopData=JSON.parse(response);
       this.repairData=new RepairModel();
       this.repairData.Item=this.shopData.Item;
       this.repairData.ClaimNumber=claim.ClaimNumber;
@@ -52,7 +52,7 @@ export class ProcessClaimComponent implements OnInit {
       this.repairData.Model=this.shopData.Model;
       this.repairData.Name=this.shopData.Name;
       this.repairData.SerialNumber=this.shopData.SerialNumber;
-      this.repairData.status="New";
+      this.repairData.ClaimStatus="New";
       this.repairData.UBN=sessionStorage.getItem("ClaimUBN");
       let repairData=new FormData();
       repairData.append("RepairData",JSON.stringify(this.repairData));

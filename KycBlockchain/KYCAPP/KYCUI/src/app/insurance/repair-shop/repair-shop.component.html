@@ -8,6 +8,9 @@
     <div class="row" *ngIf="hasrecords" >
       <div  class="col-md-5 contract" *ngFor="let repair of repairRecords">
         <table class="table borderless tablestyle" >
+            <tr>
+                <td><h4> Repair Order</h4> </td>
+              </tr>
           <tr>
             <td> Item : </td><td>{{repair.Item}}</td>
           </tr>
@@ -24,8 +27,16 @@
             <td> Description : </td><td>{{repair.Description}}</td>
           </tr>
           <tr>
-            <td>
-             <button class="btn btn-primary">Mark as Completed </button>
+              <td> Claim Status : </td><td>{{repair.ClaimStatus}}</td>
+            </tr>
+            <tr>
+              <br/>
+            </tr>
+          <tr>
+            <td>             
+            </td>
+            <td style="text-align:center">
+             <button class="btn btn-primary" (click)="RepairCompleted(repair)" >Mark as Completed </button>
             </td>
             </tr>
         </table>

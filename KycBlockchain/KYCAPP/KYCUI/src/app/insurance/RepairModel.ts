@@ -7,5 +7,5 @@ export class RepairModel
     SerialNumber:string;
     ClaimNumber:string;
     Description:string;
-    status:string;
+    ClaimStatus:string;
 }

@@ -33,8 +33,44 @@ namespace RepairShopAPI.Controllers
             using (RepairShopEntities db=new RepairShopEntities())
             {
                 List<RepairData> repairData=db.RepairDatas.Where(x => x.ClaimStatus == "New").ToList();
+                return Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(repairData));
             }
-            return Request.CreateResponse(HttpStatusCode.OK, "Completed");
+            
         }
+
+        [HttpPost]
+        public HttpResponseMessage UpdateStatus()
+        {
+            var httpRequest=HttpContext.Current.Request;
+            var claimNumber = httpRequest.Params["ClaimNumber"];
+            try
+            {
+                using (RepairShopEntities db = new RepairShopEntities())
+                {
+                    RepairData repairData = db.RepairDatas.Where(x => x.ClaimNumber == claimNumber).FirstOrDefault();
+                    repairData.ClaimStatus = httpRequest.Params["Status"];
+                    db.SaveChanges();
+                    return Request.CreateResponse(HttpStatusCode.OK, "Updated");
+                }
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                Exception raise = dbEx;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}",
+                            validationErrors.Entry.Entity.ToString(),
+                            validationError.ErrorMessage);
+                        // raise a new exception nesting
+                        // the current instance as InnerException
+                        raise = new InvalidOperationException(message, raise);
+                    }
+                }
+                throw raise;
+            }
+        }
+
     }
 }

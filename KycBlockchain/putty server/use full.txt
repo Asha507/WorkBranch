@@ -1,0 +1,202 @@
+
+
+
+update msa_st.INSTALLATION set logging_level=3
+
+./RunSEP.sh EVENT_TYPE_ID=42812 PROCESS_DATE=20101224000000 BATCH_PARAM_STRING=20101224061326,20101224061326;
+
+get the log user session id then run the run log with status as 1
+
+update msa_st.INSTALLATION set logging_level=1
+
+
+select * from msa_st.system_log where user_session_id =20319089000 order by log_sequence desc
+
+
+===========================================================================================================================================================
+
+
+
+select to_char(policy_trx_process_date,'YYYYMMDDHH24MISS')from msa_st.DRAGON_POLICY_TRX 
+where policy_trx_policy_number='01K7168D'
+
+select * from msa_st.system_log where user_session_id =20319089000 order by log_sequence desc
+
+
+
+
+
+
+===========================================================================================================================================================
+
+
+S:\Data\Information Technology\QA\Personal Lines\Development\2010Projects\IN AUTO RENEWAL\Intergration Testing\VM
+S:\Data\Information Technology\QA\Personal Lines\Development\2010Projects\NCAUTORENEWAL 
+========================================
+1.App Server Logs
+
+S:\Data\Application_Logs\DEV
+S:\Data\Application_Logs\QA2
+S:\Data\Application_Logs\UAT
+S:\Data\Application_Logs\QA
+
+
+JTNBB3EK0B1002133    for 2011 vin number
+
+
+2. Xml Output folders for batch processes
+                   
+\\Qa2-file\agency_interface
+\\qa-file\agency_interface
+\\dev-vmfile\agency_interface
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+planned release excell sheet 
+
+http://msaprojects/sites/PL%20MSS%20BurnDown%20Project/Requirements/Forms/AllItems.aspx
+
+Uname:  MadiredM         
+Pwd: ValueM1$
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+QA2  Env:  https://msagroupqa2.msaqa2.local/
+
+Uname: pluw2  / pluw11
+Pwd: Qwerty1$
+
+
+QA Env:  https://msagroupqa.msaqa.local/
+
+Uname: pluw2
+Pwd: Qwerty1$
+
+
+Dev:https://msagroupdev.msadev.local/
+
+pluw11
+Qwerty1$
+
+https://msagroupdev.msadev.local/oneshield/GatewayExternalLinkServlet?TX_NAME=0&EXCHANGE_ID=1219&TX_CTRL_CODE=1112&V1=4732&CFID=32117&CFTOKEN=50263760
+
+UAT :
+
+MSS App URL - https://msagroupuat.uataa.local/agentsonly/msa/plServices.cfm
+User ID - Ahopkins
+Password - Reggie*8
+
+
+select * from msa_st.ASYNC_JOB_STATUS where async_batch_id=20300156211
+
+
+select to_char(policy_trx_process_date,'YYYYMMDDHH24MISS')from msa_st.DRAGON_POLICY_TRX 
+where policy_trx_policy_number='01K6515D' 
+
+update msa_st.DRAGON_SESSION set LOGGING_LEVEL=3 where user_session_id=20309347500
+select * from msa_st.system_log where user_session_id = 20309347500
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+Scripts :
+select * from msa_st.SYSTEM_LOG where user_session_id=20256476300;
+
+select to_char(policy_trx_process_date,'YYYYMMDDHH24MISS')from msa_st.DRAGON_POLICY_TRX 
+where policy_trx_policy_number='o1U03351' 
+
+
+update msa_st.DRAGON_SESSION set LOGGING_LEVEL=3 where user_session_id=20642486700
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+>4) Flat files location:
+>\\dev-vmfile.msadev.local\OneShield_Batch
+\\Qa2-file\Oneshield_Batch
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Putty  server:
+
+./RunSEP.sh EVENT_TYPE_ID=36812 PROCESS_DATE=20101230000000 BATCH_PARAM_STRING=20101230013913,20101230013913;
+
+./RunSEP.sh EVENT_TYPE_ID=10300 PROCESS_DATE=201008202000000 BATCH_PARAM_STRING=20100820204845,20100820204845;
+
+./RunSEP.sh EVENT_TYPE_ID=40812 PROCESS_DATE=20101129000000 BATCH_PARAM_STRING=20101129073245,20101129073245;
+
+./RunSEP.sh EVENT_TYPE_ID=40912 PROCESS_DATE=20101202000000 BATCH_PARAM_STRING=20101202074151,20101202074151;
+
+
+
+
+
+
+./RunSEP.sh EVENT_TYPE_ID=53012 PROCESS_DATE=20101202000000 BATCH_PARAM_STRING=20101202042151,20101202042151;
+
+./RunSEP.sh EVENT_TYPE_ID=53112 PROCESS_DATE=20101202000000 BATCH_PARAM_STRING=20101202042151,20101202042151;
+
+./RunSEP.sh EVENT_TYPE_ID=53212 PROCESS_DATE=20101202000000 BATCH_PARAM_STRING=20101202042151,20101202042151;
+
+
+Split batch 
+====================================================================================================================
+
+./RunSEP.sh EVENT_TYPE_ID=42812 PROCESS_DATE=20110110000000 BATCH_PARAM_STRING=20110110035313,20110110035313    (511512 Action id )
+
+
+./RunSEP.sh EVENT_TYPE_ID=53012 PROCESS_DATE=20101202000000 BATCH_PARAM_STRING=20101202042151,20101202042151;   ----optional   (511512 Actin id )
+
+./RunSEP.sh EVENT_TYPE_ID=42812 PROCESS_DATE=20110110000000 BATCH_PARAM_STRING=20110110033119,20110110033119
+
+./RunSEP.sh EVENT_TYPE_ID=53112 PROCESS_DATE=20110103000000 BATCH_PARAM_STRING=20110103140542,20110103140542;   (Action id 518912)
+
+
+./RunSEP.sh EVENT_TYPE_ID=53212  PROCESS_DATE=20110103000000 BATCH_PARAM_STRING=20110103140542,20110103140542;   (Action id 513312)
+
+
+
+update msa_st.system_attribute_value set SYSTEM_ATTRIBUTE_VALUE = '/opt/lib/msadev/testtprorderpolicynumbermapping.properties'
+where SYSTEM_ATTRIBUTE_ID = 22040635
+
+
+====================================================================================================================
+
+
+2) Log files to see:
+>>\\Dev-rhwsapp01.msadev.local\logs\Dev-DragonServer1
+>
+>>3) host name for the UNIX box:
+>dev-RHWSAPP01.MSAdev.LOCAL
+
+
+>
+>4) Flat files location:
+>\\dev-vmfile.msadev.local\OneShield_Batch
+
+
+
+host name for the UNIX box:
+
+dev-RHWSAPP01.MSAdev.LOCAL
+
+qa2-RHWSAPP01.MSAqa2.LOCAL
+
+XML Locations for all regions :
+Logs
+
+S:\Data\Application_Logs\DEV
+S:\Data\Application_Logs\QA2
+S:\Data\Application_Logs\UAT
+S:\Data\Application_Logs\QA
+
+XML Location
+                   
+\\Qa2-file\agency_interface
+\\qa-file\agency_interface
+\\dev-vmfile\agency_interface
+
+
+
+Production login credentials:-
+MAzeezuddin
+$Pass9

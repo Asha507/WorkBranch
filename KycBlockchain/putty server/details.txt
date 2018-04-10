@@ -1,0 +1,60 @@
+01K7145D
+
+
+./RunSEP.sh EVENT_TYPE_ID=10612 PROCESS_DATE=20110701000000 BATCH_PARAM_STRING=20110107063342,20110107070659
+
+
+
+01B7766S
+
+south carolina
+
+>south carolina agency no. telusa??
+For SC: Agency Codes: 390025, 390045, 390051
+Cities and Zip codes:
+Aiken - 29801
+Alcot - 29010
+Cades - 29518
+
+
+------------------
+friday
+
+./RunSEP.sh EVENT_TYPE_ID=38812 PROCESS_DATE=20111001000000 BATCH_PARAM_STRING=20110110010429,20110110010429
+
+SELECT to_char(policy_trx_process_date,   'YYYYMMDDHH24MISS')
+FROM msa_st.dragon_policy_trx
+WHERE  policy_trx_policy_number = '01K7145D'
+
+VIN:
+WDBFA68F2XF174063
+
+KMHFU45E64A274115
+
+WBAVD13566KV09222
+
+
+\\dev-vmfile.msadev.local\Oneshield_Batch
+
+\\Qa2-file\Oneshield_Batch
+
+
+dowloads path:
+\\dev-vmfile.msadev.local\Agency_Interface 
+
+
+dev-RHWSAPP01.MSAdev.LOCAL
+
+qa2-RHWSAPP01.MSAqa2.LOCAL
+
+qa-RHWSAPP01.MSAqa.LOCAL
+
+
+select sum(to_number(job_natural_key))   from msa_st.async_job_status  where job_id in (select  job_id from msa_st.async_job_status where async_batch_id =21287135400) 
+
+
+
+log details
+\\Dev-rhwsapp01.msadev.local\logs\Dev-DragonBatchServer1
+
+S:\Data\Information Technology\QA\Personal Lines\Development\2010Projects\Defect Remediation
